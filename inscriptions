@@ -1,0 +1,15 @@
+\q
+clear
+\q
+SELECT * FROM cours
+SELECT * FROM cours;
+\h
+SELECT * FROM cours
+SELECT * FROM cours;
+select * from cours;
+select * from inscriptions;
+select * from inscriptions;
+psql my_database_development
+\q
+\d
+\s inscriptions

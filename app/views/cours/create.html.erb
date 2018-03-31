@@ -1,0 +1,38 @@
+<h1>Vous êtes enseignant, créez votre annonce simplement</h1>
+
+<p><%=index_link%></p>
+
+
+
+<%=form_tag "/cours/create", method:"post" do %>
+	<fieldset>
+		<legend> Détails du cours </legend>
+		<p>
+			<label for="matiere"> Quelle matière souhaitez-vous enseigner?</label>
+			<select name="matiere" required>
+				<option value="mathematiques"> Mathématiques </option>
+				<option value="francais"> Français </option>
+				<option value="anglais"> Anglais </option>
+				<option value="espagnol"> Espagnol </option>
+			</select>>
+		</p>
+		<p>
+			<label for="jour"> Quel jour seriez-vous disponible ? </label>
+			<select name="jour" required="">
+				<option>lundi</option>
+				<option>mardi</option>
+				<option>mercredi</option>
+				<option>jeudi</option>
+				<option>vendredi</option>
+				<option>samedi</option>
+				<option>dimanche</option>
+			</select>
+		</p>
+		<p>
+			<label for="lieu"> Indiquez l'adresse où le cours se tiendra</label>
+			<input type="text" name="lieu" size=40 required>
+		</p>
+	</fieldset>
+	<input type="submit" value="Envoyez">
+<%end%>
+

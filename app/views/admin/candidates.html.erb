@@ -1,0 +1,29 @@
+<h1> Candidats </h1>
+
+<table class="table">
+		<tr>
+			<th></th>
+			<th>Nom</th>
+			<th>Prénom</th>
+			<th>email</th>
+			<th>Avatar</th>
+		</tr>
+		<% @candidates.each do |c| %>
+		<tr>
+			<td> <%= link_to "Infos", {:controller => "admin", :action => "teacher_profile", :id => c.id} %></td>
+			<td><%=c.infoteacher.try(:first_name)%></td>
+			<td><%=c.infoteacher.try(:last_name)%></td>
+			<td><%=c.infoteacher.try(:email)%></td>
+			<td> 
+			<% if c.infoteacher.present?%>
+				<%=image_tag c.infoteacher.avatar.url(:thumb), :class => "thumbnail"%></td>
+			<% end %>
+			<td>
+				<div class="btn btn-success">
+					<%= link_to "Valider", {:controller => "admin", :action => "validate", :id => c.id, :class =>"btn"}%>
+				</div>
+			</td>
+		</tr>
+		<%end%>
+</table>
+

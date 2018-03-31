@@ -1,0 +1,48 @@
+
+<!-- Espace Eleves-->
+
+<% if user_signed_in? %>
+
+	<h1>Les cours auxquels je suis inscrit</h1>
+
+	<table class="table">
+		<tr>
+			<th>Prénom</th>
+			<th>Nom</th>
+			<th>Avatar</th>
+			<th>Infos</th>
+		</tr>
+		<%@inscriptions.each do |inscription| %>
+			<tr>
+				<td>
+					<%= Teacher.find(Cour.find(inscription.cour_id).teacher_id).infoteacher.try(:first_name) %>
+				</td>
+				<td>
+					<%= Teacher.find(Cour.find(inscription.cour_id).teacher_id).infoteacher.try(:last_name)%>
+				</td>
+				<td>
+					<% if Teacher.find(Cour.find(inscription.cour_id).teacher_id).infoteacher.present? %>
+					<%= image_tag Teacher.find(Cour.find(inscription.cour_id).teacher_id).infoteacher.avatar.url(:thumb), :class => "thumbnail" %>
+					<% end %>	
+				</td>
+				<td>
+					<%= link_to " Détails du cours", {:controller =>"cours", :action => "show", :id => inscription.cour_id} %>
+				</td>
+			</tr>
+		<%end%>
+	</table>
+	
+<%end%>
+
+<!-- Espace Prof -->
+
+<% if teacher_signed_in? %>
+
+	<h1>Les cours que je dispense</h1>
+
+	<%@cours_proposes.each do |cour| %>
+		<p>
+		<%= link_to "Cours Proposé", {:controller => "cours", :action => "show", :id => cour.id }%>
+		</p>
+	<% end %>
+<% end %>

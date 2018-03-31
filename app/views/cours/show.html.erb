@@ -1,0 +1,12 @@
+<h1>Détails du cours proposé par <%= Teacher.find(@cour.teacher_id).email %> </h1>
+
+<p> <%= index_link %> </p>
+
+<p>
+	<% @inscriptions.each do |i| %>
+	Eleve inscrit : <%= User.find(i.user_id).email %>
+	<br/>
+	<%end%>
+</p>
+
+

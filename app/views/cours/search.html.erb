@@ -1,0 +1,30 @@
+<h1>Cours corrspondants à votre recherche</h1>
+
+
+<p> <%= index_link %></p>
+
+<p> Votre adresse : <%=@lieu%> </p>
+
+<table>
+	<tr>
+		<th>Professeur</th>
+		<th>Matière</th>
+		<th>Disponibilité</th>
+		<th>Nb eleves inscrits</th>
+		<th>Adresse</th>
+		<th>Distance</th>
+	</tr>
+	<% for cours in @cours.near(@lieu,20) %>
+	<tr>
+		<td><%= Teacher.find(cours.teacher_id).email%></td>
+		<td><%= cours.matiere %></td>
+		<td><%= cours.jour %></td>
+		<td><%= cours.nombre_eleves %></td>
+		<td><%= cours.lieu %></td>
+		<td>
+		<%= Geocoder::Calculations.distance_between([cours.latitude, cours.longitude], @lieu, :units =>:km) %>
+		</td>
+		<td><%= link_to "S'inscrire", {:controller =>"cours", :action=>"inscription", :id=>cours.id} %></td>
+	</tr>
+	<%end%>
+</table>

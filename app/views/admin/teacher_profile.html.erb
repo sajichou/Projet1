@@ -1,0 +1,13 @@
+<h1> Détails du profil </h1>
+<% if @infoteacher.present? %>
+	<ul>
+		<li>Prénom: <%=@infoteacher.first_name %></li>
+		<li>Nom: <%=@infoteacher.last_name %></li>
+		<li>Email: <%=@infoteacher.email %></li>
+		<li>Adresse: <%=@infoteacher.location %></li>
+		<li>Téléphone: <%=@infoteacher.phone %></li>
+		<li>Avatar: <%=image_tag @infoteacher.avatar.url(:thumb), :class => "thumbnail"%></li>
+	</ul>
+<% else %>
+Aucune info renseignée
+<% end %>

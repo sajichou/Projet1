@@ -1,0 +1,16 @@
+<h1> Recherchez un cours </h1>
+
+<p> <%= index_link %> </p>
+
+<%=form_tag "/cours/accueil", method:"post" do %>
+	<label for="matiere">Quelle matière souhaitez-vous travailler ?</label>
+	<select name="matiere">
+		<option value="mathematiques">Mathématiques</option>
+		<option value="francais">Français</option>
+		<option value="anglais">Anglais</option>
+		<option value="espagnol">Espagnol</option>
+	</select>
+	<label for="lieu">Indiquez votre adresse ?</label>
+	<input type="text" name="lieu" size=40 value="<%=@client_location%>">
+	<input type="submit" value="Envoyez">
+<%end%>

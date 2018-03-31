@@ -1,0 +1,36 @@
+<h1>Index des cours</h1>
+
+<p> <a href="/cours/create"> Créez une annonce de cours </a> </p>
+<p> <a href="/cours/accueil"> Cherchez un cours </a> </p>
+
+
+
+<table class="table">
+	<tr>
+		<th>Professeur</th>
+		<th>Matière</th>
+		<th>Disponibilité</th>
+		<th>Nb eleves inscrits</th>
+		<th>Lieu du cours</th>
+		<th>Latitude</th>
+		<th>Longitude</th>
+	</tr>
+	<% @cours.each do |cours| %>
+	<tr>
+		<td><%= Teacher.find(cours.teacher_id).email%></td>
+		<td><%= cours.matiere %></td>
+		<td><%= cours.jour %></td>
+		<td><%= cours.nombre_eleves %></td>
+		<td><%= cours.lieu %></td>
+		<td><%= cours.latitude %></td>
+		<td><%= cours.longitude %></td>
+		<td><a href="/cours/<%=cours.id%>">Show</a></td>
+		<td>
+			<%= link_to "Destroy", {:controller => "cours", :action => "destroy", :id => cours.id }%>
+		</td>
+	</tr>
+	<%end%>
+</table>
+
+</br>
+<%= paginate @cours %>

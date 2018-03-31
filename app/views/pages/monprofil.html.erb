@@ -1,0 +1,199 @@
+<% if teacher_signed_in? %>
+
+
+	<h1>Mon Pofil d'enseignant</h1>
+
+
+	<%=form_tag "/pages/monprofil", method:"post", multipart:true do %>
+	<fieldset>
+		<legend> Compléter mon profil </legend>
+
+		<% if @current_teacher.infoteacher.first_name.present? %>
+		<p>
+			<label for="first_name"> Prénom </label>
+			<input type="text" class="form-control value_success" name="first_name" value='<%=@current_teacher.infoteacher.first_name%>'>
+		</p>
+		<% else %>
+			<label for="first_name"> Prénom </label>
+			<input type="text" class="form-control value_danger" name="first_name" >			
+		<% end %>
+
+		<% if @current_teacher.infoteacher.last_name.present? %>
+		<p>
+			<label for="last_name"> Nom </label>
+			<input type="text" class="form-control value_success" name="last_name" value='<%= @current_teacher.infoteacher.last_name%>'>
+		</p>
+		<% else %>
+		<p>
+			<label for="last_name"> Nom </label>
+			<input type="text" class="form-control value_danger" name="last_name">
+		</p>
+		<% end %>
+		<% if @current_teacher.infoteacher.email.present? %>
+		<p>
+			<label for="email"> Email </label>
+			<input type="text" class="form-control value_success" name="email" value='<%= @current_teacher.infoteacher.email%>'>
+		</p>
+		<% else %>
+		<p>
+			<label for="email"> Email </label>
+			<input type="text" class="form-control value_danger" name="email">
+		</p>
+		<% end %>
+
+		<% if @current_teacher.infoteacher.phone.present? %>
+		<p>
+			<label for="phone"> Téléphone </label>
+			<input type="text" class="form-control value_success" name="phone" value='<%= @current_teacher.infoteacher.phone %> '>
+		</p>
+		<% else %>
+		<p>
+			<label for="phone"> Téléphone </label>
+			<input type="text" class="form-control value_danger " name="phone">
+		</p>
+		<% end %>
+
+		<% if @current_teacher.infoteacher.location.present? %>
+		<p>
+			<label for="location"> Adresse </label>
+			<input type="text" class="form-control value_success" name="location" value='<%= current_teacher.infoteacher.location %>'>
+		</p>
+		<% else %>
+		<p>
+			<label for="location"> Adresse </label>
+			<input type="text" class="form-control value_danger" name="location">
+		</p>
+		<% end %>
+
+		<% if @current_teacher.infoteacher.experience.present? %>
+		<p>
+			<label for="experience"> Expérience </label>
+			<textarea type="text" class="form-control value_success" name="experience" ><%= @current_teacher.infoteacher.experience%></textarea> 
+		</p>
+		<% else %>
+		<p>
+			<label for="experience"> Expérience </label>
+			<textarea type="text" class="form-control value_danger" name="experience"></textarea> 
+		</p>
+		<% end %>
+
+		<% if @current_teacher.infoteacher.methodology.present? %>
+		<p>
+			<label for="methodology"> Méthodologie </label>
+			<textarea type="text" class="form-control value_success" name="methodology"><%= @current_teacher.infoteacher.methodology%></textarea> 
+		</p>
+		<% else %>
+		<p>
+			<label for="methodology"> Méthodologie </label>
+			<textarea type="text" class="form-control value_danger" name="methodology"></textarea>
+		</p>
+		<% end %>
+
+		<% if @current_teacher.infoteacher.avatar.present? %>
+		<p>
+			<label for="avatar"> Photo </label>
+			<input type="file" class="form-control value_success" name="avatar" value='<%=@current_teacher.infoteacher.avatar%>'>
+		</p>
+		<% else %>
+		<p>
+			<label for="avatar"> Photo </label>
+			<input type="file" class="form-control value_danger" name="avatar">
+		</p>
+		<% end %>
+
+	</fieldset>
+	<%= link_to "Envoyer", {:controller => "pages", :action => "completer"}%>
+	<button type="submit" class=" btn btn-primary">Envoyer</button>
+	<%end%>
+<% end%>
+<!-- Update devise registration -->
+
+<!-- Profil eleve-->
+<% if user_signed_in?%>
+	Je suis un élève
+	<%=form_tag "/pages/monprofil", method:"post", multipart:true do %>
+	<fieldset>
+		<legend> Compléter mon profil </legend>
+
+		<% if @current_user.infouser.first_name.present? %>
+		<p>
+			<label for="first_name"> Prénom </label>
+			<input type="text" class="form-control value_success" name="first_name" value='<%=@current_user.infouser.first_name%>'>
+		</p>
+		<% else %>
+			<label for="first_name"> Prénom </label>
+			<input type="text" class="form-control value_danger" name="first_name" >			
+		<% end %>
+
+		<% if @current_user.infouser.last_name.present? %>
+		<p>
+			<label for="last_name"> Nom </label>
+			<input type="text" class="form-control value_success" name="last_name" value='<%= @current_user.infouser.last_name%>'>
+		</p>
+		<% else %>
+		<p>
+			<label for="last_name"> Nom </label>
+			<input type="text" class="form-control value_danger" name="last_name">
+		</p>
+		<% end %>
+		<% if @current_user.infouser.email.present? %>
+		<p>
+			<label for="email"> Email </label>
+			<input type="text" class="form-control value_success" name="last_name" value='<%= @current_user.infouser.email%>'>
+		</p>
+		<% else %>
+		<p>
+			<label for="email"> Email </label>
+			<input type="text" class="form-control value_danger" name="email">
+		</p>
+		<% end %>
+
+		<% if @current_user.infouser.phone.present? %>
+		<p>
+			<label for="phone"> Téléphone </label>
+			<input type="text" class="form-control value_success" name="phone" value='<%= @current_user.infouser.phone %> '>
+		</p>
+		<% else %>
+		<p>
+			<label for="phone"> Téléphone </label>
+			<input type="text" class="form-control value_danger " name="phone">
+		</p>
+		<% end %>
+
+		<% if @current_user.infouser.location.present? %>
+		<p>
+			<label for="location"> Adresse </label>
+			<input type="text" class="form-control value_success" name="location" value='<%= current_user.infouser.location %>'>
+		</p>
+		<% else %>
+		<p>
+			<label for="location"> Adresse </label>
+			<input type="text" class="form-control value_danger" name="location">
+		</p>
+		<% end %>
+
+
+		<% if @current_user.infouser.avatar.present? %>
+		<p>
+			<label for="avatar"> Photo </label>
+			<input type="file" class="form-control value_success" name="avatar" value='<%=@current_user.infouser.avatar%>'>
+		</p>
+		<% else %>
+		<p>
+			<label for="avatar"> Photo </label>
+			<input type="file" class="form-control value_danger" name="avatar">
+		</p>
+		<% end %>
+	<% end %>
+	</fieldset>
+	<button type="submit" class=" btn btn-primary">Envoyer</button>
+
+
+<% end %>
+
+
+
+
+
+
+
