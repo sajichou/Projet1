@@ -139,7 +139,7 @@
 		<% if @current_user.infouser.email.present? %>
 		<p>
 			<label for="email"> Email </label>
-			<input type="text" class="form-control value_success" name="last_name" value='<%= @current_user.infouser.email%>'>
+			<input type="text" class="form-control value_success" name="email" value='<%= @current_user.infouser.email%>'>
 		</p>
 		<% else %>
 		<p>
