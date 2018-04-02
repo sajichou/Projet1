@@ -10,7 +10,7 @@ class PagesController < ApplicationController
   end
 
   def completer
-    
+    if teacher_signed_in?
     Infoteacher.find_by_teacher_id(current_teacher.id).update(
       first_name:params[:first_name],
       last_name:params[:last_name],
@@ -21,7 +21,18 @@ class PagesController < ApplicationController
       experience: params[:experience],
       avatar: params[:avatar]
       )
-    redirect_to '/pages/monespace'
+      redirect_to '/pages/monespace'
+    elsif user_signed_in?
+    Infouser.find_by_user_id(current_user.id).update(
+      first_name:params[:first_name],
+      last_name:params[:last_name],
+      email:params[:email],
+      phone: params[:phone],
+      location: params[:location],
+      avatar: params[:avatar]
+      )
+      redirect_to '/pages/monespace'
+    end
   end
 
 

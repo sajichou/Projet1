@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  devise_for :users
+  devise_for :users, controllers: { registrations:'user/registrations'}
   devise_for :teachers, controllers: { registrations:'teachers/registrations' }
   #devise_for :teachers
   #devise_scope :teachers do
