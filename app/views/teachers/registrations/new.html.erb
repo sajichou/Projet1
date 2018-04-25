@@ -1,31 +1,52 @@
-<h2>Sign up as a Teacher</h2>
+<div class="row justify-content-around">
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
+  <div class="col-sm-6" id="devise_subcontent">
+
+    <h2>Inscription enseignant</h2>
+
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= devise_error_messages! %>
 
 
-  <div class="form_group">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, class: 'form-control',autocomplete: "email" %>
+      <div class="form_group">
+        <%= f.label :email, 'Adresse e-mail', class:"control-label" %><br />
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><span class="fa fa-envelope-o"></span></span>
+           </div>
+        <%= f.email_field :email, class: 'form-control',autocomplete: "email" %>
+        </div>
+      </div>
+      <br />
+      <div class="form_group">
+        <%= f.label :password, 'Mot de passe', class:"control-label" %>
+        <% if @minimum_password_length %>
+        <em>(<%= @minimum_password_length %> caractères minimum)</em>
+        <% end %><br />
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><span class="fa fa-lock"></span></span>
+          </div>
+        <%= f.password_field :password, class: 'form-control',autocomplete: "off" %>
+        </div>
+      </div>
+      <br />
+      <div class="form_group">
+        <%= f.label :password_confirmation, 'Confirmation du mot de passe', class:"control-label" %><br />
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><span class="fa fa-lock"></span></span>
+          </div>
+        <%= f.password_field :password_confirmation, class: 'form-control',autocomplete: "off" %>
+        </div>
+      </div>
+
+      </br>
+      <div class="actions">
+        <%= f.submit "Inscription", class: "form-control btn btn-primary"%>
+      </div>
+    <% end %>
+    <br/>
+    Vous avez déjà un compte ? <%= render "teachers/shared/links" %>
   </div>
-
-  <div class="form_group">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, class: 'form-control',autocomplete: "off" %>
-  </div>
-
-  <div class="form_group">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, class: 'form-control',autocomplete: "off" %>
-  </div>
-
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "teachers/shared/links" %>
+</div>

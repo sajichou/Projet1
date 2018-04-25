@@ -10,12 +10,59 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- *= require_tree .
- *= require_self
  */
 
-@navbar-default-bg: #4286f4;
 @import "bootstrap";
+@import "font-awesome";
+
+
+$rose: #e55966;
+$vert: #00e676;
+$turquoise: #59e5d8;
+$rouge: #ff1744;
+$link-color: white;
+$gris: #eeeeee;
+
+$theme-colors: (
+  "primary": #59e5d8
+
+);
+
+*{
+	margin:0;
+	padding:0;
+}
+
+body, html {
+	height:100%;
+}
+
+body{
+	text-align:center;
+}
+
+#main{
+	max-width:1280px;
+	min-height:100%;
+	margin:0 auto;
+	position:relative;
+	//background: #fff8e1;
+}
+
+#corps {
+	padding-bottom:100px;	
+}
+
+.navbar-default {
+	background-color: $rose;
+}
+
+#bs-example-navbar-collapse-1 {
+	ul li a {
+	color:white;
+	}
+}
+
 
 .thumbnail {
 	border-radius: 50%;
@@ -29,4 +76,138 @@
 .value_danger {
 	border-color: rgb(255, 0, 0);
 	color: rgb(0,0,0);
+}
+
+
+
+#footer {
+	background-color: $rose;
+	heigh:auto;
+	width: 100%;
+	position: absolute;
+	bottom: 0;
+	ul li {
+		display: inline;
+		padding-left: 50px;
+		a{
+		color:white;
+		}
+	}
+}
+
+#devise_subcontent {
+	// background: #fff3e0 ;
+}
+
+#ado {
+	position: relative;
+	height: 100px;
+	background: url("Adolescents.jpeg") no-repeat;
+ 	background-size: cover;
+    background-attachment: fixed;
+    min-height: 500px; 
+}
+
+#opacity {
+	background-color: rgba(0, 0, 0, 0.4);
+	min-height: 500px; 
+}
+
+#cover {
+	position: absolute;
+	top: 75%;
+	width: 100%;
+}
+
+#annonce {
+	border-radius: 10px ;
+	border: solid 1px $rose;
+	background-color:#eeeeee;
+	margin-top: 10px;
+}
+
+#annonce_avatars{
+	min-height: 150px;
+	border-radius: 50%;
+	background-color: #bdbdbd;
+}
+
+.thumbnail2 {
+	border-radius: 50%;
+	height: 100px;
+	width: 100px;
+}
+
+.thumbnail3{
+	border-radius: 50%;
+	height: 130px;
+	width: 130px;
+}
+
+.avatar_occupe {
+	font-size: 2em;
+	color: #ff4444;
+}
+
+.avatar_libre {
+	font-size: 2em;
+	color: #00C851;
+}
+
+.link_to {
+	color:white;
+}
+
+.btn-link {
+	color:white;
+}
+
+.show_pastille {
+	color:white;
+	background: $rose;
+	border-radius: 10px;
+	border: $rose;
+	height: 50px;
+	align-items:center;
+}
+
+.show_pastille_speciale {
+	color:white;
+	background: $rose;
+	border-radius: 10px 10px 0 0;
+	border: $rose;
+	height: 50px;
+	align-items:center;
+}
+
+#my_tab {
+
+	li a {
+		color:white;
+	}
+
+	a.active {
+		background-color: $rose;
+	}
+
+	a:focus {
+		background-color: $rose;
+	}
+
+}
+
+.macheckbox {
+   transform: scale(1.5);
+}
+
+#btn_active {
+	input.active {
+		background-color: $turquoise;
+	}
+}
+
+.submit_tag {
+	background-color: $vert;
+	color: white;
+	border: none;
 }

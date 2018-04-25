@@ -54,19 +54,24 @@ Rails.application.configure do
   
   config.action_mailer.delivery_method = :smtp
 
-  config.action_mailer.smtp_settings = {
-    address: "auth.smtp.1and1.fr",
+  #config.action_mailer.smtp_settings = {
+   # address: "auth.smtp.1and1.fr",
     #address: "smtp.gmail.com",
-    #port: 25,
-    port: 587,
-    #domain: "mail.google.com",
-    domain: "1and1.fr",
-    authentication: "plain",
-    enable_starttls_auto: true,
-    user_name: "contact@lakamaraderie.fr",
-    #user_name: "sajidsalhi@gmail.com"
-    password: "sajidkevin18"
-    #password: "papillon77"
+    #port: 465,
+   # domain: "1and1.fr",
+   # authentication: "plain",
+   # enable_starttls_auto: true,
+   # user_name: "",
+    #password: ""
+  #}
+  ActionMailer::Base.smtp_settings = {
+  :user_name => ENV["SG_USERNAME"],
+  :password => ENV["SG_PASSWORD"],
+  :domain => 'gmail.com',
+  :address => 'smtp.sendgrid.net',
+  :port => 587,
+  :authentication => :plain,
+  :enable_starttls_auto => true
   }
 
   config.action_mailer.default_url_options = { host: 'localhost', port: 5000 }

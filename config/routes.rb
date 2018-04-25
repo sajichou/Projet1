@@ -8,13 +8,15 @@ Rails.application.routes.draw do
  # end
 
 
-  root 'home#index'
+  root 'cours#accueil'
 
   get 'cours/create'
  
   post 'cours/create' => 'cours#new'
 
   get 'cours/show'
+
+  post 'cours/show' => 'cours#inscription'
 
   get 'cours/update'
 
@@ -30,9 +32,11 @@ Rails.application.routes.draw do
 
   get 'cours/accueil'
 
+  get 'cours/search'
+
   post 'cours/accueil' =>'cours#search'
 
-  get 'cours/search'
+  post 'cours/search' =>'cours#search'
 
   get 'cours/inscription'
 
@@ -44,8 +48,13 @@ Rails.application.routes.draw do
 
   post 'pages/monprofil' => 'pages#completer'
 
+  get 'pages/maphoto'
+
+  post 'pages/maphoto' => 'pages#modifier_maphoto'
+
   get 'pages/completer'
 
+  get 'pages/medesabonner'
 
   get 'admin/candidates'
 

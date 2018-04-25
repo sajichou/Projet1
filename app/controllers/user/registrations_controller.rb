@@ -9,6 +9,7 @@ class User::RegistrationsController < Devise::RegistrationsController
   def after_signin
     if user_signed_in? 
       Infouser.create user_id:current_user.id, email:current_user.email
+      UserMailer.signup(current_user).deliver
     end
   end
 

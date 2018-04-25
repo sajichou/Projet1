@@ -12,53 +12,39 @@
   </head>
 
   <body>
+      <div id="main">
 
-       <%= render partial:"shared/navbar"%>
+          <header>
+             <%= render partial:"shared/navbar"%>      
+          </header>
+          
 
-       <% flash.each do |key, value| %>
-       <% if key == "notice"
-          key = "success"
-        elsif key == "alert"
-          key = "warning"
-        end %>
-            
-        <div class="alert alert-<%= key %>">
-          <a href="#" data-dismiss="alert" class="close">×</a>
-          <ul>
-            <li>
-              <%= value %>
-            </li>
-          </ul>
-        </div>
-      <% end %>
+           <% flash.each do |key, value| %>
+           <% if key == "notice"
+              key = "success"
+            elsif key == "alert"
+              key = "warning"
+            end %>
+                
+            <div class="alert alert-<%= key %>">
+              <a href="#" data-dismiss="alert" class="close">×</a>
+              <ul>
+                <li>
+                  <%= value %>
+                </li>
+              </ul>
+            </div>
+          <% end %>
+        <section id="corps">
+           <!-- <p> <%= debug session.to_hash %> </p> -->
+          <%= yield %>       
+        </section> 
 
 
+          <footer>
+            <%= render partial: "shared/footer" %>
+          </footer>
 
-       <% if user_signed_in? %>
-         <p>
-         Bonjour user : <%= current_user.email %> 
-         <%= link_to "Se déconnecter", destroy_user_session_path, :method => 'delete' %>
-         </p>
-       <% else %>
-         <p>
-         <%= link_to "Se connecter as user", new_user_session_path %>
-         </p>
-       <% end %>
-
-       <% if teacher_signed_in? %>
-         <p>
-         Bonjour prof  : <%= current_teacher.email %> 
-         <%= link_to "Se déconnecter", destroy_teacher_session_path, :method => 'delete' %>
-         </p>
-       <% else %>
-         <p>
-         <%= link_to "Se connecter as teacher", new_teacher_session_path %>
-         </p>
-       <% end %>
-
-       <%= link_to "Espace Perso", {:controller => "/pages", :action => "monespace"}%>
-
-       <!-- <p> <%= debug session.to_hash %> </p> -->
-    <%= yield %>
+    </div>
   </body>
 </html>

@@ -1,3 +1,5 @@
+<!--
+
 <h1>Détails du cours proposé par <%= Teacher.find(@cour.teacher_id).email %> </h1>
 
 <p> <%= index_link %> </p>
@@ -8,5 +10,226 @@
 	<br/>
 	<%end%>
 </p>
+
+--> 
+
+<div class="row justify-content-center my-5">
+	<div class="col-11">
+		<div class="row">
+			<!-- Rappel des caractéristiques du cours -->
+			<div class="col-sm-3">
+				<div class="d-flex mb-1 show_pastille">
+					<div class="pl-4">
+						<i class="fa fa-map-marker fa-lg"></i>
+					</div>
+					<div class="pl-2">
+						<%= @cour.lieu %>
+					</div>
+				</div>
+				<div class="d-flex mb-1 show_pastille">
+					<div class="pl-4">
+						<i class="fa fa-book fa-lg"></i>
+					</div>
+					<div class="pl-2">
+						<%= @cour.matiere %>
+						<%@cour.annees.each do |n| %>
+							| <%= Correspondance.find_by_niveau_id(n.niveau).nom%>	
+						<%end%>	
+					</div>
+				</div>
+				<div class="d-flex mb-1 show_pastille">
+					<div class="pl-4">
+						<i class="fa fa-users fa-lg"></i>
+					</div>
+					<div class="pl-2">
+						<% if @cour.nombre_eleves<2 %>
+							<%= 3-@cour.nombre_eleves %> places disponibles
+						<% else %>
+							<%= 3-@cour.nombre_eleves %> place disponible
+						<% end %>
+					</div>
+				</div>	
+				<!--Horaire -->
+				<!-- 1er cas : Horaire déjà fixé -->
+				<% if (@cour.jour.present? and @cour.heure.present?) %>
+					<div class="d-flex mb-1 show_pastille">
+						<div class="pl-4">
+							<i class="fa fa-calendar fa-lg"></i>
+						</div>
+						<div class="pl-2" style="text-transform: capitalize">
+							<%=@cour.jour%> | <%=@cour.heure %>-<%=@cour.heure+1 %>h
+						</div>
+					</div>
+				<!-- 2eme cas : Horaire pas encore fixé -->		
+				<% else %>
+					<div class="d-flex show_pastille_speciale">
+						<div class="pl-4">
+							<i class="fa fa-calendar fa-lg"></i>
+						</div>
+						<div class="pl-2">
+							Choisis ton horaire :
+						</div>
+					</div>
+					<div style="border:solid 1px #e55966; background-color: #eeeeee">
+						<div class="row">
+							<div class="col-12">
+								<%=form_tag "/cours/show", method:"post" do %>
+									<div class="d-flex flex-wrap justify-content-center">							
+										<% @l.each do |j| %>
+											<div>
+												<table class="table">
+													<thead>
+														<tr>
+															<th><%=j%></th>
+														</tr>
+													</thead>
+													<tbody>
+														<%@cour.dispos.where(jour:j).each do |jh| %>
+															<tr>
+																<th>
+																	<div class="btn-group btn-group-toggle" data-toggle="buttons">
+																	<label class="btn" id="btn_active" style="background-color: #e0e0e0">
+							   										 <input type="radio" name="dispo" id="option1" autocomplete="off" value="<%=j%>,<%=jh.heure%>" required>
+							   										 <%=jh.heure%>h
+							 										 </label>
+																	</div>
+																</th>
+															</tr>
+														<% end %>
+													</tbody>
+												</table>
+											</div>
+										<%end%>	
+									</div>
+								<%= hidden_field_tag "id", @cour.id %>
+					<div class="row justify-content-center">
+						<div  class="col-6" style="border:solid 1px black; border-top-left-radius: 15px; border-top-right-radius: 15px; background-color: #00e676 ; height:30px"><%= submit_tag "M'inscrire", class:"submit_tag"%>
+						</div>
+					</div>
+					<%end%>				
+							</div>
+						</div>
+					</div>	
+					
+				<% end %>
+				<!-- Fin horaire -->	
+			</div>
+			<div class="col-sm-9">			
+				<div class="row justify-content-center">
+					<div class="col-sm-4">
+						<%= image_tag @cour.teacher.infoteacher.avatar(:thumb), alt:"avatar", :class => "thumbnail3" %>
+						<p><%= @cour.teacher.infoteacher.first_name %></p>
+						<!-- Avatars eleves -->
+						<div class="row justify-content-center">
+							<!-- Cas où 2 eleves sont déjà inscrits -->
+							<% if @cour.nombre_eleves == 2%>
+								<div class="col">
+									<div class="avatar_occupe">
+										<i class="fa fa-user-circle-o"></i>
+									</div>
+								</div>
+								<div class="col">
+									<div class="avatar_occupe">
+										<i class="fa fa-user-circle-o"></i>
+									</div>
+								</div>										
+								<div class="col">
+									<div class="avatar_libre">
+										<i class="fa fa-user-circle-o"></i>
+									</div>
+								</div>
+							<!-- Cas où 1 eleve est déjà inscrit -->
+							<% elsif @cour.nombre_eleves == 1 %>		
+								<div class="col-3">
+									<div class="avatar_occupe">
+										<i class="fa fa-user-circle-o"></i>
+									</div>
+								</div>
+								<div class="col-3">
+									<div class="avatar_libre">
+										<i class="fa fa-user-circle-o"></i>
+									</div>
+								</div>											
+								<div class="col-3">
+									<div class="avatar_libre">
+										<i class="fa fa-user-circle-o"></i>
+									</div>
+								</div>
+							<!-- Aucun eleves d'inscrit -->
+							<% else %>
+								<div class="col">
+									<div class="avatar_libre">
+										<i class="fa fa-user-circle-o"></i>
+									</div>
+								</div>
+								<div class="col">
+									<div class="avatar_libre">
+										<i class="fa fa-user-circle-o"></i>
+									</div>
+								</div>										
+								<div class="col">
+									<div class="avatar_libre">
+										<i class="fa fa-user-circle-o"></i>
+									</div>
+								</div>
+							<% end %>										
+						</div>				
+					</div>
+						<!-- fin avatars eleves -->
+					<div class="col-sm-8" style="background-color: #eeeeee; border-radius: 10px">
+						<h5 class="mt-2">Expérience</h5>
+						<p class="font-italic text-justify" style="font-size:90%"><%=@cour.teacher.infoteacher.experience%></p>
+						<h5>Méthodologie</h5>
+						<p class="font-italic text-justify" style="font-size:90%"><%=@cour.teacher.infoteacher.methodology%></p>						
+					</div>
+				</div>
+
+				<!-- Bouton s'inscire si eleve, se désabonner si élève déjà inscrit, pas de bouton si prof-->
+				<!-- Eleve connecté -->
+				<% if (user_signed_in? and @cour.nombre_eleves > 0) %>
+					<div class="row justify-content-center">
+						<div class="col-sm-3" style="border:solid 1px black; border-radius: 10px; background-color: #00e676 ; height:30px">
+							<%= link_to "M'inscrire", {:controller =>"cours", :action=>"inscription", :id=>@cour.id}, class:"link_to" %>
+						</div>
+					</div>
+				<% elsif (teacher_signed_in? and current_teacher.id == @cour.teacher_id) %>
+				<!-- Prof connecté -->
+				<div class="row justify-content-center">
+					<div class="col-sm-3" style="border:solid 1px black; border-radius: 10px; background-color: #ff1744 ; height:40px">
+					<!-- Modal -->
+						<button type="button" class="btn btn-link" data-toggle="modal" data-target="#exampleModal">
+				  		Supprimer ce cours
+						</button>
+
+						<!-- Modal -->
+						<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						  <div class="modal-dialog" role="document">
+						    <div class="modal-content">
+						      <div class="modal-header">
+						        <h5 class="modal-title" id="exampleModalLabel">Supprimer ce cours</h5>
+						        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						          <span aria-hidden="true">&times;</span>
+						        </button>
+						      </div>
+						      <div class="modal-body">
+						        Je confirme mon souhait de supprimer ce cours. Avant de valider votre choix, nous vous conseillons de prévenir les élèves inscrits de la fin de leur cours. 
+						      </div>
+						      <div class="modal-footer">
+						        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+						        <%= link_to "Supprimer le cours", {:controller =>"cours", :action=>"destroy", :id=>@cour.id}, class:"btn btn-danger"%>
+						      </div>
+						    </div>
+						  </div>
+						</div>
+					<!-- Fin du modal -->
+					</div>
+				</div>					
+				<!-- Eleve non connecté/inscrit -->
+				<% end %>
+			</div>
+		</div>
+	</div>
+</div>
+
 
 

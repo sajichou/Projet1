@@ -1,0 +1,25 @@
+<h1> Photo </h1>
+
+<p>Ajoutez une photo ! Cela rassurera les autres membres et vous trouverez plus facilement des élèves. Les photos permettent aussi aux élèves de vous reconnaître.</p>
+
+<% if teacher_signed_in? %>
+	<p><%= image_tag @current_teacher.infoteacher.avatar.url(:thumb), :class => "thumbnail" %></p>
+	<%=form_tag "/pages/maphoto", method:"post", multipart:true do %>
+	<p>
+		<label for="avatar"> Photo </label>
+		<input type="file" class="form-control value_danger" name="avatar">
+	</p>
+	<button type="submit" class=" btn btn-primary">Modifier ma photo</button>
+	<% end %>
+
+<% elsif user_signed_in?%>
+	<p><%= image_tag @current_user.infouser.avatar.url(:thumb), :class=>"thumbnail" %></p>
+	<%=form_tag "/pages/maphoto", method:"post", multipart:true do %>
+	<p>
+		<label for="avatar"> Photo </label>
+		<input type="file" class="form-control" name="avatar">
+	</p>
+	<button type="submit" class=" btn btn-primary">Enregister ma nouvelle photo</button>
+	<% end %>
+
+<% end %>

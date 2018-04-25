@@ -1,16 +1,61 @@
-<h1> Recherchez un cours </h1>
+<div id="ado">
+	<div id="opacity">
+		<div id="cover">
+			<div class="row justify-content-center">
+			  <div class="col-sm-11">
+				<%=form_tag "/cours/accueil", method:"post" do %>
+					<div class="form-row justify-content-center">
+						<div class="from-group col-sm-3">
+						<label for="matiere" class="sr-only">Quelle matière ?</label>
+							<select name="matiere" class="form-control">
+								<option value="" disabled selected>Quelle matière ?</option>
+								<option value="mathematiques">Mathématiques</option>
+								<option value="francais">Français</option>
+								<option value="anglais">Anglais</option>
+								<option value="espagnol">Espagnol</option>
+							</select>
+						</div>
+						<div class="form-group col-sm-3">
+						<label for="classe" class="sr-only">Quelle classe ?</label>
+							<select name="classe" class="form-control">
+								<option disabled selected>Quelle classe ?</option>
+								<optgroup label="Collège">
+									<option value="1">6ème</option>
+									<option value="2">5ème</option>
+									<option value="3">4ème</option>
+									<option value="4">3ème</option>
+								</optgroup>
+								<optgroup label="Lycée">
+									<option value="5">2nde</option>
+									<option value="6">1ère S</option>
+									<option value="7">1ère ES</option>
+									<option value="8">1ère L</option>
+									<option value="9">Terminale S</option>	
+									<option value="10">Terminale ES</option>
+									<option value="11">Terminale L</option>
+								</optgroup>
+							</select>
+						</div>
+						<div class="form-group col-sm-3">
+						<label for="lieu" class="sr-only">Adresse ou quartier ?</label>
+							<input type="text" name="lieu" class="form-control" value="<%=@client_location%>">
+						</div>
+						<div class="col-sm-2">
+							<input type="submit" class="form-control btn-primary" value="Chercher">
+						</div>
+					</div>
+				<%end%>
 
-<p> <%= index_link %> </p>
+			   </div>
+			</div>
+		</div>
+	</div>
+</div>
 
-<%=form_tag "/cours/accueil", method:"post" do %>
-	<label for="matiere">Quelle matière souhaitez-vous travailler ?</label>
-	<select name="matiere">
-		<option value="mathematiques">Mathématiques</option>
-		<option value="francais">Français</option>
-		<option value="anglais">Anglais</option>
-		<option value="espagnol">Espagnol</option>
-	</select>
-	<label for="lieu">Indiquez votre adresse ?</label>
-	<input type="text" name="lieu" size=40 value="<%=@client_location%>">
-	<input type="submit" value="Envoyez">
-<%end%>
+
+<div class="row" style="border:solid 1px green">
+	<div class="col text-center">
+ 	 	<h3> Une nouvelle façon d'apprendre</h3>
+ 	 	<p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt sed, magni, veritatis aliquam sequi eveniet? Rerum quia accusantium alias provident perferendis</p>
+	</div>
+</div>

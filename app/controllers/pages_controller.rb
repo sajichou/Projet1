@@ -9,6 +9,15 @@ class PagesController < ApplicationController
     end     
   end
 
+  def medesabonner
+    inscription = Inscription.find(params[:id])
+    cour = inscription.cour 
+    cour.nombre_eleves = cour.nombre_eleves - 1
+    cour.save
+    inscription.destroy
+    redirect_to '/pages/monespace'
+  end
+
   def completer
     if teacher_signed_in?
     Infoteacher.find_by_teacher_id(current_teacher.id).update(
@@ -29,7 +38,8 @@ class PagesController < ApplicationController
       email:params[:email],
       phone: params[:phone],
       location: params[:location],
-      avatar: params[:avatar]
+      avatar: params[:avatar],
+      niveau: params[:niveau]
       )
       redirect_to '/pages/monespace'
     end
@@ -44,6 +54,22 @@ class PagesController < ApplicationController
     end
   end
 
-    
+  def maphoto
+    if teacher_signed_in?
+      @current_teacher = current_teacher
+    elsif user_signed_in?
+      @current_user = current_user
+    end
+  end
+
+  def modifier_maphoto
+    if teacher_signed_in?
+      current_teacher.infoteacher.update(avatar:params[:avatar])
+      redirect_to '/pages/maphoto'
+    elsif user_signed_in?
+      current_user.infouser.update(avatar:params[:avatar])    
+      redirect_to  '/pages/maphoto'
+    end 
+  end     
 
 end

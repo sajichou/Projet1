@@ -10,10 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180330143239) do
+ActiveRecord::Schema.define(version: 20180425071331) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "annees", force: :cascade do |t|
+    t.integer "cour_id"
+    t.integer "teacher_id"
+    t.integer "niveau", default: 0
+  end
+
+  create_table "correspondances", force: :cascade do |t|
+    t.integer "niveau_id"
+    t.string "nom"
+  end
 
   create_table "cours", force: :cascade do |t|
     t.string "matiere"
@@ -23,6 +34,13 @@ ActiveRecord::Schema.define(version: 20180330143239) do
     t.float "latitude"
     t.float "longitude"
     t.integer "teacher_id"
+    t.integer "heure"
+  end
+
+  create_table "dispos", force: :cascade do |t|
+    t.integer "cour_id"
+    t.string "jour"
+    t.integer "heure"
   end
 
   create_table "infoteachers", force: :cascade do |t|
@@ -51,6 +69,7 @@ ActiveRecord::Schema.define(version: 20180330143239) do
     t.integer "avatar_file_size"
     t.datetime "avatar_updated_at"
     t.string "email"
+    t.integer "niveau"
   end
 
   create_table "inscriptions", force: :cascade do |t|
