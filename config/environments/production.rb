@@ -91,4 +91,34 @@ Rails.application.configure do
 
   config.assets.initialize_on_precompile = false
   
+
+  #Did
+
+  config.action_mailer.delivery_method = :smtp
+
+  #config.action_mailer.smtp_settings = {
+   # address: "auth.smtp.1and1.fr",
+    #address: "smtp.gmail.com",
+    #port: 465,
+   # domain: "1and1.fr",
+   # authentication: "plain",
+   # enable_starttls_auto: true,
+   # user_name: "",
+    #password: ""
+  #}
+  ActionMailer::Base.smtp_settings = {
+  :user_name => ENV["SG_USERNAME"],
+  :password => ENV["SG_PASSWORD"],
+  :domain => 'gmail.com',
+  :address => 'smtp.sendgrid.net',
+  :port => 587,
+  :authentication => :plain,
+  :enable_starttls_auto => true
+  }
+
+  #config.action_mailer.default_url_options = { host: 'localhost', port: 5000 }
+  config.action_mailer.default_url_options = { host: 'lakamaraderie.herokuapp.com.'}
+
+  config.assets.initialize_on_precompile = false
+
 end
