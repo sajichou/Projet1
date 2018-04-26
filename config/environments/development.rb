@@ -74,8 +74,7 @@ Rails.application.configure do
   :enable_starttls_auto => true
   }
 
-  #config.action_mailer.default_url_options = { host: 'localhost', port: 5000 }
-  config.action_mailer.default_url_options = { host: 'lakamaraderie.herokuapp.com.'}
+  config.action_mailer.default_url_options = { host: 'localhost', port: 5000 }
 
   config.assets.initialize_on_precompile = false
 
