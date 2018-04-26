@@ -4,9 +4,9 @@ class User::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 
-  after_action :after_signin, only: [:create]
+  after_action :after_signup, only: [:create]
 
-  def after_signin
+  def after_signup
     if user_signed_in? 
       Infouser.create user_id:current_user.id, email:current_user.email
       UserMailer.signup(current_user).deliver
@@ -62,7 +62,14 @@ class User::RegistrationsController < Devise::RegistrationsController
   # The path used after sign up.
    def after_sign_up_path_for(resource)
     #super(resource)
-    '/pages/monprofil'
+
+    #'/pages/monprofil'
+
+    if(session[:page_id].present?)
+        cours_show_path(session[:page_id])
+    else
+      '/pages/monespace'  
+    end
    end
 
   # The path used after sign up for inactive accounts.

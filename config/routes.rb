@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
 
-  devise_for :users, controllers: { registrations:'user/registrations'}
-  devise_for :teachers, controllers: { registrations:'teachers/registrations' }
+
   #devise_for :teachers
   #devise_scope :teachers do
    # get 'teachers/sign_up', to: 'teachers/sessions#create'
@@ -66,7 +65,8 @@ Rails.application.routes.draw do
 
   get 'admin/teacher_profile'
 
-
+  devise_for :users, controllers: { registrations:'user/registrations', sessions:'user/sessions'}
+  devise_for :teachers, controllers: { registrations:'teachers/registrations'}
 
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

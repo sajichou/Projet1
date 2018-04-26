@@ -30,7 +30,11 @@ class PagesController < ApplicationController
       experience: params[:experience],
       avatar: params[:avatar]
       )
-      redirect_to '/pages/monespace'
+        if(session[:page_id].present?)
+        redirect_to controller:"cours", action: "show", id: session[:page_id]
+        else
+          redirect_to '/pages/monespace'
+        end
     elsif user_signed_in?
     Infouser.find_by_user_id(current_user.id).update(
       first_name:params[:first_name],
@@ -41,7 +45,11 @@ class PagesController < ApplicationController
       avatar: params[:avatar],
       niveau: params[:niveau]
       )
-      redirect_to '/pages/monespace'
+      if(session[:page_id].present?)
+        redirect_to controller:"cours", action: "show", id: session[:page_id]
+        else
+          redirect_to '/pages/monespace'
+        end
     end
   end
 

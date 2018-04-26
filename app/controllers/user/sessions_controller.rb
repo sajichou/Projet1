@@ -24,4 +24,18 @@ class User::SessionsController < Devise::SessionsController
   # def configure_sign_in_params
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
+
+  def after_sign_in_path_for(resource)
+    #super(resource)
+
+    #'/pages/monprofil'
+    #puts"after sign in avant if"
+    if(session[:page_id].present?)
+        cours_show_path(session[:page_id])
+    else
+      '/pages/monespace'  
+    end
+
+   end
+
 end
