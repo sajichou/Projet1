@@ -16,6 +16,8 @@ Rails.application.routes.draw do
 
   get 'cours/show'
 
+  get 'cours/inscription'
+
   post 'cours/show' => 'cours#inscription'
 
   get 'cours/update'
@@ -37,8 +39,6 @@ Rails.application.routes.draw do
   post 'cours/accueil' =>'cours#search'
 
   post 'cours/search' =>'cours#search'
-
-  get 'cours/inscription'
 
   get 'cours/:id' => 'cours#show'
 

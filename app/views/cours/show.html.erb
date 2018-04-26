@@ -186,7 +186,7 @@
 
 				<!-- Bouton s'inscire si eleve, se désabonner si élève déjà inscrit, pas de bouton si prof-->
 				<!-- Eleve connecté -->
-				<% if (user_signed_in? and @cour.nombre_eleves > 0) %>
+				<% if (!teacher_signed_in? and @cour.nombre_eleves > 0) %>
 					<div class="row justify-content-center">
 						<div class="col-sm-3" style="border:solid 1px black; border-radius: 10px; background-color: #00e676 ; height:30px">
 							<%= link_to "M'inscrire", {:controller =>"cours", :action=>"inscription", :id=>@cour.id}, class:"link_to" %>
@@ -194,36 +194,36 @@
 					</div>
 				<% elsif (teacher_signed_in? and current_teacher.id == @cour.teacher_id) %>
 				<!-- Prof connecté -->
-				<div class="row justify-content-center">
-					<div class="col-sm-3" style="border:solid 1px black; border-radius: 10px; background-color: #ff1744 ; height:40px">
-					<!-- Modal -->
-						<button type="button" class="btn btn-link" data-toggle="modal" data-target="#exampleModal">
-				  		Supprimer ce cours
-						</button>
-
+					<div class="row justify-content-center">
+						<div class="col-sm-3" style="border:solid 1px black; border-radius: 10px; background-color: #ff1744 ; height:40px">
 						<!-- Modal -->
-						<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-						  <div class="modal-dialog" role="document">
-						    <div class="modal-content">
-						      <div class="modal-header">
-						        <h5 class="modal-title" id="exampleModalLabel">Supprimer ce cours</h5>
-						        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						          <span aria-hidden="true">&times;</span>
-						        </button>
-						      </div>
-						      <div class="modal-body">
-						        Je confirme mon souhait de supprimer ce cours. Avant de valider votre choix, nous vous conseillons de prévenir les élèves inscrits de la fin de leur cours. 
-						      </div>
-						      <div class="modal-footer">
-						        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-						        <%= link_to "Supprimer le cours", {:controller =>"cours", :action=>"destroy", :id=>@cour.id}, class:"btn btn-danger"%>
-						      </div>
-						    </div>
-						  </div>
+							<button type="button" class="btn btn-link" data-toggle="modal" data-target="#exampleModal">
+					  		Supprimer ce cours
+							</button>
+
+							<!-- Modal -->
+							<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+							  <div class="modal-dialog" role="document">
+							    <div class="modal-content">
+							      <div class="modal-header">
+							        <h5 class="modal-title" id="exampleModalLabel">Supprimer ce cours</h5>
+							        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							          <span aria-hidden="true">&times;</span>
+							        </button>
+							      </div>
+							      <div class="modal-body">
+							        Je confirme mon souhait de supprimer ce cours. Avant de valider votre choix, nous vous conseillons de prévenir les élèves inscrits de la fin de leur cours. 
+							      </div>
+							      <div class="modal-footer">
+							        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+							        <%= link_to "Supprimer le cours", {:controller =>"cours", :action=>"destroy", :id=>@cour.id}, class:"btn btn-danger"%>
+							      </div>
+							    </div>
+							  </div>
+							</div>
+						<!-- Fin du modal -->
 						</div>
-					<!-- Fin du modal -->
-					</div>
-				</div>					
+					</div>					
 				<!-- Eleve non connecté/inscrit -->
 				<% end %>
 			</div>

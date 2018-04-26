@@ -135,6 +135,7 @@ class CoursController < ApplicationController
         Dispo.create cour_id:cour.id, jour:dispo[0], heure:dispo[1]
         cour.update(jour:dispo[0])
         cour.update(heure:dispo[1])
+        puts"lolilol"
       end
     cour.save
   
@@ -143,7 +144,7 @@ class CoursController < ApplicationController
 
     UserMailer.inscription(current_user, cour).deliver
     TeacherMailer.inscription(cour.teacher).deliver
-
+    puts "lol"
     redirect_to '/pages/monespace'
   end
 
@@ -164,6 +165,7 @@ class CoursController < ApplicationController
   end
 
   def premier_eleve
+    puts"test"
     cour = Cour.find(params[:id])
     #On peut verifier que l eleve a bien renseigné sa classe mais on pourrait aussi bien tout vérifier
     if (cour.nombre_eleves < 1 and !current_user.infouser.niveau.present?)
