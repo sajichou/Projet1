@@ -131,7 +131,8 @@ Rails.application.configure do
           #s3_host_name: ENV['S3_HOST_NAME']
         }
     }
-
+    
+  end
 
   config.assets.initialize_on_precompile = false
 
