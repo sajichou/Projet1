@@ -14,6 +14,7 @@ gem 'figaro'
 gem 'pg'
 
 gem "paperclip", "~> 6.0.0"
+gem 'aws-sdk', '~> 3'
 
 #gem 'bootstrap', '~> 4.0.0'
 gem 'bootstrap', '~> 4.0.0'
