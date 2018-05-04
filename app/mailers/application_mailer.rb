@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'sajid@lakamaraderie.fr'
+  default from: 'contact@lakamaraderie.fr'
   layout 'mailer'
 end

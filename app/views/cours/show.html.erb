@@ -117,7 +117,7 @@
 			<div class="col-sm-9">			
 				<div class="row justify-content-center">
 					<div class="col-sm-4">
-						<%= image_tag @cour.teacher.infoteacher.avatar(:thumb), alt:"avatar", :class => "thumbnail3" %>
+						<%= image_tag @cour.teacher.infoteacher.avatar.url(:thumb), :class => "thumbnail3" %>
 						<p><%= @cour.teacher.infoteacher.first_name %></p>
 						<!-- Avatars eleves -->
 						<div class="row justify-content-center">
@@ -230,6 +230,7 @@
 		</div>
 	</div>
 </div>
+
 
 
 

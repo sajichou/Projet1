@@ -65,16 +65,17 @@ Rails.application.configure do
     #password: ""
   #}
   ActionMailer::Base.smtp_settings = {
-  :user_name => ENV["SG_USERNAME"],
-  :password => ENV["SG_PASSWORD"],
-  :domain => 'gmail.com',
-  :address => 'smtp.sendgrid.net',
+  :user_name => ENV["1_USERNAME"],
+  :password => ENV["1_PASSWORD"],
+  :domain => 'lakamaraderie.fr',
+  :address => 'smtp.office365.com',
   :port => 587,
-  :authentication => :plain,
+  :authentication => :login,
   :enable_starttls_auto => true
   }
 
   config.action_mailer.default_url_options = { host: 'localhost', port: 5000 }
+  #config.action_mailer.default_url_options = { host: 'lakamaraderie.herokuapp.com.'}
 
   config.assets.initialize_on_precompile = false
 

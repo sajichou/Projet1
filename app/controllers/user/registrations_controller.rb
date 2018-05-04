@@ -4,15 +4,6 @@ class User::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 
-  after_action :after_signup, only: [:create]
-
-  def after_signup
-    if user_signed_in? 
-      Infouser.create user_id:current_user.id, email:current_user.email
-      UserMailer.signup(current_user).deliver
-    end
-  end
-
   # GET /resource/sign_up
   # def new
   #   super

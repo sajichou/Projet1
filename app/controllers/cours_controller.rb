@@ -33,16 +33,19 @@ class CoursController < ApplicationController
   end
 
   def show
-    if session[:page_id].present?
-      @cour = Cour.find(session[:page_id])
-    else
+
+    if params[:id].present?
       @cour = Cour.find(params[:id])
       session[:page_id] = params[:id]
+    else
+      @cour = Cour.find(session[:page_id])
     end
     #@cour = Cour.find(params[:id])
     @inscriptions = Inscription.where("cour_id=?",@cour.id)
     
+    puts "session"
     puts session[:page_id]
+
 
     # Si aucun eleve encore inscrit :
 

@@ -3,14 +3,6 @@
 class Teachers::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
-  after_action :after_signin, only: [:create]
-
-  def after_signin
-    if teacher_signed_in? 
-      Role.create teacher_id:current_teacher.id
-      Infoteacher.create teacher_id:current_teacher.id, email:current_teacher.email
-    end
-  end
 
   # GET /resource/sign_up
   # def new
