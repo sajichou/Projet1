@@ -5,7 +5,6 @@ class Teacher < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
   def after_confirmation
-  	puts"apres confirmation"
   	Role.create teacher_id:self.id
     Infoteacher.create teacher_id:self.id, email:self.email
   end
