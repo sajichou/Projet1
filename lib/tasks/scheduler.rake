@@ -4,23 +4,7 @@ desc "This task is called by the Heroku scheduler add-on"
 
 task :afficher => :environment do
 
-  wday = {"lundi":1, "mardi":2, "mercredi":3, "jeudi":4, "vendredi":5,
-   "samedi":6, "dimanche":7}
-
-  Cour.all.each do |cour|
-  	if  cour.jour.present?
-
-  		if Date.today.wday == wday[cour.jour.to_sym]
-  			begin
-  				ContactusMailer.contact("Rake","email de rake","sujet de rake","message de rake").deliver
-  			rescue Exception => e
-  				logger.error e.message
-  			end
-  		end
-
-  	end
-  	  	  	  	  		  	  	  	  		 	 	  	  	  	  	  	
-  end
+  ContactusMailer.contact("Scheduler","email de rake","sujet de rake","message de rake").deliver
 
 end
 
