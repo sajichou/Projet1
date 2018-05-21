@@ -8,6 +8,8 @@ task :afficher => :environment do
 
 end
 
+
+
 task :rappel_avant_cours => :environment do
 
   wday = {"lundi":1, "mardi":2, "mercredi":3, "jeudi":4, "vendredi":5,
