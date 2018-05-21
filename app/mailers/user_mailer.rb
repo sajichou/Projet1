@@ -19,5 +19,17 @@ class UserMailer < ApplicationMailer
     :subject => 'Votre inscription au cours de #{@cours.teacher.infoteacher.email}!' )
   end
   
+  def rappel_avant_cours(user, cour)
+    @user = user
+    @cour = cour
+    mail( :to =>@user.email, :subject => 'Rappel pour votre cours de demain')
+  end
+
+
+  def rappel_apres_cours(user, cour)
+    @user = user
+    @cour = cour
+    mail( :to =>@user.email, :subject => 'Bilan de votre cours')
+  end
 
 end

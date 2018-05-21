@@ -17,7 +17,9 @@ Rails.application.routes.draw do
 
   get 'cours/inscription'
 
-  post 'cours/show' => 'cours#inscription'
+  get 'charges/new'
+
+  post 'cours/show' => 'charges#new'
 
   get 'cours/update'
 
@@ -68,6 +70,13 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { registrations:'user/registrations', sessions:'user/sessions'}
   devise_for :teachers, controllers: { registrations:'teachers/registrations'}
 
+  get 'charges/connect'
+
+  resources :charges
+
+  #get 'pages/contactus' =>'pages#contactus'
+
+  post 'pages/contactus' 
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

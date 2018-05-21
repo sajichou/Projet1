@@ -65,12 +65,16 @@ Rails.application.configure do
     #password: ""
   #}
   ActionMailer::Base.smtp_settings = {
-  :user_name => ENV["1_USERNAME"],
-  :password => ENV["1_PASSWORD"],
+  #:user_name => ENV["1_USERNAME"],
+  :user_name => ENV["SG_USERNAME"],
+  #:password => ENV["1_PASSWORD"],
+  :password => ENV["SG_PASSWORD"],
   :domain => 'lakamaraderie.fr',
-  :address => 'smtp.office365.com',
+  #:address => 'smtp.office365.com',
+  :address => 'smtp.sendgrid.net',
   :port => 587,
-  :authentication => :login,
+  #:authentication => :login,
+  :authentication => :plain,
   :enable_starttls_auto => true
   }
 

@@ -21,4 +21,17 @@ class TeacherMailer < ApplicationMailer
     mail( :to => @teacher.email,
     :subject => 'Un nouvel élève a rejoint votre cours!' )
   end
+
+  def rappel_avant_cours(teacher, cour)
+    @teacher = teacher
+    @cour = cour
+    mail( :to =>@teacher.infoteacher.email, :subject => 'Rappel pour votre cours de demain')
+  end
+
+  def rappel_apres_cours(teacher, cour)
+    @teacher = teacher
+    @cour = cour
+    mail( :to =>@teacher.infoteacher.email, :subject => 'Bilan de votre cours')
+  end
+
 end

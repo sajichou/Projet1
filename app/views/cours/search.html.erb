@@ -2,50 +2,46 @@
 
 <!-- <p> Votre adresse : <%=@lieu%> </p> -->
 
-<div class="row justify-content-around" style="margin-top: 50px">
+<div class="row justify-content-around" style="margin-top: 80px">
 	<div class="col-sm-10">
 		<%=form_tag "/cours/search", method:"post" do %>
-			<div class="form-row">
-				<div class="from-group col-sm-3">
-				<label for="matiere" class="sr-only">Matière ?</label>
-					<select name="matiere" class="form-control">
-						<option value="" disabled selected>Quelle matière ?</option>
-						<option value="mathematiques">Mathématiques</option>
-						<option value="francais">Français</option>
-						<option value="anglais">Anglais</option>
-						<option value="espagnol">Espagnol</option>
-					</select>
-				</div>
-				<div class="form-group col-sm-3">
-						<label for="classe" class="sr-only">Quelle classe ?</label>
-							<select name="classe" class="form-control">
-								<option disabled selected>Quelle classe ?</option>
-								<optgroup label="Collège">
-									<option value="1">6ème</option>
-									<option value="2">5ème</option>
-									<option value="3">4ème</option>
-									<option value="4">3ème</option>
-								</optgroup>
-								<optgroup label="Lycée">
-									<option value="5">2nde</option>
-									<option value="6">1ère S</option>
-									<option value="7">1ère ES</option>
-									<option value="8">1ère L</option>
-									<option value="9">Terminale S</option>	
-									<option value="10">Terminale ES</option>
-									<option value="11">Terminale L</option>
-								</optgroup>
-							</select>
-						</div>
-				<div class="form-group col-sm-3">
-				<label for="lieu" class="sr-only">Adresse ou quartier ?</label>
-					<input type="text" name="lieu" class="form-control" placeholder="<%=params[:lieu] %>" value="<%=params[:lieu]%>">
-				</div>
-				<div class="col-sm-2">
-					<input type="submit" class="form-control btn-primary" value="Chercher">
-				</div>
-			</div>
-		<%end%>
+					<div class="form-row justify-content-center">
+						<select name="matiere" class="col-12 col-lg-3 form-search text-center m-2">
+							<option value="" disabled selected>Quelle matière ?</option>
+							<option value="mathematiques">Mathématiques</option>
+							<option value="francais">Français</option>
+							<option value="anglais">Anglais</option>
+							<option value="espagnol">Espagnol</option>
+						</select>
+						<select name="classe" class="col-12 col-lg-3 form-search text-center m-2">
+							<option disabled selected>Quelle classe ?</option>
+							<optgroup label="Collège">
+								<option value="1">6ème</option>
+								<option value="2">5ème</option>
+								<option value="3">4ème</option>
+								<option value="4">3ème</option>
+							</optgroup>
+							<optgroup label="Lycée">
+								<option value="5">2nde</option>
+								<option value="6">1ère S</option>
+								<option value="7">1ère ES</option>
+								<option value="8">1ère L</option>
+								<option value="9">Terminale S</option>	
+								<option value="10">Terminale ES</option>
+								<option value="11">Terminale L</option>
+							</optgroup>
+						</select>
+						<!-- Google Maps javascript API -->
+						<input id="lieu" name="lieu"
+                     	class="col-12 col-lg-3 form-search text-center m-2" placeholder="Entrez votre adresse, 3 rue...">
+		                <div>
+		                  <input id="latitude" name="latitude" type="hidden">
+		                  <input id="longitude" name="longitude" type="hidden">
+		                </div>
+						<!-- Fin de Google Maps Javascript API -->
+						<input type="submit" class="col-12 col-lg-2 form-search-btn m-2" value="Chercher">
+					</div>
+				<%end%>
 	</div>
 </div>
 
@@ -56,3 +52,46 @@
 		</div>
 	</div>
 <% end %>
+
+
+<!-- Include Google Maps JS API -->
+    <script type="text/javascript"
+            src="https://maps.googleapis.com/maps/api/js?libraries=places&amp;key=AIzaSyCmOpoeHGn3B-LSaL4_1LngRYrg9uR0IGE"></script>
+
+    <script type="text/javascript">
+      function initializeAutocomplete(id) {
+        var element = document.getElementById(id);
+        if (element) {
+          var autocomplete = new google.maps.places.Autocomplete(element, { types: ['geocode'] });
+          autocomplete.setComponentRestrictions(
+            {'country': ['fr']});
+          google.maps.event.addListener(autocomplete, 'place_changed', onPlaceChanged);
+        }
+      }
+
+      function onPlaceChanged() {
+        var place = this.getPlace();
+        var lat = document.getElementById("latitude");
+        lat.value = place.geometry.location.lat();
+        var long = document.getElementById("longitude");
+        long.value = place.geometry.location.lng();
+        // console.log(place);  // Uncomment this line to view the full object returned by Google API.
+        for (var i in place.address_components) {
+          var component = place.address_components[i];
+          for (var j in component.types) {  // Some types are ["country", "political"]
+            var type_element = document.getElementById(component.types[j]);
+            if (type_element) {
+              type_element.value = component.long_name;
+            }
+          }
+        }
+      }
+
+
+
+
+      google.maps.event.addDomListener(window, 'load', function() {
+        initializeAutocomplete('lieu');
+      });
+    </script>
+

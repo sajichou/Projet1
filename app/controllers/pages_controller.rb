@@ -80,4 +80,13 @@ class PagesController < ApplicationController
     end 
   end     
 
+  def contactus
+    @nom = params[:nom]
+    @email = params[:email]
+    @sujet = params[:sujet]
+    @message = params[:message]
+    ContactusMailer.contact(@nom,@email,@sujet,@message).deliver
+    redirect_to root_path
+  end
+
 end

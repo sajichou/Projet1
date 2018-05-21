@@ -14,6 +14,17 @@ class ApplicationController < ActionController::Base
     #  super # Use the default one
    # end
   #end
+
+  private
+  
+  def premier_eleve
+    cour = Cour.find(params[:id])
+    #On peut verifier que l eleve a bien renseigné sa classe mais on pourrait aussi bien tout vérifier
+    if (cour.nombre_eleves < 1 and !current_user.infouser.niveau.present?)
+      flash[:info] = "Vous devez d'abord terminer votre inscription"
+      redirect_to '/pages/monprofil/'
+    end
+  end
   
 end
 

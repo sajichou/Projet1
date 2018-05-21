@@ -12,7 +12,7 @@ gem 'rails', '~> 5.1.4'
 
 gem 'figaro'
 gem 'pg'
-
+gem 'haversine', '~> 0.3.2'
 gem "paperclip", "~> 6.0.0"
 gem 'aws-sdk', '~> 3'
 
@@ -74,6 +74,9 @@ gem 'geocoder'
 
 #Authenticate
 gem 'devise'
+
+#Charging
+gem 'stripe'
 
 group :production do
   gem 'rails_12factor'

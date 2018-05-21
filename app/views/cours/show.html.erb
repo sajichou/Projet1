@@ -82,7 +82,7 @@
 														<tr>
 															<th><%=j%></th>
 														</tr>
-													</thead>
+													</thead> 
 													<tbody>
 														<%@cour.dispos.where(jour:j).each do |jh| %>
 															<tr>
@@ -186,10 +186,10 @@
 
 				<!-- Bouton s'inscire si eleve, se désabonner si élève déjà inscrit, pas de bouton si prof-->
 				<!-- Eleve connecté -->
-				<% if (!teacher_signed_in? and @cour.nombre_eleves > 0) %>
+				<% if (!teacher_signed_in? and @cour.jour.present? and @cour.heure.present?) %>
 					<div class="row justify-content-center">
 						<div class="col-sm-3" style="border:solid 1px black; border-radius: 10px; background-color: #00e676 ; height:30px">
-							<%= link_to "M'inscrire", {:controller =>"cours", :action=>"inscription", :id=>@cour.id}, class:"link_to" %>
+							<%= link_to "M'inscrire", {:controller =>"charges", :action=>"new", :id=>@cour.id}, class:"link_to" %>
 						</div>
 					</div>
 				<% elsif (teacher_signed_in? and current_teacher.id == @cour.teacher_id) %>

@@ -5,6 +5,8 @@ class CoursController < ApplicationController
   before_action :authenticate_teacher! ,only: [:new, :create, :destroy]
   before_action :teacher_validated, only: [:new, :destroy]
 
+
+
   def index
      @cours = Cour.page(params[:page]).per(20)
   end
@@ -96,7 +98,6 @@ class CoursController < ApplicationController
   end
 
   def accueil
-    @client_location = request.location.address
     
   end
 
@@ -114,10 +115,13 @@ class CoursController < ApplicationController
     end
     @cours = liste
     @lieu = params[:lieu]
+    latitude = params[:latitude].to_f
+    longitude = params[:longitude].to_f
     @dist_hash = {}
     @dist = {}
     @cours.each do |c|
-      a = Geocoder::Calculations.distance_between([c.latitude, c.longitude], @lieu, :units =>:km).round(2)
+     # a = Geocoder::Calculations.distance_between([c.latitude, c.longitude], @lieu, :units =>:km).round(2)
+       a = Haversine.distance(c.latitude, c.longitude, latitude, longitude).to_kilometers.round(2)
       @dist_hash[c] = a
       @dist[c.id] = a
     end
@@ -127,6 +131,7 @@ class CoursController < ApplicationController
       @cours.push(d[0])
     end
   end
+
 
   def inscription
     cour = Cour.find(params[:id])
