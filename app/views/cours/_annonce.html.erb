@@ -96,7 +96,7 @@
 		</div>
 	<!-- Caractéristiques du cours-->
 		<div class="col-sm-7">
-			<h5 class="mt-2 mb-4">Titre du cours</h5>
+			<p class="mt-2 mb-4 lead">Titre du cours</p>
 			<div class="d-flex py-0">
 				<div class="px-4 align-self-start" style="width:50px">
 					<i class="fa fa-calendar fa-lg"></i>
@@ -116,7 +116,7 @@
 				<div class="px-4 align-self-start" style="width:50px">
 					<i class="fa fa-book fa-lg"></i>
 				</div>
-				<div class="px-4 align-self-end">
+				<div class="pl-4 align-self-end">
 					<p class="text-capitalize"><%= cours.matiere %>
 					<%cours.annees.each do |n| %>
 						| <%= Correspondance.find_by_niveau_id(n.niveau).nom%>	

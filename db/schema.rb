@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180509135440) do
+ActiveRecord::Schema.define(version: 20180522154750) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,9 @@ ActiveRecord::Schema.define(version: 20180509135440) do
     t.integer "teacher_id"
     t.integer "heure"
     t.datetime "date"
+    t.integer "mois"
+    t.integer "annee"
+    t.integer "jour_prochain"
   end
 
   create_table "dispos", force: :cascade do |t|

@@ -15,7 +15,7 @@ gem 'pg'
 gem 'haversine', '~> 0.3.2'
 gem "paperclip", "~> 6.0.0"
 gem 'aws-sdk', '~> 3'
-
+gem 'pickadate-rails', '~> 3.5', '>= 3.5.6.0'
 #gem 'bootstrap', '~> 4.0.0'
 gem 'bootstrap', '~> 4.0.0'
 

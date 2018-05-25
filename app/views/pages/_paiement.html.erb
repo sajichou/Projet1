@@ -1,5 +1,5 @@
 <% if @current_teacher and @current_teacher.infoteacher.stripe_id.present? %>
 	Stp_id : <%=@current_teacher.infoteacher.stripe_id %>
 <% else %>
-	<a href="https://connect.stripe.com/oauth/authorize?response_type=code&client_id=ca_ComNUZElZrClleagPK9y17ESiQY2Nc6b&scope=read_write">Creer compte stripe </a>
+	<a href="https://dashboard.stripe.com/oauth/authorize?response_type=code&client_id=ca_ComNVv9DH3zeYjZwYtvxV2FnJcCUZLxt&scope=read_write">Creer compte stripe </a>
 <% end %>

@@ -41,6 +41,10 @@ Rails.application.routes.draw do
 
   post 'cours/search' =>'cours#search'
 
+  get 'cours/modifier'
+
+  post 'cours/modifier' =>'cours#modifier_def'
+
   get 'cours/:id' => 'cours#show'
 
   get 'pages/monespace' 

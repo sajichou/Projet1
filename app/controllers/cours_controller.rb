@@ -45,8 +45,6 @@ class CoursController < ApplicationController
     #@cour = Cour.find(params[:id])
     @inscriptions = Inscription.where("cour_id=?",@cour.id)
     
-    puts "session"
-    puts session[:page_id]
 
 
     # Si aucun eleve encore inscrit :
@@ -160,6 +158,26 @@ class CoursController < ApplicationController
     UserMailer.inscription(current_user, cour).deliver
     TeacherMailer.inscription(cour.teacher).deliver
     redirect_to '/pages/monespace'
+  end
+
+  def modifier
+
+  end
+
+  def modifier_def
+
+    wday = {1=>"lundi", 2=>"mardi", 3=>"mercredi", 4=>"jeudi", 5=>"vendredi",
+    6=>"samedi", 7=>"dimanche"}
+    date = params[:datepicker].split("/")
+    annee = date[0].to_i
+    mois = date[1].to_i
+    jour_prochain = (date[2].to_i)
+    jour = (date[2].to_i)%7 + 1 
+    jour = wday[jour]
+    Cour.find(params[:id]).update(heure:params[:timepicker],jour:jour, jour_prochain:jour_prochain, mois:mois, annee:annee)
+    UserMailer.modifier(Cour.find(params[:id])).deliver
+    #TeacherMailer.inscription(Cour.find(params[:id]).teacher).deliver
+    redirect_to controller: 'cours', action:'modifier', id:params[:id]
   end
 
   private

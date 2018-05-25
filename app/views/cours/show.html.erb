@@ -1,17 +1,4 @@
-<!--
 
-<h1>Détails du cours proposé par <%= Teacher.find(@cour.teacher_id).email %> </h1>
-
-<p> <%= index_link %> </p>
-
-<p>
-	<% @inscriptions.each do |i| %>
-	Eleve inscrit : <%= User.find(i.user_id).email %>
-	<br/>
-	<%end%>
-</p>
-
---> 
 
 <div class="row justify-content-center my-5">
 	<div class="col-11">
@@ -116,9 +103,39 @@
 			</div>
 			<div class="col-sm-9">			
 				<div class="row justify-content-center">
-					<div class="col-sm-4">
-						<%= image_tag @cour.teacher.infoteacher.avatar.url(:thumb), :class => "thumbnail3" %>
-						<p><%= @cour.teacher.infoteacher.first_name %></p>
+					<div class="col-sm-4 mh-100">
+						<div class="row justify-content-center">
+							<div class="col-12">
+							<%= image_tag @cour.teacher.infoteacher.avatar.url(:thumb), :class => "thumbnail2" %>
+							</div>
+							<div class="col-12">
+							<%= @cour.teacher.infoteacher.first_name %>
+							</div>
+							<div class="col-12"">
+								<div class="row justify-content-center" >
+									<div class="col-10">							
+										<div class="d-flex">
+											<div style="color: #ffc400">
+												<i class="fa fa-star"></i>
+												<i class="fa fa-star"></i>
+												<i class="fa fa-star"></i>
+												<i class="fa fa-star"></i>
+												<i class="fa fa-star"></i>
+												<i class="small">(9 avis)</i>
+											</div>
+										</div>
+										<div class="d-flex">
+											<div style="color: rgba(76, 175, 80, 0.7)">
+												<i class="fa fa-check-circle-o"></i>
+											</div>
+											<div>
+												<p class="ml-2" style="font-size: 90%">Profil vérifié</p>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
 						<!-- Avatars eleves -->
 						<div class="row justify-content-center">
 							<!-- Cas où 2 eleves sont déjà inscrits -->
@@ -176,30 +193,37 @@
 						</div>				
 					</div>
 						<!-- fin avatars eleves -->
-					<div class="col-sm-8" style="background-color: #eeeeee; border-radius: 10px">
-						<h5 class="mt-2">Expérience</h5>
-						<p class="font-italic text-justify" style="font-size:90%"><%=@cour.teacher.infoteacher.experience%></p>
-						<h5>Méthodologie</h5>
-						<p class="font-italic text-justify" style="font-size:90%"><%=@cour.teacher.infoteacher.methodology%></p>						
+						<!-- Section de droite -->
+					<div class="col-sm-8" >
+						<div class="row">
+							<div class="col-12" style="background-color: #eeeeee; border-radius: 10px">
+								<h5 class="mt-2">Expérience</h5>
+								<p class="font-italic text-justify" style="font-size:90%"><%=@cour.teacher.infoteacher.experience%></p>
+								<h5>Méthodologie</h5>
+								<p class="font-italic text-justify" style="font-size:90%"><%=@cour.teacher.infoteacher.methodology%></p>								
+							</div>
+						
+							<% if (!teacher_signed_in? and @cour.jour.present? and @cour.heure.present?) %>
+									<div class="col-12 col-lg-4" style="border:solid 1px black; border-radius: 10px; background-color: #00e676 ; height:30px">
+										<%= link_to "M'inscrire", {:controller =>"charges", :action=>"new", :id=>@cour.id}, class:"link_to" %>
+									</div>
+								</div>
+							<% elsif (teacher_signed_in? and current_teacher.id == @cour.teacher_id) %>
+									<div class="col-12 col-lg-4" style="border:solid 1px black; border-radius: 10px; background-color: #00e676 ; height:30px">
+										<%= link_to "Modifier", {:controller =>"cours", :action=>"modifier", :id=>@cour.id}, class:"link_to" %>
+									</div>
+									<div class="col-12 col-lg-4" style="border:solid 1px black; border-radius: 10px; background-color: #00e676 ; height:30px">
+										<button type="button" class="btn btn-link" data-toggle="modal" data-target="#exampleModal">
+						  					Supprimer ce cours
+										</button>
+									</div>
+								</div>	
+							<%end%>	
+
+						</div>			
 					</div>
 				</div>
 
-				<!-- Bouton s'inscire si eleve, se désabonner si élève déjà inscrit, pas de bouton si prof-->
-				<!-- Eleve connecté -->
-				<% if (!teacher_signed_in? and @cour.jour.present? and @cour.heure.present?) %>
-					<div class="row justify-content-center">
-						<div class="col-sm-3" style="border:solid 1px black; border-radius: 10px; background-color: #00e676 ; height:30px">
-							<%= link_to "M'inscrire", {:controller =>"charges", :action=>"new", :id=>@cour.id}, class:"link_to" %>
-						</div>
-					</div>
-				<% elsif (teacher_signed_in? and current_teacher.id == @cour.teacher_id) %>
-				<!-- Prof connecté -->
-					<div class="row justify-content-center">
-						<div class="col-sm-3" style="border:solid 1px black; border-radius: 10px; background-color: #ff1744 ; height:40px">
-						<!-- Modal -->
-							<button type="button" class="btn btn-link" data-toggle="modal" data-target="#exampleModal">
-					  		Supprimer ce cours
-							</button>
 
 							<!-- Modal -->
 							<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -225,7 +249,7 @@
 						</div>
 					</div>					
 				<!-- Eleve non connecté/inscrit -->
-				<% end %>
+
 			</div>
 		</div>
 	</div>

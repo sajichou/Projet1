@@ -12,10 +12,10 @@
         <!-- Inscrire et se connecter -->
         <% if user_signed_in? %>
             <li class="nav-link mx-2"><a data-method="delete", href="/users/sign_out">Se déconnecter</a></li>
-            <li class="nav-link mx-2"><a href="/users/edit">Supprimer mon compte</a></li>
+            <!--<li class="nav-link mx-2"><a href="/users/edit">Supprimer mon compte</a></li>-->
         <% elsif teacher_signed_in? %>
             <li class="nav-link mx-2"><a data-method="delete", href="/teachers/sign_out">Se déconnecter</a></li>
-            <li class="nav-link mx-2"><a href="/teachers/edit">Supprimer mon compte</a></li>
+            <!--<li class="nav-link mx-2"><a href="/teachers/edit">Supprimer mon compte</a></li>-->
         <% else %>
             <li class="nav-link mx-2"><a href="/users/sign_up">S'inscrire</a></li>
             <li class="nav-link mx-2"><a href="/users/sign_in">Se connecter</a></li>

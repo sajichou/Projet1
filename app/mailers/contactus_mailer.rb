@@ -5,7 +5,7 @@ class ContactusMailer < ApplicationMailer
 		@email = email
 		@sujet = sujet
 		@message = message
-		mail to:"sajid123@hotmail.fr", subject:@sujet
+		mail to:"karimsalhi@netaxis.fr", subject:@sujet
 		
 	end
 end

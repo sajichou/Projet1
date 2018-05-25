@@ -3,12 +3,12 @@
 
 <% if user_signed_in? %>
 
-	<h1>Les cours auxquels je suis inscrit</h1>
+	
 
 	<!-- Nouveau design !!!! -->
 
 	<%@inscriptions.each do |inscription| %>
-		<div class="row justify-content-center">
+		<div class="row justify-content-center mt-4">
 			<div class="col-sm-6">	
 				<div id="annonce">
 					<div class="row">
@@ -103,13 +103,13 @@
 													</div>
 												</div>
 											<% end %>	
-									</div>
+									</div> 
 								</div>
 							</div>
 						</div>
 					<!-- Caractéristiques du cours-->
 						<div class="col-sm-7">
-							<h5 class="mt-2 mb-4">Titre du cours</h5>
+							<h5 class="mt-2 mb-4"> </h5>
 							<div class="d-flex py-0">
 								<div class="px-4 align-self-start" style="width:50px">
 									<i class="fa fa-calendar fa-lg"></i>
@@ -118,7 +118,7 @@
 									<% if (inscription.cour.jour.present? and inscription.cour.heure.present?) %>
 										<p class="text-capitalize">
 										<!-- Si 1 élève est déjà inscrit -->
-										<%=inscription.cour.dispos.first.jour%> | <%=inscription.cour.dispos.first.heure %>-<%=inscription.cour.dispos.first.heure+1 %>h
+										<%=inscription.cour.jour%> | <%=inscription.cour.heure %>-<%=inscription.cour.heure+1 %>h
 										</p>
 									<% else %>
 										<p>Plusieurs créneaux possibles</p>
@@ -129,7 +129,7 @@
 								<div class="px-4 align-self-start" style="width:50px">
 									<i class="fa fa-book fa-lg"></i>
 								</div>
-								<div class="px-4 align-self-end">
+								<div class="pl-4 align-self-end">
 									<p class="text-capitalize"><%= inscription.cour.matiere %>
 									<%inscription.cour.annees.each do |n| %>
 								 		| <%= Correspondance.find_by_niveau_id(n.niveau).nom%>	
@@ -141,7 +141,7 @@
 								<div class="px-4 align-self-start" style="width:50px">
 									<i class="fa fa-map-marker fa-lg"></i>
 								</div>
-								<div class="px-4 align-self-end">
+								<div class="pl-4 align-self-end">
 									<p class="text-capitalize"><%= inscription.cour.lieu %>
 								</div>
 							</div>
@@ -325,7 +325,7 @@
 									<% if (cour.jour.present? and cour.heure.present?) %>
 										<p class="text-capitalize">
 										<!-- Si 1 élève est déjà inscrit -->
-										<%=cour.dispos.first.jour%> | <%=cour.dispos.first.heure %>-<%=cour.dispos.first.heure+1 %>h
+										<%=cour.jour%> | <%=cour.heure %>-<%=cour.heure+1 %>h
 										</p>
 									<% else %>
 										<p>Plusieurs créneaux possibles</p>

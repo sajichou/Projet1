@@ -10,8 +10,12 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- */
 
+*= require pickadate/default
+*= require pickadate/default.date
+*= require pickadate/default.time
+ */
+ 
 $theme-colors: (
   "primary": #e55966,
   "danger": #ff4136
@@ -59,7 +63,7 @@ section {
 }
 
 #corps {
-	padding-bottom:200px;	
+	padding-bottom:150px;	
 }
 
 // MENU
@@ -147,7 +151,7 @@ section {
 // ACCUEIL
 
 #opacity {
-	background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0) );
+	background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.7) );
 }
 
 

@@ -8,6 +8,29 @@ task :afficher => :environment do
 
 end
 
+task :paye => :environment do
+
+    # Amount in cents
+    @amount = 130
+    #stripe_teacher_id = "ac_CvXOvyzEp3Oemjs3JVUFqj2Grc6Vg8F4"
+    stripe_teacher_id = Teacher.last.infoteacher.stripe_id
+
+    #stripe_customer_id = "cus_CvWlzILiYEJMJK"
+    stripe_customer_id = User.last.infouser.stipe_customer_id
+
+    charge = Stripe::Charge.create(
+      :customer    => stripe_customer_id,
+      :amount      => @amount,
+      :description => 'Rails Stripe Connect',
+      :currency    => 'eur',
+      :destination => {
+        :amount => 100,
+        :account => stripe_teacher_id,
+     }
+    )
+
+
+end
 
 
 task :rappel_avant_cours => :environment do

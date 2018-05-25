@@ -32,4 +32,13 @@ class UserMailer < ApplicationMailer
     mail( :to =>@user.email, :subject => 'Bilan de votre cours')
   end
 
+  def modifier(cour)
+    @cour = cour
+    cour.inscriptions.each do |i|
+      user = User.find(i.user_id)
+     # mail( :to=>user.email, :subject => "Nouvel horaire pour votre cours")
+      mail( :to=>"karimsalhi@netaxis.com", :subject => "Test sans lien")
+    end
+  end
+
 end
