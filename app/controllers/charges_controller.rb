@@ -48,7 +48,7 @@ class ChargesController < ApplicationController
 		uri = URI.parse("https://connect.stripe.com/oauth/token")
 		request = Net::HTTP::Post.new(uri)
 		request.set_form_data(
-		  "client_secret" =>ENV["STRIPE_TEST_SECRET_KEY"],
+		  "client_secret" =>ENV["STRIPE_SECRET_KEY"],
 		  "code" => params[:code],
 		  "grant_type" => "authorization_code",
 		)
