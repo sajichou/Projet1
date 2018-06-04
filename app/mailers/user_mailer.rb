@@ -8,37 +8,37 @@ class UserMailer < ApplicationMailer
   def signup(user)
     @user = user
     mail( :to => @user.email,
-    :subject => 'Merci pour votre inscription!' )
+    :subject => 'Bienvenue dans la communauté de La Kamaraderie ' )
   end
 
   def inscription(user, cour)
   	@user = user
   	@cour = cour
-  	#subject = "Votre inscription au cours de" + @cours.teacher.infoteacher.email
+  	subject = "Votre inscription au cours de " + @cour.teacher.infoteacher.email
   	mail( :to => @user.email,
-    :subject => 'Votre inscription au cours de #{@cour.teacher.infoteacher.email}!' )
+    :subject => subject)
   end
   
   def rappel_avant_cours(user, cour)
     @user = user
     @cour = cour
-    mail( :to =>@user.email, :subject => 'Rappel pour votre cours de demain')
+    subject = "Rappel pour votre cours de " + @cour.matiere + " demain à " + @cour.heure.to_s + "h."
+    mail( :to =>@user.email, :subject =>subject)
   end
 
 
   def rappel_apres_cours(user, cour)
     @user = user
     @cour = cour
-    mail( :to =>@user.email, :subject => 'Bilan de votre cours')
+    subject = "Bilan de votre cours de " + @cour.matiere
+    mail( :to =>@user.email, :subject => subject)
   end
 
-  def modifier(cour)
+  def modifier_ex(cour,user)
     @cour = cour
-    cour.inscriptions.each do |i|
-      user = User.find(i.user_id)
-     # mail( :to=>user.email, :subject => "Nouvel horaire pour votre cours")
-      mail( :to=>"karimsalhi@netaxis.com", :subject => "Test sans lien")
-    end
+    subject = "Modification de la date du prochain cours avec " + @cour.teacher.infoteacher.first_name
+    @user = user
+    mail( :to=>@user.email, :subject => "subject")
   end
 
 end

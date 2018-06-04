@@ -26,7 +26,9 @@ class Teachers::ConfirmationsController < Devise::ConfirmationsController
   # end
 
   # The path used after confirmation.
-  # def after_confirmation_path_for(resource_name, resource)
-  #   super(resource_name, resource)
-  # end
+   def after_confirmation_path_for(resource_name, resource)
+     super(resource_name, resource)
+     sign_in(resource)
+     '/pages/monespace' 
+   end
 end

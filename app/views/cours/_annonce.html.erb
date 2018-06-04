@@ -105,7 +105,7 @@
 					<% if (cours.jour.present? and cours.heure.present?) %>
 						<p class="text-capitalize">
 						<!-- Si 1 élève est déjà inscrit -->
-						<%=cours.dispos.first.jour%> | <%=cours.dispos.first.heure %>-<%=cours.dispos.first.heure+1 %>h
+						<%=cours.jour%> | <%=cours.heure %>-<%=cours.heure+1 %>h
 						</p>
 					<% else %>
 						<p>Plusieurs créneaux possibles</p>

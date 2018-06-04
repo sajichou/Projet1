@@ -43,7 +43,7 @@ Rails.application.routes.draw do
 
   get 'cours/modifier'
 
-  post 'cours/modifier' =>'cours#modifier_def'
+  post 'cours/modifier' =>'cours#modifier_ex_def'
 
   get 'cours/:id' => 'cours#show'
 
@@ -56,6 +56,8 @@ Rails.application.routes.draw do
   get 'pages/maphoto'
 
   post 'pages/maphoto' => 'pages#modifier_maphoto'
+
+  post 'pages/code_promo' => 'pages#code_promo_create'
 
   get 'pages/completer'
 
@@ -71,8 +73,8 @@ Rails.application.routes.draw do
 
   get 'admin/teacher_profile'
 
-  devise_for :users, controllers: { registrations:'user/registrations', sessions:'user/sessions'}
-  devise_for :teachers, controllers: { registrations:'teachers/registrations'}
+  devise_for :users, controllers: { registrations:'user/registrations', sessions:'user/sessions', confirmations: 'user/confirmations'}
+  devise_for :teachers, controllers: { registrations:'teachers/registrations', confirmations: 'teachers/confirmations'}
 
   get 'charges/connect'
 
@@ -81,6 +83,8 @@ Rails.application.routes.draw do
   #get 'pages/contactus' =>'pages#contactus'
 
   post 'pages/contactus' 
+
+  get 'annexe/quisommesnous'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

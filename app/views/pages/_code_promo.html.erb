@@ -1,0 +1,16 @@
+<%=form_tag "/pages/code_promo", method:"post" do %>
+	<div class="row justify-content-center">
+		<fieldset>
+			<legend> Si vous disposez d'un code promo, entrez le ici :</legend>
+				<div class="col-8 col-lg-4 mx-auto">
+					<p>
+						<label for="code"> Code </label>
+						<input type="text" class="form-control text-center" name="code" value='<%=current_user.infouser.code%>'>
+					</p>
+				</div>
+			</div>
+		</fieldset>
+		<div class="col-8 col-lg-4 mx-auto">
+			<button type="submit" class="btn btn-primary">Envoyer</button>
+		</div>
+<% end %>

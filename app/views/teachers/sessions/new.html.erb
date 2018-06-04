@@ -1,8 +1,16 @@
-<div class="row justify-content-around">
+<div class="row justify-content-around py-5" style="background-color: rgb(252,98,112); color:white">
+ 
+  <div class="col-12 col-lg-5">
+    <h2 class="col-12">Devenir professeur, partager son savoir !</h2>
+    <p class="col-12"> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+        ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
+        in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+        cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    </p>
+  </div>
 
-  <div class="col-sm-6" id="devise_subcontent">
-    <h2>Connexion enseignant</h2>
-
+  <div class="col-12 col-lg-5" id="devise_subcontent">
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <div class="form-group">
         <%= f.label :email, 'Adresse e-mail', class:"control-label" %><br />
@@ -39,3 +47,105 @@
     <%= render "teachers/shared/links" %>
   </div>
 </div>
+
+<!--
+<div class="row">
+  <div class="col-5">
+  </div>
+  <div class="col-5">
+    <h2>Une offre convaincante</h2>
+    <p>Nos professeurs peuvent s'assurer d'un revenu plus comfortable et
+    profiter d'une dynamique de groupe.</p>
+  </div>
+    <div class="row">
+      <div class="col-6">
+        <h4>Une pédagogie coopérative</h4>
+        <p>Créer une interaction entre les élèves, bénéficier de l'émulation collective et d'une ambiance plus agréable.</p>
+      </div>
+      <div class="col-6">
+        <h4>Une plateforme intuitive</h4>
+        <p>Vous permettant de constituer des groupes de travail facilement et de s'assurer un revenu en continu.</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-5">
+    <%= image_tag "la_kamaraderie_site_valeurs.jpg", :style=>"max-height:150px" %>
+  </div>
+</div>
+-->
+
+<section class="row justify-content-center align-items-stretch mt-3">
+            <div class="col-12 row justify-content-center">
+                <h4 class="col-12 m-0 text-center prof-flex-title">Pour vous professeur, une plateforme intuitive et pratique </h4>
+
+                <div class="col-12 col-lg-5 row prof-flex m-4 justify-content-around">
+                    <div class="col-12 col-lg-2 m-2 m-lg-0 row justify-content-center align-items-center ">
+                      <%= image_tag "ico/logo_intuitif.png", :class=>"icones"%>
+                    </div>
+                    <div class="col-12 col-lg-8 row justify-content-center align-items-center">
+                        <div class="col-12 prof-flex-title">Une plateforme intuitive</div>
+                        <div class="col-12"><p>Efficace répondant aux besoins des parents, élèves et professeurs avec beaucoup de simplicité.</p></div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-5 row prof-flex m-4 justify-content-around">
+                    <div class="col-12 col-lg-2 m-2 m-lg-0 row justify-content-center align-items-center">
+                      <%= image_tag "ico/algor_site.png", :class=>"icones"%>
+                    </div>
+                    <div class="col-12 col-lg-8 row justify-content-center align-items-center">
+                        <div class="col-12 prof-flex-title">Un algorithme de recherche</div>
+                        <div class="col-12"><p>Permettant de regrouper selon des cirtères similaires des élèves et professeurs pour constituer des groupes.</p></div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-5 row prof-flex m-4 justify-content-around">
+                    <div class="col-12 col-lg-2 m-2 m-lg-0 row justify-content-center align-items-center">
+                      <%= image_tag "ico/collaboratif_site.png", :class=>"icones"%>
+                    </div>
+                    <div class="col-12 col-lg-8 row justify-content-center align-items-center">
+                        <div class="col-12 prof-flex-title">Un espace collaboratif</div>
+                        <div class="col-12"><p>Dédié et privé à chaque groupe de travail pour assurer un suivi et une forte cohésion entre parents, élèves et professeurs.</p></div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-5 row prof-flex m-4 justify-content-around">
+                    <div class="col-12 col-lg-2 m-2 m-lg-0 row justify-content-center align-items-center">
+                      <%= image_tag "ico/Logo prix.png", :class=>"icones"%>
+                    </div>
+                    <div class="col-12 col-lg-8 row justify-content-center align-items-center">
+                        <div class="col-12 prof-flex-title">Un processus de paiement simplifié</div>
+                        <div class="col-12"><p>Basé sur un abonnement sans engagement, automatisé et sécurisé. Désormais, payer n'est plus un problème.</p></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 row justify-content-center">
+                <div class="col-12 text-center mt-4">
+                  <h4 style="color:#e55966">Rejoignez notre communauté de professeurs !</h4>
+                </div>
+                <div class="col-12 text-center">
+                  <h6 style="color:#e55966">ils nous font déjà confiance, à votre tour</h6>
+                </div>
+                <div class="col-12 col-md-8 row justify-content-center align-items-center">
+                    <div class="col-12 col-md-3 text-center mb-1">
+                        <%= image_tag "samuel.jpeg", :class=>"prof-avatar img-fluid col-12 mb-3"%>
+                        <div class="col-12">Samuel</div>
+                        <div class="col-12">Physique chimie</div>
+                    </div>
+                    <div class="col-12 col-md-3 text-center mb-1">
+                        <%= image_tag "anais.jpeg", :class=>"prof-avatar img-fluid col-12 mb-3"%>
+                        <div class="col-12">Anaïs</div>
+                        <div class="col-12">Mathématiques</div>
+                    </div>
+                    <div class="col-12 col-md-3 text-center mb-1">
+                        <%= image_tag "ines.jpeg", :class=>"prof-avatar img-fluid col-12 mb-3"%>
+                        <div class="col-12">Ines</div>
+                        <div class="col-12">Français</div>
+                    </div>
+                    <div class="col-12 col-md-3 text-center mb-1">
+                        <%= image_tag "arthur.jpeg", :class=>"prof-avatar img-fluid col-12 mb-3"%>
+                        <div class="col-12">Arthur</div>
+                        <div class="col-12">Anglais</div>
+                    </div>
+                </div>
+                <div class="col-12 row justify-content-center align-items-center m-2">
+                    <a href="#" class="col-auto pt-2 pb-2 pl-4 pr-4 bg-rose join-btn">Nous rejoindre</a>
+                </div>
+            </div>
+</section>

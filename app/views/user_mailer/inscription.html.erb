@@ -1,2 +1,16 @@
-<h1>La Kamaraderie</h1>
-<p>Nous vous confirmons votre inscription au cours de <%=@cour.teacher.infoteacher.email %>.</p>
+<h4>La Kamaraderie</h4>
+
+<p>Bonjour <%=@user.infouser.first_name%>,</p>
+
+<p>Tu es désormais abonné au cours de <%=@cour.teacher.infoteacher.first_name %>, le <%=@cour.jour %> à <%=@cour.heure %>h.</p>
+<p>Lieu du cours: <%=@cour.lieu%></p>
+
+<p>Tu peux dès maintenant le contacter <%=@cour.teacher.infoteacher.phone %> ou à l’adresse mail suivante: <%=@cour.teacher.infoteacher.email %></p>
+
+<p>Si tu as des questions ou besoin d’aide, Margot, Ines, Arthur, Kevin ou l’un de nos Kamarades se fera le plaisir de te répondre dans la journée !</p>
+
+<p>N’hésite pas à nous suivre sur <a href="https://www.facebook.com/lakamaraderie.fr/">Facebook</a> ou <a href="https://www.instagram.com/lakamaraderie.fr/">Instagram</a>, nous sommes très actifs et répondons à toutes vos questions sur l’orientation, l’actualité ou encore la préparation des examens !</p>
+
+<p>Nous te disons à très bientôt !</p>
+
+<p>L’équipe de La Kamaraderie.</p>

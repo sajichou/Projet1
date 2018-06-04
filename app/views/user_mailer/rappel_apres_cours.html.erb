@@ -1,8 +1,14 @@
-<h1>La Kamaraderie</h1>
-<h3>Bilan de votre cours</h3>
-<p>XXX</p>
-<h3>Votre prochain cours</h3>
-<p>Votre prochain cours aura lieu @cour.jour, à <%= @cour.heure %>h, au <%=@cour.lieu %>.</p>
-<p>Si vous souhaitez indiquer votre absence ou annuler votre abonnement, rendez-vous sur votre espace personnel: XXX.</p>
+<h4>La Kamaraderie</h4>
 
-<p>Merci, et à la semaine prochaine!</p>
+<p>Bonjour <%=@user.infouser.first_name%>,</p>
+
+<p>Voici le bilan de ton dernier cours et les consignes pour le cours suivant :</p>
+<p>« Bonjour XXX, dhawjdk kawdawhduawd na u ada a awda a adbad yakd akd dadjsgduegf   jdnajd dabdkn dvd  hbdkandhd dw dv »</p>
+
+<p>Nous te rappelons que ton prochain cours de <%=@cour.matiere%> avec <%=@cour.teacher.infoteacher.first_name%> aura lieu le <%=@cour.date_reg%> à <%=@cour.horaire%>
+
+<p>Nous te souhaitons plein de courage et de réussite !</p>
+
+<p>À bientôt,</p>
+
+<p>L’équipe de La Kamaraderie.</p>

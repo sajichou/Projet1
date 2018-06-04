@@ -1,5 +1,15 @@
-<p>Bienvenue <%= @email %>!</p>
+<h4>La Kamaraderie</h4>
 
-<p>Vous pouvez confirmer la création de votre compte en cliquant sur le lien ci-dessous:</p>
+<p>Bonjour <%=@email%>,</p>
 
+<p>Bienvenue dans la communauté de La Kamaraderie ! </p>
+<p>Pour valider la création de ton espace personnalisé et pouvoir réserver ton premier cours, tu as juste à cliquer sur le lien ci-dessous : </p>
 <p><%= link_to 'Confirmer mon compte', confirmation_url(@resource, confirmation_token: @token) %></p>
+
+<p>Si tu as des questions ou besoin d’aide, Margot, Ines, Arthur, Kevin ou l’un de nos Kamarades se fera le plaisir de te répondre dans la journée !</p>
+
+<p>N’hésite pas à nous suivre sur <a href="https://www.facebook.com/lakamaraderie.fr/">Facebook</a> ou <a href="https://www.instagram.com/lakamaraderie.fr/">Instagram</a>, nous sommes très actifs et répondons à toutes vos questions sur l’orientation, l’actualité ou encore la préparation des examens !</p>
+
+<p>À très bientôt !</p>
+
+<p>L’équipe de La Kamaraderie.</p>

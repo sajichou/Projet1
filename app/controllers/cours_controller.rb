@@ -15,7 +15,8 @@ class CoursController < ApplicationController
   end
 
   def new
-    cour = Cour.create teacher_id:current_teacher.id, matiere:params[:matiere], lieu:params[:lieu]
+    cour = Cour.create teacher_id:current_teacher.id, matiere:params[:matiere], lieu:params[:lieu],
+     latitude:params[:latitude], longitude:params[:longitude]
     params[:classe].each do |c|
       Annee.create cour_id:cour.id, teacher_id:current_teacher.id, niveau:c
     end
@@ -28,6 +29,7 @@ class CoursController < ApplicationController
       cour.update(jour:cour.dispos.first.jour)
       cour.update(heure:cour.dispos.first.heure)
     end
+    Lesson.create cour_id:cour.id, complaints:0, paid:false
     #cours.latitude =  Geocoder.coordinates(params[:lieu])[0]
     #cours.longitude = Geocoder.coordinates(params[:lieu])[1]
     #sleep (3)
@@ -92,6 +94,16 @@ class CoursController < ApplicationController
     inscriptions.each do |i|
       i.destroy
     end
+    if (cour.lessons.last.present? and cour.lessons.last.presences.present?)
+      puts "suppression"
+      cour.lessons.last.presences.each do |p|
+        puts !p.perf
+        if (p.user_id == current_user.id and !p.perf)
+          puts "ici"
+          p.destroy 
+        end
+      end
+    end
     redirect_to '/pages/monespace'
   end
 
@@ -123,6 +135,7 @@ class CoursController < ApplicationController
       @dist_hash[c] = a
       @dist[c.id] = a
     end
+
     @cours=[]
     @dist_hash_trie = @dist_hash.sort_by {|_key, value| value}
     @dist_hash_trie.each do |d|
@@ -144,19 +157,36 @@ class CoursController < ApplicationController
         cour.dispos.each do |a|
           a.destroy
         end
-        dispo = params[:dispo].split(",")
-        dispo[1] = dispo[1].to_i
-        Dispo.create cour_id:cour.id, jour:dispo[0], heure:dispo[1]
-        cour.update(jour:dispo[0])
-        cour.update(heure:dispo[1])
+        
+        if !cour.jour
+          dispo = params[:dispo].split(",")
+          dispo[1] = dispo[1].to_i
+          Dispo.create cour_id:cour.id, jour:dispo[0], heure:dispo[1]
+          cour.update(jour:dispo[0])
+          cour.update(heure:dispo[1])
+        end
+
+        #On calcule la date reguliere
+        wday = {"lundi"=>1, "mardi"=>2, "mercredi"=>3, "jeudi"=>4, "vendredi"=>5,
+        "samedi"=>6, "dimanche"=>0}
+        delta_jours = (wday[cour.jour] - Date.today.wday)
+        if delta_jours < 0 
+          delta_jours += 7
+        end
+        date_reg = Date.today + delta_jours
+        #Conversion implicite de la date au format 2018-05-04: strftime("%Y-%m-%d")
+        cour.update(date_reg:date_reg)
+        #On cree la lesson et la presence associee
+        #Lesson.create cour_id:cour.id, date:date_reg
+        Lesson.find_by_cour_id(cour.id).update(date:date_reg)
       end
     cour.save
-  
-    inscription = Inscription.create user_id:current_user.id, cour_id:cour.id
-    inscription.save
+    
+    Inscription.create user_id:current_user.id, cour_id:cour.id
+    #Presence.create lesson_id:cour.lessons.last.id, user_id:current_user.id, perf:true
 
     UserMailer.inscription(current_user, cour).deliver
-    TeacherMailer.inscription(cour.teacher).deliver
+    TeacherMailer.inscription(cour.teacher,cour,current_user).deliver
     redirect_to '/pages/monespace'
   end
 
@@ -164,18 +194,39 @@ class CoursController < ApplicationController
 
   end
 
-  def modifier_def
+  def modifier_ex_def
 
-    wday = {1=>"lundi", 2=>"mardi", 3=>"mercredi", 4=>"jeudi", 5=>"vendredi",
-    6=>"samedi", 7=>"dimanche"}
-    date = params[:datepicker].split("/")
-    annee = date[0].to_i
-    mois = date[1].to_i
-    jour_prochain = (date[2].to_i)
-    jour = (date[2].to_i)%7 + 1 
-    jour = wday[jour]
-    Cour.find(params[:id]).update(heure:params[:timepicker],jour:jour, jour_prochain:jour_prochain, mois:mois, annee:annee)
-    UserMailer.modifier(Cour.find(params[:id])).deliver
+    wday = {"lundi"=>1, "mardi"=>2, "mercredi"=>3, "jeudi"=>4, "vendredi"=>5,
+    "samedi"=>6, "dimanche"=>0}
+    cour = Cour.find(params[:id])
+    if params[:modifier_ex]
+      date_ex = params[:datepicker]
+      horaire_ex = params[:timepicker]
+      cour.update(date_ex:date_ex, horaire_ex:horaire_ex)
+      cour.save
+      if cour.lessons.last.present?
+        cour.lessons.last.update(date:date_ex)
+      end
+      cour.inscriptions.each do |i|
+        UserMailer.modifier_ex(cour,User.find(i.user_id)).deliver
+      end
+
+    else
+      jour = params[:jour]
+      heure = params[:timepicker_def]
+      delta_jours = (wday[jour] - Date.today.wday)
+      if delta_jours < 0 
+        delta_jours += 7
+      end
+      date_reg = Date.today + delta_jours
+      cour.update(jour:jour, heure:heure, date_reg:date_reg)
+      cour.save
+      if cour.lessons.last.present?
+        cour.lessons.last.update(date:date_reg)
+      end
+    end
+    #UserMailer.modifier(Cour.find(params[:id])).deliver
+
     #TeacherMailer.inscription(Cour.find(params[:id]).teacher).deliver
     redirect_to controller: 'cours', action:'modifier', id:params[:id]
   end

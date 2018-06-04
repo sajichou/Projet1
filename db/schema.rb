@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180522154750) do
+ActiveRecord::Schema.define(version: 20180601163749) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,10 +35,9 @@ ActiveRecord::Schema.define(version: 20180522154750) do
     t.float "longitude"
     t.integer "teacher_id"
     t.integer "heure"
-    t.datetime "date"
-    t.integer "mois"
-    t.integer "annee"
-    t.integer "jour_prochain"
+    t.string "date_reg"
+    t.string "date_ex"
+    t.string "horaire_ex"
   end
 
   create_table "dispos", force: :cascade do |t|
@@ -76,6 +75,8 @@ ActiveRecord::Schema.define(version: 20180522154750) do
     t.string "email"
     t.integer "niveau"
     t.string "stripe_customer_id"
+    t.string "code"
+    t.boolean "code_used", default: false
   end
 
   create_table "inscriptions", force: :cascade do |t|
@@ -83,9 +84,30 @@ ActiveRecord::Schema.define(version: 20180522154750) do
     t.integer "user_id"
   end
 
+  create_table "lessons", force: :cascade do |t|
+    t.integer "cour_id"
+    t.string "date"
+    t.integer "complaints"
+    t.boolean "in_fav_of_users"
+    t.boolean "paid"
+  end
+
+  create_table "presences", force: :cascade do |t|
+    t.integer "lesson_id"
+    t.integer "user_id"
+    t.boolean "perf"
+    t.integer "charge_id"
+  end
+
   create_table "roles", force: :cascade do |t|
     t.integer "teacher_id"
     t.integer "power", default: 0
+  end
+
+  create_table "stripe_customers", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "cour_id"
+    t.string "stripe_customer_id"
   end
 
   create_table "teachers", force: :cascade do |t|

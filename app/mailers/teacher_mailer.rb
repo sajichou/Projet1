@@ -8,16 +8,24 @@ class TeacherMailer < ApplicationMailer
   def validated(teacher)
     @teacher = teacher
     mail( :to => @teacher.email,
-    :subject => 'Votre profil est maintenant validé!' )
+    :subject => 'Votre compte professeur est maintenant validé' )
   end
 
+
+  def validation(teacher)
+    @teacher = teacher
+    mail( :to => @teacher.email,
+    :subject => 'Votre profil est maintenant validé!' )
+  end
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
   #
   #   en.teacher_mailer.inscription.subject
   #
-  def inscription(teacher)
+  def inscription(teacher,cour,eleve)
     @teacher = teacher
+    @cour = cour
+    @eleve= eleve
     mail( :to => @teacher.email,
     :subject => 'Un nouvel élève a rejoint votre cours!' )
   end
@@ -25,13 +33,15 @@ class TeacherMailer < ApplicationMailer
   def rappel_avant_cours(teacher, cour)
     @teacher = teacher
     @cour = cour
-    mail( :to =>@teacher.infoteacher.email, :subject => 'Rappel pour votre cours de demain')
+    subject = "Rappel pour votre cours de " + @cour.matiere + " demain à " + @cour.heure.to_s + "h."
+    mail( :to =>@teacher.email, :subject =>subject)
   end
 
   def rappel_apres_cours(teacher, cour)
     @teacher = teacher
     @cour = cour
-    mail( :to =>@teacher.infoteacher.email, :subject => 'Bilan de votre cours')
+    subject = "Rappel: Bilan du cours de " + @cour.jour
+    mail( :to =>@teacher.infoteacher.email, :subject => subject)
   end
 
 end

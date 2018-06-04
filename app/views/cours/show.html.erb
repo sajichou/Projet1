@@ -155,6 +155,23 @@
 										<i class="fa fa-user-circle-o"></i>
 									</div>
 								</div>
+							<!-- Cas où 3 eleves sont déjà inscrits -->
+							<% elsif @cour.nombre_eleves == 3%>
+								<div class="col">
+									<div class="avatar_occupe">
+										<i class="fa fa-user-circle-o"></i>
+									</div>
+								</div>
+								<div class="col">
+									<div class="avatar_occupe">
+										<i class="fa fa-user-circle-o"></i>
+									</div>
+								</div>										
+								<div class="col">
+									<div class="avatar_occupe">
+										<i class="fa fa-user-circle-o"></i>
+									</div>
+								</div>
 							<!-- Cas où 1 eleve est déjà inscrit -->
 							<% elsif @cour.nombre_eleves == 1 %>		
 								<div class="col-3">
@@ -205,7 +222,13 @@
 						
 							<% if (!teacher_signed_in? and @cour.jour.present? and @cour.heure.present?) %>
 									<div class="col-12 col-lg-4" style="border:solid 1px black; border-radius: 10px; background-color: #00e676 ; height:30px">
+										
 										<%= link_to "M'inscrire", {:controller =>"charges", :action=>"new", :id=>@cour.id}, class:"link_to" %>
+										
+										<!--
+										<%= link_to "Inscription gratuite", {:controller =>"cours", :action=>"inscription", :id=>@cour.id, :dispo=>params[:dispo]} %>
+										-->
+
 									</div>
 								</div>
 							<% elsif (teacher_signed_in? and current_teacher.id == @cour.teacher_id) %>

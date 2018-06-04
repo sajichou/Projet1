@@ -68,6 +68,23 @@
 														<i class="fa fa-user-circle-o"></i>
 													</div>
 												</div>
+											<!-- Cas où 3 eleves sont inscrits -->
+											<% elsif inscription.cour.nombre_eleves == 3 %>		
+												<div class="col-3">
+													<div class="avatar_occupe">
+														<i class="fa fa-user-circle-o"></i>
+													</div>
+												</div>
+												<div class="col-3">
+													<div class="avatar_occupe">
+														<i class="fa fa-user-circle-o"></i>
+													</div>
+												</div>											
+												<div class="col-3">
+													<div class="avatar_occupe">
+														<i class="fa fa-user-circle-o"></i>
+													</div>
+												</div>
 											<!-- Cas où 1 eleve est déjà inscrit -->
 											<% elsif inscription.cour.nombre_eleves == 1 %>		
 												<div class="col-3">
@@ -272,6 +289,23 @@
 												</div>										
 												<div class="col">
 													<div class="avatar_libre">
+														<i class="fa fa-user-circle-o"></i>
+													</div>
+												</div>
+											<!-- Cas où 3 eleves sont inscrits -->
+											<% elsif cour.nombre_eleves == 3 %>		
+												<div class="col-3"> 
+													<div class="avatar_occupe">
+														<i class="fa fa-user-circle-o"></i>
+													</div>
+												</div>
+												<div class="col-3">
+													<div class="avatar_occupe">
+														<i class="fa fa-user-circle-o"></i>
+													</div>
+												</div>											
+												<div class="col-3">
+													<div class="avatar_occupe">
 														<i class="fa fa-user-circle-o"></i>
 													</div>
 												</div>

@@ -1,5 +1,18 @@
-<h1>La Kamaraderie</h1>
-<h3>Rappel pour votre cours de demain</h3>
-<p>Vous donnez cours de <%=@cour.matiere%> à <%=@cour.heure%>h.</p>
-<p>L'adresse du cours que vous avez communiqué aux élèves est : <%=@cour.lieu%>.</p>
-<p>Bon cours, et à demain !</p>
+<h4>La Kamaraderie</h4>
+
+<p>Bonjour <%=@teacher.infoteacher.email%>,</p>
+
+<p>Nous vous rappelons que vous dispensez un cours de <%=@cour.matiere%> demain (<%=@cour.jour%>) à <%=@cour.heure%>. </p>
+<p>Lieu du cours: <%=@cour.lieu%></p>
+
+<p>Vous pouvez joindre vos élèves aux numéros ou mails suivants :</p>
+
+<% @cour.inscriptions.each do |i| %>
+
+	<p><%=User.find(i.user_id).infouser.first_name%>: <%=User.find(i.user_id).infouser.phone%> | <%=User.find(i.user_id).infouser.email%></p>
+
+<% end%>
+
+<p>Nous vous souhaitons un bon cours avec vos élèves,</p>
+
+<p>L’équipe de La Kamaraderie.</p>

@@ -15,6 +15,17 @@ class PagesController < ApplicationController
     cour.nombre_eleves = cour.nombre_eleves - 1
     cour.save
     inscription.destroy
+    #On supprime aussi sa presence
+    if (cour.lessons.last.present? and cour.lessons.last.presences.present?)
+      puts "desabonnement"
+      cour.lessons.last.presences.each do |p|
+        puts !p.perf
+        if (p.user_id == current_user.id and !p.perf)
+          puts "ici"
+          p.destroy 
+        end
+      end
+    end
     redirect_to '/pages/monespace'
   end
 
@@ -27,8 +38,7 @@ class PagesController < ApplicationController
       phone: params[:phone],
       location: params[:location],
       methodology: params[:methodology],
-      experience: params[:experience],
-      avatar: params[:avatar]
+      experience: params[:experience]
       )
         if(session[:page_id].present?)
         redirect_to controller:"cours", action: "show", id: session[:page_id]
@@ -42,13 +52,12 @@ class PagesController < ApplicationController
       email:params[:email],
       phone: params[:phone],
       location: params[:location],
-      avatar: params[:avatar],
       niveau: params[:niveau]
       )
       if(session[:page_id].present?)
         redirect_to controller:"cours", action: "show", id: session[:page_id]
         else
-          redirect_to '/pages/monespace'
+          redirect_to '/pages/monespace' 
         end
     end
   end
@@ -68,6 +77,13 @@ class PagesController < ApplicationController
     elsif user_signed_in?
       @current_user = current_user
     end
+  end
+
+  def code_promo
+  end
+
+  def code_promo_create
+    current_user.infouser.update(code:params[:code])
   end
 
   def modifier_maphoto

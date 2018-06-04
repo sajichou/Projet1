@@ -18,7 +18,8 @@
  
 $theme-colors: (
   "primary": #e55966,
-  "danger": #ff4136
+  "danger": #ff4136,
+  "roseclair": rgb(252,98,112)
 );
 
 @import "bootstrap";
@@ -55,15 +56,14 @@ section {
 	min-height: 100%;
 }
 #main{
-	max-width:1280px;
 	min-height:100%;
-	margin:0 auto;
+	margin:0;
 	position:relative;
 	//background: #fff8e1;
 }
 
 #corps {
-	padding-bottom:150px;	
+	padding-bottom:200px;	
 }
 
 // MENU
@@ -131,10 +131,6 @@ section {
 
 #footer {
 	background-color: $rose;
-	heigh:auto;
-	width: 100%;
-	position: absolute;
-	bottom: 0;
 	ul li {
 		display: inline;
 		padding-left: 50px;
@@ -145,7 +141,9 @@ section {
 }
 
 #devise_subcontent {
-	// background: #fff3e0 ;
+	 color: $rose ;
+	 background-color: white;
+	 border-radius:10px;
 }
 
 // ACCUEIL
@@ -284,4 +282,216 @@ section {
 	background-color: $vert;
 	color: white;
 	border: none;
+}
+
+/*  FOOTER  */
+
+.footer {
+	background-color: $rose;
+	position: absolute;
+	bottom:0px;
+	height:150px;
+	ul li {
+		display: inline;
+		padding-left: 50px;
+	}
+	a{
+	color:white;
+	}
+}
+
+.suscribe-footer{
+    top:-40px;
+    width: fit-content;
+    a{
+    border-radius:25px;
+    padding:10px;
+    background-color: rgb(255,184,79);
+    }
+}
+
+.icones-title{
+    max-height: 40px;
+}
+
+/* ADDITIVES MEDIA */
+@media (min-width: 1200px) {
+    .form-pic{
+        height:100%;
+    }
+}
+
+/* DEVENIR PROFESSEUR */
+
+.box-icones{
+    max-height: 80px;
+    max-width: 80px;
+}
+.prof-flex{
+    min-height: 100px;
+    border: 1px solid gainsboro;
+}
+.prof-flex-title{
+    color:rgb(238,97,131);
+}
+
+.prof-flex-icon{
+    font-size: 40px;
+    padding:15px;
+    border-radius: 50%;
+    color:rgb(238,97,131);
+    border:rgb(238,97,131) 1px solid;
+}
+.prof-avatar{
+    border-radius:50%;
+    max-width:150px; 
+}
+.icones{
+    height:100px;
+}
+.join-btn{
+    border-radius: 25px;
+    color:white;
+}
+
+.test{
+    min-height: 50%;
+}
+
+/* GUIDE STRIPE */
+
+.ico-plus{
+    width: 200px;
+    height:200px;
+}
+.ico-right{
+    width: 100px;
+    height:100px;
+}
+.ico-infos{
+    width: 50px;
+    height:50px;
+}
+
+.infos li{
+    list-style-type: none;
+}
+
+/* PAIEMENT */
+body, html{
+    display: block;
+    position:absolute;
+    height: 100%;
+    width: 100%;
+    margin:0;
+}
+body{
+    padding-top: 56px;
+}
+
+.col{
+    margin:0px;
+    padding: 0px;
+}
+
+
+/*  CONTENT */
+
+section{
+    min-height:100%;
+    width: 100%;
+}
+
+.avatar{
+    height:100px;
+}
+.block-avatars{
+    max-height: 200px;
+    border-bottom: #868e96 3px solid;
+}
+.block-eleve{
+    height:90px;
+    overflow: hidden;
+}
+
+.box-prix{
+    border:3px solid rgb(238,97,131);
+}
+.logo-prix{
+    height:50px;
+}
+.prix{
+    background-color: rgb(238,97,131);
+    border-bottom-left-radius: 35%;
+    border-top-left-radius: 35%;
+}
+
+.fa-circle{
+    color: rgb(255,184,79);
+    padding-right: 4px;
+}
+li{
+    list-style-type: none;
+    margin-bottom: 0.5rem;
+    padding-right: 0.5rem;
+}
+
+.input-paiement{
+    background-color: rgb(238,97,131);
+    border:none;
+    padding: 20px 60px;
+    border-radius: 35px;
+    color:white;
+    cursor: pointer;
+}
+
+.gcu-style::after{    border: 3px solid rgb(238,97,131);
+    background: #f5c6cb;
+    cursor: pointer;
+}
+
+a:hover,input[type=submit]:hover{
+    text-decoration: none;
+    color:#007bff;
+}
+ 
+/* QUI SOMMES NOUS ? */
+
+.Button:hover {
+    background-color:#eb675e;
+}
+.Button:active {
+    position:relative;
+    top:1px;
+}
+#carouselTeam{
+    width:200px;
+}
+.img-valeur{
+    height: 250px;
+}
+.avatar{
+    height: 200px;
+    width: 200px;
+    overflow: hidden;
+}
+.team-bloc{
+    margin-left:1.5rem;
+    margin-right:1.5rem;
+    margin-bottom: 2rem;
+
+    max-height: 200px;
+}
+.quadran{
+    max-height:400px;
+}
+
+.img-quadran{
+    width:340px;
+    height:175px;
+}
+
+.quadran-btn{
+    max-height:40px;
+    color:white;
 }

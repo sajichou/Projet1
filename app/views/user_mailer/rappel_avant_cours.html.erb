@@ -1,5 +1,14 @@
-<h1>La Kamaraderie</h1>
-<h3>Cours de <%= @cour.teacher.infoteacher.first_name %> <%= @cour.teacher.infoteacher.last_name %> </h3>
-<p>Nous vous rappelons que vous aurez cours demain de <%=@cour.matiere%> à <%= @cour.heure %>h.</p>
-<p>Adresse du cours: <%=@cour.lieu%></p>
-<p>À demain</p>
+<h4>La Kamaraderie</h4>
+
+<p>Bonjour <%=@user.infouser.email%>,</p>
+
+<p>Nous te rappelons que tu as cours avec <%=@cour.teacher.infoteacher.email%> demain (<%=@cour.jour%>) à <%=@cour.heure%>. </p>
+<p>Lieu du cours: <%=@cour.lieu%></p>
+
+<p>Tu peux contacter <%=@cour.teacher.infoteacher.first_name%> au <%=@cour.teacher.infoteacher.phone%> ou à l’adresse email suivante: <%=@cour.teacher.infoteacher.email%>.</p>
+
+<p>Nous te souhaitons plein de courage et de réussite !</p>
+
+<p>À bientôt,</p>
+
+<p>L’équipe de La Kamaraderie.</p>

@@ -1,7 +1,7 @@
 <% if teacher_signed_in? %>
 
 
-	<%=form_tag "/pages/monprofil", method:"post", multipart:true do %>
+	<%=form_tag "/pages/monprofil", method:"post" do %>
 	<fieldset>
 		<legend> Compléter mon profil : <%= @current_teacher.email%></legend>
 
@@ -107,7 +107,7 @@
 <!-- Profil eleve-->
 <% elsif user_signed_in? %>
 
-	<%=form_tag "/pages/monprofil", method:"post", multipart:true do %>
+	<%=form_tag "/pages/monprofil", method:"post" do %>
 	<fieldset>
 		<legend> Compléter mon profil </legend>
 
@@ -173,14 +173,16 @@
 			<p>			
 				<label for="niveau">Classe</label>
 				<%= select_tag(:niveau, grouped_options_for_select(
-					[
+					[	['',
+							[['',nil]]
+					],
 						['Collège',
 							[['6ème',1],['5ème',2],['4ème',3],['3ème',4]]
 						],
 						['Lycée',
 							[['2nde',5],['1ère S', 6], ['1ère ES',7], ['1ère L',8], ['Terminale S',9], ['Terminale ES', 10], ['Terminale L',11]]
 						]
-					],@current_user.infouser.niveau), class:"form-control value_danger") %>
+					]), class:"form-control value_danger") %>
 			</p>
 		<% end %>
 
