@@ -7,7 +7,7 @@
                             <%= image_tag "ico/icon_rgb_site.png", :class=>"img-fluid logo-prix" %>
                             <h5 class="col-auto row align-items-center" style="color:#e55966">Abonnement sans engagement</h5>
                         </div>
-                        <h5 class="col-12 col-md-auto row align-items-center justify-content-center prix text-light">16
+                        <h5 class="col-12 col-md-auto row align-items-center justify-content-center prix text-light">15
                             €</h5>
                     </div>
                     <div class="col-12">
@@ -37,7 +37,7 @@
                       <p><%= flash[:error] %></p>
                     </div>
                   <% end %>
-                    <% if current_user.infouser.code == "10" and !current_user.infouser.code_used %>
+                    <% if current_user.infouser.code == "Lancement18" and !current_user.infouser.code_used %>
                       <span>Vous disposez d'un code promo valide, votre premier cours est donc gratuit !</span>
                     <% end %>
                 </article>

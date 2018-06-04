@@ -13,7 +13,7 @@ class ChargesController < ApplicationController
 	def create
 
 	  	# Amount in cents
-	  	amount = 130
+	  	amount = 1500
 	  	@stripe_teacher_id = Cour.find(params[:cours_id]).teacher.infoteacher.stripe_id
 	  	customer = Stripe::Customer.create(
 	    	:email => params[:stripeEmail],
@@ -25,7 +25,7 @@ class ChargesController < ApplicationController
 	  	Stripe_customer.create user_id:current_user.id, cour_id:params[:cours_id],
 	   		stripe_customer_id:customer.id
 	  	#Si code promo il paye pas 
-	  	if (current_user.infouser.code != "10" or current_user.infouser.code_used)
+	  	if (current_user.infouser.code != "Lancement18" or current_user.infouser.code_used)
 		  	description = "Cour de " + Cour.find(params[:cours_id]).teacher.email
 		  	transfer_group = "Lesson " + Cour.find(params[:cours_id]).lessons.last.id.to_s
 		  	charge = Stripe::Charge.create({
