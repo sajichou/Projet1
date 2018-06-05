@@ -14,6 +14,6 @@ class User < ApplicationRecord
   has_many :cours
   has_many :inscriptions, dependent: :destroy
   has_one :infouser, dependent: :destroy
-  has_many :stripe_customers, dependent: :destroy
+  has_many :stripe_customers
 
 end
