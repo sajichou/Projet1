@@ -72,107 +72,105 @@
         <%= render partial:'/pages/annonce_prof', locals:{cour:Cour.find(params[:id])}%>
     </div>
 
+    <div class="col-12 bg-rose row justify-content-center align-items-center p-4" style="bottom:0px">
+        <div class="col-auto row text-light align-items-center footer-page">
+            <i class="far fa-calendar-alt"></i><strong>Date d'expiration: </strong>
+            Date
+        </div>
+        <div class="col-auto row text-light align-items-center footer-page">
+            <strong>Date du cours: </strong>
+            Date
+        </div>
+    </div> <!-- footer page 1 -->
+</section>
+<section class="row flex-column justify-content-around align-items-center modif-prof">
+        <div class="col-12 col-md-8 row justify-content-start align-items-center mt-2">
+            <h3 class="col-12 text-center">Modification de la date du prochain cours</h3>
+            <div class="col-12 text-justify m-2">Cette rubrique vous permet de modifier la date du
+                prochain cours et d'en informer automatiquement vos élèves en cas d'absence, de vacances, ou
+                autre éventuelles situations. Les élèves recevront un email leur indiquant la sate du prochain
+                cours. Leur abonnement sera alors suspendu jusqu'à cette nouvelle date. Ils seront libre de se
+                désinscrire si ils le souhaitent.</br><strong>Exemple : </strong> Les vacances arrivent et je
+                ne suis pas présent, je peux indiquer que les cours n'auront pas lieu les deux prochaines
+                semaines et qu'ils reprendront le jeudi d'après comme d'habitude.</div>
+            <strong class="col-12 col-md-5 m-2 align-self-baseline">Modifier définitivement la date et l'heure du
+                prochain
+                cours</strong>
+            <form class="col-12 col-md-6 m-2 row justify-content-center align-items-center">
+                <div class="col-12">
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">Date</div>
+                        </div>
+                        <input type="date" class="form-control" name="date-next" placeholder="Username">
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">Heure</div>
+                        </div>
+                        <input type="time" class="form-control" name="time-next" placeholder="Username">
+                    </div>
+                </div>
+                <div class="col-12 row justify-content-center">
+                    <input class="col-auto" type="submit" value="Valider">
+                </div>
+            </form>
+        </div>
+    <div class="col-12 col-md-8 row justify-content-start align-items-center">
+            <h3 class="col-12 text-center">Modification de la date du cours</h3>
+            <div class="col-12 m-3 text-justify">Cette rubrique vous permet de modifier de manière
+                permanenete le jour et l'heure auxquels se passe le cours.</br><strong>Exemple : </strong>Le
+                cours se passe habituellement le jeudi à 18h mais vous avez convenu avec vos élèves qu'il se
+                passerait le mercredi à 14h. Vous pouvez le modifier vous même en validant ci-dessous la
+                nouvelle date.</div>
+            <strong class="col-12 col-md-5 m-2 align-self-baseline">Modifier définitivement la date et l'heure du
+                cours de manière permanente</strong>
+            <form class="col-12 col-md-6 m-2 row justify-content-center align-items-center">
+                <div class="col-12">
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">Date</div>
+                        </div>
+                        <input type="date" class="form-control" name="date-perm" placeholder="Username">
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">Heure</div>
+                        </div>
+                        <input type="time" class="form-control" name="time-perm" placeholder="Username">
+                    </div>
+                </div>
+                <div class="col-12 row justify-content-center">
+                    <input class="col-auto" type="submit" value="Valider">
+                </div>
+            </form>
+        </div>
+    <div class="col-12 col-md-8 row justify-content-start align-items-center">
+            <h3 class="col-12 text-center">Modification de la date d'expiration du cours</h3>
+            <div class="col-12 text-left m-2">Cette rubrique vous permet de modifier la date
+                d'expiration de votre cours afin que les abonnements de vos élèves s'arrètent à la date
+                souhaitée.</br><strong>Exemple : </strong> Les cours avec ce groupe devaient prendre
+                initialement fin le 10 mai 2019 mais vous avez décidé de prolonger jusqu'au 10 juin pour mieux
+            préparer les examens de fin d'années, vous pouvez alors le modifier vous même afin que les
+                abonnements continuent jusqu'à l'échéance.</div>
+            <strong class="col-12 col-md-5 m-3 align-self-baseline">Modifier la date d'expiration du cours</strong>
+            <form class="col-12 col-md-4 m-2">
+                <div class="col-12">
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">Date</div>
+                        </div>
+                        <input type="date" class="form-control" name="date-expiration" placeholder="Username">
+                    </div>
+                </div>
+                <div class="col-12 row justify-content-center">
+                    <input class="col-auto" type="submit" value="Valider">
+                </div>
+            </form>
+        </div>
 
-
-        <div class="col-12 bg-rose row justify-content-center align-items-center p-4" style="bottom:0px">
-            <div class="col-auto row text-light align-items-center footer-page">
-                <i class="far fa-calendar-alt"></i><strong>Date d'expiration: </strong>
-                Date
-            </div>
-            <div class="col-auto row text-light align-items-center footer-page">
-                <strong>Date du cours: </strong>
-                Date
-            </div>
-        </div> <!-- footer page 1 -->
-    </section>
-    <section class="row flex-column justify-content-around align-items-center modif-prof">
-            <div class="col-12 col-md-8 row justify-content-start align-items-center mt-2">
-                <h3 class="col-12 text-center">Modification de la date du prochain cours</h3>
-                <div class="col-12 text-justify m-2">Cette rubrique vous permet de modifier la date du
-                    prochain cours et d'en informer automatiquement vos élèves en cas d'absence, de vacances, ou
-                    autre éventuelles situations. Les élèves recevront un email leur indiquant la sate du prochain
-                    cours. Leur abonnement sera alors suspendu jusqu'à cette nouvelle date. Ils seront libre de se
-                    désinscrire si ils le souhaitent.</br><strong>Exemple : </strong> Les vacances arrivent et je
-                    ne suis pas présent, je peux indiquer que les cours n'auront pas lieu les deux prochaines
-                    semaines et qu'ils reprendront le jeudi d'après comme d'habitude.</div>
-                <strong class="col-12 col-md-5 m-2 align-self-baseline">Modifier définitivement la date et l'heure du
-                    prochain
-                    cours</strong>
-                <form class="col-12 col-md-6 m-2 row justify-content-center align-items-center">
-                    <div class="col-12">
-                        <div class="input-group mb-2">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">Date</div>
-                            </div>
-                            <input type="date" class="form-control" name="date-next" placeholder="Username">
-                        </div>
-                    </div>
-                    <div class="col-12">
-                        <div class="input-group mb-2">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">Heure</div>
-                            </div>
-                            <input type="time" class="form-control" name="time-next" placeholder="Username">
-                        </div>
-                    </div>
-                    <div class="col-12 row justify-content-center">
-                        <input class="col-auto" type="submit" value="Valider">
-                    </div>
-                </form>
-            </div>
-        <div class="col-12 col-md-8 row justify-content-start align-items-center">
-                <h3 class="col-12 text-center">Modification de la date du cours</h3>
-                <div class="col-12 m-3 text-justify">Cette rubrique vous permet de modifier de manière
-                    permanenete le jour et l'heure auxquels se passe le cours.</br><strong>Exemple : </strong>Le
-                    cours se passe habituellement le jeudi à 18h mais vous avez convenu avec vos élèves qu'il se
-                    passerait le mercredi à 14h. Vous pouvez le modifier vous même en validant ci-dessous la
-                    nouvelle date.</div>
-                <strong class="col-12 col-md-5 m-2 align-self-baseline">Modifier définitivement la date et l'heure du
-                    cours de manière permanente</strong>
-                <form class="col-12 col-md-6 m-2 row justify-content-center align-items-center">
-                    <div class="col-12">
-                        <div class="input-group mb-2">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">Date</div>
-                            </div>
-                            <input type="date" class="form-control" name="date-perm" placeholder="Username">
-                        </div>
-                    </div>
-                    <div class="col-12">
-                        <div class="input-group mb-2">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">Heure</div>
-                            </div>
-                            <input type="time" class="form-control" name="time-perm" placeholder="Username">
-                        </div>
-                    </div>
-                    <div class="col-12 row justify-content-center">
-                        <input class="col-auto" type="submit" value="Valider">
-                    </div>
-                </form>
-            </div>
-        <div class="col-12 col-md-8 row justify-content-start align-items-center">
-                <h3 class="col-12 text-center">Modification de la date d'expiration du cours</h3>
-                <div class="col-12 text-left m-2">Cette rubrique vous permet de modifier la date
-                    d'expiration de votre cours afin que les abonnements de vos élèves s'arrètent à la date
-                    souhaitée.</br><strong>Exemple : </strong> Les cours avec ce groupe devaient prendre
-                    initialement fin le 10 mai 2019 mais vous avez décidé de prolonger jusqu'au 10 juin pour mieux
-                préparer les examens de fin d'années, vous pouvez alors le modifier vous même afin que les
-                    abonnements continuent jusqu'à l'échéance.</div>
-                <strong class="col-12 col-md-5 m-3 align-self-baseline">Modifier la date d'expiration du cours</strong>
-                <form class="col-12 col-md-4 m-2">
-                    <div class="col-12">
-                        <div class="input-group mb-2">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">Date</div>
-                            </div>
-                            <input type="date" class="form-control" name="date-expiration" placeholder="Username">
-                        </div>
-                    </div>
-                    <div class="col-12 row justify-content-center">
-                        <input class="col-auto" type="submit" value="Valider">
-                    </div>
-                </form>
-            </div>
-
-    </section>
+</section>

@@ -80,6 +80,9 @@ class PagesController < ApplicationController
   end
 
   def code_promo
+    if params[:id].present?
+      @cour_id = params[:id]
+    end
   end
 
   def paiement
@@ -87,6 +90,13 @@ class PagesController < ApplicationController
 
   def code_promo_create
     current_user.infouser.update(code:params[:code])
+    if params[:id].present?
+      #redirect_to '/charges/new'
+      redirect_to controller: 'charges', action: 'new', id: params[:id]
+    else
+      redirect_to '/pages/code_promo'
+    end
+      
   end
 
   def modifier_maphoto
