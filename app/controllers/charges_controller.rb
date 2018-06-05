@@ -13,7 +13,7 @@ class ChargesController < ApplicationController
 	def create
 
 	  	# Amount in cents
-	  	amount = 1500
+	  	amount = ENV["AMOUNT"]
 	  	@stripe_teacher_id = Cour.find(params[:cours_id]).teacher.infoteacher.stripe_id
 	  	customer = Stripe::Customer.create(
 	    	:email => params[:stripeEmail],
