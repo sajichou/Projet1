@@ -43,7 +43,7 @@ class PagesController < ApplicationController
         if(session[:page_id].present?)
         redirect_to controller:"cours", action: "show", id: session[:page_id]
         else
-          redirect_to '/pages/monespace'
+          redirect_to '/pages/maphoto'
         end
     elsif user_signed_in?
     Infouser.find_by_user_id(current_user.id).update(
@@ -82,6 +82,9 @@ class PagesController < ApplicationController
   def code_promo
   end
 
+  def paiement
+  end
+
   def code_promo_create
     current_user.infouser.update(code:params[:code])
   end
@@ -89,7 +92,7 @@ class PagesController < ApplicationController
   def modifier_maphoto
     if teacher_signed_in?
       current_teacher.infoteacher.update(avatar:params[:avatar])
-      redirect_to '/pages/maphoto'
+      redirect_to '/pages/paiement'
     elsif user_signed_in?
       current_user.infouser.update(avatar:params[:avatar])    
       redirect_to  '/pages/maphoto'

@@ -55,6 +55,8 @@ Rails.application.routes.draw do
 
   get 'pages/maphoto'
 
+  get 'pages/paiement'
+
   post 'pages/maphoto' => 'pages#modifier_maphoto'
 
   post 'pages/code_promo' => 'pages#code_promo_create'

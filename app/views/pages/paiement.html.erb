@@ -1,0 +1,107 @@
+<% if @current_teacher and @current_teacher.infoteacher.stripe_id.present? %>
+	Stp_id : <%=@current_teacher.infoteacher.stripe_id %>
+<% else %>
+	<!-- Prod Mode -->
+	<!--
+	<a target="_blank" href="https://dashboard.stripe.com/oauth/authorize?response_type=code&client_id=ca_ComNVv9DH3zeYjZwYtvxV2FnJcCUZLxt&scope=read_write">Creer compte stripe </a>
+	<!--Test Mode-->
+	<!--
+	<a target="_blank" href="https://dashboard.stripe.com/oauth/authorize?response_type=code&client_id=ca_ComNUZElZrClleagPK9y17ESiQY2Nc6b&scope=read_write">Creer compte stripe </a>
+-->
+<% end %>
+
+<section class="row container-fluid justify-content-center align-items-baseline p-0 section-border">
+    <div class="col-12 row justify-content-between align-items-center p-3">
+        <div class="col"></div>
+
+	        <div class="col-12 col-md-6 col-md-auto row justify-content-center">
+	            <div class="col-auto flex-row justify-content-around align-items-center">
+	            	<a href="https://dashboard.stripe.com/oauth/authorize?response_type=code&client_id=ca_ComNVv9DH3zeYjZwYtvxV2FnJcCUZLxt&scope=read_write">
+	                	<%= image_tag "ico/Plus.png", :class=>"ico-plus" %>
+	                </a>
+	            </div>
+	            <h3 class="col-12 text-center text-secondary">Créez</h3>
+	            <div class="col-12 text-center">votre compte Stripe en cliquant sur le lien ci-dessous</div>
+	            <div class="col-12 text-center">
+	                <a href="https://dashboard.stripe.com/oauth/authorize?response_type=code&client_id=ca_ComNVv9DH3zeYjZwYtvxV2FnJcCUZLxt&scope=read_write">Créer</a>
+	            </div>
+	        </div>
+	        <div class="col-12 col-md-6 row justify-content-start">
+	            <div class="col-12 row justify-content-center">
+	                <div class="col-auto">
+	                    <%= image_tag "ico/modifier_rose.png", :class=>"ico-right" %>
+	                </div>
+	                <h4 class="col-12 text-center text-secondary">Modifiez</h4>
+	                <p class="col text-center">vos informations bancaires en cliquant sur l'îcone ci-dessus</p>
+	            </div>
+	            <div class="col-12 row justify-content-center">
+	                <div class="col-auto">
+	                    <%= image_tag "ico/facture_rose.png", :class=>"ico-right" %>
+	                </div>
+	                <h4 class="col-12 text-center text-secondary">Récuperez</h4>
+	                <p class="col text-center">vos factures en cliqaunt sur l'îcone ci-dessus</p>
+
+	            </div>
+	        </div>
+    </div>
+    <div class="col-12 row justify-content-center">
+        <h2 class="col-12 text-secondary text-center">Guide de création de votre compte Stripe</h2>
+        <div class="col-12 row text-center justify-content-center align-items-center">
+            <ul class="infos text-left mt-3">
+                <li>
+                	<%= image_tag "ico/info_rose.png", :class=>"ico-infos mr-3" %>
+                	<strong>Votre compte sera validé que lorsque
+                    votre compte Stripe sera créé.</strong>
+                </li>
+                <li>
+                	<%= image_tag "ico/info_rose.png", :class=>"ico-infos mr-3" %>
+                	<strong>Munissez vous de votre IBAN pour créer votre
+                    compte Stripe.</strong>
+                </li>
+                <li>
+                	<%= image_tag "ico/info_rose.png", :class=>"ico-infos mr-3" %><strong>Ci-dessous le guide création pour créer votre
+                    compte Stripe</strong>
+                </li>
+            </ul>
+        </div>
+        <div class="col-12 row justify-content-center">
+            <div class="col-12 col-md-auto">
+                <%= image_tag "Inscription_stripe_1.png", :class=>"img-fluid" %>
+            </div>
+            <p class="col-12 text-center">La description de votre activité est "Soutien scolaire"</p>
+            <p class="col-12 text-center">Votre site est : "lakamaraderie.fr"</p>
+        </div>
+        <div class="col-12 row justify-content-center">
+            <div class="col-12 col-md-auto">
+                <%= image_tag "Inscription_stripe_2.png", :class=>"img-fluid" %>
+            </div>
+            <p class="col-12 text-center">Le type d'organisation qui vous concerne est "Particulier /
+                Micro-entrepreneur / Auto-entrepreneur</p>
+            <p class="col-12 text-center">L'adresse de votre entreprise est votre adresse postale. Dans cet exemple, l'adresse de Monsieur
+                DUPONT Alexis est : "10 rue de Rivoli, 75002, Paris"</p>
+        </div>
+        <div class="col-12 row justify-content-center">
+            <div class="col-12 col-md-auto">
+                <%= image_tag "Inscription_stripe_3.png", :class=>"img-fluid" %>
+            </div>
+            <p class="col-12 text-center">Dans cette première partie, vous devez remplir vos informations
+                personnelles.</p>
+            <p>Exemple: Monsieur DUPONT Alexis, professeur habitant au "10 rue de Rivoli."</p>
+        </div>
+        <div class="col-12 row justify-content-center">
+            <div class="col-12 col-md-auto">
+                <%= image_tag "Inscription_stripe_4.png", :class=>"img-fluid" %>
+            </div>
+            <p class="col-12 text-center">Vous êtes libre de choisir le nom de votre entreprise, le plus courant est
+            d'indiquer votre nom et prénom comme dans l'exemple ci-dessus: "Alexis DUPONT"</p>
+        </div>
+        <div class="col-12 row justify-content-center">
+            <div class="col-12 col-md-auto">
+                <%= image_tag "Inscription_stripe_5.png", :class=>"img-fluid" %>
+            </div>
+            <p class="col-12 text-center">
+            	<strong>Veuillez indiquer votre IBAN afin de recevoir
+                automatiquement votre rémunération.</strong>
+            </p>
+        </div>
+    </div>
