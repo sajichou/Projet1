@@ -79,7 +79,7 @@ Rails.application.configure do
   }
 
   #config.action_mailer.default_url_options = { host: 'localhost', port: 5000 }
-  config.action_mailer.default_url_options = { host: 'lakamaraderie.fr'}
+  config.action_mailer.default_url_options = { host: 'www.lakamaraderie.fr'}
 
   config.action_mailer.default :charset => "utf-8"
 
