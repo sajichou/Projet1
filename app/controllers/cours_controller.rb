@@ -15,25 +15,35 @@ class CoursController < ApplicationController
   end
 
   def new
-    cour = Cour.create teacher_id:current_teacher.id, matiere:params[:matiere], lieu:params[:lieu],
-     latitude:params[:latitude], longitude:params[:longitude]
-    params[:classe].each do |c|
-      Annee.create cour_id:cour.id, teacher_id:current_teacher.id, niveau:c
+
+    # Si adresse  reconnue 
+    if (params[:latitude].present? and params[:longitude].present?)
+      cour = Cour.create teacher_id:current_teacher.id, matiere:params[:matiere], lieu:params[:lieu],
+       latitude:params[:latitude], longitude:params[:longitude]
+      params[:classe].each do |c|
+        Annee.create cour_id:cour.id, teacher_id:current_teacher.id, niveau:c
+      end
+      params[:dispo].each do |c|
+        c = c.split(",")
+        c[1] = c[1].to_i
+        Dispo.create cour_id:cour.id, jour:c[0], heure:c[1]
+      end
+      if cour.dispos.length == 1
+        cour.update(jour:cour.dispos.first.jour)
+        cour.update(heure:cour.dispos.first.heure)
+      end
+      Lesson.create cour_id:cour.id, complaints:0, paid:false
+      #cours.latitude =  Geocoder.coordinates(params[:lieu])[0]
+      #cours.longitude = Geocoder.coordinates(params[:lieu])[1]
+      #sleep (3)
+      redirect_to "/pages/monespace"
+
+      #Si adresse non reconnue
+    else
+      redirect_to '/cours/create'
+      flash[:info] ="Votre adresse n'est pas reconnue"
     end
-    params[:dispo].each do |c|
-      c = c.split(",")
-      c[1] = c[1].to_i
-      Dispo.create cour_id:cour.id, jour:c[0], heure:c[1]
-    end
-    if cour.dispos.length == 1
-      cour.update(jour:cour.dispos.first.jour)
-      cour.update(heure:cour.dispos.first.heure)
-    end
-    Lesson.create cour_id:cour.id, complaints:0, paid:false
-    #cours.latitude =  Geocoder.coordinates(params[:lieu])[0]
-    #cours.longitude = Geocoder.coordinates(params[:lieu])[1]
-    #sleep (3)
-    redirect_to "/pages/monespace"
+
   end
 
   def show
@@ -130,8 +140,11 @@ class CoursController < ApplicationController
     @dist_hash = {}
     @dist = {}
     @cours.each do |c|
-     # a = Geocoder::Calculations.distance_between([c.latitude, c.longitude], @lieu, :units =>:km).round(2)
-       a = Haversine.distance(c.latitude, c.longitude, latitude, longitude).to_kilometers.round(2)
+    a = 0
+    if(c.latitude.present? and c.longitude.present?)
+   # a = Geocoder::Calculations.distance_between([c.latitude, c.longitude], @lieu, :units =>:km).round(2)
+      a = Haversine.distance(c.latitude, c.longitude, latitude, longitude).to_kilometers.round(2)
+    end
       @dist_hash[c] = a
       @dist[c.id] = a
     end
