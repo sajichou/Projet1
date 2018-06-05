@@ -2,16 +2,16 @@
 	<div class="row justify-content-center">
 		<fieldset>
 			<legend> Si vous disposez d'un code promo, entrez le ici :</legend>
-				<div class="col-8 col-lg-4 mx-auto">
+				<div class="col-8 col-lg-5 mx-auto">
 					<p>
 						<label for="code"> Code </label>
 						<input type="text" class="form-control text-center" name="code" value='<%=current_user.infouser.code%>'>
 					</p>
-					<% if (current_user.infouser.code == "Lancement18" and !current_user.infouser.code_used) %>
+					<% if (current_user.infouser.code == "LANCEMENT18" and !current_user.infouser.code_used) %>
 							<p>Super! Votre code est bien valide :)</p>
-					<% elsif (current_user.infouser.code == "Lancement18" and current_user.infouser.code_used) %>
+					<% elsif (current_user.infouser.code == "LANCEMENT18" and current_user.infouser.code_used) %>
 							<p>Ce code n'est malheureusement plus valide.</p>
-					<%else%>
+					<%elsif current_user.infouser.code.present? and current_user.infouser.code != "LANCEMENT18"%>
 						<p>Ce code n'est pas valide.</p>
 					<%end%>
 				</div>
