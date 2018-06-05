@@ -1,14 +1,14 @@
 <nav class="navbar fixed-top navbar-expand-lg navbar-default navbar-light">
 
     <a class="navbar-brand" href="/cours/accueil">
-      <%= image_tag "logo_blanc.png", alt:"Logo", width:"80", height:"30"%>
+      <%= image_tag "logo_rgb_entier.png", alt:"Logo", width:"150", height:"30"%>
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
       <span class="navbar-toggler-icon"></span>
     </button>
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="navbar-nav mr-auto">
+      <ul class="navbar-nav ml-auto">
         <!-- Inscrire et se connecter -->
         <% if user_signed_in? %>
             <li class="nav-link mx-2"><a data-method="delete", href="/users/sign_out">Se déconnecter</a></li>
@@ -54,9 +54,9 @@
         <% end %>
       </ul>
       <!-- Index pour admin et Proposer un cours -->
-      <ul class="navbar-nav navbar-right give-lesson" >
+      <ul class="navbar-nav ml-3">
         
-        <li class="nav-link"><a href="/cours/create" style="color:#e55966"><i class="fa fa-plus"></i> Proposer un cours</a></li>
+        <li class="nav-item  give-lesson" style="width: 200px"><a href="/cours/create" style="color:#e55966"><i class="fa fa-plus"></i> Proposer un cours</a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
 </nav>
