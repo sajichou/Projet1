@@ -77,7 +77,8 @@ class ChargesController < ApplicationController
 		#render :json => response.body
 		hash_response = JSON.parse(response.body)
 		current_teacher.infoteacher.update(stripe_id:hash_response["stripe_user_id"])
-		#redirect_to "/pages/monespace"
+		redirect_to "/pages/monespace"
+		flash[:info] = "Nous allons maintenant vérifier vos informations. Nous vous enverrons un mail sous 24h."
 	end
 
 end
