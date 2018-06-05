@@ -6,7 +6,11 @@
 			<th>Nom</th>
 			<th>Prénom</th>
 			<th>email</th>
+			<th>Téléphone</th>
 			<th>Avatar</th>
+			<th>Stripe</th>
+			<th>Experience</th>
+			<th>Méthodologie</th>
 		</tr>
 		<% @candidates.each do |c| %>
 		<tr>
@@ -14,10 +18,25 @@
 			<td><%=c.infoteacher.try(:first_name)%></td>
 			<td><%=c.infoteacher.try(:last_name)%></td>
 			<td><%=c.infoteacher.try(:email)%></td>
+			<td><%=c.infoteacher.try(:phone)%></td>
 			<td> 
-			<% if c.infoteacher.present?%>
-				<%=image_tag c.infoteacher.avatar.url(:thumb), :class => "thumbnail"%></td>
-			<% end %>
+				<% if c.infoteacher.present?%>
+					<%=image_tag c.infoteacher.avatar.url(:thumb), :class => "thumbnail"%>
+				<% end %>
+			</td>
+			<td>
+				<% if c.infoteacher.stripe_id.present? %>
+					<span style="color:green">OK</span>
+				<% else %>
+					<span style="color:red">NON</span>
+				<%end%>
+			</td>
+			<td>
+				<%=c.infoteacher.try(:experience) %>
+			</td>
+			<td>
+				<%=c.infoteacher.try(:methodologie) %>
+			</td>			
 			<td>
 				<div class="btn btn-success">
 					<%= link_to "Valider", {:controller => "admin", :action => "validate", :id => c.id, :class =>"btn"}%>

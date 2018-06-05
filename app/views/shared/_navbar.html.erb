@@ -17,8 +17,26 @@
             <li class="nav-link mx-2"><a data-method="delete", href="/teachers/sign_out">Se déconnecter</a></li>
             <!--<li class="nav-link mx-2"><a href="/teachers/edit">Supprimer mon compte</a></li>-->
         <% else %>
+        <!--
             <li class="nav-link mx-2"><a href="/users/sign_up">S'inscrire</a></li>
             <li class="nav-link mx-2"><a href="/users/sign_in">Se connecter</a></li>
+        -->
+            <li class="nav-item dropdown mx-2">
+              <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="navbarDropdownI">S'inscrire</a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdownI">
+                <a class="dropdown-item" href="/users/sign_up" style="color:black">Inscription Élève</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="/teachers/sign_up" style="color:black">Inscription Professeur</a>
+              </div>
+            </li>
+            <li class="nav-item dropdown mx-2">
+              <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="navbarDropdown">Se connecter</a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="/users/sign_in" style="color:black">Connexion Élève</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="/teachers/sign_in" style="color:black">Connexion Professeur</a>
+              </div>
+            </li>
         <% end %>
         <!-- Espace administrateur si power ==2  -->
         <% if (teacher_signed_in? and current_teacher.role.power == 2) %>
