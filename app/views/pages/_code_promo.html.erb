@@ -7,9 +7,9 @@
 						<label for="code"> Code </label>
 						<input type="text" class="form-control text-center" name="code" value='<%=current_user.infouser.code%>'>
 					</p>
-					<% if (current_user.infouser.code == "Lancement18" and !current_user.infouser.code_used) %>
+					<% if (current_user.infouser.code == "LANCEMENT18" and !current_user.infouser.code_used) %>
 							<p>Super! Votre code est bien valide :)</p>
-					<% elsif (current_user.infouser.code == "Lancement18" and current_user.infouser.code_used) %>
+					<% elsif (current_user.infouser.code == "LANCEMENT18" and current_user.infouser.code_used) %>
 							<p>Ce code n'est malheureusement plus valide.</p>
 					<%else%>
 						<p>Ce code n'est pas valide.</p>

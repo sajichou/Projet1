@@ -9,7 +9,7 @@
 		<li>Expérience: <%=@infoteacher.experience %></li>
 		<li>Methodologie: <%=@infoteacher.methodology %></li>
 		<li>Stripe: 
-			<% if c.infoteacher.stripe_id.present? %>
+			<% if @infoteacher.stripe_id.present? %>
 				<span style="color:green">OK</span>
 			<% else %>
 				<span style="color:red">NON</span>

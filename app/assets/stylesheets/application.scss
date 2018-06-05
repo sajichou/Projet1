@@ -33,8 +33,13 @@ $rouge: #ff1744;
 $link-color: white;
 $gris: #eeeeee;
 
+.bg-rose {
+    background-color: $rose;
+}
 
-
+.rose {
+    color:$rose;
+}
 *{
 	margin:0;
 	padding:0;
