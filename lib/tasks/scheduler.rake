@@ -4,7 +4,7 @@ desc "This task is called by the Heroku scheduler add-on"
 task :paye => :environment do
 
     # Amount in cents
-    @amount = ENV["AMOUNT"]
+    @amount = ENV["AMOUNT"].to_i
     #stripe_teacher_id = "ac_CvXOvyzEp3Oemjs3JVUFqj2Grc6Vg8F4"
     stripe_teacher_id = "acct_1CVgoxChvnMxBQel"
 
@@ -28,7 +28,7 @@ end
 task :paiement_users => :environment do
 
   # Amount in cents
-  @amount = ENV["AMOUNT"]
+  @amount = ENV["AMOUNT"].to_i
   #On cherche les cours qui ont lieu demain reg 
   Cour.all.each do |cour|
     if (cour.date_reg.present? and !cour.date_ex.present?)
@@ -124,7 +124,7 @@ task :paiement_teachers => :environment do
                 nb_paiements_recus += 1
               end
             end
-            @amount = nb_paiements_recus * ENV["AMOUNT"]
+            @amount = nb_paiements_recus * ENV["AMOUNT"].to_i
             description = "Votre cour du " + cour.date_reg
             transfer_group = "Lesson " + cour.lessons.last.id.to_s
             transfer = Stripe::Transfer.create({
@@ -157,7 +157,7 @@ task :paiement_teachers => :environment do
                 nb_paiements_recus += 1
               end
             end
-            @amount = nb_paiements_recus * ENV["AMOUNT"]
+            @amount = nb_paiements_recus * ENV["AMOUNT"].to_i
 
             description = "Votre cour du " + cour.date_reg
             transfer_group = "Lesson " + cour.lessons.last.id.to_s
@@ -301,7 +301,7 @@ task :settlement => :environment do
           if p.perf
             refund = Stripe::Refund.create({
             charge: p.charge_id,
-            amount: ENV["AMOUNT"],
+            amount: ENV["AMOUNT"].to_i,
             })
           end
         end
