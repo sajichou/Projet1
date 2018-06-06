@@ -68,7 +68,6 @@ class ChargesController < ApplicationController
 		require 'uri'
 		require 'json'
 
-		puts "ICICICI"
 		uri = URI.parse("https://connect.stripe.com/oauth/token")
 		request = Net::HTTP::Post.new(uri)
 		request.set_form_data(

@@ -23,11 +23,7 @@
             </div>
 
                 <div class="custom-control custom-checkbox m-3">
-                    <p>
-                        Si vous disposez d'un code promo, veillez le saisir dans votre espace personnel: 
-                        <%= link_to "Code promo", {:controller =>"pages", :action=>"code_promo", :id=>@cours_id, :dispo=>@dispo}%>
-                    </p>
-
+                  
                     <% if (current_user.infouser.code == "LANCEMENT18" and !current_user.infouser.code_used) %>
                         <p>
                           Super! Votre code est bien valide :) Vous ne serez pas débité sur votre premier cours.

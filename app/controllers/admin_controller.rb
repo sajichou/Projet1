@@ -34,6 +34,21 @@ class AdminController < ApplicationController
     @infoteacher = Infoteacher.find_by_teacher_id(id)
   end 
 
+  def detruire_prof
+    Teacher.find(params[:id]).destroy
+    redirect_to '/admin/validated'
+  end
+
+  def eleves
+    @users=User.all
+  end
+
+  def detruire_eleve
+    User.find(params[:id]).destroy
+    redirect_to '/admin/eleves'
+  end
+
+
   private
 
   def admin_validated

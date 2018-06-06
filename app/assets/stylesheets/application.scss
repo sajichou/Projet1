@@ -32,6 +32,7 @@ $turquoise: #59e5d8;
 $rouge: #ff1744;
 $link-color: white;
 $gris: #eeeeee;
+$bleu: #4897D8;
 
 .bg-rose {
     background-color: $rose;
@@ -39,6 +40,10 @@ $gris: #eeeeee;
 
 .rose {
     color:$rose;
+}
+
+.bleu {
+    background-color:$bleu
 }
 *{
 	margin:0;
@@ -223,12 +228,12 @@ section {
 
 .avatar_occupe {
 	font-size: 2em;
-	color: #ff4444;
+	color: $rose;
 }
 
 .avatar_libre {
 	font-size: 2em;
-	color: #00C851;
+	color: $bleu;
 }
 
 .link_to {
@@ -284,7 +289,7 @@ section {
 }
 
 .submit_tag {
-	background-color: $vert;
+	background-color: $bleu;
 	color: white;
 	border: none;
 }

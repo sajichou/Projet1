@@ -90,7 +90,7 @@
 									</div>
 								<%= hidden_field_tag "id", @cour.id %>
 					<div class="row justify-content-center">
-						<div  class="col-6" style="border:solid 1px black; border-top-left-radius: 15px; border-top-right-radius: 15px; background-color: #00e676 ; height:30px"><%= submit_tag "M'inscrire", class:"submit_tag"%>
+						<div  class="col-6 bleu" style="border:solid 1px black; border-top-left-radius: 15px; border-top-right-radius: 15px; height:30px"><%= submit_tag "M'inscrire", class:"submit_tag"%>
 						</div>
 					</div>
 					<%end%>				
@@ -221,7 +221,7 @@
 							</div>
 						
 							<% if (!teacher_signed_in? and @cour.jour.present? and @cour.heure.present?) %>
-									<div class="col-12 col-lg-4" style="border:solid 1px black; border-radius: 10px; background-color: #00e676 ; height:30px">
+									<div class="col-12 col-lg-4 bleu" style="border:solid 1px black; border-radius: 10px; height:30px">
 										
 										<%= link_to "M'inscrire", {:controller =>"charges", :action=>"new", :id=>@cour.id}, class:"link_to" %>
 										
@@ -232,10 +232,10 @@
 									</div>
 								</div>
 							<% elsif (teacher_signed_in? and current_teacher.id == @cour.teacher_id) %>
-									<div class="col-12 col-lg-4" style="border:solid 1px black; border-radius: 10px; background-color: #00e676 ; height:30px">
+									<div class="col-12 col-lg-4 bleu" style="border:solid 1px black; border-radius: 10px ; height:30px">
 										<%= link_to "Modifier", {:controller =>"cours", :action=>"modifier", :id=>@cour.id}, class:"link_to" %>
 									</div>
-									<div class="col-12 col-lg-4" style="border:solid 1px black; border-radius: 10px; background-color: #00e676 ; height:30px">
+									<div class="col-12 col-lg-4 bleu" style="border:solid 1px black; border-radius: 10px; height:30px">
 										<button type="button" class="btn btn-link" data-toggle="modal" data-target="#exampleModal">
 						  					Supprimer ce cours
 										</button>

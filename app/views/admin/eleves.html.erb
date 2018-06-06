@@ -1,28 +1,20 @@
-<h1> Professeurs validés </h1>
+<h1> Elèves </h1>
 
 <table class="table">
 		<tr>
-			<th></th>
 			<th>Nom</th>
 			<th>Prénom</th>
 			<th>email</th>
-			<th>Avatar</th>
+			<th>Téléphone</th>
+			<th>Nb de cours</th>
 		</tr>
-		<% @validated.each do |c| %>
+		<% @users.each do |c| %>
 		<tr>
-			<td> <%= link_to "Infos", {:controller => "admin", :action => "teacher_profile", :id => c.id} %></td>
-			<td><%=c.infoteacher.try(:first_name)%></td>
-			<td><%=c.infoteacher.try(:last_name)%></td>
-			<td><%=c.infoteacher.try(:email)%></td>
-			<td> 
-			<% if c.infoteacher.present?%>
-				<%=image_tag c.infoteacher.avatar.url(:thumb), :class => "thumbnail"%></td>
-			<% end %>
-			<td>
-				<div class="btn btn-danger">
-					<%= link_to "Devalider", {:controller => "admin", :action => "invalidate", :id => c.id, :class =>"btn"}%>
-				</div>
-			</td>
+			<td><%=c.infouser.try(:first_name)%></td>
+			<td><%=c.infouser.try(:last_name)%></td>
+			<td><%=c.infouser.try(:email)%></td>
+			<td><%=c.infouser.try(:phone)%></td>
+			<td><%=Inscription.where(user_id:c.id).length %></td>	
 			<td>
 				<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
 					Supprimer
@@ -39,11 +31,11 @@
 				        </button>
 				      </div>
 				      <div class="modal-body">
-				        Supprimer ce prof.
+				        Supprimer cet élève.
 				      </div>
 				      <div class="modal-footer">
 				        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-				       <%= link_to "Supprimer", {:controller => "admin", :action => "detruire_prof", :id => c.id, :class =>"btn btn-danger"}%>
+				       <%= link_to "Supprimer", {:controller => "admin", :action => "detruire_eleve", :id => c.id, :class =>"btn btn-danger"}%>
 				      </div>
 				    </div>
 				  </div>

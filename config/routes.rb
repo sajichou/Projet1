@@ -77,6 +77,12 @@ Rails.application.routes.draw do
 
   get 'admin/teacher_profile'
 
+  get 'admin/detruire_prof'
+
+  get 'admin/detruire_eleve'
+
+  get 'admin/eleves'
+
   devise_for :users, controllers: { registrations:'user/registrations', sessions:'user/sessions', confirmations: 'user/confirmations'}
   devise_for :teachers, controllers: { registrations:'teachers/registrations', confirmations: 'teachers/confirmations'}
 
