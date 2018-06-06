@@ -31,34 +31,41 @@ class PagesController < ApplicationController
 
   def completer
     if teacher_signed_in?
-    Infoteacher.find_by_teacher_id(current_teacher.id).update(
-      first_name:params[:first_name],
-      last_name:params[:last_name],
-      email:params[:email],
-      phone: params[:phone],
-      location: params[:location],
-      methodology: params[:methodology],
-      experience: params[:experience]
-      )
-        if(session[:page_id].present?)
-        redirect_to controller:"cours", action: "show", id: session[:page_id]
-        else
-          redirect_to '/pages/maphoto'
-        end
-    elsif user_signed_in?
-    Infouser.find_by_user_id(current_user.id).update(
-      first_name:params[:first_name],
-      last_name:params[:last_name],
-      email:params[:email],
-      phone: params[:phone],
-      location: params[:location],
-      niveau: params[:niveau]
-      )
+      puts"latitude"
+      puts params[:latitude]
+      puts "long"
+      puts params[:longitude]
+      Infoteacher.find_by_teacher_id(current_teacher.id).update(
+        first_name:params[:first_name],
+        last_name:params[:last_name],
+        email:params[:email],
+        phone: params[:phone],
+        location: params[:location],
+        methodology: params[:methodology],
+        experience: params[:experience],
+        latitude: params[:latitude],
+        longitude: params[:longitude]
+        )
+      
       if(session[:page_id].present?)
         redirect_to controller:"cours", action: "show", id: session[:page_id]
-        else
-          redirect_to '/pages/monespace' 
-        end
+      else
+        redirect_to '/pages/maphoto'
+      end
+    elsif user_signed_in?
+      Infouser.find_by_user_id(current_user.id).update(
+        first_name:params[:first_name],
+        last_name:params[:last_name],
+        email:params[:email],
+        phone: params[:phone],
+        location: params[:location],
+        niveau: params[:niveau]
+        )
+      if(session[:page_id].present?)
+        redirect_to controller:"cours", action: "show", id: session[:page_id]
+      else
+        redirect_to '/pages/monespace' 
+      end
     end
   end
 
@@ -83,6 +90,9 @@ class PagesController < ApplicationController
     if params[:id].present?
       @cour_id = params[:id]
     end
+    if params[:dispo].present?
+      @dispo = params[:dispo]
+    end
   end
 
   def paiement
@@ -92,7 +102,7 @@ class PagesController < ApplicationController
     current_user.infouser.update(code:params[:code])
     if params[:id].present?
       #redirect_to '/charges/new'
-      redirect_to controller: 'charges', action: 'new', id: params[:id]
+      redirect_to controller: 'charges', action: 'new', id: params[:id], dispo: params[:dispo]
     else
       redirect_to '/pages/code_promo'
     end

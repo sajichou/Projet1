@@ -25,7 +25,7 @@
                 <div class="custom-control custom-checkbox m-3">
                     <p>
                         Si vous disposez d'un code promo, veillez le saisir dans votre espace personnel: 
-                        <%= link_to "Code promo", {:controller =>"pages", :action=>"code_promo", :id=>@cours_id}%>
+                        <%= link_to "Code promo", {:controller =>"pages", :action=>"code_promo", :id=>@cours_id, :dispo=>@dispo}%>
                     </p>
                 </div>
 
@@ -46,8 +46,8 @@
           data-description="Inscription hebdomadaire"
           data-locale="auto"></script>
 
-  <input type="hidden" id="cours_id" name="cours_id" value='<%=@cours_id%>'/>
-  <input type="hidden" id="dispo" name="dispo" value='<%=@dispo%>'/>
+  <input  id="cours_id" type="hidden" name="cours_id" value='<%=@cours_id%>'/>
+  <input  id="dispo" type="hidden" name="dispo" value='<%=@dispo%>'/>
 
 <% end %>
 

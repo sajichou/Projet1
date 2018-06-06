@@ -5,9 +5,7 @@ class ChargesController < ApplicationController
 
 	def new
 		@cours_id = params[:id]
-		if params[:dispo].present?
-			@dispo = params[:dispo]
-		end
+		@dispo = params[:dispo]
 	end
 
 	def create
@@ -24,6 +22,10 @@ class ChargesController < ApplicationController
 	  	#On enregistre le customer id associe a ce cours
 	  	Stripe_customer.create user_id:current_user.id, cour_id:params[:cours_id],
 	   		stripe_customer_id:customer.id
+	   	puts "AAAA"
+	   	puts params[:dispo]
+		puts "ID"
+		puts params[:cours_id] 
 
 	  	#Si pas de code promo il paye  
 	  	if (current_user.infouser.code != "LANCEMENT18" or current_user.infouser.code_used)
@@ -43,6 +45,11 @@ class ChargesController < ApplicationController
 	  	#Si code promo il paye pas
 		else
 			current_user.infouser.update(code_used:true)
+			puts "BBBBB"
+			puts "Dispo"
+			puts params[:dispo]
+			puts "ID"
+			puts params[:cours_id]
 			Presence.create lesson_id:Cour.find(params[:cours_id]).lessons.last.id, user_id:current_user.id, 
 	  			perf:true
 	  	end

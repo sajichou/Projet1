@@ -53,12 +53,12 @@
 		<% if @current_teacher.infoteacher.location.present? %>
 		<p>
 			<label for="location"> Adresse </label>
-			<input type="text" class="form-control value_success" name="location" value='<%= current_teacher.infoteacher.location %>'>
+			<input type="text" id="lieu" class="form-control value_success" name="location" value='<%= current_teacher.infoteacher.location %>'>
 		</p>
 		<% else %>
 		<p>
 			<label for="location"> Adresse </label>
-			<input type="text" class="form-control value_danger" name="location">
+			<input type="text" id="lieu" class="form-control value_danger" name="location" placeholder="Entrez votre adresse, 3 rue ...">
 		</p>
 		<% end %>
 
@@ -85,22 +85,18 @@
 			<textarea type="text" class="form-control value_danger" name="methodology"></textarea>
 		</p>
 		<% end %>
-<!--
-		<% if @current_teacher.infoteacher.avatar.present? %>
-		<p>
-			<label for="avatar"> Photo </label>
-			<input type="file" class="form-control value_success" name="avatar" value='<%=@current_teacher.infoteacher.avatar%>'>
-		</p>
-		<% else %>
-		<p>
-			<label for="avatar"> Photo </label>
-			<input type="file" class="form-control value_danger" name="avatar">
-		</p>
-		<% end %>
--->
+	<!-- Google Maps javascript API -->
+		                <div>
+		                  <input id="latitude" name="latitude" type="hidden">
+		                  <input id="longitude" name="longitude" type="hidden">
+		                </div>
+	<!-- Fin de Google Maps Javascript API -->
 	</fieldset>
 	<button type="submit" class=" btn btn-primary">Envoyer</button>
 	<%end%>
+
+
+
 
 <!-- Update devise registration -->
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180601163749) do
+ActiveRecord::Schema.define(version: 20180606083047) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,6 +60,8 @@ ActiveRecord::Schema.define(version: 20180601163749) do
     t.datetime "avatar_updated_at"
     t.string "email"
     t.string "stripe_id"
+    t.float "latitude"
+    t.float "longitude"
   end
 
   create_table "infousers", force: :cascade do |t|
@@ -148,6 +150,10 @@ ActiveRecord::Schema.define(version: 20180601163749) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string "unconfirmed_email"
+    t.string "first_name"
+    t.string "last_name"
+    t.integer "niveau"
+    t.string "phone"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

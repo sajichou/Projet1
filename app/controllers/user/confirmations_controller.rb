@@ -30,7 +30,7 @@ class User::ConfirmationsController < Devise::ConfirmationsController
      if(session[:page_id].present? and Cour.where(:id => session[:page_id]).present?)
         cours_show_path(session[:page_id])
     else
-      '/pages/monespace'  
+      '/pages/monprofil'  
     end
    end
 end

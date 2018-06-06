@@ -3,8 +3,8 @@
 en:
   devise:
     confirmations:
-      confirmed: "Votre mail a bien été validé."
-      send_instructions: "Vous allez recevoir un mail de validation d'ici quelques minutes."
+      confirmed: "Votre mail a bien été validé. Nous vous invitons à completer votre profil."
+      send_instructions: "Vous allez recevoir un mail de validation d'ici quelques minutes. Pensez à regarder dans vos spams."
       send_paranoid_instructions: "If your email address exists in our database, you will receive an email with instructions for how to confirm your email address in a few minutes."
     failure:
       already_authenticated: "Vous êtes déjà connecté."
