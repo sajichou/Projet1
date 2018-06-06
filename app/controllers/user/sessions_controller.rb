@@ -33,7 +33,7 @@ class User::SessionsController < Devise::SessionsController
     if(session[:page_id].present?)
         cours_show_path(session[:page_id])
     else
-      '/pages/monespace'  
+      '/cours/accueil'  
     end
 
    end

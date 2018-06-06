@@ -3,12 +3,18 @@
 <p>Bonjour <%=@teacher.email%>,</p>
 
 <p>Bienvenue dans la communauté de La Kamaraderie ! </p>
-<p>Pour valider la création de ton espace personnalisé et pouvoir réserver ton premier cours, tu as juste à cliquer sur le lien ci-dessous : </p>
+<p>Nous vous invitons à cliquer sur le lien suivant pour valider la création de votre espace personnalisé:
+ </p>
 <p><%= link_to 'Confirmer mon compte', confirmation_url(@resource, confirmation_token: @token) %></p>
 
-<p>Si tu as des questions ou besoin d’aide, Margot, Ines, Arthur, Kevin ou l’un de nos Kamarades se fera le plaisir de te répondre dans la journée !</p>
+<p>Vous devrez alors compléter votre profil: </br>
+	- informations personnelles </br>
+	- photo </br>
+	- création de votre compte Stripe </br>
+ pour que nous puissions procéder à un entretien téléphonique avec vous dans les 24h suivantes. Une fois l’entretien réalisé, nous validerons votre compte afin que vous puissiez créer votre première annonce.
+</p>
 
-<p>N’hésite pas à nous suivre sur <a href="https://www.facebook.com/lakamaraderie.fr/">Facebook</a> ou <a href="https://www.instagram.com/lakamaraderie.fr/">Instagram</a>, nous sommes très actifs et répondons à toutes vos questions sur l’orientation, l’actualité ou encore la préparation des examens !</p>
+<p>Si vous avez des questions ou besoin d’aide, Margot, Inès, Arthur, Kevin ou l’un de nos Kamarades se fera le plaisir de vous répondre dans la journée ! </p>
 
 <p>À très bientôt !</p>
 
