@@ -30,11 +30,11 @@ class PagesController < ApplicationController
   end
 
   def completer
+    if params[:cgu].present?
+      cgu = true
+    end
+
     if teacher_signed_in?
-      puts"latitude"
-      puts params[:latitude]
-      puts "long"
-      puts params[:longitude]
       Infoteacher.find_by_teacher_id(current_teacher.id).update(
         first_name:params[:first_name],
         last_name:params[:last_name],
@@ -44,7 +44,8 @@ class PagesController < ApplicationController
         methodology: params[:methodology],
         experience: params[:experience],
         latitude: params[:latitude],
-        longitude: params[:longitude]
+        longitude: params[:longitude],
+        cgu: cgu
         )
       
       if(session[:page_id].present?)
@@ -59,12 +60,23 @@ class PagesController < ApplicationController
         email:params[:email],
         phone: params[:phone],
         location: params[:location],
-        niveau: params[:niveau]
+        niveau: params[:niveau],
+        cgu: cgu
         )
       if(session[:page_id].present?)
         redirect_to controller:"cours", action: "show", id: session[:page_id]
+          if user_complet(current_user)
+            flash[:info] = "Votre profil est complet, vous pouvez maintenant vous inscrire à un cours !"
+          else
+            flash[:info] = "Votre profil n'est pas encore complet."
+          end 
       else
-        redirect_to '/pages/monespace' 
+        redirect_to root_path
+        if user_complet(current_user)
+          flash[:info] = "Votre profil est complet, vous pouvez maintenant vous inscrire à un cours ! !" 
+        else
+          flash[:info] = "Votre profil n'est pas encore complet."
+        end
       end
     end
   end
@@ -120,12 +132,21 @@ class PagesController < ApplicationController
   end     
 
   def contactus
-    @nom = params[:nom]
     @email = params[:email]
     @sujet = params[:sujet]
     @message = params[:message]
-    ContactusMailer.contact(@nom,@email,@sujet,@message).deliver
+    puts "contactus controller"
+    ContactusMailer.contact(@email,@sujet,@message).deliver
     redirect_to root_path
   end
 
+end
+
+private
+
+def user_complet(user)
+
+  user.infouser.first_name.present? and user.infouser.last_name.present? and user.infouser.niveau.present? and
+  user.infouser.email.present? and user.infouser.cgu
+  
 end

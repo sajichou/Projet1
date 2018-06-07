@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180606083047) do
+ActiveRecord::Schema.define(version: 20180607125821) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,6 +62,7 @@ ActiveRecord::Schema.define(version: 20180606083047) do
     t.string "stripe_id"
     t.float "latitude"
     t.float "longitude"
+    t.boolean "cgu"
   end
 
   create_table "infousers", force: :cascade do |t|
@@ -79,6 +80,7 @@ ActiveRecord::Schema.define(version: 20180606083047) do
     t.string "stripe_customer_id"
     t.string "code"
     t.boolean "code_used", default: false
+    t.boolean "cgu"
   end
 
   create_table "inscriptions", force: :cascade do |t|

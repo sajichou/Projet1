@@ -17,7 +17,7 @@
 
 		<% if @current_teacher.infoteacher.last_name.present? %>
 		<p>
-			<label for="last_name"> Nom </label>
+			<label for="last_name"> Nom<span style="font-style: italic; font-size: 0.8em; margin-left: 10px"> Visible uniquement pour les élèves inscrits à vos cours</span> </label>
 			<input type="text" class="form-control value_success" name="last_name" value='<%= @current_teacher.infoteacher.last_name%>'>
 		</p>
 		<% else %>
@@ -85,6 +85,29 @@
 			<textarea type="text" class="form-control value_danger" name="methodology"></textarea>
 		</p>
 		<% end %>
+
+		<!-- CGU -->
+
+		<% if @current_teacher.infoteacher.cgu %>
+		<div class="d-flex">
+			<div>
+				<input type="checkbox" name="cgu" value="true" checked>
+			</div>
+			<div>
+				<p>Veuillez lire et accepter les <a href="/annexe/CGU">condition générales d'utilisation</a>.</p>
+			</div>
+		</div>
+		<% else %>
+		<div class="d-flex">
+			<div>
+				<input type="checkbox" name="cgu" value="true" required>
+			</div>
+			<div>
+				<p>Veuillez lire et accepter les <a href="/annexe/CGU">condition générales d'utilisation</a>.</p>
+			</div>
+		</div>
+		<% end %>
+
 	<!-- Google Maps javascript API -->
 		                <div>
 		                  <input id="latitude" name="latitude" type="hidden">
@@ -207,34 +230,31 @@
 			<input type="text" class="form-control value_danger " name="phone">
 		</p>
 		<% end %>
-		<!-- Champ facultatif -->
-		<!--
-		<% if @current_user.infouser.location.present? %>
-		<p>
-			<label for="location"> Adresse </label>
-			<input type="text" class="form-control value_success" name="location" value='<%= current_user.infouser.location %>'>
-		</p>
+
+		<!-- CGU -->
+
+		<% if @current_user.infouser.cgu %>
+		<div class="d-flex">
+			<div>
+				<input type="checkbox" name="cgu" value="true" checked>
+			</div>
+			<div>
+				<p>Veuillez lire et accepter les <a href="/annexe/CGU">condition générales d'utilisation</a>.</p>
+			</div>
+		</div>
 		<% else %>
-		<p>
-			<label for="location"> Adresse </label>
-			<input type="text" class="form-control value_danger" name="location">
-		</p>
+		<div class="d-flex">
+			<div>
+				<input type="checkbox" name="cgu" value="true" required>
+			</div>
+			<div>
+				<p>Veuillez lire et accepter les <a href="/annexe/CGU">condition générales d'utilisation</a>.</p>
+			</div>
+		</div>
 		<% end %>
-		-->
-		<!-- Fin du champ facultatif -->
-<!--
-		<% if @current_user.infouser.avatar.present? %>
-		<p>
-			<label for="avatar"> Photo </label>
-			<input type="file" class="form-control value_success" name="avatar" value='<%=@current_user.infouser.avatar%>'>
-		</p>
-		<% else %>
-		<p>
-			<label for="avatar"> Photo </label>
-			<input type="file" class="form-control value_danger" name="avatar">
-		</p>
-		<% end %>
--->	
+
+
+
 	</fieldset>
 	<button type="submit" class=" btn btn-primary">Envoyer</button>
 	<% end %>

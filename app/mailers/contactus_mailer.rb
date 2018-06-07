@@ -1,11 +1,16 @@
 class ContactusMailer < ApplicationMailer
 	
-	def contact(nom,email,sujet,message)
-		@nom = nom
-		@email = email
+	def contact(email,sujet,message)
+
+		if !email.present?
+			@email= "Sans email"
+		else
+			@email = email
+		end
 		@sujet = sujet
 		@message = message
-		mail to:"sajid123@hotmail.fr", subject:@sujet, from:@nom
+		puts "ici"
+		mail to:"sajidsalhi@gmail.com", subject:@sujet, from:"sajid123@hotmail.fr"
 	end
 
 end

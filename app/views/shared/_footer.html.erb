@@ -12,9 +12,7 @@
                     -->
                     <a href="/annexe/quisommesnous" class="col-12 col-md-2 p-2 menu-item">Qui sommes-nous ?</a>
                     <a href="" class="col-12 col-md-2 p-2 menu-item" data-toggle="modal" data-target="#modalContactForm" >Nous contacter</a>
-                    <!--
-                    <a href="#" class="col-12 col-md-2 p-2 menu-item">Conditions Générales</a>
-                    -->
+                    <a href="/annexe/CGU" class="col-12 col-md-2 p-2 menu-item">Conditions Générales</a>
                     <a  href="https://www.facebook.com/lakamaraderie.fr/"><i class="fa fa-facebook-square fa-2x p-2 menu-item"></i></a>
                     <a href="https://www.instagram.com/lakamaraderie.fr/"><i class="fa fa-instagram fa-2x p-2 menu-item"></i></a>
                 </div>
@@ -67,13 +65,6 @@
             <div class="modal-body mx-3">
 
             <%=form_tag("/pages/contactus", method: "post") do %>
-            <label class="sr-only" for="Nom">Nom</label>
-			<div class="input-group mb-3">
-				<div class="input-group-prepend">
-					<div class="input-group-text"><span class="fa fa-user"></span></div>
-				</div>
-				<input type="text" class="form-control" id="Nom" name="nom" placeholder="Nom">
-			</div>
 
 			<label class="sr-only" for="Email">Email</label>
             <div class="input-group mb-3">

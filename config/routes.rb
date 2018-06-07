@@ -90,11 +90,14 @@ Rails.application.routes.draw do
 
   resources :charges
 
-  #get 'pages/contactus' =>'pages#contactus'
+  post 'pages/contactus' =>'pages#contactus'
 
-  post 'pages/contactus' 
+  #get 'pages/contactus' 
 
   get 'annexe/quisommesnous'
+
+
+  get 'annexe/CGU'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
