@@ -13,10 +13,10 @@
 		<% if @l.present?%>
 			<% @l.each do |c| %>
 				<tr>
-					<td><%=Teacher.find(c).infoteacher.first_name%></td>
-					<td><%=Teacher.find(c).teacher.infoteacher.last_name%></td>
-					<td><%=Teacher.find(c).teacher.infoteacher.email%></td>
-					<td><%=Teacher.find(c).nombre_eleves%></td>
+					<td><%=c.teacher.infoteacher.first_name%></td>
+					<td><%=c.teacher.infoteacher.last_name%></td>
+					<td><%=c.teacher.infoteacher.email%></td>
+					<td><%=c.nombre_eleves%></td>
 					<td>
 						<%= link_to "Details du cours", {:controller =>"cours", :action=>"show", :id=>c.id}%>		
 					</td>
