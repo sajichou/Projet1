@@ -110,7 +110,7 @@ task :paiement_teachers => :environment do
       puts "A"
       puts cour.date_reg
       puts Date.today.strftime("%Y-%m-%d")
-      if (Date.today).strftime("%Y-%m-%d") == cour.date_reg
+      if (Date.today-1).strftime("%Y-%m-%d") == cour.date_reg
         puts "AA"
         #Parmi ces cours on ceux qui ne signalent aucune complaint
         if (cour.lessons.last.complaints == 0 and !cour.lessons.last.paid)
@@ -124,18 +124,20 @@ task :paiement_teachers => :environment do
                 nb_paiements_recus += 1
               end
             end
-            @amount = nb_paiements_recus * ENV["AMOUNT"].to_i
-            description = "Votre cour du " + cour.date_reg
-            transfer_group = "Lesson " + cour.lessons.last.id.to_s
-            transfer = Stripe::Transfer.create({
-            :amount      => @amount,
-            :currency    => 'eur',
-            :transfer_group => transfer_group,
-            :description => description,
-            :destination => cour.teacher.infoteacher.stripe_id
-            })
-            cour.lessons.last.update(paid:true)
-            puts cour.teacher.email + " a été payé"
+            if nb_paiements_recus > 0
+              @amount = nb_paiements_recus * ENV["AMOUNT"].to_i
+              description = "Votre cour du " + cour.date_reg
+              transfer_group = "Lesson " + cour.lessons.last.id.to_s
+              transfer = Stripe::Transfer.create({
+              :amount      => @amount,
+              :currency    => 'eur',
+              :transfer_group => transfer_group,
+              :description => description,
+              :destination => cour.teacher.infoteacher.stripe_id
+              })
+              cour.lessons.last.update(paid:true)
+              puts cour.teacher.email + " a été payé"
+            end
           rescue
             logger.error "Transfert" + Teacher.find(cour.teacher.email)
           end
