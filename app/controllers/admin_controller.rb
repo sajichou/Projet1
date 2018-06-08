@@ -31,6 +31,7 @@ class AdminController < ApplicationController
 
   def teacher_profile
     id = params[:id]
+    @cours = Cour.where(teacher_id:id)
     @infoteacher = Infoteacher.find_by_teacher_id(id)
   end 
 
@@ -46,6 +47,15 @@ class AdminController < ApplicationController
   def detruire_eleve
     User.find(params[:id]).destroy
     redirect_to '/admin/eleves'
+  end
+
+  def info_eleve
+    @l=[]
+    @user = User.find(params[:id])
+    puts @user.email
+    Inscription.where(user_id:params[:id]).each do |i|
+      @l << i.cour_id
+    end
   end
 
 

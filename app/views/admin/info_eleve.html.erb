@@ -1,0 +1,26 @@
+<h4> <%= @user.infouser.email %> </h4>
+<h4><%=@user.infouser.first_name%></h4>
+<h4><%=@user.infouser.last_name%></h4>
+
+<table class="table">
+		<tr>
+			<th>Nom Prof</th>
+			<th>Prénom Prof</th>
+			<th>email Prof</th>
+			<th>Nb d'inscrits</th>
+			<th>Détails du cours</th>
+		</tr>
+		<% if @l.present?%>
+			<% @l.each do |c| %>
+				<tr>
+					<td><%=c.teacher.infoteacher.first_name%></td>
+					<td><%=c.teacher.infoteacher.last_name%></td>
+					<td><%=c.teacher.infoteacher.email%></td>
+					<td><%=c.nombre_eleves%></td>
+					<td>
+						<%= link_to "Details du cours", {:controller =>"cours", :action=>"show", :id=>c.id}%>		
+					</td>
+				</tr>
+			<%end%>
+		<%end%>
+</table>

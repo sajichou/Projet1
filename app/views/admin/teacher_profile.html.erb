@@ -20,3 +20,27 @@
 <% else %>
 Aucune info renseignée
 <% end %>
+
+
+<h1> Cours proposés </h1>
+
+<table class="table">
+		<tr>
+			<th>Matiere</th>
+			<th>Jour</th>
+			<th>Nb eleves</th>
+			<th>Lieu</th>
+			<th>Détails des cours</th>
+		</tr>
+		<% @cours.each do |c| %>
+		<tr>
+			<td><%=c.matiere%></td>
+			<td><%=c.jour%></td>
+			<td><%=c.nombre_eleves%></td>
+			<td><%=c.lieu%></td>
+			<td>
+				<%= link_to "Details du cours", {:controller =>"cours", :action=>"show", :id=>c.id}%>
+			</td>
+		</tr>
+		<%end%>
+</table>

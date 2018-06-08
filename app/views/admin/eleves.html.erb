@@ -7,6 +7,7 @@
 			<th>email</th>
 			<th>Téléphone</th>
 			<th>Nb de cours</th>
+			<th>Détails des cours</th>
 		</tr>
 		<% @users.each do |c| %>
 		<tr>
@@ -14,7 +15,10 @@
 			<td><%=c.infouser.try(:last_name)%></td>
 			<td><%=c.infouser.try(:email)%></td>
 			<td><%=c.infouser.try(:phone)%></td>
-			<td><%=Inscription.where(user_id:c.id).length %></td>	
+			<td><%=Inscription.where(user_id:c.id).length %></td>
+			<td>	
+				<%= link_to "Details des cours", {:controller =>"admin", :action=>"info_eleve", :id=>c.id}%>
+			</td>	
 			<td>
 				<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
 					Supprimer
