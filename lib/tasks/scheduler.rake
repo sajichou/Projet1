@@ -110,7 +110,7 @@ task :paiement_teachers => :environment do
       puts "A"
       puts cour.date_reg
       puts Date.today.strftime("%Y-%m-%d")
-      if (Date.today-1).strftime("%Y-%m-%d") == cour.date_reg
+      if (Date.today).strftime("%Y-%m-%d") == cour.date_reg
         puts "AA"
         #Parmi ces cours on ceux qui ne signalent aucune complaint
         if (cour.lessons.last.complaints == 0 and !cour.lessons.last.paid)
