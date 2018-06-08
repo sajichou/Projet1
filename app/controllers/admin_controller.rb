@@ -52,9 +52,8 @@ class AdminController < ApplicationController
   def info_eleve
     @l=[]
     @user = User.find(params[:id])
-    puts @user.email
     Inscription.where(user_id:params[:id]).each do |i|
-      @l << i.cour_id
+      @l << Cour.find(i.cour_id)
     end
   end
 
