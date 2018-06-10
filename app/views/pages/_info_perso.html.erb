@@ -1,7 +1,7 @@
 <% if teacher_signed_in? %>
 
 
-	<%=form_tag "/pages/monprofil", method:"post" do %>
+	<%=form_tag "/pages/monprofil", method:"post", :html => {:autocomplete => "off"} do %>
 	<fieldset>
 		<legend> Compléter mon profil : <%= @current_teacher.email%></legend>
 
