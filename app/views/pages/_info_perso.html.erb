@@ -1,7 +1,7 @@
 <% if teacher_signed_in? %>
 
 
-	<%=form_tag "/pages/monprofil", method:"post", :html => {:autocomplete => "off"} do %>
+	<%=form_tag "/pages/monprofil", method:"post" do %>
 	<fieldset>
 		<legend> Compléter mon profil : <%= @current_teacher.email%></legend>
 
@@ -53,12 +53,12 @@
 		<% if @current_teacher.infoteacher.location.present? %>
 		<p>
 			<label for="location"> Adresse </label>
-			<input type="text" id="lieu" class="form-control value_success" name="location" value='<%= current_teacher.infoteacher.location %>' autocomplete="false">
+			<input type="text" id="lieu" class="form-control value_success" name="location" value='<%= current_teacher.infoteacher.location %>' autocomplete="nope">
 		</p>
 		<% else %>
 		<p>
 			<label for="location"> Adresse </label>
-			<input type="text" id="lieu" class="form-control value_danger" name="location" placeholder="Entrez votre adresse, 3 rue ..." autocomplete="false">
+			<input type="text" id="lieu" class="form-control value_danger" name="location" placeholder="Entrez votre adresse, 3 rue ..." autocomplete="nope">
 		</p>
 		<% end %>
 
