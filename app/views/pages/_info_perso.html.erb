@@ -52,13 +52,13 @@
 
 		<% if @current_teacher.infoteacher.location.present? %>
 		<p>
-			<label for="location"> Adresse </label>
-			<input type="text" id="lieu" class="form-control value_success" name="location" value='<%= current_teacher.infoteacher.location %>' autocomplete="new-location">
+			<label for="sarue"> Adresse </label>
+			<input type="text" id="sarue" class="form-control value_success" name="sarue" value='<%= current_teacher.infoteacher.location %>' autocomplete="new-location">
 		</p>
 		<% else %>
 		<p>
-			<label for="location"> Adresse </label>
-			<input type="text" id="lieu" class="form-control value_danger" name="location" placeholder="Entrez votre adresse, 3 rue ..." autocomplete="new-location">
+			<label for="sarue"> Adresse </label>
+			<input type="text" id="sarue" class="form-control value_danger" name="sarue" placeholder="Entrez votre adresse, 3 rue ..." autocomplete="new-location">
 		</p>
 		<% end %>
 
