@@ -53,12 +53,12 @@
 		<% if @current_teacher.infoteacher.location.present? %>
 		<p>
 			<label for="location"> Adresse </label>
-			<input type="text" id="lieu" class="form-control value_success" name="location" value='<%= current_teacher.infoteacher.location %>' autocomplete="off">
+			<input type="text" id="lieu" class="form-control value_success" name="location" value='<%= current_teacher.infoteacher.location %>' autocomplete="false">
 		</p>
 		<% else %>
 		<p>
 			<label for="location"> Adresse </label>
-			<input type="text" id="lieu" class="form-control value_danger" name="location" placeholder="Entrez votre adresse, 3 rue ..." autocomplete="off">
+			<input type="text" id="lieu" class="form-control value_danger" name="location" placeholder="Entrez votre adresse, 3 rue ..." autocomplete="false">
 		</p>
 		<% end %>
 
