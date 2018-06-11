@@ -67,152 +67,134 @@
 <!-- Simple comme bonjour de moi -->
 <div class="row justify-content-center mt-3">
 	<div class="col-10 justify-content-center">
-		<p class="jacket-text title-simple">Simple comme bonjour</p>
+		<p class="jacket-text title-simple">Comment ça marche ?</p>
 		<div class="row justify-content-center">
-			<div class="col-12 col-lg-3 justify-content-center">
+			<div class="col-12 col-lg-4 justify-content-center">
 				<div class="row">
 					<div class="col-3 mx-auto round d-flex">
 	            		<div class="p-2 align-self-center">
-	                		<i class="fa fa-clone" style="font-size:3em"></i>
+	                		<%= image_tag "ico/recherche.png", :class=>"icones"%>
 	                	</div>
 	                </div>
                 </div>
-                <h5 class="text-center">Trouve</h5>
-                <div class="text-center">Le cours que tu veux suivre selon ton adresse, ton année d’étude et la matière que tu
+                <h5 class="text-center">Recherche</h5>
+                <div class="text-center">Un cours selon ton adresse, ton niveau et la matière que tu
 souhaites apprendre.</div>
 			</div>
-			<div class="col-12 col-lg-3">
+			<div class="col-12 col-lg-4">
 				<div class="row">
 					<div class="col-3 mx-auto round d-flex">
 	            		<div class="p-2 align-self-center">
-	                		<i class="fa fa-thumbs-up" style="font-size:3em"></i>
+	                		<%= image_tag "ico/abonne1.png", :class=>"icones"%>
 	                	</div>
 	                </div>
                 </div>
-                 <h5 class="text-center">Participe</h5>
-                <div class="text-center">À un cours près de chez toi, avec le professeur qui te correspond.
+                 <h5 class="text-center">Abonne-toi</h5>
+                <div class="text-center">Au groupe de travail avec le professeur et tes nouveaux camarades.
 </div>
 			</div>
-			<div class="col-12 col-lg-3">
+			<div class="col-12 col-lg-4">
 				<div class="row">
 					<div class="col-3 mx-auto round d-flex">
 	            		<div class="p-2 align-self-center">
-	                		<i class="fa fa-hand-peace-o" style="font-size:3em"></i>
+	                		<%= image_tag "ico/beneficie1.png", :class=>"icones"%>
 	                	</div>
 	                </div>
                 </div>
-                <h5 class="text-center">Recommence</h5>
-                <div class="text-center">Une fois, ou autant qu’il te plaira.</div>
+                <h5 class="text-center">Bénéficie</h5>
+                <div class="text-center">D'un suivi de la part de ton professeur et arrête ton abonnement quand tu le souhaites.</div>
 			</div>
 		</div>
 	</div>
 </div>
 
-<!-- Une offre sur mesure de moi -->
-<div class="row justify-content-center">
-	<div class="col-11 ">
+<!-- Nos 4 points clés -->
 
-		<div class="row justify-content-center mt-5">
-			<div class="col-12 col-lg-6">
-				<%= image_tag "Lakamaraderie_sur_mesure.png", :class=>"img-fluid"%>
+<section class="row justify-content-center align-items-stretch mt-3">
+            <div class="col-12 row justify-content-center">
+            	<!--
+                <h4 class="col-12 m-0 text-center prof-flex-title">Pour vous professeur, une plateforme intuitive et pratique </h4>
+				-->
+                <div class="col-12 col-lg-5 row prof-flex m-4 justify-content-around">
+                    <div class="col-12 col-lg-2 m-2 m-lg-0 row justify-content-center align-items-center ">
+                      <%= image_tag "ico/plusieurs.png", :class=>"icones"%>
+                    </div>
+                    <div class="col-12 col-lg-8 row justify-content-center align-items-center">
+                        <div class="col-12 prof-flex-title">Une dynamique de groupe</div>
+                        <div class="col-12">
+                        	<p style="text-align: left">Bénéficiez d'une émulation collective dans l'apprentissage.</br>
+                        	Groupe formé de 3 élèves de même niveau.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-5 row prof-flex m-4 justify-content-around">
+                    <div class="col-12 col-lg-2 m-2 m-lg-0 row justify-content-center align-items-center">
+                      <%= image_tag "ico/pouce.png", :class=>"icones"%>
+                    </div>
+                    <div class="col-12 col-lg-8 row justify-content-center align-items-center">
+                        <div class="col-12 prof-flex-title">Un enseignement de qualité</div>
+                        <div class="col-12">
+                        	<p style="text-align: left">Des professeurs sélectionnés pour leur profil de qualité.</br>
+                        	Issus de grandes écoles ou de l'éducation nationale.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-5 row prof-flex m-4 justify-content-around">
+                    <div class="col-12 col-lg-2 m-2 m-lg-0 row justify-content-center align-items-center">
+                      <%= image_tag "ico/collaboratif_site.png", :class=>"icones"%>
+                    </div>
+                    <div class="col-12 col-lg-8 row justify-content-center align-items-center">
+                        <div class="col-12 prof-flex-title">Un espace collaboratif</div>
+                        <div class="col-12">
+                        	<p style="text-align: left">Dédié et privé à chaque groupe de travail pour assurer un suivi et une forte cohésion entre parents, élèves et professeurs.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-5 row prof-flex m-4 justify-content-around">
+                    <div class="col-12 col-lg-2 m-2 m-lg-0 row justify-content-center align-items-center">
+                      <%= image_tag "ico/abonne.png", :style=>"height:130px;"%>
+                    </div>
+                    <div class="col-12 col-lg-8 row justify-content-center align-items-center">
+                        <div class="col-12 prof-flex-title">Un processus de paiement simplifié</div>
+                        <div class="col-12">
+                        	<p style="text-align: left">Basé sur un abonnement sans engagement, automatisé et sécurisé. Tu peux arrêter l'abonnement à tout moment.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+</section>
+
+<section class="row bg-rose py-4">
+	<div class="col-2 pl-4">
+		<%= image_tag "ico/argent.png", :style=>"height:150px"%>
+	</div>
+	<div class="col-10 pl-4">
+		<div class="row justify-content-center" style="color:white; text-align: left">
+			<div class="col-12">
+				<h4>Des cours à prix réduits !</h4>
 			</div>
-			<div class="col-12 col-lg-6">
-				<h3 style="color:#e55966">Un service sur mesure</h3>
-				<p>La Kamaraderie est ouverte à l’ensemble des collégiens et lycéens afin de les aider à
-atteindre leurs objectifs, et plus encore !</p>
-				<div class="row">
-					<div class="col-6">
-						<div class="row">
-							<div class="col-12">
-								<h4>Le succès scolaire</h4>
-							</div>
-							<div class="col-12">
-								<p>Un enfant en difficulté est un enfant ayant perdu confiance en lui/elle. Fréquenter des élèves qui lui ressemblent, sous la guidance d’un(e) professeur(e) compétent(e) et investi(e) lui permettra d’exprimer son potentiel.
-								</p>
-							</div>
-							<div class="col-12">
-								<h4>Révision d'examens</h4>
-							</div>
-							<div class="col-12">
-								<p>Grace à nos programmes spéciaux, mettez votre enfant dans les meilleures conditions pour réussir ses examens. Brevet, BAC, BTS, toutes les échéances seront abordées avec sérénité.
-								</p>
-							</div>
-						</div>
+			<div class="col-12">
+				<p>L'esprit de La Kamaraderie, c'est partager aussi bien le résultat que le coût.</p>
+			</div>
+			<div class="col-12">
+				<div class="row mt-3">
+					<div class="col-4">
+						<span class="p-3 px-5" style="background-color: white; color: black; font-size: 1.2em; font-weight: bold; border-radius: 20px">Collège <span class="rose">15€/h</span>
+						</span>
 					</div>
-					<div class="col-6">
-						<div class="row">
-							<div class="col-12">
-								<h4>Approfondissement des cours</h4>
-							</div>
-							<div class="col-12">
-								<p>Intégrer une prépa ou une grande école nécessite un dossier solide. Nous proposons ainsi des cours d’approfondissement des thèmes abordés en classe afin d’assurer les meilleurs résultats possibles.</p>
-							</div>
-							<div class="col-12">
-								<h4>Préparation aux concours</h4>
-							</div>
-							<div class="col-12">
-								<p>Nos professeurs guideront vos enfants dans la préparation des concours de grandes écoles (Science-Po, Médecine, Écoles de commerce…). Après tout, ils sont passés par là.
-								</p>
-							</div>
-						</div>
+					<div class="col-4">
+						<span class="p-3 px-5" style="background-color: white; color: black; font-size: 1.2em; font-weight: bold; border-radius: 20px">Lycée <span class="rose">15€/h</span>
+						</span>
+					</div>
+					<div class="col-4">
+						<span class="p-3 px-5" style="background-color: white; color: black; font-size: 1.2em; font-weight: bold; border-radius: 20px">Supérieur <span class="rose">18€/h</span>
+						</span>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
+
+</section>
 
 
-<!-- Esprit de la Kamaraderie -->
-
-<div class="row justify-content-center mt-5">
-	<div class="col-12">
-		<div class="row">
-			<div class="col-12 col-lg-6">
-				<h3 style="color:#e55966">L'esprit de La Kamaraderie c'est, </h3>
-				<h3 style="color:gray">Partager aussi bien la qualité que le coût.</h3>
-				<div class="row justify-content-center">
-					<div class="col-12">
-						<div class="row">
-							<div class="col-6">
-								<div class="col-12">
-									<h4>L'union fait la force</h4>
-								</div>
-								<div class="col-12">
-									<p>Réunir 3 élèves de même niveau ayant des objectifs similaires créé une émulation collective qui permettra à chacun de progresser, et de reprendre le goût d’apprendre.</p>
-								</div>
-							</div>
-							<div class="col-6">
-								<div class="col-12">
-									<h4>Un enseignement de qualité</h4>
-								</div>
-								<div class="col-12">
-									<p>Réunir 3 élèves de même niveau ayant des objectifs similaires créé une émulation collective qui permettra à chacun de progresser, et de reprendre le goût d’apprendre.
-									</p>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="row justify-content-center">
-					<div class="col-10">
-						<div class="col-12">
-							<h4>Des prix défiants toutes concurrences</h4>
-						</div>
-						<div class="col-12">
-							<p>Pour que le soutien scolaire soit financièrement envisageable pour un plus grand nombre, nous proposons les formules suivantes :</br>
-							Collège: 15€/h </br>
-							Lycée: 15€/h </br>
-							Concours: 18€/h</p>
-							<p>Les prix que nous proposons sont fixes. Ils ne varient pas selon le nombre d’élèves inscrits dans le groupe.
-							</p>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-12 col-lg-6">
-				<%= image_tag "la_kamaraderie_site_valeurs.jpg", :class=>"img-fluid"%>
-			</div>
-		</div>
-	</div>
-</div>

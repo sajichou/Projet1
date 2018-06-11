@@ -1,6 +1,6 @@
 
 <div class="row justify-content-center mt-3">
-	<div class="col-sm-7">
+	<div class="col-12 col-lg-8">
 		<%=form_tag "/cours/create", method:"post" do %>
 	<fieldset>
 		<legend class="mb-5"> Créez votre annonce </legend>
@@ -74,482 +74,8 @@
 
 		</div>
 		<br/>
-		<!--
-		<div class="form-group">
-			<label for="jour"> Quel jour seriez-vous disponible ? </label>
-			<select name="jour" class="form-control" required="">
-				<option>lundi</option>
-				<option>mardi</option>
-				<option>mercredi</option>
-				<option>jeudi</option>
-				<option>vendredi</option>
-				<option>samedi</option>
-				<option>dimanche</option>
-			</select>
-		</div>
-		-->
-		<p style="background-color: #eeeeee">Vos disponibilités</p>
-		<table class="table">
-			<thead>
-				<tr>
-					<th scope="col"></th>
-					<th scope="col">lundi</th>
-					<th scope="col">mardi</th>
-					<th scope="col">mercredi</th>
-					<th scope="col">jeudi</th>
-					<th scope="col">vendredi</th>
-					<th scope="col">samedi</th>
-					<th scope="col">dimanche</th>
-				</tr>				
-			</thead>
-			<tbody>
-				<tr>
-					<th scope="row">9-10h</th>
-					<th>
-						<div class="form-check">
-				  			<input class="form-check-input macheckbox" name="dispo[]" type="checkbox"" value="lundi,9">&nbsp;
-						</div>
-					<th>
-						<div class="form-check">
-				  			<input class="form-check-input macheckbox" name="dispo[]" type="checkbox"" value="mardi,9">&nbsp;
-						</div>
-					</th>
-					<th>
-						<div class="form-check">
-				  			<input class="form-check-input macheckbox" name="dispo[]" type="checkbox"" value="mercredi,9">&nbsp;
-						</div>
-					</th>
-					<th>
-						<div class="form-check">
-				  			<input class="form-check-input macheckbox" name="dispo[]" type="checkbox"" value="jeudi,9">&nbsp;
-						</div>
-					</th>
-					<th>
-						<div class="form-check">
-				  			<input class="form-check-input macheckbox" name="dispo[]" type="checkbox"" value="vendredi,9">&nbsp;
-						</div>
-					</th>
-					<th>
-						<div class="form-check">
-				  			<input class="form-check-input macheckbox" name="dispo[]" type="checkbox"" value="samedi,9">&nbsp;
-						</div>
-					</th>
-					<th>
-						<div class="form-check">
-				  			<input class="form-check-input macheckbox" name="dispo[]" type="checkbox"" value="dimanche,9">&nbsp;
-						</div>
-					</th>
-				</tr>
-				<tr>
-					<th scope="row">10-11h</th>
-					<th>
-						<div class="form-check">
-				  			<input class="form-check-input macheckbox" name="dispo[]" type="checkbox"" value="lundi,10">&nbsp;
-						</div>
-					<th>
-						<div class="form-check">
-				  			<input class="form-check-input macheckbox" name="dispo[]" type="checkbox"" value="mardi,10">&nbsp;
-						</div>
-					</th>
-					<th>
-						<div class="form-check">
-				  			<input class="form-check-input macheckbox" name="dispo[]" type="checkbox"" value="mercredi,10">&nbsp;
-						</div>
-					</th>
-					<th>
-						<div class="form-check">
-				  			<input class="form-check-input macheckbox" name="dispo[]" type="checkbox"" value="jeudi,10">&nbsp;
-						</div>
-					</th>
-					<th>
-						<div class="form-check">
-				  			<input class="form-check-input macheckbox" name="dispo[]" type="checkbox"" value="vendredi,10">&nbsp;
-						</div>
-					</th>
-					<th>
-						<div class="form-check">
-				  			<input class="form-check-input macheckbox" name="dispo[]" type="checkbox"" value="samedi,10">&nbsp;
-						</div>
-					</th>
-					<th>
-						<div class="form-check">
-				  			<input class="form-check-input macheckbox" name="dispo[]" type="checkbox"" value="dimanche,10">&nbsp;
-						</div>
-					</th>
-				</tr>
-				<tr>
-					<th scope="row">11-12h</th>
-					<th>
-						<div class="form-check">
-				  			<input class="form-check-input macheckbox" name="dispo[]" type="checkbox"" value="lundi,11">&nbsp;
-						</div>
-					<th>
-						<div class="form-check">
-				  			<input class="form-check-input macheckbox" name="dispo[]" type="checkbox"" value="mardi,11">&nbsp;
-						</div>
-					</th>
-					<th>
-						<div class="form-check">
-				  			<input class="form-check-input macheckbox" name="dispo[]" type="checkbox"" value="mercredi,11">&nbsp;
-						</div>
-					</th>
-					<th>
-						<div class="form-check">
-				  			<input class="form-check-input macheckbox" name="dispo[]" type="checkbox"" value="jeudi,11">&nbsp;
-						</div>
-					</th>
-					<th>
-						<div class="form-check">
-				  			<input class="form-check-input macheckbox" name="dispo[]" type="checkbox"" value="vendredi,11">&nbsp;
-						</div>
-					</th>
-					<th>
-						<div class="form-check">
-				  			<input class="form-check-input macheckbox" name="dispo[]" type="checkbox"" value="samedi,11">&nbsp;
-						</div>
-					</th>
-					<th>
-						<div class="form-check">
-				  			<input class="form-check-input macheckbox" name="dispo[]" type="checkbox"" value="dimanche,11">&nbsp;
-						</div>
-					</th>
-				</tr>
-				<tr>
-					<th scope="row">12-13h</th>
-					<th>
-						<div class="form-check">
-				  			<input class="form-check-input macheckbox" name="dispo[]" type="checkbox"" value="lundi,12">&nbsp;
-						</div>
-					<th>
-						<div class="form-check">
-				  			<input class="form-check-input macheckbox" name="dispo[]" type="checkbox"" value="mardi,12">&nbsp;
-						</div>
-					</th>
-					<th>
-						<div class="form-check">
-				  			<input class="form-check-input macheckbox" name="dispo[]" type="checkbox"" value="mercredi,12">&nbsp;
-						</div>
-					</th>
-					<th>
-						<div class="form-check">
-				  			<input class="form-check-input macheckbox" name="dispo[]" type="checkbox"" value="jeudi,12">&nbsp;
-						</div>
-					</th>
-					<th>
-						<div class="form-check">
-				  			<input class="form-check-input macheckbox" name="dispo[]" type="checkbox"" value="vendredi,12">&nbsp;
-						</div>
-					</th>
-					<th>
-						<div class="form-check">
-				  			<input class="form-check-input macheckbox" name="dispo[]" type="checkbox"" value="samedi,12">&nbsp;
-						</div>
-					</th>
-					<th>
-						<div class="form-check">
-				  			<input class="form-check-input macheckbox" name="dispo[]" type="checkbox"" value="dimanche,12">&nbsp;
-						</div>
-					</th>
-				</tr>
-				<tr>
-					<th scope="row">13-14h</th>
-					<th>
-						<div class="form-check">
-				  			<input class="form-check-input macheckbox" name="dispo[]" type="checkbox"" value="lundi,13">&nbsp;
-						</div>
-					<th>
-						<div class="form-check">
-				  			<input class="form-check-input macheckbox" name="dispo[]" type="checkbox"" value="mardi,13">&nbsp;
-						</div>
-					</th>
-					<th>
-						<div class="form-check">
-				  			<input class="form-check-input macheckbox" name="dispo[]" type="checkbox"" value="mercredi,13">&nbsp;
-						</div>
-					</th>
-					<th>
-						<div class="form-check">
-				  			<input class="form-check-input macheckbox" name="dispo[]" type="checkbox"" value="jeudi,13">&nbsp;
-						</div>
-					</th>
-					<th>
-						<div class="form-check">
-				  			<input class="form-check-input macheckbox" name="dispo[]" type="checkbox"" value="vendredi,13">&nbsp;
-						</div>
-					</th>
-					<th>
-						<div class="form-check">
-				  			<input class="form-check-input macheckbox" name="dispo[]" type="checkbox"" value="samedi,13">&nbsp;
-						</div>
-					</th>
-					<th>
-						<div class="form-check">
-				  			<input class="form-check-input macheckbox" name="dispo[]" type="checkbox"" value="dimanche,13">&nbsp;
-						</div>
-					</th>
-				</tr>
-				<tr>
-					<th scope="row">14-15h</th>
-					<th>
-						<div class="form-check">
-				  			<input class="form-check-input macheckbox" name="dispo[]" type="checkbox"" value="lundi,14">&nbsp;
-						</div>
-					<th>
-						<div class="form-check">
-				  			<input class="form-check-input macheckbox" name="dispo[]" type="checkbox"" value="mardi,14">&nbsp;
-						</div>
-					</th>
-					<th>
-						<div class="form-check">
-				  			<input class="form-check-input macheckbox" name="dispo[]" type="checkbox"" value="mercredi,14">&nbsp;
-						</div>
-					</th>
-					<th>
-						<div class="form-check">
-				  			<input class="form-check-input macheckbox" name="dispo[]" type="checkbox"" value="jeudi,14">&nbsp;
-						</div>
-					</th>
-					<th>
-						<div class="form-check">
-				  			<input class="form-check-input macheckbox" name="dispo[]" type="checkbox"" value="vendredi,14">&nbsp;
-						</div>
-					</th>
-					<th>
-						<div class="form-check">
-				  			<input class="form-check-input macheckbox" name="dispo[]" type="checkbox"" value="samedi,14">&nbsp;
-						</div>
-					</th>
-					<th>
-						<div class="form-check">
-				  			<input class="form-check-input macheckbox" name="dispo[]" type="checkbox"" value="dimanche,14">&nbsp;
-						</div>
-					</th>
-				</tr>
-				<tr>
-					<th scope="row">15-16h</th>
-					<th>
-						<div class="form-check">
-				  			<input class="form-check-input macheckbox" name="dispo[]" type="checkbox"" value="lundi,15">&nbsp;
-						</div>
-					<th>
-						<div class="form-check">
-				  			<input class="form-check-input macheckbox" name="dispo[]" type="checkbox"" value="mardi,15">&nbsp;
-						</div>
-					</th>
-					<th>
-						<div class="form-check">
-				  			<input class="form-check-input macheckbox" name="dispo[]" type="checkbox"" value="mercredi,15">&nbsp;
-						</div>
-					</th>
-					<th>
-						<div class="form-check">
-				  			<input class="form-check-input macheckbox" name="dispo[]" type="checkbox"" value="jeudi,15">&nbsp;
-						</div>
-					</th>
-					<th>
-						<div class="form-check">
-				  			<input class="form-check-input macheckbox" name="dispo[]" type="checkbox"" value="vendredi,15">&nbsp;
-						</div>
-					</th>
-					<th>
-						<div class="form-check">
-				  			<input class="form-check-input macheckbox" name="dispo[]" type="checkbox"" value="samedi,15">&nbsp;
-						</div>
-					</th>
-					<th>
-						<div class="form-check">
-				  			<input class="form-check-input macheckbox" name="dispo[]" type="checkbox"" value="dimanche,15">&nbsp;
-						</div>
-					</th>
-				</tr>
-				<tr>	
-					<th scope="row">16-17h</th>
-					<th>
-						<div class="form-check">
-				  			<input class="form-check-input macheckbox" name="dispo[]" type="checkbox"" value="lundi,16">&nbsp;
-						</div>
-					<th>
-						<div class="form-check">
-				  			<input class="form-check-input macheckbox" name="dispo[]" type="checkbox"" value="mardi,16">&nbsp;
-						</div>
-					</th>
-					<th>
-						<div class="form-check">
-				  			<input class="form-check-input macheckbox" name="dispo[]" type="checkbox"" value="mercredi,16">&nbsp;
-						</div>
-					</th>
-					<th>
-						<div class="form-check">
-				  			<input class="form-check-input macheckbox" name="dispo[]" type="checkbox"" value="jeudi,16">&nbsp;
-						</div>
-					</th>
-					<th>
-						<div class="form-check">
-				  			<input class="form-check-input macheckbox" name="dispo[]" type="checkbox"" value="vendredi,16">&nbsp;
-						</div>
-					</th>
-					<th>
-						<div class="form-check">
-				  			<input class="form-check-input macheckbox" name="dispo[]" type="checkbox"" value="samedi,16">&nbsp;
-						</div>
-					</th>
-					<th>
-						<div class="form-check">
-				  			<input class="form-check-input macheckbox" name="dispo[]" type="checkbox"" value="dimanche,16">&nbsp;
-						</div>
-					</th>
-				</tr>
-				<tr>
-					<th scope="row">17-18h</th>
-					<th>
-						<div class="form-check">
-				  			<input class="form-check-input macheckbox" name="dispo[]" type="checkbox"" value="lundi,17">&nbsp;
-						</div>
-					<th>
-						<div class="form-check">
-				  			<input class="form-check-input macheckbox" name="dispo[]" type="checkbox"" value="mardi,17">&nbsp;
-						</div>
-					</th>
-					<th>
-						<div class="form-check">
-				  			<input class="form-check-input macheckbox" name="dispo[]" type="checkbox"" value="mercredi,17">&nbsp;
-						</div>
-					</th>
-					<th>
-						<div class="form-check">
-				  			<input class="form-check-input macheckbox" name="dispo[]" type="checkbox"" value="jeudi,17">&nbsp;
-						</div>
-					</th>
-					<th>
-						<div class="form-check">
-				  			<input class="form-check-input macheckbox" name="dispo[]" type="checkbox"" value="vendredi,17">&nbsp;
-						</div>
-					</th>
-					<th>
-						<div class="form-check">
-				  			<input class="form-check-input macheckbox" name="dispo[]" type="checkbox"" value="samedi,17">&nbsp;
-						</div>
-					</th>
-					<th>
-						<div class="form-check">
-				  			<input class="form-check-input macheckbox" name="dispo[]" type="checkbox"" value="dimanche,17">&nbsp;
-						</div>
-					</th>
-				</tr>
-				<tr>
-					<th scope="row">18-19h</th>
-					<th>
-						<div class="form-check">
-				  			<input class="form-check-input macheckbox" name="dispo[]" type="checkbox"" value="lundi,18">&nbsp;
-						</div>
-					<th>
-						<div class="form-check">
-				  			<input class="form-check-input macheckbox" name="dispo[]" type="checkbox"" value="mardi,18">&nbsp;
-						</div>
-					</th>
-					<th>
-						<div class="form-check">
-				  			<input class="form-check-input macheckbox" name="dispo[]" type="checkbox"" value="mercredi,18">&nbsp;
-						</div>
-					</th>
-					<th>
-						<div class="form-check">
-				  			<input class="form-check-input macheckbox" name="dispo[]" type="checkbox"" value="jeudi,18"]>&nbsp;
-						</div>
-					</th>
-					<th>
-						<div class="form-check">
-				  			<input class="form-check-input macheckbox" name="dispo[]" type="checkbox"" value="vendredi,18"]>&nbsp;
-						</div>
-					</th>
-					<th>
-						<div class="form-check">
-				  			<input class="form-check-input macheckbox" name="dispo[]" type="checkbox"" value="samedi,18"]>&nbsp;
-						</div>
-					</th>
-					<th>
-						<div class="form-check">
-				  			<input class="form-check-input macheckbox" name="dispo[]" type="checkbox"" value=dimanche,18]>&nbsp;
-						</div>
-					</th>
-				</tr>
-				<tr>
-					<th scope="row">19-20h</th>
-					<th>
-						<div class="form-check">
-				  			<input class="form-check-input macheckbox" name="dispo[]" type="checkbox"" value="lundi,19"]>&nbsp;
-						</div>
-					<th>
-						<div class="form-check">
-				  			<input class="form-check-input macheckbox" name="dispo[]" type="checkbox"" value="mardi,19"]>&nbsp;
-						</div>
-					</th>
-					<th>
-						<div class="form-check">
-				  			<input class="form-check-input macheckbox" name="dispo[]" type="checkbox"" value="mercredi,19"]>&nbsp;
-						</div>
-					</th>
-					<th>
-						<div class="form-check">
-				  			<input class="form-check-input macheckbox" name="dispo[]" type="checkbox"" value="jeudi,19"]>&nbsp;
-						</div>
-					</th>
-					<th>
-						<div class="form-check">
-				  			<input class="form-check-input macheckbox" name="dispo[]" type="checkbox"" value="vendredi,19"]>&nbsp;
-						</div>
-					</th>
-					<th>
-						<div class="form-check">
-				  			<input class="form-check-input macheckbox" name="dispo[]" type="checkbox"" value="samedi,19"]>&nbsp;
-						</div>
-					</th>
-					<th>
-						<div class="form-check">
-				  			<input class="form-check-input macheckbox" name="dispo[]" type="checkbox"" value="dimanche,19"]>&nbsp;
-						</div>
-					</th>
-				</tr>
-				<tr>
-					<th scope="row">20-21h</th>
-					<th>
-						<div class="form-check">
-				  			<input class="form-check-input macheckbox" name="dispo[]" type="checkbox"" value="lundi,20"]>&nbsp;
-						</div>
-					<th>
-						<div class="form-check">
-				  			<input class="form-check-input macheckbox" name="dispo[]" type="checkbox"" value="mardi,20"]>&nbsp;
-						</div>
-					</th>
-					<th>
-						<div class="form-check">
-				  			<input class="form-check-input macheckbox" name="dispo[]" type="checkbox"" value="mercredi,20"]>&nbsp;
-						</div>
-					</th>
-					<th>
-						<div class="form-check">
-				  			<input class="form-check-input macheckbox" name="dispo[]" type="checkbox"" value="jeudi,20"]>&nbsp;
-						</div>
-					</th>
-					<th>
-						<div class="form-check">
-				  			<input class="form-check-input macheckbox" name="dispo[]" type="checkbox"" value="vendredi,20"]>&nbsp;
-						</div>
-					</th>
-					<th>
-						<div class="form-check">
-				  			<input class="form-check-input macheckbox" name="dispo[]" type="checkbox"" value="samedi,20"]>&nbsp;
-						</div>
-					</th>
-					<th>
-						<div class="form-check">
-				  			<input class="form-check-input macheckbox" name="dispo[]" type="checkbox"" value="dimanche,20"]>&nbsp;
-						</div>
-					</th>
-				</tr>
-			</tbody>
-		</table>
 
+		<p style="background-color: #eeeeee">L'adresse où se tiendra le cours</p>
 		<!-- Google Maps javascript API -->
 				<div class="form-group">
 					<label for="lieu" class="sr-only">Adresse ou quartier ?</label>
@@ -561,7 +87,123 @@
                   <input id="longitude" name="longitude" type="hidden">
                 </div>
 		<!-- Fin de Google Maps Javascript API -->
+
+		
+		<p style="background-color: #eeeeee">Vos disponibilités pour ce cours</p>
+
+		<div class="row justify-content-center">
+			<div class="col-12">
+				<div class="row align-items-center justify-content-center">
+					<!-- Pastille nouveau créneau -->
+					<div class="col-4 col-lg-2 px-0" style="max-width: 100%">
+						<div class="row">
+							<div class="col-12">
+								<select name="jour[]" class="col-12 col-lg-3 form-search text-center m-2" style="text-align-last: center; height: 40px">
+								<option disabled selected value>Jour</option>
+								<option value="lundi">Lundi</option>
+								<option value="mardi">Mardi</option>
+								<option value="mercredi">Mercredi</option>
+								<option value="jeudi">Jeudi</option>
+								<option value="vendredi">Vendredi</option>
+								<option value="samedi">Samedi</option>
+								<option value="dimanche">Dimanche</option>
+							</select>
+							</div>
+							<div class="col-12">
+								<input type="text" name="heure[]" class="timepicker col-12 col-lg-3 form-search text-center m-2" placeholder="Heure">
+							</div>
+						</div>
+					</div>
+					<div class="col-1 px-0" style="color: rgb(252,98,112)">
+						<i class="fa fa-plus-circle" style="font-size: 2em"></i>
+					</div>	
+					<!-- Fin d'une pastille -->	
+					<!-- Pastille nouveau créneau -->
+					<div class="col-4 col-lg-2 px-0" style="max-width: 100%">
+						<div class="row">
+							<div class="col-12">
+								<select name="jour[]" class="col-12 col-lg-3 form-search text-center m-2" style="text-align-last: center; height: 40px">
+								<option disabled selected value>Jour</option>
+								<option value="lundi">Lundi</option>
+								<option value="mardi">Mardi</option>
+								<option value="mercredi">Mercredi</option>
+								<option value="jeudi">Jeudi</option>
+								<option value="vendredi">Vendredi</option>
+								<option value="samedi">Samedi</option>
+								<option value="dimanche">Dimanche</option>
+							</select>
+							</div>
+							<div class="col-12">
+								<input type="text" name="heure[]" class="timepicker col-12 col-lg-3 form-search text-center m-2" placeholder="Heure">
+							</div>
+						</div>
+					</div>
+					<div class="col-1 px-0" style="color: rgb(252,98,112)">
+						<i class="fa fa-plus-circle" style="font-size: 2em"></i>
+					</div>	
+					<!-- Fin d'une pastille -->	
+					<!-- Pastille nouveau créneau -->
+					<div class="col-4 col-lg-2 px-0" style="max-width: 100%">
+						<div class="row">
+							<div class="col-12">
+								<select name="jour[]" class="col-12 col-lg-3 form-search text-center m-2" style="text-align-last: center; height: 40px">
+								<option disabled selected value>Jour</option>
+								<option value="lundi">Lundi</option>
+								<option value="mardi">Mardi</option>
+								<option value="mercredi">Mercredi</option>
+								<option value="jeudi">Jeudi</option>
+								<option value="vendredi">Vendredi</option>
+								<option value="samedi">Samedi</option>
+								<option value="dimanche">Dimanche</option>
+							</select>
+							</div>
+							<div class="col-12">
+								<input type="text" name="heure[]" class="timepicker col-12 col-lg-3 form-search text-center m-2" placeholder="Heure">
+							</div>
+						</div>
+					</div>
+					<!-- Fin d'une pastille -->	
+
+				</div>
+			</div>
+		</div>
+
+		<script type="text/javascript">
+		 	$.extend($.fn.pickadate.defaults, {
+			  monthsFull: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+			  weekdaysShort: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
+			  today: '',
+			  clear: '',
+			  close: 'Fermer',
+			  formatSubmit: 'yyyy-mm-dd',
+			  firstDay: 1,
+			  min: 1
+			})
+
+			$('.datepicker').pickadate({
+				hiddenName:true
+			})
+
+			$.extend($.fn.pickatime.defaults, {
+	  			clear: 'Effacer',
+	  			interval: 30,
+				min: [10,0],
+	  			max: [20,0],
+	  			format: 'H:i !h.',
+	  			formatLabel: 'H:i',
+	  			formatSubmit: 'H:i'
+
+			})		
+
+			$('.timepicker').pickatime({
+				hiddenName:true
+			})
+
+		</script>
+
+		
 	</fieldset>
+	<br/>
 	<input type="submit" class="btn col-3" value="Envoyez" style="background-color: #59e5d8; border: solid 1px black; font-weight: bold">
 <%end%>
 

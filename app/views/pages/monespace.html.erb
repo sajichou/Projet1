@@ -134,8 +134,11 @@
 								<div class="px-4 align-self-end">
 									<% if (inscription.cour.jour.present? and inscription.cour.heure.present?) %>
 										<p class="text-capitalize">
-										<!-- Si 1 élève est déjà inscrit -->
-										<%=inscription.cour.jour%> | <%=inscription.cour.heure %>-<%=inscription.cour.heure+1 %>h
+											<% if inscription.cour.min == 0 %>
+												<%=inscription.cour.jour%> | <%=inscription.cour.heure %>h - <%=inscription.cour.heure+1 %>h30
+											<% else %>
+												<%=inscription.cour.jour%> | <%=inscription.cour.heure %>h30 - <%=inscription.cour.heure+2 %>h
+											<% end %>
 										</p>
 									<% else %>
 										<p>Plusieurs créneaux possibles</p>
@@ -358,8 +361,11 @@
 								<div class="px-4 align-self-end">
 									<% if (cour.jour.present? and cour.heure.present?) %>
 										<p class="text-capitalize">
-										<!-- Si 1 élève est déjà inscrit -->
-										<%=cour.jour%> | <%=cour.heure %>-<%=cour.heure+1 %>h
+											<% if cour.min == 0 %>
+												<%=cour.jour%> | <%=cour.heure %>h - <%=cour.heure+1 %>h30
+											<% else %>
+												<%=cour.jour%> | <%=cour.heure %>h30 - <%=cour.heure+2 %>h
+											<% end %>
 										</p>
 									<% else %>
 										<p>Plusieurs créneaux possibles</p>

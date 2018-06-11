@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180607125821) do
+ActiveRecord::Schema.define(version: 20180611132739) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,12 +38,15 @@ ActiveRecord::Schema.define(version: 20180607125821) do
     t.string "date_reg"
     t.string "date_ex"
     t.string "horaire_ex"
+    t.integer "min", default: 0
+    t.integer "min_ex", default: 0
   end
 
   create_table "dispos", force: :cascade do |t|
     t.integer "cour_id"
     t.string "jour"
     t.integer "heure"
+    t.integer "min", default: 0
   end
 
   create_table "infoteachers", force: :cascade do |t|
@@ -63,6 +66,7 @@ ActiveRecord::Schema.define(version: 20180607125821) do
     t.float "latitude"
     t.float "longitude"
     t.boolean "cgu"
+    t.integer "dossier", default: 0
   end
 
   create_table "infousers", force: :cascade do |t|

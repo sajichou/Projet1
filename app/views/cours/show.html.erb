@@ -44,7 +44,11 @@
 							<i class="fa fa-calendar fa-lg"></i>
 						</div>
 						<div class="pl-2" style="text-transform: capitalize">
-							<%=@cour.jour%> | <%=@cour.heure %>-<%=@cour.heure+1 %>h
+							<% if @cour.min == 0 %>
+								<%=@cour.jour%> | <%=@cour.heure %>h - <%=@cour.heure+1 %>h30
+							<% else %>
+								<%=@cour.jour%> | <%=@cour.heure %>h30 - <%=@cour.heure+2 %>h
+							<% end %>
 						</div>
 					</div>
 				<!-- 2eme cas : Horaire pas encore fixé -->		
@@ -77,7 +81,11 @@
 																	<div class="btn-group btn-group-toggle" data-toggle="buttons">
 																	<label class="btn" id="btn_active" style="background-color: #e0e0e0">
 							   										 <input type="radio" name="dispo" id="option1" autocomplete="off" value="<%=j%>,<%=jh.heure%>" required>
-							   										 <%=jh.heure%>h
+							   										 <% if jh.min == 0%>
+							   										 	<%=jh.heure%>h
+							   										 <% else %>
+							   										 	<%=jh.heure%>h<%=jh.min%>
+							   										 <% end%>
 							 										 </label>
 																	</div>
 																</th>

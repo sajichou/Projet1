@@ -1,4 +1,3 @@
-
 	<%=form_tag "/cours/modifier", method:"post" do %>
 
 	<div class="form-row justify-content-center mt-5">
@@ -49,19 +48,19 @@
 			})
 
 			$.extend($.fn.pickatime.defaults, {
-	  			clear: 'Effacer',
-	  			interval: 60,
-				min: [9,0],
-	  			max: [20,0],
-	  			format: 'H:i !h.',
-	  			formatLabel: 'H:i',
-	  			formatSubmit: 'H'
+                clear: 'Effacer',
+                interval: 30,
+                min: [10,0],
+                max: [20,0],
+                format: 'H:i !h.',
+                formatLabel: 'H:i',
+                formatSubmit: 'H:i'
 
-			})		
+            })      
 
-			$('.timepicker').pickatime({
-				hiddenName:true
-			})
+            $('.timepicker').pickatime({
+                hiddenName:true
+            })
 
 		</script>
 	<%end%>

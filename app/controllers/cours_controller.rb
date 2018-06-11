@@ -23,14 +23,19 @@ class CoursController < ApplicationController
       params[:classe].each do |c|
         Annee.create cour_id:cour.id, teacher_id:current_teacher.id, niveau:c
       end
-      params[:dispo].each do |c|
-        c = c.split(",")
-        c[1] = c[1].to_i
-        Dispo.create cour_id:cour.id, jour:c[0], heure:c[1]
+
+      3.times do |i|
+        if params[:jour][i].present?
+          horaire = params[:heure][i].split(":")
+          heure = horaire[0].to_i
+          min = horaire[1].to_i
+          Dispo.create cour_id:cour.id, jour:params[:jour][i], heure:heure, min:min
+        end
       end
+
       if cour.dispos.length == 1
-        cour.update(jour:cour.dispos.first.jour)
-        cour.update(heure:cour.dispos.first.heure)
+        cour.update(jour:cour.dispos.first.jour, heure:cour.dispos.first.heure, 
+          min:cour.dispos.first.min)
       end
       Lesson.create cour_id:cour.id, complaints:0, paid:false
       #cours.latitude =  Geocoder.coordinates(params[:lieu])[0]
@@ -56,43 +61,33 @@ class CoursController < ApplicationController
     end
     #@cour = Cour.find(params[:id])
     @inscriptions = Inscription.where("cour_id=?",@cour.id)
-    
+    # Si plusieurs créneaux disponibles :
 
-
-    # Si aucun eleve encore inscrit :
-
-    def MinJour (j1,j2)
-      hash_jours = {"lundi":1, "mardi":2, "mercredi":3, "jeudi":4, "vendredi":5, "samedi":6, "dimanche":7} 
-      #puts hash_jours[j1.to_sym]
-      if(hash_jours[j1.to_sym] <= hash_jours[j2.to_sym])
-        return true
-      else
-        return false
+    if @cour.dispos.length >1
+      l = []
+      @cour.dispos.each do |jh|
+        unless l.include? (jh.jour) 
+          l.push(jh.jour)
+        end 
       end
+
+      l_ord = []
+      while l.length >= 1
+          l.length.times do |i|
+            bool = true
+            l.length.times do |j|
+              bool = MinJour(l[i],l[j])
+            end
+            if bool 
+              l_ord.push(l[i])
+              l.delete_at(i)
+              break
+            end
+          end
+      end
+      @l=l_ord
     end
 
-    l = []
-    @cour.dispos.each do |jh|
-      unless l.include? (jh.jour) 
-        l.push(jh.jour)
-      end 
-    end
-
-    l_ord = []
-    while l.length >= 1
-        l.length.times do |i|
-          bool = true
-          l.length.times do |j|
-            bool = MinJour(l[i],l[j])
-          end
-          if bool 
-            l_ord.push(l[i])
-            l.delete_at(i)
-            break
-          end
-        end
-    end
-    @l=l_ord
   end
 
   def update
@@ -214,8 +209,10 @@ class CoursController < ApplicationController
     cour = Cour.find(params[:id])
     if params[:modifier_ex]
       date_ex = params[:datepicker]
-      horaire_ex = params[:timepicker]
-      cour.update(date_ex:date_ex, horaire_ex:horaire_ex)
+      time = params[:timepicker].split(":")
+      horaire_ex = time[0].to_i
+      min_ex = time[1].to_i
+      cour.update(date_ex:date_ex, horaire_ex:horaire_ex, min_ex:min_ex)
       cour.save
       if cour.lessons.last.present?
         cour.lessons.last.update(date:date_ex)
@@ -226,13 +223,15 @@ class CoursController < ApplicationController
 
     else
       jour = params[:jour]
-      heure = params[:timepicker_def]
+      time = params[:timepicker_def].split(":")
+      heure = time[0].to_i
+      min = time[1].to_i
       delta_jours = (wday[jour] - Date.today.wday)
       if delta_jours < 0 
         delta_jours += 7
       end
       date_reg = Date.today + delta_jours
-      cour.update(jour:jour, heure:heure, date_reg:date_reg)
+      cour.update(jour:jour, heure:heure, min:min, date_reg:date_reg)
       cour.save
       if cour.lessons.last.present?
         cour.lessons.last.update(date:date_reg)
@@ -266,6 +265,16 @@ class CoursController < ApplicationController
     if (cour.nombre_eleves < 1 and !current_user.infouser.niveau.present?)
       flash[:info] = "Vous devez d'abord terminer votre inscription"
       redirect_to '/pages/monprofil/'
+    end
+  end
+
+  def MinJour (j1,j2)
+    hash_jours = {"lundi":1, "mardi":2, "mercredi":3, "jeudi":4, "vendredi":5, "samedi":6, "dimanche":7} 
+    #puts hash_jours[j1.to_sym]
+    if(hash_jours[j1.to_sym] <= hash_jours[j2.to_sym])
+      return true
+    else
+      return false
     end
   end
 
