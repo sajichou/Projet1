@@ -120,11 +120,15 @@ class PagesController < ApplicationController
   end
 
   def modifier_maphoto
-    if teacher_signed_in?
-      current_teacher.infoteacher.update(avatar:params[:avatar])
+    if teacher_signed_in? 
+      if params[:avatar].present?
+        current_teacher.infoteacher.update(avatar:params[:avatar])
+      end
       redirect_to '/pages/paiement'
     elsif user_signed_in?
-      current_user.infouser.update(avatar:params[:avatar])    
+      if params[:avatar].present?
+        current_user.infouser.update(avatar:params[:avatar])
+      end    
       redirect_to  '/pages/maphoto'
     end 
   end     
