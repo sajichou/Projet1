@@ -3,7 +3,7 @@ class CoursController < ApplicationController
   before_action :authenticate_user! ,only: [:inscription]
   before_action :premier_eleve ,only: [:inscription]
   before_action :authenticate_teacher! ,only: [:new, :create, :destroy]
-  before_action :teacher_validated, only: [:create, :new,:destroy]
+  #before_action :teacher_validated, only: [:create, :new,:destroy]
 
 
 

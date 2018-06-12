@@ -427,37 +427,7 @@
 								<%= link_to "Details du cours", {:controller =>"cours", :action=>"show", :id=>cour.id}, class:"link_to btn"%>
 							</p>				
 						</div>
-					</div>
-					<!--  Modal pour se désabonner-->
-					<div class="col-4">
-						<div style="border-bottom-left-radius: 30px; border-bottom-right-radius: 30px; background: #e55966; height:40px">
-							<button type="button" class="btn btn-link" data-toggle="modal" data-target="#exampleModal">
-					  		Supprimer ce cours
-							</button>
-
-							<!-- Modal -->
-							<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-							  <div class="modal-dialog" role="document">
-							    <div class="modal-content">
-							      <div class="modal-header">
-							        <h5 class="modal-title" id="exampleModalLabel">Supprimer ce cours</h5>
-							        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							          <span aria-hidden="true">&times;</span>
-							        </button>
-							      </div>
-							      <div class="modal-body">
-							        Je confirme mon souhait de supprimer ce cours. Avant de valider votre choix, nous vous conseillons de prévenir les élèves inscrits de la fin de leur cours.
-							      </div>
-							      <div class="modal-footer">
-							        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-							        <%= link_to "Supprimer le cours", {:controller =>"cours", :action=>"destroy", :id=>cour.id}, class:"btn btn-danger"%>
-							      </div>
-							    </div>
-							  </div>
-							</div>
-						</div>
-					</div>
-					<!--Fin du modal -->	
+					</div>	
 				</div>
 			</div>
 		</div>
