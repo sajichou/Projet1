@@ -16,7 +16,7 @@ class CoursController < ApplicationController
 
   def new
 
-    # Si adresse  reconnue 
+    # Si adresse reconnue 
     if (params[:latitude].present? and params[:longitude].present?)
       cour = Cour.create teacher_id:current_teacher.id, matiere:params[:matiere], lieu:params[:lieu],
        latitude:params[:latitude], longitude:params[:longitude], titre:params[:titre], descriptif:params[:descriptif]
