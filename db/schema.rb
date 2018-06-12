@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180611132739) do
+ActiveRecord::Schema.define(version: 20180612130655) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,6 +67,7 @@ ActiveRecord::Schema.define(version: 20180611132739) do
     t.float "longitude"
     t.boolean "cgu"
     t.integer "dossier", default: 0
+    t.string "dptm"
   end
 
   create_table "infousers", force: :cascade do |t|

@@ -7,9 +7,10 @@
 			<th>Prénom</th>
 			<th>email</th>
 			<th>Téléphone</th>
+			<th>Code postal</th>
 			<th>Avatar</th>
 			<th>Stripe</th>
-			<th>Etat du dossier</th>
+		
 			<!--
 			<th>Experience</th>
 			<th>Méthodologie</th>
@@ -22,6 +23,7 @@
 			<td><%=c.infoteacher.try(:last_name)%></td>
 			<td><%=c.infoteacher.try(:email)%></td>
 			<td><%=c.infoteacher.try(:phone)%></td>
+			<td><%=c.infoteacher.try(:dptm)%></td>
 			<td> 
 				<% if c.infoteacher.present?%>
 					<%=image_tag c.infoteacher.avatar.url(:thumb), :class => "thumbnail"%>

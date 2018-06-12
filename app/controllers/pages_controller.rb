@@ -33,7 +33,7 @@ class PagesController < ApplicationController
     if params[:cgu].present?
       cgu = true
     end
-
+    puts params[:dptm]
     if teacher_signed_in?
       Infoteacher.find_by_teacher_id(current_teacher.id).update(
         first_name:params[:first_name],
@@ -41,6 +41,7 @@ class PagesController < ApplicationController
         email:params[:email],
         phone: params[:phone],
         location: params[:lieu],
+        dptm: params[:dptm],
         methodology: params[:methodology],
         experience: params[:experience],
         latitude: params[:latitude],

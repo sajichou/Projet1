@@ -50,6 +50,7 @@
 		</p>
 		<% end %>
 
+		<!-- ADRESSE EXACTE
 		<% if @current_teacher.infoteacher.location.present? %>
 		<p>
 			<label for="lieu"> Adresse </label>
@@ -59,6 +60,20 @@
 		<p>
 			<label for="lieu"> Adresse </label>
 			<input type="text" id="lieu" class="form-control value_danger" name="lieu" placeholder="Entrez votre adresse, 3 rue ..." >
+		</p>
+		<% end %>
+		
+		-->
+
+		<% if @current_teacher.infoteacher.dptm.present? %>
+		<p>
+			<label for="dptm"> Code Postal </label>
+			<input type="text" maxlength="5" id="dptm" class="form-control value_success" name="dptm" value='<%= current_teacher.infoteacher.dptm %>'>
+		</p>
+		<% else %>
+		<p>
+			<label for="dptm"> Code Postal </label>
+			<input type="text" maxlength="5" id="dptm" class="form-control value_danger" name="dptm" placeholder="Numéro de votre code postal" >
 		</p>
 		<% end %>
 
