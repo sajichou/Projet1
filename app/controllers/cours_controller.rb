@@ -3,7 +3,7 @@ class CoursController < ApplicationController
   before_action :authenticate_user! ,only: [:inscription]
   before_action :premier_eleve ,only: [:inscription]
   before_action :authenticate_teacher! ,only: [:new, :create, :destroy]
-  before_action :teacher_validated, only: [:new, :destroy]
+  before_action :teacher_validated, only: [:create, :new,:destroy]
 
 
 
@@ -245,6 +245,14 @@ class CoursController < ApplicationController
 
   private
 
+  def teacher_complet(teacher)
+
+    teacher.infoteacher.first_name.present? and teacher.infoteacher.last_name.present? and teacher.infoteacher.dptm.present? and
+    teacher.infoteacher.email.present? and teacher.infoteacher.cgu and teacher.infoteacher.stripe_id.present? and
+    teacher.infoteacher.experience.present? and teacher.infoteacher.methodology.present? and teacher.infoteacher.phone.present?
+  
+  end
+
   def teacher_validated
     #unless (teacher_signed_in? and Role.where(teacher_id: current_teacher.id).last.power==1)
       #redirect_to '/teachers/sign_in'
@@ -252,9 +260,12 @@ class CoursController < ApplicationController
 
     if (!teacher_signed_in?)
       redirect_to '/teachers/sign_in'
-    elsif (teacher_signed_in? and Role.where(teacher_id: current_teacher.id).last.power==0)
+    elsif (teacher_signed_in? and !teacher_complet(current_teacher) and Role.where(teacher_id: current_teacher.id).last.power==0)
       flash[:info] = "Vous devez d'abord terminer votre inscription. Vous recevrez ensuite un mail de validation"
       redirect_to '/pages/monprofil/'
+    elsif (teacher_signed_in? and teacher_complet(current_teacher) and Role.where(teacher_id: current_teacher.id).last.power==0)
+      flash[:info] = "Nous allons vous contacter sous 24h pour valider votre compte. Vous pourrez ensuite créer des annonces :)"
+      redirect_to '/cours/accueil/'
     end
 
   end
