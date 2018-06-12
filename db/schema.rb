@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180612130655) do
+ActiveRecord::Schema.define(version: 20180612153056) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +40,8 @@ ActiveRecord::Schema.define(version: 20180612130655) do
     t.string "horaire_ex"
     t.integer "min", default: 0
     t.integer "min_ex", default: 0
+    t.string "titre"
+    t.string "descriptif"
   end
 
   create_table "dispos", force: :cascade do |t|

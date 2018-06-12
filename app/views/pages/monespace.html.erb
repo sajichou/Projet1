@@ -2,14 +2,18 @@
 <!-- Espace Eleves-->
 
 <% if user_signed_in? %>
-
 	
+	<div class="row justify-content-center">
+		<div class="col-12 col-lg-6">
+			<h1 style="background-color: rgb(252,98,112); color:white">Mes cours</h1>
+		</div>
+	</div>
 
 	<!-- Nouveau design !!!! -->
 
 	<%@inscriptions.each do |inscription| %>
 		<div class="row justify-content-center mt-4">
-			<div class="col-sm-6">	
+			<div class="col-12 col-lg-6">	
 				<div id="annonce">
 					<div class="row">
 
@@ -28,7 +32,8 @@
 										<div class="col" style="margin-top: 15px">
 											<%=image_tag inscription.cour.teacher.infoteacher.avatar.url(:thumb), :class => "thumbnail2"%>
 											<div class="row justify-content-center">
-												<div class="col-10">							
+												<div class="col-10">	
+												<!-- NOTATION ENSEIGNANT						
 													<div class="d-flex">
 														<div style="color: #ffc400">
 															<i class="fa fa-star"></i>
@@ -38,6 +43,7 @@
 															<i class="fa fa-star"></i>
 														</div>
 													</div>
+												-->
 													<div class="d-flex">
 														<div style="color: rgba(76, 175, 80, 0.7)">
 															<i class="fa fa-check-circle-o"></i>
@@ -232,11 +238,15 @@
 
 <% elsif teacher_signed_in? %>
 
-	<h1>Les cours que je dispense</h1>
+	<div class="row justify-content-center">
+		<div class="col-12 col-lg-6">
+			<h1 style="background-color: rgb(252,98,112); color:white">Mes cours</h1>
+		</div>
+	</div>
 
 	<%@cours_proposes.each do |cour| %>
 		<div class="row justify-content-center">
-			<div class="col-sm-6">	
+			<div class="col-12 col-lg-6">	
 				<div id="annonce">
 					<div class="row">
 
@@ -255,7 +265,8 @@
 										<div class="col" style="margin-top: 15px">
 											<%=image_tag cour.teacher.infoteacher.avatar.url(:thumb), :class => "thumbnail2"%>
 											<div class="row justify-content-center">
-												<div class="col-10">							
+												<div class="col-10">
+												<!--						
 													<div class="d-flex">
 														<div style="color: #ffc400">
 															<i class="fa fa-star"></i>
@@ -265,6 +276,7 @@
 															<i class="fa fa-star"></i>
 														</div>
 													</div>
+												-->
 													<div class="d-flex">
 														<div style="color: rgba(76, 175, 80, 0.7)">
 															<i class="fa fa-check-circle-o"></i>

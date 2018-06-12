@@ -67,13 +67,23 @@
 			</div>
 			<div class="col-sm-6">
 				<div class="form-check ">
-				  <input class="form-check-input" checked name="classe[]" type="checkbox" id="inlineCheckbox9" value="13">
+				  <input class="form-check-input"  name="classe[]" type="checkbox" id="inlineCheckbox9" value="13">
 				  <label class="form-check-label" for="inlineCheckbox13">Tous les niveaux</label>
 				</div>
 			</div>
 
 		</div>
 		<br/>
+		<p style="background-color: #eeeeee">Détails de votre annonce</p>
+			<div class="form-group">
+				<label for="titre">Titre de votre annonce <span style="font-size: 0.8em">10 caractères minimum - 70 caractères maximum</span></label>
+				<input id="titre" minlength="10" maxlength="70" name="titre" class="form-control" style="text-align: left">
+			</div>
+
+			<div class="form-group">
+				<label for="descriptif">Description de votre annonce <span style="font-size: 0.8em">100 caractères minimum - 500 caractères maximum</span></label>
+				<textarea id="descriptif" minlength="100" maxlength="500" name="descriptif" class="form-control" style="text-align: left"></textarea>
+			</div>
 
 		<p style="background-color: #eeeeee">L'adresse où se tiendra le cours</p>
 		<!-- Google Maps javascript API -->
