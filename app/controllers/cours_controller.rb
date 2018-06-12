@@ -3,7 +3,7 @@ class CoursController < ApplicationController
   before_action :authenticate_user! ,only: [:inscription]
   before_action :premier_eleve ,only: [:inscription]
   before_action :authenticate_teacher! ,only: [:new, :create, :destroy]
-  #before_action :teacher_validated, only: [:create, :new,:destroy]
+  before_action :teacher_validated, only: [:create, :new,:destroy]
 
 
 
@@ -168,48 +168,53 @@ class CoursController < ApplicationController
 
   def inscription
     cour = Cour.find(params[:id])
-    cour.nombre_eleves = cour.nombre_eleves + 1
-    #Si premier inscrit alors le niveau du cours est celui de l'élève mais encore faut-il que l'élève ait 
-    #renseigné sa classe lors de son inscription => before action premier_eleve
-      if cour.nombre_eleves < 2
-        cour.annees.each do |a|
-          a.destroy
-        end
-        Annee.create cour_id:cour.id, teacher_id:cour.teacher_id, niveau:current_user.infouser.niveau
-        cour.dispos.each do |a|
-          a.destroy
-        end
-        
-        if !cour.jour
-          dispo = params[:dispo].split(",")
-          dispo[1] = dispo[1].to_i
-          Dispo.create cour_id:cour.id, jour:dispo[0], heure:dispo[1]
-          cour.update(jour:dispo[0])
-          cour.update(heure:dispo[1])
-        end
+    if cour.nombre_eleves < 3
+      cour.nombre_eleves = cour.nombre_eleves + 1
+      #Si premier inscrit alors le niveau du cours est celui de l'élève mais encore faut-il que l'élève ait 
+      #renseigné sa classe lors de son inscription => before action premier_eleve
+        if cour.nombre_eleves < 2
+          cour.annees.each do |a|
+            a.destroy
+          end
+          Annee.create cour_id:cour.id, teacher_id:cour.teacher_id, niveau:current_user.infouser.niveau
+          cour.dispos.each do |a|
+            a.destroy
+          end
+          
+          if !cour.jour
+            dispo = params[:dispo].split(",")
+            dispo[1] = dispo[1].to_i
+            Dispo.create cour_id:cour.id, jour:dispo[0], heure:dispo[1]
+            cour.update(jour:dispo[0])
+            cour.update(heure:dispo[1])
+          end
 
-        #On calcule la date reguliere
-        wday = {"lundi"=>1, "mardi"=>2, "mercredi"=>3, "jeudi"=>4, "vendredi"=>5,
-        "samedi"=>6, "dimanche"=>0}
-        delta_jours = (wday[cour.jour] - Date.today.wday)
-        if delta_jours < 0 
-          delta_jours += 7
+          #On calcule la date reguliere
+          wday = {"lundi"=>1, "mardi"=>2, "mercredi"=>3, "jeudi"=>4, "vendredi"=>5,
+          "samedi"=>6, "dimanche"=>0}
+          delta_jours = (wday[cour.jour] - Date.today.wday)
+          if delta_jours < 0 
+            delta_jours += 7
+          end
+          date_reg = Date.today + delta_jours
+          #Conversion implicite de la date au format 2018-05-04: strftime("%Y-%m-%d")
+          cour.update(date_reg:date_reg)
+          #On cree la lesson et la presence associee
+          #Lesson.create cour_id:cour.id, date:date_reg
+          Lesson.find_by_cour_id(cour.id).update(date:date_reg)
         end
-        date_reg = Date.today + delta_jours
-        #Conversion implicite de la date au format 2018-05-04: strftime("%Y-%m-%d")
-        cour.update(date_reg:date_reg)
-        #On cree la lesson et la presence associee
-        #Lesson.create cour_id:cour.id, date:date_reg
-        Lesson.find_by_cour_id(cour.id).update(date:date_reg)
-      end
-    cour.save
-    
-    Inscription.create user_id:current_user.id, cour_id:cour.id
-    #Presence.create lesson_id:cour.lessons.last.id, user_id:current_user.id, perf:true
+      cour.save
+      
+      Inscription.create user_id:current_user.id, cour_id:cour.id
+      #Presence.create lesson_id:cour.lessons.last.id, user_id:current_user.id, perf:true
 
-    UserMailer.inscription(current_user, cour).deliver
-    TeacherMailer.inscription(cour.teacher,cour,current_user).deliver
-    redirect_to '/pages/monespace'
+      UserMailer.inscription(current_user, cour).deliver
+      TeacherMailer.inscription(cour.teacher,cour,current_user).deliver
+      redirect_to '/pages/monespace'
+    else
+      redirect_to controller: 'cours', action: 'show', id: params[:id]
+      flash[:info] = "Ce cours est complet."
+    end
   end
 
   def modifier

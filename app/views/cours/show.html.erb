@@ -233,7 +233,7 @@
 								<p class="font-italic text-justify" style="font-size:90%"><%=@cour.teacher.infoteacher.methodology%></p>								
 							</div>
 						
-							<% if (!teacher_signed_in? and @cour.jour.present? and @cour.heure.present?) %>
+							<% if (@cour.nombre_eleves<3 and @cour.jour.present? and @cour.heure.present?) %>
 									<div class="col-12 col-lg-4 bleu" style="border:solid 1px black; border-radius: 10px; height:30px">
 										
 										<%= link_to "M'inscrire", {:controller =>"charges", :action=>"new", :id=>@cour.id}, class:"link_to" %>
@@ -243,7 +243,7 @@
 										-->
 
 									</div>
-								</div>
+								
 							<% elsif (teacher_signed_in? and current_teacher.id == @cour.teacher_id) %>
 									<div class="col-12 col-lg-4 bleu" style="border:solid 1px black; border-radius: 10px ; height:30px">
 										<%= link_to "Modifier", {:controller =>"cours", :action=>"modifier", :id=>@cour.id}, class:"link_to" %>
@@ -253,12 +253,12 @@
 						  					Supprimer ce cours
 										</button>
 									</div>
-								</div>	
+								
 							<%end%>	
-
-						</div>			
-					</div>
+						</div>
+					</div>			
 				</div>
+			</div>
 
 
 							<!-- Modal -->
