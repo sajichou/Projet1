@@ -3,7 +3,7 @@ class CoursController < ApplicationController
   before_action :authenticate_user! ,only: [:inscription]
   before_action :premier_eleve ,only: [:inscription]
   before_action :authenticate_teacher! ,only: [:new, :create, :destroy]
-  #before_action :teacher_validated, only: [:create, :new,:destroy]
+  before_action :teacher_validated, only: [:create, :new,:destroy]
 
 
 
@@ -16,8 +16,11 @@ class CoursController < ApplicationController
 
   def new
 
+    if(!params[:jour].present? or !params[:heure].present?)
+      redirect_to '/cours/create'
+      flash[:info] ="Veuillez indiquer au moins un créneau pour ce cours."
     # Si adresse reconnue 
-    if (params[:latitude].present? and params[:longitude].present?)
+    elsif (params[:latitude].present? and params[:longitude].present?)
       cour = Cour.create teacher_id:current_teacher.id, matiere:params[:matiere], lieu:params[:lieu],
        latitude:params[:latitude], longitude:params[:longitude], titre:params[:titre], descriptif:params[:descriptif]
       params[:classe].each do |c|
