@@ -40,12 +40,9 @@ class PagesController < ApplicationController
         last_name:params[:last_name],
         email:params[:email],
         phone: params[:phone],
-        location: params[:lieu],
         dptm: params[:dptm],
         methodology: params[:methodology],
         experience: params[:experience],
-        latitude: params[:latitude],
-        longitude: params[:longitude],
         cgu: cgu
         )
       
