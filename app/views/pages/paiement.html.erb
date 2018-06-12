@@ -3,10 +3,10 @@
 <% if @current_teacher and @current_teacher.infoteacher.stripe_id.present? and @current_teacher.role.power<1 %>
     <p>Votre compte Stripe a bien été créé. Nous allons vous contacter sous 24H pour terminer votre inscription.</p>
     <p>Pour modifier votre compte Stripe, cliquez sur le lien suivant :
-    <a href="https://stripe.com/fr">Modifier mon compte Stripe</a></p>
+    <a target="_blank" href="https://stripe.com/fr">Modifier mon compte Stripe</a></p>
 <% elsif @current_teacher and @current_teacher.infoteacher.stripe_id.present? and @current_teacher.role.power==1%>
     Pour modifier votre compte Stripe, cliquez sur le lien suivant :
-    <a href="https://stripe.com/fr">Modifier mon compte Stripe</a>
+    <a target="_blank" href="https://stripe.com/fr">Modifier mon compte Stripe</a>
 <% else %>
 
     <!-- Prod Mode -->
@@ -59,11 +59,11 @@
 
                         <div class="col-12 col-md-6 col-md-auto row justify-content-center">
                             <div class="col-auto flex-row justify-content-around align-items-center">
-                                <a href="https://dashboard.stripe.com/oauth/authorize?response_type=code&client_id=ca_ComNVv9DH3zeYjZwYtvxV2FnJcCUZLxt&scope=read_write">
+                                <a target="_blank" href="https://dashboard.stripe.com/oauth/authorize?response_type=code&client_id=ca_ComNVv9DH3zeYjZwYtvxV2FnJcCUZLxt&scope=read_write">
                                     <%= image_tag "ico/Plus.png", :class=>"ico-plus" %>
                                 </a>
                             </div>
-                            <h3 class="col-12 text-center text-secondary"><a href="https://dashboard.stripe.com/oauth/authorize?response_type=code&client_id=ca_ComNVv9DH3zeYjZwYtvxV2FnJcCUZLxt&scope=read_write">Créer</a></h3>
+                            <h3 class="col-12 text-center text-secondary"><a target="_blank" href="https://dashboard.stripe.com/oauth/authorize?response_type=code&client_id=ca_ComNVv9DH3zeYjZwYtvxV2FnJcCUZLxt&scope=read_write">Créer</a></h3>
                             <div class="col-12 text-center">votre compte Stripe en cliquant sur le lien ci-dessus</div>
                         </div>
                 </div>
