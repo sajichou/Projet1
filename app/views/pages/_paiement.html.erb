@@ -1,8 +1,8 @@
-<% if @current_teacher and @current_teacher.infoteacher.stripe_id.present? and @current_teacher.infoteacher.role.power<1 %>
+<% if @current_teacher and @current_teacher.infoteacher.stripe_id.present? and @current_teacher.role.power<1 %>
     <p>Votre compte Stripe a bien été créé. Nous allons vous contacter sous 24H pour terminer votre inscription.</p>
     <p>Pour modifier votre compte Stripe, cliquez sur le lien suivant :
     <a href="https://stripe.com/fr">Modifier mon compte Stripe</a></p>
-<% elsif @current_teacher and @current_teacher.infoteacher.stripe_id.present? and @current_teacher.infoteacher.role.power==1%>
+<% elsif @current_teacher and @current_teacher.infoteacher.stripe_id.present? and @current_teacher.role.power==1%>
     Pour modifier votre compte Stripe, cliquez sur le lien suivant :
     <a href="https://stripe.com/fr">Modifier mon compte Stripe</a>
 <% else %>
