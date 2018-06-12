@@ -119,19 +119,33 @@ class CoursController < ApplicationController
   def search
 
     niveau = params[:classe].to_i
-    @cours = Cour.where("matiere=? AND nombre_eleves < ?  ", params[:matiere], 3)
-    liste = []
-    @cours.each do |cg|
-      cg.annees.each do |cp|
-        if(cp.niveau == niveau || cp.niveau == 13)
-          liste.push(cg)
+    #@cours = Cour.where("matiere=? AND nombre_eleves < ?  ", params[:matiere], 3)
+    if params[:matiere].present?
+      @cours = Cour.where("matiere=?", params[:matiere])
+    else
+      #matiere non renseignee
+      @cours = Cour.all
+    end
+
+    #Classe non renseignee
+    if niveau != 0
+      liste = []
+      @cours.each do |cg|
+        cg.annees.each do |cp|
+          if(cp.niveau == niveau || cp.niveau == 13)
+            liste.push(cg)
+          end
         end
       end
+      @cours = liste
     end
-    @cours = liste
     @lieu = params[:lieu]
     latitude = params[:latitude].to_f
     longitude = params[:longitude].to_f
+    if !latitude
+      latitude = 48.87
+      longitude = 2.30
+    end
     @dist_hash = {}
     @dist = {}
     @cours.each do |c|

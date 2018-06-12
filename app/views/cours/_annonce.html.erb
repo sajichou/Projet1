@@ -5,9 +5,13 @@
 		<div class="col-sm-5 justify-content-center">
 			<div class="row">
 				<div class="col-2" >
-					<div style="background-color: #e55966; height: 30px; width: 50px; border-top-left-radius: 10px">
-						<p class="text-white">15€</p>
-					</div>			
+					<% if cours.nombre_eleves<3 %>
+						<div style="background-color: #e55966; height: 30px; width: 50px; border-top-left-radius: 10px">
+							<p class="text-white">15€</p>
+						</div>	
+					<% else %>
+						<%= image_tag "ico/complet.png" , :class=>"iconespetits"%>
+					<% end %>		
 				</div>
 				<div class="col-10">
 					<!-- Ligne correspondant au bloc image prof-->
@@ -41,7 +45,24 @@
 					</div>
 					<!-- Ligne correspondant au bloc image élèves-->
 					<div class="row justify-content-center">
-						<% if cours.nombre_eleves == 2%>
+						<% if cours.nombre_eleves == 3%>
+								<div class="col">
+									<div class="avatar_occupe">
+										<i class="fa fa-user-circle-o"></i>
+									</div>
+								</div>
+								<div class="col">
+									<div class="avatar_occupe">
+										<i class="fa fa-user-circle-o"></i>
+									</div>
+								</div>										
+								<div class="col">
+									<div class="avatar_occupe">
+										<i class="fa fa-user-circle-o"></i>
+									</div>
+								</div>
+						<!-- Cas ou 2 eleves inscrits -->
+						<% elsif cours.nombre_eleves == 2%>
 								<div class="col">
 									<div class="avatar_occupe">
 										<i class="fa fa-user-circle-o"></i>
