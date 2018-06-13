@@ -38,6 +38,10 @@ $bleu: #4897D8;
     background-color: $rose;
 }
 
+.bg-rose-clair {
+    background-color: rgb(252,98,112);
+}
+
 .rose {
     color:$rose;
 }
@@ -163,6 +167,9 @@ section {
 	background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.7) );
 }
 
+#gradient_rose {
+    background: linear-gradient($rose, rgba(0, 0, 0, 0) );
+}
 
 .jacket{
     color:white;
@@ -174,6 +181,21 @@ section {
     font-family: 'Roboto', sans-serif;
     font-size:3vw;
 }
+
+.jacket-title2{
+    font-family: 'Roboto', sans-serif;
+    font-size:1.7em;
+}
+
+.jacket-title3{
+    font-family: 'Roboto', sans-serif;
+    font-size:1.2em;
+
+}
+.roboto{
+    font-family: 'Roboto', sans-serif;
+}
+
 .jacket-text{
     font-family: 'Lato',sans-serif;
     font-size:2vw;

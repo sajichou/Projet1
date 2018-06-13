@@ -86,12 +86,23 @@
         }
       }
 
+       var componentForm = {
+        street_number: 'short_name',
+        route: 'long_name',
+        locality: 'long_name',
+        administrative_area_level_1: 'short_name',
+        country: 'long_name',
+        postal_code: 'short_name'
+      };
+
       function onPlaceChanged() {
         var place = this.getPlace();
         var lat = document.getElementById("latitude");
         lat.value = place.geometry.location.lat();
         var long = document.getElementById("longitude");
         long.value = place.geometry.location.lng();
+        //var ville = document.getElementById("ville");
+        //ville.value = place.address_components[2].long_name;
         // console.log(place);  // Uncomment this line to view the full object returned by Google API.
         for (var i in place.address_components) {
           var component = place.address_components[i];
