@@ -113,7 +113,7 @@ task :paiement_teachers => :environment do
       if (Date.today-1).strftime("%Y-%m-%d") == cour.date_reg
         puts "AA"
         #Parmi ces cours on ceux qui ne signalent aucune complaint
-        if (cour.lessons.last.complaints == 0 and !cour.lessons.last.paid)
+        if (cour.lessons.last.present? and cour.lessons.last.complaints == 0 and !cour.lessons.last.paid)
           puts "AAA"
           begin
             #On paye le prof
