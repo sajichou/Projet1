@@ -10,7 +10,7 @@ ruby '2.3.1'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.4'
 
-gem 'mailboxer'
+
 gem 'figaro'
 gem 'pg'
 gem 'haversine', '~> 0.3.2'
