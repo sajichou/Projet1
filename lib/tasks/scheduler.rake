@@ -25,6 +25,7 @@ task :paye => :environment do
 end
 
 
+
 task :paiement_users => :environment do
 
   # Amount in cents
@@ -98,6 +99,22 @@ task :paiement_users => :environment do
     else
       puts "C"
     end
+  end
+end
+
+task :paiement_special => :environment do
+  @amount = ENV["AMOUNT"].to_i
+  Lesson.all.each do |l|
+    description = "Votre cour du " + l.date
+    transfer_group = "Lesson " + l.id.to_s
+    transfer = Stripe::Transfer.create({
+    :amount      => @amount,
+    :currency    => 'eur',
+    :transfer_group => transfer_group,
+    :description => description,
+    :destination => Cour.find(l.cour_id).teacher.infoteacher.stripe_id
+    })
+    l.update(paid:true)
   end
 end
 
