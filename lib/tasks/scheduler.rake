@@ -111,7 +111,7 @@ task :paiement_special => :environment do
     :currency    => 'eur',
     :transfer_group => transfer_group,
     :description => description,
-    :destination => Teacher.find(29)infoteacher.stripe_id
+    :destination => Teacher.find(29).infoteacher.stripe_id
     })
     l.update(paid:true)
 
