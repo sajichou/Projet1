@@ -113,7 +113,7 @@ task :paiement_special => :environment do
     :description => description,
     :destination => Teacher.find(29).infoteacher.stripe_id
     })
-    l.update(paid:true)
+    Lesson.last.update(paid:true)
 
 end
 
