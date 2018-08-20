@@ -102,9 +102,12 @@
         long.value = place.geometry.location.lng();
         //var ville = document.getElementById("ville");
         //ville.value = place.address_components[2].long_name;
-        // console.log(place);  // Uncomment this line to view the full object returned by Google API.
+        //console.log(place);  // Uncomment this line to view the full object returned by Google API.
+        
         for (var i in place.address_components) {
-          var component = place.address_components[i];
+          var component = place.address_components[i]; 
+          console.log(place.address_components[i]);
+          //console.log(component.types);//street_number, route, locality, administrative_area, country, postal_code
           for (var j in component.types) {  // Some types are ["country", "political"]
             var type_element = document.getElementById(component.types[j]);
             if (type_element) {

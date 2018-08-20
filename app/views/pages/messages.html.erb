@@ -1,0 +1,62 @@
+<%= render partial: "shared/sousmenu", locals: {tabname:"messages"} %>
+
+
+<% if user_signed_in? %>
+
+	<div class="row justify-content-center mt-5">
+		<div class="col-12 col-lg-10">
+			<div class="row">
+				<div class="col-12">
+					<h5>Vos messages liés à des demandes d'information sont visibles ici.</h5>
+				</div>
+				<div class="col-12 mt-5">
+					<table class="table">
+					  <tbody>
+					  	<% @messages_tries.each do|m| %>
+					  	<tr data-link="<%= pages_monprofil_path %>">
+					      <td><%= image_tag m.teacher.infoteacher.avatar.url(:thumb), :class => "thumbnail1" %>
+					      	<%= m.teacher.infoteacher.first_name %>
+					      	</td>
+					      <td><%= m.cour.matiere %></td>
+					      <td><%= m.created_at.strftime("%Y-%m-%d") %> à <%=m.created_at.strftime("%H")%>h<%=m.created_at.strftime("%M")%>
+					      </td>
+					      <td><%= link_to "Voir", {:controller =>"messages", :action=>"show", :message_id=>m.id}%> 
+					      </td>
+					    </tr>
+					   	<% end %>
+					  </tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+<% elsif teacher_signed_in? %>
+
+	<div class="row justify-content-center mt-5">
+		<div class="col-12 col-lg-10">
+			<div class="row">
+				<div class="col-12">
+					<h4>Vos messages liés à des demandes d'information sont visibles ici.</h4>
+				</div>
+				<div class="col-12">
+					<table class="table">
+					  <tbody>
+					  	<% @messages_tries.each do|m| %>
+					  	<tr>
+					      <td><%= m.user.infouser.first_name %></td>
+					      <td><%= m.cour.matiere %></td>
+					      <td><%= m.message %></td>
+					      <td><%= m.created_at.strftime("%Y-%m-%d") %> à <%=m.created_at.strftime("%H")%>h<%=m.created_at.strftime("%M")%>
+					      </td>
+					      <td><%= link_to "Voir", {:controller =>"messages", :action=>"show", :message_id=>m.id}%> 
+					    </tr>
+					   	<% end %>
+					  </tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+<% end %>

@@ -1,4 +1,5 @@
 class Infouser < ActiveRecord::Base
+	acts_as_paranoid
 	belongs_to :user, :foreign_key => 'user_id'
 	#validates_length_of :methodology, :minimum => 5, :maximum => 40, :allow_blank => true
 	#validates_length_of :experience, :minimum => 5, :maximum => 40, :allow_blank => true

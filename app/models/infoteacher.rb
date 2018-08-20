@@ -1,4 +1,5 @@
 class Infoteacher < ActiveRecord::Base
+	acts_as_paranoid
 	belongs_to :teacher, :foreign_key => 'teacher_id'
 	#validates_length_of :methodology, :minimum => 5, :maximum => 40, :allow_blank => true
 	#validates_length_of :experience, :minimum => 5, :maximum => 40, :allow_blank => true
@@ -10,5 +11,6 @@ class Infoteacher < ActiveRecord::Base
 	#validates :phone, presence: true
 	#validates :avatar, presence: true
 	#validates :location, presence: true
+
 
 end

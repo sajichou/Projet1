@@ -1,4 +1,4 @@
-
+<%= render partial: "shared/sousmenu", locals: {tabname:"paiement"} %>
 
 <% if @current_teacher and @current_teacher.infoteacher.stripe_id.present? and @current_teacher.role.power<1 %>
     <p>Votre compte Stripe a bien été créé. Nous allons vous contacter sous 24H pour terminer votre inscription.</p>
@@ -7,7 +7,7 @@
 <% elsif @current_teacher and @current_teacher.infoteacher.stripe_id.present? and @current_teacher.role.power==1%>
     Pour modifier votre compte Stripe, cliquez sur le lien suivant :
     <a target="_blank" href="https://stripe.com/fr">Modifier mon compte Stripe</a>
-<% else %>
+<% elsif @current_teacher%>
 
     <!-- Prod Mode -->
     <!--
@@ -133,5 +133,7 @@
     </div>
 </div>
 
+<% else %>
+<p>Historique des paiements</p>
 <% end %>
 

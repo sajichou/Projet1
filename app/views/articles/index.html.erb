@@ -1,0 +1,24 @@
+<div class="row justify-content-center mt-5">
+	<div class="col-12 col-lg-10 justify-content-center">
+		<h1>Notre blog</h1>
+		<div class="row">
+			<% @articles.each do |a| %>
+				<div class="col-3">
+					<div class="card mt-3 " style="width: 18rem; overflow: hidden">
+					  
+					  <div style="width:18rem; height: 200px">
+					  	<%= image_tag a.image.url,:class=>"img-fluid mh-100"%>
+					  </div>
+					  <div class="card-body">
+					    <h5 class="card-title"><%=a.titre%></h5>
+					    <p class="small"><%=a.date%></p>
+					    <p class="card-text"><%=a.accroche%></p>
+					    <%= link_to "Lire", {:controller =>"articles", :action=>"show", :id=>a.id}, class:"btn btn-primary"%>
+					  </div>
+					</div>
+				</div>
+				<div class="col-1"></div>
+			<%end%>
+		</div>
+	</div>
+</div>

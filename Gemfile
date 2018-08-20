@@ -10,15 +10,22 @@ ruby '2.3.1'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.4'
 
-
+#Environment keys
 gem 'figaro'
+#Postgresql
 gem 'pg'
+#Distance entre deux points sur une sphere
 gem 'haversine', '~> 0.3.2'
+#Charger des images
 gem "paperclip", "~> 6.0.0"
 gem 'aws-sdk', '~> 3'
 gem 'pickadate-rails', '~> 3.5', '>= 3.5.6.0'
 #gem 'bootstrap', '~> 4.0.0'
 gem 'bootstrap', '~> 4.0.0'
+#Text editor for blog
+gem 'trix'
+#Twilio SMS
+gem 'twilio-ruby'
 
 gem 'jquery-rails'
 gem "font-awesome-rails"
@@ -78,6 +85,14 @@ gem 'devise'
 
 #Charging
 gem 'stripe'
+
+#Soft erase
+gem "paranoia", "~> 2.2"
+
+#DB diagram
+group :development do
+  gem "rails-erd"
+end
 
 group :production do
   gem 'rails_12factor'

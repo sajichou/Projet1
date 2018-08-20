@@ -1,25 +1,31 @@
-<h1> Photo </h1>
+<%= render partial: "shared/sousmenu", locals: {tabname:"maphoto"} %>
 
-<p>Ajoutez une photo ! Cela rassurera les autres membres et vous trouverez plus facilement des élèves. Les photos permettent aussi aux élèves de vous reconnaître.</p>
+<div class="row justify-content-center">
+	<div class="col-12 col-lg-8">
+		<h1> Photo </h1>
 
-<% if teacher_signed_in? %>
-	<p><%= image_tag @current_teacher.infoteacher.avatar.url(:thumb), :class => "thumbnail" %></p>
-	<%=form_tag "/pages/maphoto", method:"post", multipart:true do %>
-	<p>
-		<label for="avatar"> Photo </label>
-		<input type="file" class="form-control value_danger" name="avatar">
-	</p>
-	<button type="submit" class=" btn btn-primary">Modifier ma photo</button>
-	<% end %>
+		<p>Ajoutez une photo ! Cela rassurera les autres membres et vous trouverez plus facilement des élèves. Les photos permettent aussi aux élèves de vous reconnaître.</p>
 
-<% elsif user_signed_in?%>
-	<p><%= image_tag @current_user.infouser.avatar.url(:thumb), :class=>"thumbnail" %></p>
-	<%=form_tag "/pages/maphoto", method:"post", multipart:true do %>
-	<p>
-		<label for="avatar"> Photo </label>
-		<input type="file" class="form-control" name="avatar">
-	</p>
-	<button type="submit" class=" btn btn-primary">Enregister ma nouvelle photo</button>
-	<% end %>
+		<% if teacher_signed_in? %>
+			<p><%= image_tag @current_teacher.infoteacher.avatar.url(:thumb), :class => "thumbnail" %></p>
+			<%=form_tag "/pages/maphoto", method:"post", multipart:true do %>
+			<p>
+				<label for="avatar"> Photo </label>
+				<input type="file" class="form-control value_danger" name="avatar">
+			</p>
+			<button type="submit" class=" btn btn-primary">Modifier ma photo</button>
+			<% end %>
 
-<% end %>
+		<% elsif user_signed_in?%>
+			<p><%= image_tag @current_user.infouser.avatar.url(:thumb), :class=>"thumbnail" %></p>
+			<%=form_tag "/pages/maphoto", method:"post", multipart:true do %>
+			<p>
+				<label for="avatar"> Photo </label>
+				<input type="file" class="form-control" name="avatar">
+			</p>
+			<button type="submit" class=" btn btn-primary">Enregister ma nouvelle photo</button>
+			<% end %>
+
+		<% end %>
+	</div>
+</div>

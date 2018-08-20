@@ -1,6 +1,20 @@
 Rails.application.routes.draw do
 
 
+  get 'messages/index'
+
+  get 'messages/show'
+
+  post 'messages/show' => "messages#new"
+
+  get 'messages/create'
+
+  get 'messages/new'
+
+  get 'messages/destroy'
+
+  get 'messages/mark_as_read_and_read'
+
   #devise_for :teachers
   #devise_scope :teachers do
    # get 'teachers/sign_up', to: 'teachers/sessions#create'
@@ -19,7 +33,7 @@ Rails.application.routes.draw do
 
   get 'charges/new'
 
-  post 'cours/show' => 'charges#new'
+  post 'cours/show' => 'cours#contacter_prof'
 
   get 'cours/update'
 
@@ -59,6 +73,8 @@ Rails.application.routes.draw do
 
   get 'pages/code_promo'
 
+  get 'pages/messages'
+
   post 'pages/maphoto' => 'pages#modifier_maphoto'
 
   post 'pages/code_promo' => 'pages#code_promo_create'
@@ -66,6 +82,8 @@ Rails.application.routes.draw do
   get 'pages/completer'
 
   get 'pages/medesabonner'
+
+  get 'pages/dashboard'
 
   get 'admin/candidates'
 
@@ -100,6 +118,20 @@ Rails.application.routes.draw do
 
 
   get 'annexe/CGU'
+
+  get 'articles/index'
+  get 'articles/create'
+  post 'articles/create' =>'articles#new'
+  get 'articles/show'
+  get 'articles/edit'
+  post 'articles/edit' =>'articles#update'
+  get 'articles/destroy'
+
+  resources :notifications do
+    collection do 
+        post :mark_as_read
+    end 
+  end
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

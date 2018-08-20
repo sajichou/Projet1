@@ -44,4 +44,11 @@ class TeacherMailer < ApplicationMailer
     mail( :to =>@teacher.infoteacher.email, :subject => subject)
   end
 
+  def contact(teacher, user)
+    @teacher = teacher
+    @user = user
+    subject = "Nouveau message"
+    mail( :to =>@teacher.infoteacher.email, :subject => subject)
+  end
+
 end

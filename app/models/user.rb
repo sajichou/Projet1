@@ -10,10 +10,14 @@ class User < ApplicationRecord
 	  UserMailer.signup(self).deliver
   end
 
+  acts_as_paranoid
 
   has_many :cours
   has_many :inscriptions, dependent: :destroy
   has_one :infouser, dependent: :destroy
   has_many :stripe_customers
+  has_many :contactmessages
+  #has_many :notifications, foreign_key: :recipient_id
+  has_many :notifications, as: :recipient
 
 end

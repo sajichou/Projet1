@@ -88,6 +88,39 @@ class PagesController < ApplicationController
     end
   end
 
+  def messages
+    if teacher_signed_in?
+      messages = Contactmessage.where(teacher_id:current_teacher.id)
+      puts messages
+      @messages_tries = []
+      messages.each do |m|
+        a = true
+        @messages_tries.each do |t|
+          if (m.user_id == t.user_id and m.cour_id == t.cour_id)
+            a = false
+          end
+        end
+        if a 
+          @messages_tries << m
+        end
+      end
+    elsif user_signed_in?
+      messages = Contactmessage.where(user_id:current_user.id)
+      @messages_tries = []
+      messages.each do |m|
+        a = true
+        @messages_tries.each do |t|
+          if (m.teacher_id == t.teacher_id and m.cour_id == t.cour_id)  
+            a = false
+          end
+        end
+        if a 
+          @messages_tries << m
+        end
+      end
+    end
+  end
+
   def maphoto
     if teacher_signed_in?
       @current_teacher = current_teacher
@@ -106,6 +139,16 @@ class PagesController < ApplicationController
   end
 
   def paiement
+  end
+
+  def dashboard
+    if user_signed_in?
+        @notifications = Notification.where(recipient: current_user).unread
+        @nb_nouveaux_messages = @notifications.length
+      elsif teacher_signed_in?
+        @notifications = Notification.where(recipient: current_teacher).unread
+        @nb_nouveaux_messages = @notifications.length
+    end
   end
 
   def code_promo_create
@@ -129,7 +172,7 @@ class PagesController < ApplicationController
       if params[:avatar].present?
         current_user.infouser.update(avatar:params[:avatar])
       end    
-      redirect_to  '/pages/maphoto'
+      redirect_to '/pages/maphoto'
     end 
   end     
 

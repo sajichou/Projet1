@@ -1,0 +1,9 @@
+<%= link_to messages_show_path(:message_id => notification.notifiable_id ), class: "dropdown-item #{"unread" if !notification.read_at?}", style:"color:black" do %>
+	<% if notification.actor.class == Teacher %>
+  		<%= notification.actor.infoteacher.first_name %>
+  	<% else %>
+  		<%= notification.actor.infouser.first_name %>
+  	<% end %>
+  <%= notification.action %>
+  un <%= notification.notifiable_type.underscore.humanize.downcase %>
+<% end %>

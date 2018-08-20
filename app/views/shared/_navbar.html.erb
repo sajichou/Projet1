@@ -8,19 +8,21 @@
     </button>
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="navbar-nav ml-auto">
+
+      
+      <ul class="navbar-nav ml-auto mr-3">    
+        <!-- Index pour admin et Proposer un cours -->
+        <li class="nav-item  give-lesson" style="width: 200px"><a href="/cours/create" style="color:#e55966"><i class="fa fa-plus"></i> Proposer un cours</a>
+        </li>
+      </ul>
+
+      <ul class="navbar-nav mr-4 ">
+
+
+
         <!-- Inscrire et se connecter -->
-        <% if user_signed_in? %>
-            <li class="nav-link mx-2"><a data-method="delete", href="/users/sign_out">Se déconnecter</a></li>
-            <!--<li class="nav-link mx-2"><a href="/users/edit">Supprimer mon compte</a></li>-->
-        <% elsif teacher_signed_in? %>
-            <li class="nav-link mx-2"><a data-method="delete", href="/teachers/sign_out">Se déconnecter</a></li>
-            <!--<li class="nav-link mx-2"><a href="/teachers/edit">Supprimer mon compte</a></li>-->
-        <% else %>
-        <!--
-            <li class="nav-link mx-2"><a href="/users/sign_up">S'inscrire</a></li>
-            <li class="nav-link mx-2"><a href="/users/sign_in">Se connecter</a></li>
-        -->
+        <% if !user_signed_in? and !teacher_signed_in? %>
+
             <li class="nav-item dropdown mx-2">
               <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="navbarDropdownI">S'inscrire</a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdownI">
@@ -29,9 +31,9 @@
                 <a class="dropdown-item" href="/teachers/sign_up" style="color:black">Inscription Professeur</a>
               </div>
             </li>
-            <li class="nav-item dropdown mx-2">
+            <li class="nav-item dropdown  mx-2">
               <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="navbarDropdown">Se connecter</a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="/users/sign_in" style="color:black">Connexion Élève</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="/teachers/sign_in" style="color:black">Connexion Professeur</a>
@@ -48,35 +50,74 @@
                 <a class="dropdown-item" href="/admin/validated" style="color:black">Professeurs validés</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="/admin/eleves" style="color:black">Eleves</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="/articles/create" style="color:black">Article</a>
               </div>
             </li>
             <li class="nav-link mx-5"><a href="/cours/index">Index</a></li>
         <% end %>
         <!-- Mon espace si connecté et si différent d'admin -->
         <% if user_signed_in? %>
+
+        <li class="nav-item dropdown mx-2" data-behavior="notifications" data-notifications='<%= render template: "notifications/index", formats: [:json] %>'>
+          <!--
+          <a href="/notifications/mark_as_read" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" data-behavior="notifications-link" aria-expanded="false" id="DropMessages"><i class="fa fa-bell"><span data-behavior="unread-count"></span></i></a>
+          <div class="dropdown-menu" aria-labelledby="DropMessages" data-behavior="notification-items">
+          </div>
+          -->
+        </li>
         <li class="nav-item dropdown mx-2">
-          <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="navbarDropdown">Mon espace</span></a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="/pages/monespace" style="color:black">Vos réservations</a>
+          <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="navbarDropdown">Mon espace<span class="badge  badge-pill badge-danger" data-behavior="unread-count"></span></a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="/pages/dashboard" style="color:black">Tableau de bord <span class="badge badge-pill badge-danger" data-behavior="unread-count"></span></a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="/pages/monprofil" style="color:black">Mon profil</a>
+            <a class="dropdown-item" href="/pages/monespace" style="color:black">Mes cours</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/pages/messages" style="color:black">Messages</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/pages/monprofil" style="color:black">Profil</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/pages/messages" style="color:black">Code Promo</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/pages/monprofil" style="color:black">Compte</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/pages/monprofil" style="color:black">Paiement</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" data-method="delete", href="/users/sign_out" style="color:black">Se déconnecter</a>
           </div>
         </li>
         <% elsif (teacher_signed_in? and current_teacher.role.power <2)%>
+          <li class="nav-item dropdown mx-2" data-behavior="notifications" data-notifications='<%= render template: "notifications/index", formats: [:json] %>'>
+          <!--
+          <a href="/notifications/mark_as_read" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" data-behavior="notifications-link" aria-expanded="false" id="DropMessages"><i class="fa fa-bell"><span data-behavior="unread-count"></span></i></a>
+          <div class="dropdown-menu" aria-labelledby="DropMessages" data-behavior="notification-items">
+          </div>
+          -->
+        </li>
         <li class="nav-item dropdown mx-2">
-          <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="navbarDropdown">Mon espace</a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="/pages/monespace" style="color:black">Vos cours</a>
+          <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="navbarDropdown">Mon espace <span class="badge badge-pill badge-danger" data-behavior="unread-count"></span></a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="/pages/dashboard" style="color:black">Tableau de bord <span class="badge badge-pill badge-danger" data-behavior="unread-count"></span></a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="/pages/monprofil" style="color:black" >Mon profil</a>
+            <a class="dropdown-item" href="/pages/monespace" style="color:black">Mes cours</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/pages/messages" style="color:black">Messages</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/pages/monprofil" style="color:black">Profil</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/pages/messages" style="color:black">Messages</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/pages/maphoto" style="color:black">Photo</a>
+            <div class="dropdown-divider"></div>           
+            <a class="dropdown-item" href="/pages/monprofil" style="color:black">Compte</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/pages/monprofil" style="color:black">Paiement</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" data-method="delete", href="/teachers/sign_out" style="color:black">Se déconnecter</a>
           </div>
         </li>
         <% end %>
       </ul>
-      <!-- Index pour admin et Proposer un cours -->
-      <ul class="navbar-nav ml-3">
-        
-        <li class="nav-item  give-lesson" style="width: 200px"><a href="/cours/create" style="color:#e55966"><i class="fa fa-plus"></i> Proposer un cours</a></li>
-      </ul>
+
     </div><!-- /.navbar-collapse -->
 </nav>

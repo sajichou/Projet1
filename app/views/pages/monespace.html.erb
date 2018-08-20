@@ -1,14 +1,8 @@
-
+<%= render partial: "shared/sousmenu", locals: {tabname:"mescours"}  %>
 <!-- Espace Eleves-->
 
 <% if user_signed_in? %>
 	
-	<div class="row justify-content-center">
-		<div class="col-12 col-lg-6">
-			<h1 style="background-color: rgb(252,98,112); color:white">Mes cours</h1>
-		</div>
-	</div>
-
 	<!-- Nouveau design !!!! -->
 
 	<%@inscriptions.each do |inscription| %>
@@ -168,7 +162,7 @@
 									<i class="fa fa-map-marker fa-lg"></i>
 								</div>
 								<div class="pl-4 align-self-end">
-									<p class="text-capitalize"><%= inscription.cour.lieu %>
+									<p class="text-capitalize"><%= inscription.cour.lieu_court %>
 								</div>
 							</div>
 							<div class="d-flex">
@@ -237,12 +231,6 @@
 <!-- Espace Prof -->
 
 <% elsif teacher_signed_in? %>
-
-	<div class="row justify-content-center">
-		<div class="col-12 col-lg-6">
-			<h1 style="background-color: rgb(252,98,112); color:white">Mes cours</h1>
-		</div>
-	</div>
 
 	<%@cours_proposes.each do |cour| %>
 		<div class="row justify-content-center">
@@ -401,7 +389,7 @@
 									<i class="fa fa-map-marker fa-lg"></i>
 								</div>
 								<div class="px-4 align-self-end">
-									<p class="text-capitalize"><%= cour.lieu %>
+									<p class="text-capitalize"><%= cour.lieu_court %>
 								</div>
 							</div>
 							<div class="d-flex">

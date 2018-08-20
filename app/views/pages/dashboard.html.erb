@@ -1,0 +1,32 @@
+<%= render partial: "shared/sousmenu", locals: {tabname:"dashboard"}  %>
+
+<div class="row justify-content-center">
+
+	<div class="col-12 col-lg-8 mt-4" style="text-align: left">
+		<h4 class="pl-3" style="border-bottom: solid 1px black">
+			Informations en attente ()
+		</h4>
+	</div>
+	<div class="col-12 col-lg-8" style="text-align: left">
+		<p class="pl-3">Rien</p>
+	</div>
+	<div class="col-12 col-lg-8 mt-5" style="text-align: left">
+		<h4 class="pl-3" style="border-bottom: solid 1px black">
+			Nouveaux messages (<%=@nb_nouveaux_messages%>)
+		</h4>
+	</div>
+	<div class="col-12 col-lg-8" style="text-align: left">
+		<% @notifications.each do |notif| %>
+			<%= link_to messages_mark_as_read_and_read_path(:message_id => notif.notifiable_id) do%>
+				<div style="background-color: #eeeeee ">
+					<% if notif.actor.class == Teacher %>
+						<p><%= image_tag notif.actor.infoteacher.avatar.url(:thumb), :class => "thumbnail1" %><%=notif.actor.email%> vous a envoyé un message</p>
+					<% else %>
+						<p> <%=notif.actor.email%> vous a envoyé un message</p>
+					<% end %>
+				</div>
+			<% end %>
+		<% end %>
+		<p class="text-right"><a href="/pages/messages">Voir tous les messages</a></p>
+	</div>
+</div>

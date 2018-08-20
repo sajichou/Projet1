@@ -1,46 +1,275 @@
-<div class="row justify-content-around" style="margin-top: 0px">
-	<!-- Menu de navigation de gauche-->
-	<div class="col-sm-8"> 
-		<ul class="nav nav-pills nav-justified mb-3" id="my_tab" role="tablist" style="background-color: #ffccbc">
-		  <li class="nav-item">
-		    <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Informations personnelles</a>
-		  </li>
-		  <li class="nav-item">
-		  	<% if teacher_signed_in? %>
-		    	<a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Photo</a>
-		    <% elsif user_signed_in? %>
-		    	<a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Code Promo</a>
-		    <% end %>
-		  </li>
-		  <% if teacher_signed_in? %>
-		  <li class="nav-item">
-		    <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Paiement</a>
-		  </li>
-		  <%end%>
-		</ul>
-		<div class="tab-content" id="pills-tabContent">
-		  <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-		  	<div style="background-color: #eeeeee; border-radius: 10px">
-		  		<div class="row justify-content-center">
-		  			<div class="col-10">
-		  				<%= render partial:"pages/info_perso"%>
-		  			</div>
-		  		</div>		  		
-		  	</div>
-		  </div>
+<%= render partial: "shared/sousmenu", locals: {tabname:"monprofil"}  %>
 
-		  <% if teacher_signed_in? %>
-			  <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">	
-			  	<%= render partial:"pages/maphoto" %>
-			  </div>
-		  <% elsif user_signed_in? %>
-			  <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">	
-			  	<%= render partial:"pages/code_promo" %>
-			  </div>
-		  <% end %>
-		  <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab"><%= render partial:"pages/paiement" %></div>
-		</div>
+<div class="row justify-content-center">
+	<div class="col-12 col-lg-8" style="background-color: #eeeeee">
+
+		<% if teacher_signed_in? %>
+
+
+			<%=form_tag "/pages/monprofil", method:"post" do %>
+			<fieldset> 
+				<% if @current_teacher.infoteacher.first_name.present? %>
+				<p>
+					<label for="first_name"> Prénom </label>
+					<input type="text" class="form-control value_success" name="first_name" value='<%=@current_teacher.infoteacher.first_name%>'>
+				</p>
+				<% else %>
+					<label for="first_name"> Prénom </label>
+					<input type="text" class="form-control value_danger" name="first_name" >			
+				<% end %>
+
+				<% if @current_teacher.infoteacher.last_name.present? %>
+				<p>
+					<label for="last_name"> Nom<span style="font-style: italic; font-size: 0.8em; margin-left: 10px"> Visible uniquement pour les élèves inscrits à vos cours</span> </label>
+					<input type="text" class="form-control value_success" name="last_name" value='<%= @current_teacher.infoteacher.last_name%>'>
+				</p>
+				<% else %>
+				<p>
+					<label for="last_name"> Nom </label>
+					<input type="text" class="form-control value_danger" name="last_name">
+				</p>
+				<% end %>
+				<% if @current_teacher.infoteacher.email.present? %>
+				<p>
+					<label for="email"> Email </label>
+					<input type="text" class="form-control value_success" name="email" value='<%= @current_teacher.infoteacher.email%>'>
+				</p>
+				<% else %>
+				<p>
+					<label for="email"> Email </label>
+					<input type="text" class="form-control value_danger" name="email">
+				</p>
+				<% end %>
+
+				<% if @current_teacher.infoteacher.phone.present? %>
+				<p>
+					<label for="phone"> Téléphone </label>
+					<input type="text" class="form-control value_success" name="phone" value='<%= @current_teacher.infoteacher.phone %> '>
+				</p>
+				<% else %>
+				<p>
+					<label for="phone"> Téléphone </label>
+					<input type="text" class="form-control value_danger " name="phone">
+				</p>
+				<% end %>
+
+				<!-- ADRESSE EXACTE
+				<% if @current_teacher.infoteacher.location.present? %>
+				<p>
+					<label for="lieu"> Adresse </label>
+					<input type="text" id="lieu" class="form-control value_success" name="lieu" value='<%= current_teacher.infoteacher.location %>'>
+				</p>
+				<% else %>
+				<p>
+					<label for="lieu"> Adresse </label>
+					<input type="text" id="lieu" class="form-control value_danger" name="lieu" placeholder="Entrez votre adresse, 3 rue ..." >
+				</p>
+				<% end %>
+				
+				-->
+
+				<% if @current_teacher.infoteacher.dptm.present? %>
+				<p>
+					<label for="dptm"> Code Postal </label>
+					<input type="text" maxlength="5" id="dptm" class="form-control value_success" name="dptm" value='<%= current_teacher.infoteacher.dptm %>'>
+				</p>
+				<% else %>
+				<p>
+					<label for="dptm"> Code Postal </label>
+					<input type="text" maxlength="5" id="dptm" class="form-control value_danger" name="dptm" placeholder="Numéro de votre code postal" >
+				</p>
+				<% end %>
+
+				<% if @current_teacher.infoteacher.experience.present? %>
+				<p>
+					<label for="experience"> Expérience </label>
+					<textarea type="text" class="form-control value_success" name="experience" ><%= @current_teacher.infoteacher.experience%></textarea> 
+				</p>
+				<% else %>
+				<p>
+					<label for="experience"> Expérience </label>
+					<textarea type="text" class="form-control value_danger" name="experience"></textarea> 
+				</p>
+				<% end %>
+
+				<% if @current_teacher.infoteacher.methodology.present? %>
+				<p>
+					<label for="methodology"> Méthodologie </label>
+					<textarea type="text" class="form-control value_success" name="methodology"><%= @current_teacher.infoteacher.methodology%></textarea> 
+				</p>
+				<% else %>
+				<p>
+					<label for="methodology"> Méthodologie </label>
+					<textarea type="text" class="form-control value_danger" name="methodology"></textarea>
+				</p>
+				<% end %>
+
+				<!-- CGU -->
+
+				<% if @current_teacher.infoteacher.cgu %>
+				<div class="d-flex">
+					<div>
+						<input type="checkbox" name="cgu" value="true" checked>
+					</div>
+					<div>
+						<p>Veuillez lire et accepter les <a href="/annexe/CGU">condition générales d'utilisation</a>.</p>
+					</div>
+				</div>
+				<% else %>
+				<div class="d-flex">
+					<div>
+						<input type="checkbox" name="cgu" value="true" required>
+					</div>
+					<div>
+						<p>Veuillez lire et accepter les <a href="/annexe/CGU">condition générales d'utilisation</a>.</p>
+					</div>
+				</div>
+				<% end %>
+			</fieldset>
+			<button type="submit" class=" btn btn-primary">Envoyer</button>
+			<%end%>
+
+
+
+
+		<!-- Update devise registration -->
+
+		<!-- Profil eleve-->
+		<% elsif user_signed_in? %>
+
+			<%=form_tag "/pages/monprofil", method:"post" do %>
+			<fieldset>
+
+				<% if @current_user.infouser.first_name.present? %>
+				<p>
+					<label for="first_name"> Prénom </label>
+					<input type="text" class="form-control value_success" name="first_name" value='<%=@current_user.infouser.first_name%>'>
+				</p>
+				<% else %>
+					<label for="first_name"> Prénom </label>
+					<input type="text" class="form-control value_danger" name="first_name" >			
+				<% end %>
+
+				<% if @current_user.infouser.last_name.present? %>
+				<p>
+					<label for="last_name"> Nom </label>
+					<input type="text" class="form-control value_success" name="last_name" value='<%= @current_user.infouser.last_name%>'>
+				</p>
+				<% else %>
+				<p>
+					<label for="last_name"> Nom </label>
+					<input type="text" class="form-control value_danger" name="last_name">
+				</p>
+				<% end %>
+				<!-- Classe-->
+				<!--
+				<p>
+					<label for="classe">Quelle classe ?</label>
+					<select name="classe" class="form-control">
+						<option disabled selected>Quelle classe ?</option>
+						<optgroup label="Collège">
+							<option value="1">6ème</option>
+							<option value="2">5ème</option>
+							<option value="3">4ème</option>
+							<option value="4">3ème</option>
+						</optgroup>
+						<optgroup label="Lycée">
+							<option value="5">2nde</option>
+							<option value="6">1ère S</option>
+							<option value="7">1ère ES</option>
+							<option value="8">1ère L</option>
+							<option value="9">Terminale S</option>	
+							<option value="10">Terminale ES</option>
+							<option value="11">Terminale L</option>
+						</optgroup>
+					</select>
+				</p>
+				-->
+				<% if @current_user.infouser.niveau.present? %>
+					<p>			
+						<label for="niveau">Classe</label>
+						<%= select_tag(:niveau, grouped_options_for_select(
+							[
+								['Collège',
+									[['6ème',1],['5ème',2],['4ème',3],['3ème',4]]
+								],
+								['Lycée',
+									[['2nde',5],['1ère S', 6], ['1ère ES',7], ['1ère L',8], ['Terminale S',9], ['Terminale ES', 10], ['Terminale L',11]]
+								]
+							],@current_user.infouser.niveau), class:"form-control value_success") %>
+					</p>
+				<% else %>
+					<p>			
+						<label for="niveau">Classe</label>
+						<%= select_tag(:niveau, grouped_options_for_select(
+							[	['',
+									[['',nil]]
+							],
+								['Collège',
+									[['6ème',1],['5ème',2],['4ème',3],['3ème',4]]
+								],
+								['Lycée',
+									[['2nde',5],['1ère S', 6], ['1ère ES',7], ['1ère L',8], ['Terminale S',9], ['Terminale ES', 10], ['Terminale L',11]]
+								]
+							]), class:"form-control value_danger") %>
+					</p>
+				<% end %>
+
+				<!-- Fin classe -->
+
+				<% if @current_user.infouser.email.present? %>
+				<p>
+					<label for="email"> Email </label>
+					<input type="text" class="form-control value_success" name="email" value='<%= @current_user.infouser.email%>'>
+				</p>
+				<% else %>
+				<p>
+					<label for="email"> Email </label>
+					<input type="text" class="form-control value_danger" name="email">
+				</p>
+				<% end %>
+
+				<% if @current_user.infouser.phone.present? %>
+				<p>
+					<label for="phone"> Téléphone </label>
+					<input type="text" class="form-control value_success" name="phone" value='<%= @current_user.infouser.phone %> '>
+				</p>
+				<% else %>
+				<p>
+					<label for="phone"> Téléphone </label>
+					<input type="text" class="form-control value_danger " name="phone">
+				</p>
+				<% end %>
+
+				<!-- CGU -->
+
+				<% if @current_user.infouser.cgu %>
+				<div class="d-flex">
+					<div>
+						<input type="checkbox" name="cgu" value="true" checked>
+					</div>
+					<div>
+						<p>Veuillez lire et accepter les <a href="/annexe/CGU">condition générales d'utilisation</a>.</p>
+					</div>
+				</div>
+				<% else %>
+				<div class="d-flex">
+					<div>
+						<input type="checkbox" name="cgu" value="true" required>
+					</div>
+					<div>
+						<p>Veuillez lire et accepter les <a href="/annexe/CGU">condition générales d'utilisation</a>.</p>
+					</div>
+				</div>
+				<% end %>
+
+
+
+			</fieldset>
+			<button type="submit" class=" btn btn-primary">Envoyer</button>
+			<% end %>
+
+		<% end %>
+
 	</div>
-
-
-
+</div>

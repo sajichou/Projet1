@@ -1,0 +1,131 @@
+<%= render partial: "shared/sousmenu", locals: {tabname:"messages"} %>
+
+<div class="row justify-content-center mt-4">
+	<div class="col-10">
+		<div class="row">
+		<!-- Rappel des caractéristiques du cours -->
+			<div class="col-12 col-lg-5">
+				<div class="d-flex mb-1 show_pastille">
+					<div class="pl-4">
+						<i class="fa fa-map-marker fa-lg"></i>
+					</div>
+					<div class="pl-2">
+						<%= @messages.last.cour.lieu %>
+					</div>
+				</div>
+				<div class="d-flex mb-1 show_pastille">
+					<div class="pl-4">
+						<i class="fa fa-book fa-lg"></i>
+					</div>
+					<div class="pl-2">
+						<%= @messages.last.cour.matiere %>
+						<% @messages.last.cour.annees.each do |n| %>
+							| <%= Correspondance.find_by_niveau_id(n.niveau).nom%>	
+						<%end%>	
+					</div>
+				</div>
+				<div class="d-flex mb-1 show_pastille">
+					<div class="pl-4">
+						<i class="fa fa-users fa-lg"></i>
+					</div>
+					<div class="pl-2">
+						<% if @messages.last.cour.nombre_eleves<2 %>
+							<%= 3-@messages.last.cour.nombre_eleves %> places disponibles
+						<% else %>
+							<%= 3-@messages.last.cour.nombre_eleves %> place disponible
+						<% end %>
+					</div>
+				</div>
+				
+				<div class="d-flex py-0 show_pastille">
+					<div class="pl-4" style="width:50px">
+						<i class="fa fa-calendar fa-lg"></i>
+					</div>
+					<div class="pl-2">
+						<% if (@messages.last.cour.jour.present? and @messages.last.cour.heure.present?) %>
+							<p class="text-capitalize my-auto">
+								<% if @messages.last.cour.min == 0 %>
+									<%=@messages.last.cour.jour%> | <%=@messages.last.cour.heure %>h - <%=@messages.last.cour.heure+1 %>h30
+								<% else %>
+									<%=@messages.last.cour.jour%> | <%=@messages.last.cour.heure %>h30 - <%=@messages.last.cour.heure+2 %>h
+								<% end %>
+							</p>
+						<% else %>
+							<p class="my-auto">Plusieurs créneaux possibles</p>
+						<% end %>
+					</div>
+				</div>
+			</div>
+
+			<!-- Historique des messages echanges -->
+
+			<div class="col-12 col-lg-6">
+				<% @messages.each do |m| %>
+					<div class="row mt-2">
+						<% if !m.ecritparuser %>
+							<div class="col-3 align-self-center">	
+								<%= image_tag m.teacher.infoteacher.avatar.url(:thumb), :class => "thumbnail1" %>
+							</div>
+							<div class="col-9">
+								<div class="px-3 py-2" style="background-color: #fafafa; border:solid 1px black; border-radius: 10px; ">
+									<p class="mb-0" style="text-align: left; font-weight: bold">
+										<%=m.teacher.infoteacher.first_name%> :</p>
+									<p class="mb-0" style="text-align: left"><%= m.message %></p>
+									<p class="mb-0" style="text-align: right; font-style: italic;">
+										<%= m.created_at.strftime("%Y-%m-%d") %> à <%=m.created_at.strftime("%H")%>h<%=m.created_at.strftime("%M") %></p>
+								</div>
+							</div>
+						<% elsif m.ecritparuser %>
+						
+							<div class="col-3">	
+								<!--
+								<%= image_tag m.teacher.infoteacher.avatar.url(:thumb), :class => "thumbnail1" %>
+								-->
+							</div>
+		
+							<div class="col-9">
+								<div class="px-3 py-2" style="background-color: #bdbdbd; border:solid 1px black; border-radius: 10px; color: white">
+									<p class="mb-0" style="text-align: left; font-weight: bold">
+										<%=m.user.infouser.first_name%> :</p>
+									<p class="mb-0" style="text-align: left"><%= m.message %></p>
+									<p class="mb-0" style="text-align: right; font-style: italic;">
+										<%= m.created_at.strftime("%Y-%m-%d") %> à <%=m.created_at.strftime("%H")%>h<%=m.created_at.strftime("%M") %></p>
+								</div>
+							</div>
+						<% end %>
+					</div>
+				<% end %>
+
+				<!-- Poster un nouveau message -->
+
+				<div class="row mt-4">
+					<div class="col-3"></div>
+					<div class="col-9">
+						<%=form_tag("/messages/show", method: "post") do %>
+							<div class="row">
+								<div class="col-12">
+									<% if user_signed_in? %>
+										<textarea placeholder="Rédigez votre message ici..." type="text" class="form-control" style="background-color: #bdbdbd; border:solid 1px black; border-radius: 10px; color:white"  name="message"></textarea>
+									<% else %>
+										<textarea placeholder="Rédigez votre message ici..." type="text" class="form-control" style="background-color: #fafafa; border:solid 1px black; border-radius: 10px;"  name="message"></textarea>
+									<% end %>
+								</div>
+							</div>
+							<input type="hidden" name="message_id" value='<%=@messages.last.id%>'>
+							<div class="row justify-content-end">
+								<div class="col-3">
+									<input type="submit" class="btn btn-primary " value="Envoyer">
+								</div>
+							</div>	
+						<% end %>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+
+		</div>
+	</div>
+</div>
+

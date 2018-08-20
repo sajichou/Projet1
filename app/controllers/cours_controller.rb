@@ -1,6 +1,6 @@
 class CoursController < ApplicationController
 
-  before_action :authenticate_user! ,only: [:inscription]
+  before_action :authenticate_user! ,only: [:inscription, :contacter_prof]
   before_action :premier_eleve ,only: [:inscription]
   before_action :authenticate_teacher! ,only: [:new, :create, :destroy]
   before_action :teacher_validated, only: [:create, :new,:destroy]
@@ -16,13 +16,20 @@ class CoursController < ApplicationController
 
   def new
 
+    # Si creneau non renseigne
     if(!params[:jour].present? or !params[:heure].present?)
       redirect_to '/cours/create'
       flash[:info] ="Veuillez indiquer au moins un créneau pour ce cours."
+    # Si niveau non renseigne
+    elsif(!params[:classe].present?)
+      redirect_to '/cours/create'
+      flash[:info] ="Veuillez indiquer au moins un niveau d'étude pour ce cours."
     # Si adresse reconnue 
     elsif (params[:latitude].present? and params[:longitude].present?)
       cour = Cour.create teacher_id:current_teacher.id, matiere:params[:matiere], lieu:params[:lieu],
-       latitude:params[:latitude], longitude:params[:longitude], titre:params[:titre], descriptif:params[:descriptif]
+       latitude:params[:latitude], longitude:params[:longitude], titre:params[:titre], 
+       descriptif:params[:descriptif], street_number:params[:street_number], route:params[:route],
+       locality:params[:locality], postal_code:params[:postal_code], country:params[:country]
       params[:classe].each do |c|
         Annee.create cour_id:cour.id, teacher_id:current_teacher.id, niveau:c
       end
@@ -263,6 +270,24 @@ class CoursController < ApplicationController
 
     #TeacherMailer.inscription(Cour.find(params[:id]).teacher).deliver
     redirect_to controller: 'cours', action:'modifier', id:params[:id]
+  end
+
+  def contacter_prof
+    if params[:contactprof]
+      #Sauvergarder le message envoye
+      message = Contactmessage.create cour_id:params[:cour_id], user_id:current_user.id, message:params[:message], teacher_id:Cour.find(params[:cour_id]).teacher_id, ecritparuser:true
+      message.save
+      Notification.create recipient:message.teacher, 
+      actor:current_user, 
+      action:"envoyé", 
+      notifiable:message
+      #Envoyer une notification au prof 
+      teacher = Cour.find(params[:cour_id]).teacher
+      TeacherMailer.contact(teacher,current_user).deliver
+      redirect_to controller: 'cours', action:'show', id:params[:cour_id]
+    elsif params[:commit]
+      redirect_to controller: 'charges', action:'new', id:params[:id], dispo:params[:dispo]
+    end
   end
 
   private

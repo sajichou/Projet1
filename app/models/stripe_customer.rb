@@ -1,3 +1,3 @@
-class Stripe_customer < ActiveRecord::Base
+class StripeCustomer < ActiveRecord::Base
 	belongs_to :user
 end
