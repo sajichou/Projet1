@@ -22,6 +22,17 @@ class TeacherMailer < ApplicationMailer
   #
   #   en.teacher_mailer.inscription.subject
   #
+
+  def demande_inscription(cour,user, jour, heure)
+    @teacher = cour.teacher
+    @user = user
+    @cour = cour
+    @jour = jour
+    @heure = heure
+    mail( :to => @teacher.email,
+    :subject => "Un élève souhaite s'inscrire à votre cours!")
+  end
+
   def inscription(teacher,cour,eleve)
     @teacher = teacher
     @cour = cour

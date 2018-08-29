@@ -1,81 +1,81 @@
-<div class="row justify-content-around">
+<div class="row justify-content-around mb-3">
   <!-- Sous menu-->
   <div class="col-12 col-lg-11"> 
 
-    <ul class="nav nav-tabs nav-justified mb-3" style="background-color: #ffccbc">
+    <ul class="nav nav-pills nav-fill" style="background-color: #ffccbc">
 
-      <li class="nav-item" >
+      <li class="nav-item mb-0" >
         <% if tabname == "dashboard" %>
-          <a class="nav-link active" style="background-color: #e55966; color: white"  role="tab" href="/pages/dashboard">Tableau de bord</a>
+          <a class="nav-link active" href="/pages/dashboard">Tableau de bord</a>
         <% else %>
-          <a class="nav-link" role="tab" href="/pages/dashboard">Tableau de bord</a>
+          <a class="nav-link" href="/pages/dashboard">Tableau de bord</a>
         <% end %>
       </li>
 
-      <li class="nav-item" >
+      <li class="nav-item mb-0" >
         <% if tabname == "mescours" %>
-          <a class="nav-link active" style="background-color: #e55966; color: white"  role="tab" href="/pages/monespace">Mes cours</a>
+          <a class="nav-link active"  href="/pages/monespace">Mes cours</a>
         <% else %>
-          <a class="nav-link" role="tab" href="/pages/monespace">Mes cours</a>
+          <a class="nav-link"  href="/pages/monespace">Mes cours</a>
         <% end %>
       </li>
 
-      <li class="nav-item" >
+      <li class="nav-item mb-0" >
         <% if tabname == "messages" %>
-          <a class="nav-link active" style="background-color: #e55966; color: white"  role="tab" href="/pages/messages">Messages</a>
+          <a class="nav-link active"  href="/pages/messages">Messages</a>
         <% else %>
-          <a class="nav-link" role="tab" href="/pages/messages">Messages</a>
+          <a class="nav-link" href="/pages/messages">Messages</a>
         <% end %>
       </li>
 
-      <li class="nav-item" >
+      <li class="nav-item mb-0" >
         <% if tabname == "monprofil" %>
-          <a class="nav-link active" style="background-color: #e55966; color: white"  role="tab" href="/pages/monprofil">Profil</a>
+          <a class="nav-link active"  href="/pages/monprofil">Profil</a>
         <% else %>
-          <a class="nav-link" role="tab" href="/pages/monprofil">Profil</a>
+          <a class="nav-link" href="/pages/monprofil">Profil</a>
         <% end %>
       </li>
-      <li class="nav-item">
+      <li class="nav-item mb-0">
 
         <% if teacher_signed_in? %>
           <% if tabname == "maphoto" %>
-            <a class="nav-link active" style="background-color: #e55966; color: white" role="tab" href="/pages/maphoto" >Photo</a>
+            <a class="nav-link active" href="/pages/maphoto" >Photo</a>
           <% else %>
-            <a class="nav-link" role="tab" href="/pages/maphoto" >Photo</a>
+            <a class="nav-link" href="/pages/maphoto" >Photo</a>
           <% end %>
 
         <% elsif user_signed_in? %>
           <% if tabname == "code_promo" %>
-            <a class="nav-link active" style="background-color: #e55966; color: white" href="/pages/code_promo" role="tab">Code Promo</a>
+            <a class="nav-link active" href="/pages/code_promo">Code Promo</a>
           <% else %>
-            <a class="nav-link" href="/pages/code_promo" role="tab">Code Promo</a>
+            <a class="nav-link" href="/pages/code_promo">Code Promo</a>
           <%end%>
 
         <% end %>
 
       </li>
       <% if user_signed_in? %>
-        <li class="nav-item">
+        <li class="nav-item mb-0">
           <% if tabname == "compte" %>
-            <a class="nav-link active" style="background-color: #e55966; color: white" role="tab" href="/users/edit">Compte</a>
+            <a class="nav-link active" href="/users/edit">Compte</a>
           <% else %>
-            <a class="nav-link" role="tab" href="/users/edit">Compte</a>
+            <a class="nav-link" href="/users/edit">Compte</a>
           <% end %>
         </li>
       <% elsif teacher_signed_in? %>
-        <li class="nav-item">
+        <li class="nav-item mb-0">
           <% if tabname == "compte" %>
-            <a class="nav-link active" style="background-color: #e55966; color: white" role="tab" href="/teachers/edit">Compte</a>
+            <a class="nav-link active" href="/teachers/edit">Compte</a>
           <% else %>
-            <a class="nav-link" role="tab" href="/teachers/edit">Compte</a>
+            <a class="nav-link" href="/teachers/edit">Compte</a>
           <% end %>
         </li>
       <% end %>
-      <li class="nav-item">
+      <li class="nav-item mb-0 pr-0">
         <% if tabname == "paiement" %>
-          <a class="nav-link active" style="background-color: #e55966; color: white" role="tab" href="/pages/paiement">Paiement</a>
+          <a class="nav-link active" href="/pages/paiement">Paiement</a>
         <% else %>
-          <a class="nav-link" role="tab" href="/pages/paiement">Paiement</a>
+          <a class="nav-link" href="/pages/paiement">Paiement</a>
         <% end %>
       </li>
     </ul>

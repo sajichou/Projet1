@@ -139,15 +139,22 @@ class PagesController < ApplicationController
   end
 
   def paiement
+    if user_signed_in?
+      @paiements = Paiement.where(user_id:current_user.id)
+    elsif teacher_signed_in?
+      @paiements = Paiement.where(teacher_id:current_teacher.id)
+    end
   end
 
   def dashboard
     if user_signed_in?
         @notifications = Notification.where(recipient: current_user).unread
         @nb_nouveaux_messages = @notifications.length
-      elsif teacher_signed_in?
+    elsif teacher_signed_in?
         @notifications = Notification.where(recipient: current_teacher).unread
         @nb_nouveaux_messages = @notifications.length
+        #Les demandes d'inscription envoyées par les eleves
+        @demandes = Demande.where("state IS NULL",teacher_id=current_teacher.id)
     end
   end
 

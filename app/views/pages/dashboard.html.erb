@@ -7,9 +7,23 @@
 			Informations en attente ()
 		</h4>
 	</div>
+	<% if teacher_signed_in? and @demandes.present?%>
 	<div class="col-12 col-lg-8" style="text-align: left">
-		<p class="pl-3">Rien</p>
+		<% @demandes.each do |d| %>
+			<%= link_to cours_show_path(:id => d.cour_id) do%>
+				<p class="pl-3" style="background-color: #eeeeee ">
+					<% if d.min == 0 %>
+						<%=User.find(d.user_id).infouser.first_name%> souhaite s'inscire à votre cours de <%=Cour.find(d.cour_id).matiere %> pour le <%=d.jour%> à <%=d.heure%>h.
+					<% else %>
+						<%=User.find(d.user_id).infouser.first_name%> souhaite s'inscire à votre cours de <%=Cour.find(d.cour_id).matiere %> pour le <%=d.jour%> à <%=d.heure%>h30.
+					<% end %>
+				</p>
+			<% end %>
+			<%= link_to "Accepter", {:controller =>"cours", :action=>"accepter_inscription", :cour_id=>d.cour.id, :user_id=>d.user_id, :demande_id=>d.id}, class:"btn btn-primary"%>
+			<%= link_to "Refuser", {:controller =>"cours", :action=>"refuser_inscription", :user_id=>d.user.id, :demande_id=>d.id}, class:"btn btn-danger"%>
+		<% end %>
 	</div>
+	<% end %>
 	<div class="col-12 col-lg-8 mt-5" style="text-align: left">
 		<h4 class="pl-3" style="border-bottom: solid 1px black">
 			Nouveaux messages (<%=@nb_nouveaux_messages%>)

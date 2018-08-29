@@ -81,7 +81,7 @@
 																<th>
 																	<div class="btn-group btn-group-toggle" data-toggle="buttons">
 																	<label class="btn" id="btn_active" style="background-color: #e0e0e0">
-							   										 <input type="radio" name="dispo" id="option1" autocomplete="off" value="<%=j%>,<%=jh.heure%>" required>
+							   										 <input type="radio" name="dispo" id="option1" autocomplete="off" value="<%=j%>,<%=jh.heure%>,<%=jh.min%>" required>
 							   										 <% if jh.min == 0%>
 							   										 	<%=jh.heure%>h
 							   										 <% else %>
@@ -245,18 +245,20 @@
 									<div class="col-12 col-lg-4 bleu" style="border:solid 1px black; border-radius: 10px ; height:30px">
 										<%= link_to "Modifier", {:controller =>"cours", :action=>"modifier", :id=>@cour.id}, class:"link_to" %>
 									</div>
-									<div class="col-12 col-lg-4 bleu" style="border:solid 1px black; border-radius: 10px; height:30px">
+									<div class="col-12 col-lg-4 ml-auto bleu" style="border:solid 1px black; border-radius: 10px; height:30px">
 										<button type="button" class="btn btn-link" data-toggle="modal" data-target="#exampleModal" style="">
 						  					Supprimer ce cours
 										</button>
 									</div>
 								
 							<%end%>	
-							<div class="col-12 col-lg-4 bleu" style="border:solid 1px black; border-radius: 10px; height:30px">
-								<button type="button" class="btn btn-link" data-toggle="modal" data-target="#ContacterProf">
-				  					Contacter
-								</button>
-							</div>
+							<% if !teacher_signed_in? %>
+								<div class="col-12 col-lg-4 bleu" style="border:solid 1px black; border-radius: 10px; height:30px">
+									<button type="button" class="btn btn-link" data-toggle="modal" data-target="#ContacterProf">
+					  					Contacter
+									</button>
+								</div>
+							<% end %>
 						</div>
 					</div>			
 				</div>

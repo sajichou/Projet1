@@ -1,133 +1,90 @@
-<div id="annonce">
-	<div class="row">
+<%= link_to cours_show_path(:id => cours.id), style:"color:#444A55" do%>
+<div  id="annonce" style="position: relative">
+	<div style="position: absolute; top: 20%; left: 30%; border: solid 1px #e55966; height: 170px"></div>
+	<div class="row" >
 
 	<!-- Avatars prof et élèves-->	
-		<div class="col-sm-5 justify-content-center">
+		<div class="col-4">
 			<div class="row">
 				<div class="col-2" >
 					<% if cours.nombre_eleves<3 %>
-						<div style="background-color: #e55966; height: 30px; width: 50px; border-top-left-radius: 10px">
+						<div style="background-color: #e55966; height: 30px; width: 50px; border-bottom-right-radius: 10px">
 							<p class="text-white">15€</p>
 						</div>	
 					<% else %>
 						<%= image_tag "ico/complet.png" , :class=>"iconespetits"%>
 					<% end %>		
 				</div>
+			</div>
+			<div class="row justify-content-center">
+				
 				<div class="col-10">
-					<!-- Ligne correspondant au bloc image prof-->
-					<div class="row">
-						<div class="col" style="margin-top: 15px">
-							<%=image_tag Teacher.find(cours.teacher_id).infoteacher.avatar.url(:thumb), :class => "thumbnail2"%>
-							<div class="row justify-content-center">
-								<div class="col-10">
-								<!--	AVIS ENSEIGNANT						
-									<div class="d-flex">
-										<div style="color: #ffc400">
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
+						<!-- Ligne correspondant au bloc image prof-->
+						<div class="row justify-content-center">
+							<div class="col">
+								<%=image_tag Teacher.find(cours.teacher_id).infoteacher.avatar.url(:thumb), :class => "thumbnail2"%>
+								<div class="row justify-content-center mt-2">
+									<div class="col-12">
+										<div style="font-weight: bold;">
+											<%=cours.teacher.infoteacher.first_name%> <%=cours.teacher.infoteacher.last_name[0]%>.
 										</div>
 									</div>
-								-->
-									<div class="d-flex">
-										<div style="color: rgba(76, 175, 80, 0.7)">
-											<i class="fa fa-check-circle-o"></i>
-										</div>
-										<div>
-											<p class="ml-2" style="font-size: 90%">Profil vérifié</p>
+									<div class="row justify-content-center mt-1">
+										<div class="col-12">
+										<!--	AVIS ENSEIGNANT						
+											<div class="d-flex">
+												<div style="color: #ffc400">
+													<i class="fa fa-star"></i>
+													<i class="fa fa-star"></i>
+													<i class="fa fa-star"></i>
+													<i class="fa fa-star"></i>
+													<i class="fa fa-star"></i>
+												</div>
+											</div>
+										-->
+											<div class="d-flex">
+												<div style="color: #e55966">
+													<i class="fa fa-check"></i>
+												</div>
+												<div>
+													<p class="ml-1" style="font-size: 90%">Profil vérifié</p>
+												</div>
+											</div>
 										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-					</div>
-					<!-- Ligne correspondant au bloc image élèves-->
-					<div class="row justify-content-center">
-						<% if cours.nombre_eleves == 3%>
-								<div class="col">
-									<div class="avatar_occupe">
-										<i class="fa fa-user-circle-o"></i>
-									</div>
-								</div>
-								<div class="col">
-									<div class="avatar_occupe">
-										<i class="fa fa-user-circle-o"></i>
-									</div>
-								</div>										
-								<div class="col">
-									<div class="avatar_occupe">
-										<i class="fa fa-user-circle-o"></i>
-									</div>
-								</div>
-						<!-- Cas ou 2 eleves inscrits -->
-						<% elsif cours.nombre_eleves == 2%>
-								<div class="col">
-									<div class="avatar_occupe">
-										<i class="fa fa-user-circle-o"></i>
-									</div>
-								</div>
-								<div class="col">
-									<div class="avatar_occupe">
-										<i class="fa fa-user-circle-o"></i>
-									</div>
-								</div>										
-								<div class="col">
-									<div class="avatar_libre">
-										<i class="fa fa-user-circle-o"></i>
-									</div>
-								</div>
-							<!-- Cas où 1 eleve est déjà inscrit -->
-							<% elsif cours.nombre_eleves == 1 %>		
-								<div class="col-3">
-									<div class="avatar_occupe">
-										<i class="fa fa-user-circle-o"></i>
-									</div>
-								</div>
-								<div class="col-3">
-									<div class="avatar_libre">
-										<i class="fa fa-user-circle-o"></i>
-									</div>
-								</div>											
-								<div class="col-3">
-									<div class="avatar_libre">
-										<i class="fa fa-user-circle-o"></i>
-									</div>
-								</div>
-							<!-- Aucun eleves d'inscrit -->
-							<% else %>
-								<div class="col">
-									<div class="avatar_libre">
-										<i class="fa fa-user-circle-o"></i>
-									</div>
-								</div>
-								<div class="col">
-									<div class="avatar_libre">
-										<i class="fa fa-user-circle-o"></i>
-									</div>
-								</div>										
-								<div class="col">
-									<div class="avatar_libre">
-										<i class="fa fa-user-circle-o"></i>
-									</div>
-								</div>
-							<% end %>	
+
 					</div>
 				</div>
 			</div>
 		</div>
 	<!-- Caractéristiques du cours-->
-		<div class="col-sm-7">
-			<!--<p class="mt-2 mb-4 lead">Titre du cours</p>-->
-			<p> </p>
-			<div class="d-flex py-0">
-				<div class="px-4 align-self-start" style="width:50px">
-					<i class="fa fa-calendar fa-lg"></i>
+		<div class="col-8">
+			<div class="row mb-1">
+				<div class="col-12">
+					<p class="mt-3 text-capitalize" style="text-align: start; font-weight: bold; font-size: 1.2em"><%=cours.matiere%>
+						<%cours.annees.each do |n| %>
+							| <%= Correspondance.find_by_niveau_id(n.niveau).nom%>	
+						<%end%>
+					</p>
 				</div>
-				<div class="px-4 align-self-end">
+			</div>
+
+			<div class="row align-items-start">
+				<div class="col-12" style="text-align: start">
+					<p>
+						<%= cours.descriptif[0..50] %>...
+					</p>
+				</div>
+			</div>
+			
+			<div class="row align-items-start">
+				<div class="col-12" style="text-align: start">
 					<% if (cours.jour.present? and cours.heure.present?) %>
-						<p class="text-capitalize">
+						<p>
+							<span style="font-weight: bold">Date du prochain cours : </span>
+
 							<% if cours.min == 0 %>
 								<%=cours.jour%> | <%=cours.heure %>h - <%=cours.heure+1 %>h30
 							<% else %>
@@ -135,37 +92,21 @@
 							<% end %>
 						</p>
 					<% else %>
-						<p>Plusieurs créneaux possibles</p>
+						<p style="font-weight: bold">Plusieurs créneaux possibles</p>
 					<% end %>
 				</div>
 			</div>
-			<div class="d-flex mb-0">
-				<div class="px-4 align-self-start" style="width:50px">
-					<i class="fa fa-book fa-lg"></i>
-				</div>
-				<div class="pl-4 align-self-end">
-					<p class="text-capitalize"><%= cours.matiere %>
-					<%cours.annees.each do |n| %>
-						| <%= Correspondance.find_by_niveau_id(n.niveau).nom%>	
-					<%end%>
-					</p>
-				</div>
-			</div>
-			<div class="d-flex">
-				<div class="px-4 align-self-start" style="width:50px">
-					<i class="fa fa-map-marker fa-lg"></i>
-				</div>
-				<div class="px-4 align-self-end">
-					<p class="text-capitalize"><%= cours.lieu_court %> <small class="text-muted">
+
+			<div class="row align-items-start">
+				<div class="col-12" style="text-align: start">
+					<p><span style="font-weight: bold">Lieu du cours : </span>
+						<%= cours.lieu_court %> <small class="text-muted">
 						(<%= @dist[cours.id]%> Km)
 					</small></p>
 				</div>
 			</div>
-			<div class="d-flex">
-				<div class="px-4 align-self-start" style="width:50px">
-					<i class="fa fa-users fa-lg"></i>
-				</div>
-				<div class="px-4 align-self-end">
+			<div class="row align-items-start">
+				<div class="col-12" style="text-align: start; color: #e55966">
 					<% if cours.nombre_eleves<2 %>
 						<p><%= 3-cours.nombre_eleves %> places disponibles</p>
 					<% else %>
@@ -176,8 +117,9 @@
 		</div>
 	</div>			
 </div>
+<%end%>
 
-<div class="row justify-content-center" >
+<div class="row justify-content-center mb-4" >
 	<div class="col-5">
 		<div style="border-bottom-left-radius: 30px; border-bottom-right-radius: 30px; background: #e55966">
 			<p class="text-white">

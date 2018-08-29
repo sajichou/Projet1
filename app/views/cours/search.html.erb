@@ -2,7 +2,7 @@
 
 <!-- <p> Votre adresse : <%=@lieu%> </p> -->
 
-<div class="row justify-content-around" style="margin-top: 80px">
+<div class="row justify-content-around mt-4">
 	<div class="col-sm-10">
 		<%=form_tag "/cours/search", method:"post" do %>
 					<div class="form-row justify-content-center">
@@ -45,11 +45,15 @@
 	</div>
 </div>
 
-<% for cours in @cours%>
-	<div class="row justify-content-center">
-		<div class="col-sm-6">	
-			<%= render partial:"annonce", locals:{cours:cours}%>
+
+<div class="row justify-content-center mt-3">
+	<div class="col-10 col-lg-8">
+		<div class="p-4" style="background-color: #F2F2F2">
+			<% for cours in @cours%>
+				<div class="mb-2">
+					<%= render partial:"annonce", locals:{cours:cours}%>
+				</div>
+			<% end %>
 		</div>
 	</div>
-<% end %>
-
+</div>

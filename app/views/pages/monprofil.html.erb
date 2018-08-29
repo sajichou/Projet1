@@ -44,12 +44,22 @@
 				<% if @current_teacher.infoteacher.phone.present? %>
 				<p>
 					<label for="phone"> Téléphone </label>
-					<input type="text" class="form-control value_success" name="phone" value='<%= @current_teacher.infoteacher.phone %> '>
+					<div class="input-group">
+			        	<div class="input-group-prepend">
+			            	<span class="input-group-text" style="font-weight: 500; background-color: white">+33</span>
+			          	</div>
+						<input type="text" pattern=".{9}" class="form-control value_success" name="phone" value='<%= @current_teacher.infoteacher.phone %> ' required title="Format invalide">
+					</div>
 				</p>
 				<% else %>
 				<p>
 					<label for="phone"> Téléphone </label>
-					<input type="text" class="form-control value_danger " name="phone">
+					<div class="input-group">
+			        	<div class="input-group-prepend">
+			            	<span class="input-group-text" style="font-weight: 500; background-color: white">+33</span>
+			          	</div>
+						<input type="text" pattern=".{9}" class="form-control value_danger " name="phone" required title="Format invalide">
+					</div>
 				</p>
 				<% end %>
 
@@ -232,12 +242,22 @@
 				<% if @current_user.infouser.phone.present? %>
 				<p>
 					<label for="phone"> Téléphone </label>
-					<input type="text" class="form-control value_success" name="phone" value='<%= @current_user.infouser.phone %> '>
+					<div class="input-group">
+			        	<div class="input-group-prepend">
+			            	<span class="input-group-text" style="font-weight: 500; background-color: white">+33</span>
+			          	</div>
+						<input type="text" class="form-control value_success" name="phone" value='<%= @current_user.infouser.phone %> ' required title="Format invalide">
+					</div>
 				</p>
 				<% else %>
 				<p>
 					<label for="phone"> Téléphone </label>
-					<input type="text" class="form-control value_danger " name="phone">
+					<div class="input-group">
+			        	<div class="input-group-prepend">
+			            	<span class="input-group-text" style="font-weight: 500; background-color: white">+33</span>
+			          	</div>
+						<input type="text" class="form-control value_danger " name="phone" required title="Format invalide">
+					</div>
 				</p>
 				<% end %>
 

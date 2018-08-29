@@ -59,6 +59,10 @@ Rails.application.routes.draw do
 
   post 'cours/modifier' =>'cours#modifier_ex_def'
 
+  get 'cours/accepter_inscription'
+
+  get 'cours/refuser_inscription'
+
   get 'cours/:id' => 'cours#show'
 
   get 'pages/monespace' 

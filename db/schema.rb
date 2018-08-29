@@ -10,10 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180807160534) do
+ActiveRecord::Schema.define(version: 20180823125358) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "alertes", force: :cascade do |t|
+    t.integer "lesson_id"
+    t.boolean "error"
+  end
 
   create_table "annees", force: :cascade do |t|
     t.integer "cour_id"
@@ -74,6 +79,19 @@ ActiveRecord::Schema.define(version: 20180807160534) do
     t.string "lieu_court"
     t.datetime "deleted_at"
     t.index ["deleted_at"], name: "index_cours_on_deleted_at"
+  end
+
+  create_table "demandes", force: :cascade do |t|
+    t.integer "teacher_id"
+    t.integer "cour_id"
+    t.integer "user_id"
+    t.string "jour"
+    t.integer "heure"
+    t.integer "min"
+    t.boolean "state"
+    t.datetime "created_at"
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_demandes_on_deleted_at"
   end
 
   create_table "dispos", force: :cascade do |t|
@@ -216,6 +234,14 @@ ActiveRecord::Schema.define(version: 20180807160534) do
     t.datetime "updated_at", null: false
     t.string "recipient_type"
     t.string "actor_type"
+  end
+
+  create_table "paiements", force: :cascade do |t|
+    t.integer "teacher_id"
+    t.integer "cour_id"
+    t.integer "user_id"
+    t.string "lesson_id"
+    t.datetime "created_at"
   end
 
   create_table "presences", force: :cascade do |t|

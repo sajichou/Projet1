@@ -47,7 +47,7 @@ class CoursController < ApplicationController
         cour.update(jour:cour.dispos.first.jour, heure:cour.dispos.first.heure, 
           min:cour.dispos.first.min)
       end
-      Lesson.create cour_id:cour.id, complaints:0, paid:false
+      #Lesson.create cour_id:cour.id, complaints:0, paid:false
       #cours.latitude =  Geocoder.coordinates(params[:lieu])[0]
       #cours.longitude = Geocoder.coordinates(params[:lieu])[1]
       #sleep (3)
@@ -191,12 +191,14 @@ class CoursController < ApplicationController
             a.destroy
           end
           
-          if !cour.jour
+          if !cour.jour or !cour.heure or !cour.min
             dispo = params[:dispo].split(",")
             dispo[1] = dispo[1].to_i
-            Dispo.create cour_id:cour.id, jour:dispo[0], heure:dispo[1]
+            dispo[2] = dispo[2].to_i
+            Dispo.create cour_id:cour.id, jour:dispo[0], heure:dispo[1], min:dispo[2]
             cour.update(jour:dispo[0])
             cour.update(heure:dispo[1])
+            cour.update(min:dispo[2])
           end
 
           #On calcule la date reguliere
@@ -216,7 +218,7 @@ class CoursController < ApplicationController
       cour.save
       
       Inscription.create user_id:current_user.id, cour_id:cour.id
-      #Presence.create lesson_id:cour.lessons.last.id, user_id:current_user.id, perf:true
+      Presence.create lesson_id:cour.lessons.last.id, user_id:current_user.id, perf:false
 
       UserMailer.inscription(current_user, cour).deliver
       TeacherMailer.inscription(cour.teacher,cour,current_user).deliver
@@ -225,6 +227,66 @@ class CoursController < ApplicationController
       redirect_to controller: 'cours', action: 'show', id: params[:id]
       flash[:info] = "Ce cours est complet."
     end
+  end
+
+  def accepter_inscription
+    user = User.find(params[:user_id])
+    cour = Cour.find(params[:cour_id])
+    Demande.find(params[:demande_id]).update(state:true)
+    demande = Demande.find(params[:demande_id])
+
+    if cour.nombre_eleves < 3
+    cour.nombre_eleves = cour.nombre_eleves + 1
+    #Si premier inscrit alors le niveau du cours est celui de l'élève mais encore faut-il que l'élève ait 
+    #renseigné sa classe lors de son inscription => before action premier_eleve
+      if cour.nombre_eleves < 2
+        cour.annees.each do |a|
+          a.destroy
+        end
+        Annee.create cour_id:cour.id, teacher_id:cour.teacher_id, niveau:user.infouser.niveau
+        cour.dispos.each do |a|
+          a.destroy
+        end
+        
+        if !cour.jour.present? or !cour.heure.present? or !cour.min.present?
+          cour.update(jour:demande.jour,heure:demande.heure,min:demande.min)
+          cour.save
+        end
+
+        #On calcule la date reguliere
+        wday = {"lundi"=>1, "mardi"=>2, "mercredi"=>3, "jeudi"=>4, "vendredi"=>5,
+        "samedi"=>6, "dimanche"=>0}
+        delta_jours = (wday[cour.jour] - Time.zone.today.wday)
+        if delta_jours < 0 
+          delta_jours += 7
+        end
+        date_reg = Time.zone.today + delta_jours
+        #Conversion implicite de la date au format 2018-05-04: strftime("%Y-%m-%d")
+        cour.update(date_reg:date_reg)
+        cour.save
+        #On cree la lesson et la presence associee
+        #Lesson.find_by_cour_id(cour.id).update(date:date_reg)
+        Lesson.create(cour_id:cour.id, date:date_reg,paid:false)
+      end
+      
+      Inscription.create user_id:user.id, cour_id:cour.id
+      Presence.create lesson_id:cour.lessons.last.id, user_id:user.id, perf:false
+
+      UserMailer.inscription(user, cour).deliver
+      TeacherMailer.inscription(cour.teacher,cour,user).deliver
+      redirect_to '/pages/monespace'
+      flash[:info] = "Vous avez un nouveau cours!"
+    else
+      puts "cours complet"
+      redirect_to controller: 'cours', action: 'show', id: params[:cour_id]
+      flash[:info] = "Ce cours est complet."
+    end
+
+  end
+
+  def refuser_inscription
+    Demande.find(params[:demande_id]).update(state:false)
+    redirect_to controller: 'pages', action: 'monespace'
   end
 
   def modifier

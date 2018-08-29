@@ -65,6 +65,7 @@ body, html{
 body{
    	text-align: center;
    	padding-top:45px;
+    color:#444A55;
 }
 
 section {
@@ -225,10 +226,10 @@ section {
 // FIN ACCUEIL
 
 #annonce {
-	border-radius: 10px ;
-	border: solid 1px $rose;
-	background-color:#eeeeee;
-	margin-top: 10px;
+	//border-radius: 10px ;
+	//border: solid 1px $rose;
+	background-color:white;
+	//margin-top: 10px;
 }
 
 #annonce_avatars{
@@ -251,8 +252,8 @@ section {
 
 .thumbnail2 {
 	border-radius: 50%;
-	height: 100px;
-	width: 100px;
+	height: 140px;
+	width: 140px;
 }
 
 .thumbnail3{

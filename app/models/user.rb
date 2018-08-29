@@ -13,6 +13,8 @@ class User < ApplicationRecord
   acts_as_paranoid
 
   has_many :cours
+  has_many :demandes
+  has_many :paiements
   has_many :inscriptions, dependent: :destroy
   has_one :infouser, dependent: :destroy
   has_many :stripe_customers
