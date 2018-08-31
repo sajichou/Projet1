@@ -23,6 +23,7 @@
                     <tr>   
                         <th>Élève</th>
                         <th>Matière</th>
+                        <th>Montant</th>
                         <th>Date</th>
                     </tr>
                     <% @paiements.each do |p| %>
@@ -30,7 +31,8 @@
                             <td> 
                                 <%=p.user.infouser.try(:first_name)%> <%=p.user.infouser.try(:last_name)%>
                             </td>
-                            <td><%=p.cour.matiere %></td>
+                            <td><%=p.lesson.cour.matiere %></td>
+                            <td><%=p.amount_prof/100%> €</td>
                             <td><%=p.created_at.strftime("%d-%m-%Y") %></td>
                         </tr>
                     <% end %>
@@ -167,6 +169,7 @@
                 <tr>   
                     <th>Professeur</th>
                     <th>Matiere</th>
+                    <th>Montant</th>
                     <th>Date</th>
                 </tr>
                 <% @paiements.each do |p| %>
@@ -177,7 +180,8 @@
                             </span>
                             <%=p.teacher.infoteacher.try(:first_name)%> <%=p.teacher.infoteacher.try(:last_name)%>
                         </td>
-                        <td><%=p.cour.matiere %></td>
+                        <td><%=p.lesson.cour.matiere %></td>
+                        <td><%=p.amount_eleve/100%> €</td>
                         <td><%=p.created_at.strftime("%d-%m-%Y") %></td>
                     </tr>
                 <% end %>

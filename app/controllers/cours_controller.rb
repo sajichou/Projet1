@@ -1,6 +1,6 @@
 class CoursController < ApplicationController
 
-  before_action :authenticate_user! ,only: [:inscription, :contacter_prof]
+  before_action :authenticate_user! ,only: [:inscription]
   before_action :premier_eleve ,only: [:inscription]
   before_action :authenticate_teacher! ,only: [:new, :create, :destroy]
   before_action :teacher_validated, only: [:create, :new,:destroy]
@@ -70,7 +70,11 @@ class CoursController < ApplicationController
       @cour = Cour.find(session[:page_id])
     end
     #@cour = Cour.find(params[:id])
-    @inscriptions = Inscription.where("cour_id=?",@cour.id)
+    if Inscription.where(cour_id:@cour.id, user_id:current_user).length > 0
+      @est_inscrit = true
+    else
+      @est_inscrit = false
+    end
     # Si plusieurs créneaux disponibles :
 
     if @cour.dispos.length >1
@@ -349,7 +353,54 @@ class CoursController < ApplicationController
       redirect_to controller: 'cours', action:'show', id:params[:cour_id]
     elsif params[:commit]
       redirect_to controller: 'charges', action:'new', id:params[:id], dispo:params[:dispo]
+    elsif params[:commentaire]
+      cour_id = params[:cour_id]
+      now = Time.zone.now
+      Inscription.where(cour_id:cour_id).each do |i|
+        id = i.user_id.to_s
+        if params[id]["commentaire"].present?
+          puts params[id].inspect
+          Commentaire.create(
+            user_id:i.user_id, 
+            cour_id:cour_id, 
+            date:params[id]["datepicker"],
+            contenu:params[id]["commentaire"],
+            created_at:now)
+          UserMailer.commentaire(User.find(i.user_id),Cour.find(cour_id),params[id]["commentaire"].last, params[id]["datepicker"].last).deliver
+        end
+      end
+      redirect_to controller: 'cours', action:'show', id:params[:cour_id]
     end
+  end
+
+  def absence_show
+  end
+
+  def absence
+
+    #On vérifie l'éligibilité selon les conditions d'annulation
+      #Conditions modérées:
+    #current_user.absences.where(cour_id:cour_id).each do |a|
+     # if (-a.date.to_date + 
+    #end
+    derniere_absence = 0
+    if Absence.where(user_id:current_user.id, cour_id:params[:cour_id]).present?
+      derniere_absence = Absence.where(user_id:current_user.id, cour_id:params[:cour_id]).last.to_date
+    end
+    if (Cour.find(params[:cour_id]).lessons.last.date.to_date - derniere_absence).day < 31
+      #verifier l'horaire
+      UserMailer.absence(current_user.id, Cour.find(params[:cour_id]).lessons.last.id) 
+      Presence.where(user_id:current_user.id, lesson_id:Cour.find(params[:cour_id]).lessons.last.id, perf:false).last.destroy
+      flash[:info]="Votre absence a bien été enregistré !"
+      redirect_to controller: 'cours', action:'accueil' 
+    else
+      flash[:info]="Vous avez malheureusement déjà signaler une absence il y'a moins d'un mois."
+      redirect_to  controller: 'cours', action:'absence_show'    
+    end
+    #On supprime la présence de l'élève éligible
+    #Mail prof
+    #Mail élève
+
   end
 
   private

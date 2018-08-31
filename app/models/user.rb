@@ -12,7 +12,6 @@ class User < ApplicationRecord
 
   acts_as_paranoid
 
-  has_many :cours
   has_many :demandes
   has_many :paiements
   has_many :inscriptions, dependent: :destroy
@@ -21,5 +20,6 @@ class User < ApplicationRecord
   has_many :contactmessages
   #has_many :notifications, foreign_key: :recipient_id
   has_many :notifications, as: :recipient
+  has_many :absences
 
 end

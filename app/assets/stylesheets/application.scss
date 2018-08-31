@@ -108,18 +108,7 @@ section {
     min-height:50px;
     min-width:200px;
 }
-::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-    color: $rose;
-    opacity: 1; /* Firefox */
-}
 
-:-ms-input-placeholder { /* Internet Explorer 10-11 */
-    color: #FA7B68;
-}
-
-::-ms-input-placeholder { /* Microsoft Edge */
-    color: #FA7B68;
-}
 
 .form-search-btn {
     background-color:#f2747e;

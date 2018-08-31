@@ -44,10 +44,6 @@ task :paiement => :environment do
       date = lesson.date.to_date
       heure = lesson.cour.heure
     end
-    puts "date"
-    puts date
-    puts "heure"
-    puts heure
     #On retient les lessons passées 
     if (date <= auj and heure < heure_auj)
       
@@ -75,36 +71,35 @@ task :paiement => :environment do
           else
             amount_eleve = @amount
           end
-          puts "@amount_prof"
-          puts @amount_prof
-          puts "amount_eleve"
-          puts amount_eleve
-          #begin
-            charge = Stripe::Charge.create(
-            :customer    => stripe_customer_id,
-            :amount      => amount_eleve,
-            :description => description,
-            :currency    => 'eur',
-            :metadata => {
-              'eleve' => User.find(presence.user_id).email, 
-              'professeur'=> Teacher.find(lesson.cour.teacher.id).email,
-              'lesson_id' => lesson.id,
-              },
-            :destination => {
-              :amount => @amount_prof,
-              :account => stripe_teacher_id,
-              }
+          begin
+          puts "charge"
+          charge = Stripe::Charge.create(
+          :customer    => stripe_customer_id,
+          :amount      => amount_eleve,
+          :description => description,
+          :currency    => 'eur',
+          :metadata => {
+            'eleve' => User.find(presence.user_id).email, 
+            'professeur'=> Teacher.find(lesson.cour.teacher.id).email,
+            'lesson_id' => lesson.id,
+            },
+          :destination => {
+            :amount => @amount_prof,
+            :account => stripe_teacher_id,
+            }
+          )
+          Paiement.create(
+            user_id:presence.user_id, 
+            teacher_id:lesson.cour.teacher.id, 
+            lesson_id:lesson.id,
+            amount_prof: @amount_prof,
+            amount_eleve: amount_eleve,
+            created_at:Time.zone.now,
             )
-            Paiement.create(
-              user_id:presence.user_id, 
-              teacher_id:lesson.cour.teacher.id, 
-              lesson_id:lesson.cour.id,
-              created_at:Time.zone.now,
-              )
-            presence.update(perf:true, charge_id:charge.id)
-          #rescue
-            #puts "ERRRRRRRROR DE PAIEMENT"
-          #end
+          presence.update(perf:true, stripe_charge:charge.id)
+          rescue
+            puts "ERRRRRRRROR DE PAIEMENT"
+          end
         end
       end
       #On compte le nombre de paiements effectues

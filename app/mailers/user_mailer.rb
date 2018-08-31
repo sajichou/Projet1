@@ -48,4 +48,20 @@ class UserMailer < ApplicationMailer
     mail( :to =>@user.infouser.email, :subject => subject)
   end
 
+  def commentaire(user, cour, contenu, date)
+    @user = user
+    @cour = cour
+    @date = date
+    @contenu = contenu
+    subject = "Bilan de votre cours de " + @cour.matiere
+    mail( :to =>@user.email, :subject => subject)
+  end
+
+  def absence(user, lesson)
+    @user = user
+    @lesson = lesson
+    subject = "Absence confirmée"
+    mail( :to =>@user.infouser.email, :subject => subject)
+  end
+
 end

@@ -10,10 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180823125358) do
+ActiveRecord::Schema.define(version: 20180830200424) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "absences", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "cour_id"
+    t.string "date"
+    t.datetime "deleted_at"
+  end
 
   create_table "alertes", force: :cascade do |t|
     t.integer "lesson_id"
@@ -37,6 +44,14 @@ ActiveRecord::Schema.define(version: 20180823125358) do
     t.datetime "image_updated_at"
     t.string "accroche"
     t.string "date"
+  end
+
+  create_table "commentaires", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "cour_id"
+    t.string "contenu"
+    t.string "date"
+    t.datetime "created_at"
   end
 
   create_table "contactmessages", force: :cascade do |t|
@@ -238,19 +253,19 @@ ActiveRecord::Schema.define(version: 20180823125358) do
 
   create_table "paiements", force: :cascade do |t|
     t.integer "teacher_id"
-    t.integer "cour_id"
     t.integer "user_id"
-    t.string "lesson_id"
+    t.integer "lesson_id"
     t.datetime "created_at"
+    t.float "amount_eleve"
+    t.float "amount_prof"
   end
 
   create_table "presences", force: :cascade do |t|
     t.integer "lesson_id"
     t.integer "user_id"
     t.boolean "perf"
-    t.integer "charge_id"
+    t.string "stripe_charge"
     t.datetime "deleted_at"
-    t.index ["deleted_at"], name: "index_presences_on_deleted_at"
   end
 
   create_table "roles", force: :cascade do |t|

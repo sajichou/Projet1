@@ -63,7 +63,13 @@ Rails.application.routes.draw do
 
   get 'cours/refuser_inscription'
 
+  get 'cours/absence_show'
+
+  get 'cours/absence'
+
   get 'cours/:id' => 'cours#show'
+
+
 
   get 'pages/monespace' 
 

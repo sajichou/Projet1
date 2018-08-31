@@ -1,7 +1,7 @@
 class Cour < ActiveRecord::Base
 	acts_as_paranoid
 	
-	has_many :users
+
 	has_many :demandes
 	has_many :paiements
 	has_many :annees, dependent: :destroy
@@ -10,7 +10,7 @@ class Cour < ActiveRecord::Base
 	has_many :inscriptions, dependent: :destroy
 	has_many :lessons
 	has_many :contactmessages
-
+	has_many :absences
 	after_validation :affichage_lieu, on: [ :create, :update ]
 
 	#after_create :reminder
