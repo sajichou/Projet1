@@ -389,7 +389,8 @@ class CoursController < ApplicationController
     end
     if (Cour.find(params[:cour_id]).lessons.last.date.to_date - derniere_absence).day < 31
       #verifier l'horaire
-      UserMailer.absence(current_user.id, Cour.find(params[:cour_id]).lessons.last.id) 
+      UserMailer.absence(current_user, Cour.find(params[:cour_id]).lessons.last).deliver
+      TeacherMailer.absence(current_user, Cour.find(params[:cour_id]).lessons.last).deliver
       Presence.where(user_id:current_user.id, lesson_id:Cour.find(params[:cour_id]).lessons.last.id, perf:false).last.destroy
       flash[:info]="Votre absence a bien été enregistré !"
       redirect_to controller: 'cours', action:'accueil' 

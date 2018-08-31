@@ -66,7 +66,7 @@ class TeacherMailer < ApplicationMailer
     @user = user
     @lesson = lesson
     @teacher = lesson.cour.teacher
-    subject = "Absence de " + @user.infouser.first_name +@user.infouser.last_name
+    subject = "Absence de " + @user.infouser.first_name + @user.infouser.last_name
     mail( :to =>@teacher.infoteacher.email, :subject => subject)
   end
 
