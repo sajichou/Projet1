@@ -3,7 +3,7 @@
 <p>Bonjour <%=@user.infouser.first_name%>,</p>
 
 <p>Vous avez reçu un nouveau message de <%=@teacher.infoteacher.first_name%>.</p>
-<p>Rendez-vous sur votre <%= link_to "espace personnel", {:controller =>"pages", :action=>"monprofil"} %>pour y répondre.</p>
+<p>Rendez-vous sur votre <%= link_to "espace personnel", {:controller =>"pages", :action=>"messages"} %>pour y répondre.</p>
 
 <p>À très bientôt !</p>
 

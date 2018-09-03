@@ -21,10 +21,28 @@ class MessagesController < ApplicationController
       actor:message.user, 
       action:"envoyé", 
       notifiable:message
-      #TeacherMailer.contact(message.teacher,message.user).deliver
+      TeacherMailer.contact(message.teacher,message.user).deliver
     else
       Notification.create actor:message.teacher, recipient:message.user, action:"envoyé", notifiable:message
-      #UserMailer.contact(message.teacher,message.user).deliver
+      UserMailer.contact(message.teacher,message.user).deliver
+      #On envoie une demande par SMS
+        @twilio_number = ENV['TWILIO_NUMBER']
+        account_sid = ENV['TWILIO_ACCOUNT_SID']
+        @client = Twilio::REST::Client.new(account_sid, ENV['TWILIO_AUTH_TOKEN'])
+        user_phone = "+33" + message.user.infouser.phone
+        twilio_phone_number = "TopNote"
+        #time_str = ((self.time).localtime).strftime("%I:%M%p on %b. %d, %Y")
+        #reminder = "Hi #{self.name}. Just a reminder that you have an appointment coming up at #{time_str}."
+        reminder = "Hello,<%=message.teacher.infoteacher.first_name%> a répondu à votre message. 
+        Rendez-vous sur votre espace personnel pour le lire:
+        https://www.topnote.fr/pages/messages "
+        message = @client.api.account.messages.create(
+          #:from => '+33644640536',
+          :from =>twilio_phone_number,
+          #:to => self.phone_number,
+          :to => user_phone,
+          :body => reminder,
+        )
     end
     redirect_to controller: 'messages', action:'show', message_id:params[:message_id]
 
