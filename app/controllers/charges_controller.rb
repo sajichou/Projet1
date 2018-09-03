@@ -38,7 +38,7 @@ class ChargesController < ApplicationController
 		    account_sid = ENV['TWILIO_ACCOUNT_SID']
 		    @client = Twilio::REST::Client.new(account_sid, ENV['TWILIO_AUTH_TOKEN'])
 		    teacher_phone = "+33" + Cour.find(params[:cours_id]).teacher.infoteacher.phone
-		    twilio_phone_number = "Kamaraderie"
+		    twilio_phone_number = "TopNote"
 		    #time_str = ((self.time).localtime).strftime("%I:%M%p on %b. %d, %Y")
 		    #reminder = "Hi #{self.name}. Just a reminder that you have an appointment coming up at #{time_str}."
 		    reminder = "Hello, un élève souhaite s'inscrire à l'un de vos cours! Rendez-vous sur votre espace pour l'accepter. Sans réponse de votre part sous 24h, sa demande sera refusée. "

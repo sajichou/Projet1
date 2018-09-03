@@ -339,6 +339,7 @@
 
 <% if (teacher_signed_in? and current_teacher.id == @cour.teacher_id) %>
 	<%=form_tag("/cours/show", method: "post") do %>
+	<% if Inscription.where(cour_id:@cour.id).length > 0 %>
 		<div class="row">
 			<div class="col-1"></div>
 			<div class="col-10">
@@ -367,6 +368,7 @@
 				<input type="submit" class="btn btn-primary form-control" value="Envoyer" name="commentaire">
 			</div>
 		</div>
+		<% end %>
 	<% end %>
 <% end %>
 

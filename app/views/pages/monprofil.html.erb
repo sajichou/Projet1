@@ -81,12 +81,12 @@
 				<% if @current_teacher.infoteacher.dptm.present? %>
 				<p>
 					<label for="dptm"> Code Postal </label>
-					<input type="text" maxlength="5" id="dptm" class="form-control value_success" name="dptm" value='<%= current_teacher.infoteacher.dptm %>'>
+					<input type="text" maxlength="5" id="dptm" class="form-control value_success" name="dptm" required value='<%= current_teacher.infoteacher.dptm %>'>
 				</p>
 				<% else %>
 				<p>
 					<label for="dptm"> Code Postal </label>
-					<input type="text" maxlength="5" id="dptm" class="form-control value_danger" name="dptm" placeholder="Numéro de votre code postal" >
+					<input type="text" maxlength="5" id="dptm" class="form-control value_danger" name="dptm" required placeholder="Numéro de votre code postal" >
 				</p>
 				<% end %>
 
