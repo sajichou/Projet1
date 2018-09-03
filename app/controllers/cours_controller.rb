@@ -340,17 +340,22 @@ class CoursController < ApplicationController
 
   def contacter_prof
     if params[:contactprof]
-      #Sauvergarder le message envoye
-      message = Contactmessage.create cour_id:params[:cour_id], user_id:current_user.id, message:params[:message], teacher_id:Cour.find(params[:cour_id]).teacher_id, ecritparuser:true
-      message.save
-      Notification.create recipient:message.teacher, 
-      actor:current_user, 
-      action:"envoyé", 
-      notifiable:message
-      #Envoyer une notification au prof 
-      teacher = Cour.find(params[:cour_id]).teacher
-      TeacherMailer.contact(teacher,current_user).deliver
-      redirect_to controller: 'cours', action:'show', id:params[:cour_id]
+        if user_signed_in?
+          #Sauvergarder le message envoye
+          message = Contactmessage.create cour_id:params[:cour_id], user_id:current_user.id, message:params[:message], teacher_id:Cour.find(params[:cour_id]).teacher_id, ecritparuser:true
+          message.save
+          Notification.create recipient:message.teacher, 
+          actor:current_user, 
+          action:"envoyé", 
+          notifiable:message
+          #Envoyer une notification au prof 
+          teacher = Cour.find(params[:cour_id]).teacher
+          TeacherMailer.contact(teacher,current_user).deliver
+          redirect_to controller: 'cours', action:'show', id:params[:cour_id]
+        else
+          flash[:info] = "Vous devez d'abord vous connecter."
+          redirect_to controller: 'cours', action:'show', id:params[:cour_id]
+        end
     elsif params[:commit]
       redirect_to controller: 'charges', action:'new', id:params[:id], dispo:params[:dispo]
     elsif params[:commentaire]
