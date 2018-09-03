@@ -1,13 +1,13 @@
-<h4>La Kamaraderie</h4>
+<h4>TopNote</h4>
 
 <p>Bonjour <%=@teacher.email%>,</p>
 
 <p>Nous avons le plaisir de vous annoncer que votre profil a été validé et que vous pouvez désormais créer des annonces dans les matières que vous enseignez: </p>
 
-<p><a href="http://www.lakamaraderie.fr/cours/create">Créer un cours</a></p>
+<p> <%= link_to "Créer un cours.", {:controller =>"cours", :action=>"create"} %></p>
 
 <p>Si vous avez des questions ou besoin d’aide, Margot, Ines, Arthur, Kevin ou l’un de nos Kamarades se fera le plaisir de vous répondre dans la journée !</p>
 
 <p>À très bientôt !</p>
 
-<p>L’équipe de La Kamaraderie.</p>
+<p>L’équipe de TopNote.</p>
