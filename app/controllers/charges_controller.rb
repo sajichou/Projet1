@@ -98,6 +98,11 @@ class ChargesController < ApplicationController
 	  		perf:false)
 	  		nb += 1
 	  		Cour.find(params[:cours_id]).update(nombre_eleves: nb)
+	  		Inscription.create user_id:current_user.id, cour_id:params[:cours_id]
+      		UserMailer.inscription(current_user, Cour.find(params[:cours_id])).deliver
+      		TeacherMailer.inscription(Cour.find(params[:cours_id]).teacher,Cour.find(params[:cours_id]),current_user).deliver
+
+
 		end
 		redirect_to controller: 'pages', action: 'dashboard'
 
