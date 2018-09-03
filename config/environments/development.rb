@@ -69,7 +69,7 @@ Rails.application.configure do
   :user_name => ENV["SG_USERNAME"],
   #:password => ENV["1_PASSWORD"],
   :password => ENV["SG_PASSWORD"],
-  :domain => 'lakamaraderie.fr',
+  :domain => 'topnote.fr',
   #:address => 'smtp.office365.com',
   :address => 'smtp.sendgrid.net',
   :port => 587,

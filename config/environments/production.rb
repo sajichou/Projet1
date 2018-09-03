@@ -109,7 +109,7 @@ Rails.application.configure do
   ActionMailer::Base.smtp_settings = {
   :user_name => ENV["SG_USERNAME"],
   :password => ENV["SG_PASSWORD"],
-  :domain => 'gmail.com',
+  :domain => 'topnote.fr',
   :address => 'smtp.sendgrid.net',
   :port => 587,
   :authentication => :plain,
