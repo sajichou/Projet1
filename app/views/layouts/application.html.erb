@@ -44,21 +44,26 @@
           
 
            <% flash.each do |key, value| %>
-           <% if key == "notice"
-              key = "success"
-            elsif key == "alert"
-              key = "warning"
-            end %>
-                
-            <div class="alert alert-<%= key %>">
-              <a href="#" data-dismiss="alert" class="close">×</a>
-              <ul>
-                <li>
-                  <%= value %>
-                </li>
-              </ul>
-            </div>
+             <% unless current_page?('/teachers/sign_in')%>
+
+               <% if key == "notice"
+                  key = "success"
+                elsif key == "alert"
+                  key = "warning"
+                end %>
+                    
+                <div class="alert alert-<%= key %>">
+                  <a href="#" data-dismiss="alert" class="close">×</a>
+                  <ul>
+                    <li>
+                      <%= value %>
+                    </li>
+                  </ul>
+                </div>
+              <% end %>
+
           <% end %>
+
         <section id="corps">
            <!-- <p> <%= debug session.to_hash %> </p> -->
           <%= yield %>       

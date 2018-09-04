@@ -1,15 +1,15 @@
-<div class="row justify-content-around py-5" style="background-color: rgb(252,98,112); color:white">
+<div class="row justify-content-around py-5 m-0" style="background-color: rgb(252,98,112); color:white">
  
-  <div class="col-12 col-lg-5">
+  <div class="col-12 col-lg-6">
     <p> </p>
-    <h2 class="col-12">Devenez professeur, partagez votre savoir et gagnez jusqu'à 38€/h !</h2>
-    <p class="col-12"> Vous êtes pédagogue, patient et tourné vers les autres ? 
+    <h2 class="col-12">Devenez professeur, partagez votre savoir et gagnez jusqu'à 50€/cours !</h2>
+    <p class="col-12 mt-5"> Vous êtes pédagogue, patient et tourné vers les autres ? 
 Alors des élèves ont besoin de vous. 
-Rejoignez la Kamaraderie pour révolutionner l’approche du soutien scolaire. D’une pierre deux coups, le travail en groupe permet à nos professeurs d’enseigner dans un climat optimal et leur assurent un revenu plus confortable.
+Rejoignez TopNote pour révolutionner l’approche du soutien scolaire. D’une pierre deux coups, le travail en groupe permet à nos professeurs d’enseigner dans un climat optimal et leur assurent un revenu plus confortable.
     </p>
   </div>
 
-  <div class="col-12 col-lg-5 p-4" id="devise_subcontent">
+  <div class="col-12 col-lg-4 p-4" id="devise_subcontent">
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <div class="form-group">
         <%= f.label :email, 'Adresse e-mail', class:"control-label" %><br />
@@ -47,79 +47,123 @@ Rejoignez la Kamaraderie pour révolutionner l’approche du soutien scolaire. D
   </div>
 </div>
 
-<!--
-<div class="row">
-  <div class="col-5">
-  </div>
-  <div class="col-5">
-    <h2>Une offre convaincante</h2>
-    <p>Nos professeurs peuvent s'assurer d'un revenu plus comfortable et
-    profiter d'une dynamique de groupe.</p>
-  </div>
-    <div class="row">
-      <div class="col-6">
-        <h4>Une pédagogie coopérative</h4>
-        <p>Créer une interaction entre les élèves, bénéficier de l'émulation collective et d'une ambiance plus agréable.</p>
+<section class="row justify-content-center mt-4 mx-0">
+  <div class="col-10">
+    <p style="font-size: 1.5em; font-weight: bold; color: #e55966">Avec TopNote, c'est vous qui fixez les règles </p>
+    <div class="row justify-content-center p-3">
+
+      <div class="col-12 col-lg-3">
+        <div class="row justify-content-center">
+          <div class="col-12">
+            <%= image_tag "icones-prof/lieu2.jpg", :class=>"icones_prof"%>
+          </div>
+          <div class="col-12 mt-2">
+            <p>Les cours ont lieu à <span style="font-weight: bold">votre domicile</span></p>
+          </div>
+        </div>      
       </div>
-      <div class="col-6">
-        <h4>Une plateforme intuitive</h4>
-        <p>Vous permettant de constituer des groupes de travail facilement et de s'assurer un revenu en continu.</p>
+
+      <div class="col-12 col-lg-3">
+        <div class="row justify-content-center">
+          <div class="col-12">
+            <%= image_tag "icones-prof/money-bag-euro.png", :class=>"icones_prof"%>
+          </div>
+          <div class="col-12 mt-2">
+            <p>Gagnez jusqu'à <span style="font-weight: bold">50€</span> par cours selon le nombre d'élèves votre domicile</p>
+          </div>
+        </div>      
       </div>
+
+      <div class="col-12 col-lg-3">
+        <div class="row justify-content-center">
+          <div class="col-12">
+            <%= image_tag "icones-prof/groupe.png", :class=>"icones_prof"%>
+          </div>
+          <div class="col-12 mt-2">
+            <p>Une dynamique de groupe de  <span style="font-weight: bold">1 à 3 élèves</span> </p>
+          </div>
+        </div>      
+      </div>
+
+      <div class="col-12 col-lg-3">
+        <div class="row justify-content-center">
+          <div class="col-12">
+            <%= image_tag "icones-prof/horaire.png", :class=>"icones_prof"%>
+          </div>
+          <div class="col-12 mt-2">
+            <p>Vous êtes <span style="font-weight: bold">libre</span> dans le choix de vos horaires 1 à 3 élèves</p>
+          </div>
+        </div>      
+      </div>
+
     </div>
   </div>
-  <div class="col-lg-5">
-    <%= image_tag "la_kamaraderie_site_valeurs.jpg", :style=>"max-height:150px" %>
-  </div>
-</div>
--->
+</section>
 
-<section class="row justify-content-center align-items-stretch mt-3">
-            <div class="col-12 row justify-content-center">
-                <h4 class="col-12 m-0 text-center prof-flex-title">Pour vous professeur, une plateforme intuitive et pratique </h4>
+<section class="row justify-content-center align-items-stretch mt-3 mx-0">
+            <div class="col-11 row justify-content-center">
 
-                <div class="col-12 col-lg-5 row prof-flex m-4 justify-content-around">
-                    <div class="col-12 col-lg-2 m-2 m-lg-0 row justify-content-center align-items-center ">
-                      <%= image_tag "ico/logo_intuitif.png", :class=>"icones"%>
-                    </div>
-                    <div class="col-12 col-lg-8 row justify-content-center align-items-center">
-                        <div class="col-12 prof-flex-title">Une plateforme intuitive</div>
-                        <div class="col-12"><p>Efficace répondant aux besoins des parents, élèves et professeurs avec beaucoup de simplicité.</p></div>
-                    </div>
+                <h4 class="col-12 mx-0 mb-3 text-center prof-flex-title">Une plateforme intuitive au service de votre expérience </h4>
+
+
+
+                <div class="row justify-content-around">
+                  <div class="col-12 col-lg-6 row prof-flex p-4 justify-content-around">
+                      <div class="col-12 col-lg-2 row justify-content-center align-items-center ">
+                        <%= image_tag "icones-prof/algo.png", :class=>"icones"%>
+                      </div>
+                      <div class="col-12 col-lg-10 row justify-content-center align-items-center">
+                          <div class="col-12"><p style="font-weight: bold; text-align: start;">Un algorithme de recherche</p></div>
+                          <div class="col-12"><p style="text-align: start;">vous permettant de trouver automatiquement des élèves.</p></div>
+                      </div>
+                  </div>
+                  <div class="col-12 col-lg-6 row prof-flex p-4 justify-content-around">
+                      <div class="col-12 col-lg-2 row justify-content-center align-items-center">
+                        <%= image_tag "icones-prof/home.png", :class=>"icones"%>
+                      </div>
+                      <div class="col-12 col-lg-10 row justify-content-center align-items-center">
+                          <div class="col-12"><p style="font-weight: bold; text-align: start">Un espace professeur</p></div>
+                          <div class="col-12">
+                            <p style="text-align: start;">facilitant la gestion des cours et l'échange avec les élèves.</p>
+                          </div>
+                      </div>
+                  </div>
                 </div>
-                <div class="col-12 col-lg-5 row prof-flex m-4 justify-content-around">
-                    <div class="col-12 col-lg-2 m-2 m-lg-0 row justify-content-center align-items-center">
-                      <%= image_tag "ico/Logo prix.png", :class=>"icones"%>
-                    </div>
-                    <div class="col-12 col-lg-8 row justify-content-center align-items-center">
-                        <div class="col-12 prof-flex-title">Une rémunération attractive</div>
-                        <div class="col-12">
-                          1 élève inscrit => 22,5€</br>
-                          2 élèves inscrits => 36€</br>
-                          3 élèves inscrits => 54€</br>
-                          *Un cours dure 1h30.</p>
-                        </div>
-                    </div>
+
+                <div class="row justify-content-around mt-3">
+                  <div class="col-12 col-lg-6 row prof-flex p-4 justify-content-around">
+                      <div class="col-12 col-lg-2 row justify-content-center align-items-center">
+                        <%= image_tag "icones-prof/processus.png", :class=>"icones"%>
+                      </div>
+                      <div class="col-12 col-lg-10 row justify-content-center align-items-center">
+                          <div class="col-12"><p style="font-weight: bold; text-align: start">Un espace collaboratif</p></div>
+                          <div class="col-12"><p style="text-align: start;">Dédié et privé à chaque groupe de travail pour assurer un suivi et faciliter les échanges entre parents, élèves et professeurs.</p></div>
+                      </div>
+                  </div>
+                  <div class="col-12 col-lg-6 row prof-flex p-4 justify-content-around">
+                      <div class="col-12 col-lg-2 row justify-content-center align-items-center">
+                        <%= image_tag "icones-prof/icone_paiement_securise.png", :class=>"icones"%>
+                      </div>
+                      <div class="col-12 col-lg-10 row justify-content-center align-items-center">
+                          <div class="col-12"><p style="font-weight: bold; text-align: start">Un processus de paiement simplifié</p></div>
+                          <div class="col-12"><p style="text-align: start;">Basé sur un abonnement sans engagement, vous recevez l'argent directement sur votre compte 48h après le cours.</p></div>
+                      </div>
+                  </div>
                 </div>
-                <div class="col-12 col-lg-5 row prof-flex m-4 justify-content-around">
-                    <div class="col-12 col-lg-2 m-2 m-lg-0 row justify-content-center align-items-center">
-                      <%= image_tag "ico/collaboratif_site.png", :class=>"icones"%>
-                    </div>
-                    <div class="col-12 col-lg-8 row justify-content-center align-items-center">
-                        <div class="col-12 prof-flex-title">Un espace collaboratif</div>
-                        <div class="col-12"><p>Dédié et privé à chaque groupe de travail pour assurer un suivi et faciliter les échanges entre parents, élèves et professeurs.</p></div>
-                    </div>
-                </div>
-                <div class="col-12 col-lg-5 row prof-flex m-4 justify-content-around">
-                    <div class="col-12 col-lg-2 m-2 m-lg-0 row justify-content-center align-items-center">
-                      <%= image_tag "ico/Logo prix.png", :class=>"icones"%>
-                    </div>
-                    <div class="col-12 col-lg-8 row justify-content-center align-items-center">
-                        <div class="col-12 prof-flex-title">Un processus de paiement simplifié</div>
-                        <div class="col-12"><p>Basé sur un abonnement sans engagement, vous recevez l'argent directement sur votre compte 48h après le cours.</p></div>
-                    </div>
-                </div>
+
             </div>
-            <div class="col-12 row justify-content-center">
+            
+</section>
+
+<section class="row justify-content-center mx-0 mt-5">
+    <div class="col-12 p-0">
+      <div style="min-height: 580px">
+        <%= image_tag "commentcamarche.png", :class=>"img-fluid"%>
+      </div>
+    </div>
+</section>
+
+<section class="row justify-content-center mx-0 mt-3">
                 <div class="col-12 text-center mt-4">
                   <h4 style="color:#e55966">Rejoignez notre communauté de professeurs !</h4>
                 </div>
@@ -153,3 +197,4 @@ Rejoignez la Kamaraderie pour révolutionner l’approche du soutien scolaire. D
                 </div>
             </div>
 </section>
+

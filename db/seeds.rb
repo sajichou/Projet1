@@ -19,3 +19,19 @@ Correspondance.create(niveau_id: 10, nom:"Terminale ES")
 Correspondance.create(niveau_id: 11, nom:"Terminale L")
 
 Correspondance.create(niveau_id: 13, nom:"Toutes les classes")
+
+###### Chapitres officiels
+
+###Mathématiques   mathematiques
+
+##Classe de sixième
+
+#Topic.create(niveau_id:1, matiere:"mathematiques",theme:"géométrie", chapitre:"droites")
+
+###Français   francais
+
+
+###Anglais   anglais
+
+
+###Espagnol   espagnol

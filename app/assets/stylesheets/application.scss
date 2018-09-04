@@ -20,7 +20,8 @@
 $theme-colors: (
   "primary": #e55966,
   "danger": #ff4136,
-  "roseclair": rgb(252,98,112)
+  "roseclair": rgb(252,98,112),
+  "secondary": #59e5d8
 );
 
 @import "bootstrap";
@@ -46,6 +47,14 @@ $orange: #ffb750;
     background-color: $rose;
 }
 
+.bg-rouge {
+    background-color: $rouge;
+} 
+
+.bg-orange {
+    background-color: $orange;
+}
+
 .bg-rose-clair {
     background-color: rgb(252,98,112);
 }
@@ -57,6 +66,25 @@ $orange: #ffb750;
 .bleu {
     background-color:$bleu
 }
+
+.turquoise{
+    background-color:$turquoise;
+}
+
+#grad_rose {
+    background-image: linear-gradient(to bottom, white , $rose);
+}
+
+.bg-gris {
+    background-color:#F2F2F2;
+}
+
+.bg-blanc {
+    background-color: white;
+    
+   
+}
+
 *{
 	margin:0;
 	padding:0;
@@ -89,6 +117,10 @@ section {
 	padding-bottom:50px;	
 }
 
+#commentcamarche {
+    background-image: image-url("commentcamarche.png");
+    background-size: cover;
+}
 // MENU
 
 .navbar-default {
@@ -225,6 +257,7 @@ section {
 	//border-radius: 10px ;
 	//border: solid 1px $rose;
 	background-color:white;
+    box-shadow: 2px 2px 2px 2px #aaa;
 	//margin-top: 10px;
 }
 
@@ -250,6 +283,12 @@ section {
 	border-radius: 50%;
 	height: 140px;
 	width: 140px;
+}
+
+.thumbnail_show {
+    border-radius: 50%;
+    height: 170px;
+    width: 170px;
 }
 
 .thumbnail3{
@@ -320,10 +359,16 @@ section {
 	}
 }
 
-.submit_tag {
-	background-color: $bleu;
+.submit_tag_rose {
+	background-color: $rose;
 	color: white;
 	border: none;
+}
+
+.submit_tag_bleu {
+    background-color: $bleu;
+    color: white;
+    border: none;
 }
 
 /*  FOOTER  */
@@ -389,7 +434,10 @@ section {
     max-width:150px; 
 }
 .icones{
-    height:100px;
+    height:50px;
+}
+.icones_prof{
+    height:60px;
 }
 .iconespetits{
     height:45px;

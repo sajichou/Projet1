@@ -52,47 +52,7 @@ class ChargesController < ApplicationController
 		   	#On sauvegarde la date d'envoie et le choix de créneau de l'eleve
 		   	Demande.create(user_id:current_user.id, cour_id:params[:cours_id], teacher_id: Cour.find(params[:cours_id]).teacher.id,
 		   		created_at:Time.zone.now, jour:jour, heure:heure)
-=begin
-	  	# Amount in cents
-	  	amount = ENV["AMOUNT"].to_i
-	  	@stripe_teacher_id = Cour.find(params[:cours_id]).teacher.infoteacher.stripe_id
-	   	puts "AAAA"
-	   	puts params[:dispo]
-		puts "ID"
-		puts params[:cours_id] 
 
-	  	#Si pas de code promo il paye  
-	  	if (current_user.infouser.code != "LANCEMENT18" or current_user.infouser.code_used)
-		  	description = "Cour de " + Cour.find(params[:cours_id]).teacher.email
-		  	transfer_group = "Lesson " + Cour.find(params[:cours_id]).lessons.last.id.to_s
-		  	charge = Stripe::Charge.create({
-		    	:customer    => customer.id,
-		    	:amount      => amount,
-		    	:description => description,
-		    	:currency    => 'eur',
-		    	:metadata => {'first_name' => current_user.infouser.first_name},
-	 			:transfer_group => transfer_group, 
-	 			#:on_behalf_of => Cour.find(params[:cours_id]).teacher.email
-		  	})
-		  	Presence.create lesson_id:Cour.find(params[:cours_id]).lessons.last.id, user_id:current_user.id, 
-	  		perf:true, charge_id:charge.id
-	  	#Si code promo il paye pas
-		else
-			current_user.infouser.update(code_used:true)
-			puts "BBBBB"
-			puts "Dispo"
-			puts params[:dispo]
-			puts "ID"
-			puts params[:cours_id]
-			Presence.create lesson_id:Cour.find(params[:cours_id]).lessons.last.id, user_id:current_user.id, 
-	  			perf:true
-	  	end
-
-		Presence.create lesson_id:Cour.find(params[:cours_id]).lessons.last.id, user_id:current_user.id, 
-	  		perf:false, charge_id:charge.id
-
-	  	redirect_to controller: 'cours', action: 'inscription', id: params[:cours_id], dispo: params[:dispo]
-=end
 		elsif (nb > 0 and nb < 3)
 			Presence.create(lesson_id:Cour.find(params[:cours_id]).lessons.last.id, user_id:current_user.id, 
 	  		perf:false)

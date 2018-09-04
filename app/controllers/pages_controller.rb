@@ -174,6 +174,7 @@ class PagesController < ApplicationController
       if params[:avatar].present?
         current_teacher.infoteacher.update(avatar:params[:avatar])
       end
+      flash[:info] = "Votre photo a bien été enregistrée."
       redirect_to '/pages/paiement'
     elsif user_signed_in?
       if params[:avatar].present?
