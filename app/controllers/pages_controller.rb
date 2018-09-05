@@ -43,7 +43,9 @@ class PagesController < ApplicationController
         dptm: params[:dptm],
         methodology: params[:methodology],
         experience: params[:experience],
-        cgu: cgu
+        cgu: cgu,
+        justificatif_identite: params[:justificatif_identite],
+        justificatif_diplome: params[:justificatif_diplome]
         )
       
       if(session[:page_id].present?)

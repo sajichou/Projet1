@@ -150,8 +150,8 @@ section {
 
 
 .form-search-btn {
-    background-color:#f2747e;
-    border:1px solid #f2747e; 
+    background-color:$orange;
+    border:1px solid $orange; 
     color:#ffffff;
     cursor:pointer;
 }
@@ -220,8 +220,14 @@ section {
 .jacket-title3{
     font-family: 'Roboto', sans-serif;
     font-size:1.2em;
-
 }
+
+.jacket-title4{
+    
+    font-size:1.1em;
+    font-weight:bold;
+}
+
 .roboto{
     font-family: 'Roboto', sans-serif;
 }

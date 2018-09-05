@@ -6,7 +6,7 @@
 		<% if teacher_signed_in? %>
 
 
-			<%=form_tag "/pages/monprofil", method:"post" do %>
+			<%=form_tag "/pages/monprofil", method:"post", multipart:true  do %>
 			<fieldset> 
 				<% if @current_teacher.infoteacher.first_name.present? %>
 				<p>
@@ -48,7 +48,7 @@
 			        	<div class="input-group-prepend">
 			            	<span class="input-group-text" style="font-weight: 500; background-color: white">+33</span>
 			          	</div>
-						<input type="text" pattern=".{9}" class="form-control value_success" name="phone" value='<%= @current_teacher.infoteacher.phone %> ' required title="Format invalide">
+						<input type="text" pattern=".{9}" class="form-control value_success" name="phone" value='<%= @current_teacher.infoteacher.phone%>' required title="Format invalide">
 					</div>
 				</p>
 				<% else %>
@@ -114,10 +114,48 @@
 				</p>
 				<% end %>
 
+				<!-- UPLOAD JUSTIFICATIF IDENTITE -->
+
+				<% if @current_teacher.infoteacher.justificatif_identite.present? %>
+
+				<div class="d-flex">
+					<div>
+						<p>Votre justificatif d'identité a bien été enregistré.</p>
+					</div>
+				</div>
+
+				<% else %>
+				<div class="d-flex">
+					<div>
+						<p>Ajouter la photo/scan d'un justificatif d'identité (permis, carte d'identité...) <span style="font-size: 0.8em">formats acceptés: jpg, jpeg, png</span></p>
+						<input type="file" class="form-control value_danger" name="justificatif_identite" required>
+					</div>
+				</div>
+
+				<% end %>
+
+
+				<!-- UPLOAD JUSTIFICATIF DIPLOME -->
+
+				<% if @current_teacher.infoteacher.justificatif_diplome.present? %>
+				<div class="d-flex">
+					<div>
+						<p>Votre justificatif de scolarité/diplôme a bien été enregistré.</p>
+					</div>
+				</div>
+				<% else %>
+				<div class="d-flex">
+					<div>
+						<p>Ajouter la photo de votre diplôme ou la photo d'un justificatif de scolarité <span style="font-size: 0.8em">formats acceptés: jpg, jpeg, png</span></p>
+						<input type="file" class="form-control value_danger" name="justificatif_diplome" required>
+					</div>
+				</div>
+				<% end %>
+
 				<!-- CGU -->
 
 				<% if @current_teacher.infoteacher.cgu %>
-				<div class="d-flex">
+				<div class="d-flex mt-3">
 					<div>
 						<input type="checkbox" name="cgu" value="true" checked disabled>
 					</div>
@@ -126,7 +164,7 @@
 					</div>
 				</div>
 				<% else %>
-				<div class="d-flex">
+				<div class="d-flex mt-3">
 					<div>
 						<input type="checkbox" name="cgu" value="true" required>
 					</div>
@@ -135,6 +173,8 @@
 					</div>
 				</div>
 				<% end %>
+
+
 			</fieldset>
 			<button type="submit" class=" btn btn-primary">Envoyer</button>
 			<%end%>
@@ -246,7 +286,7 @@
 			        	<div class="input-group-prepend">
 			            	<span class="input-group-text" style="font-weight: 500; background-color: white">+33</span>
 			          	</div>
-						<input type="text" class="form-control value_success" name="phone" value='<%= @current_user.infouser.phone %> ' required title="Format invalide">
+						<input type="text" class="form-control value_success" name="phone" value='<%=@current_user.infouser.phone%>' required title="Format invalide">
 					</div>
 				</p>
 				<% else %>

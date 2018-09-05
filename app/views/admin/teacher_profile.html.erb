@@ -16,6 +16,8 @@
 			<%end%>
 		</li>
 		<li>Avatar: <%=image_tag @infoteacher.avatar.url(:thumb), :class => "thumbnail"%></li>
+		<li>Justificatif d'identité : <%=image_tag @infoteacher.justificatif_identite.url(:medium)%></li>
+		<li>Justificatif diplôme : <%=image_tag @infoteacher.justificatif_diplome.url(:medium)%></li>
 	</ul>
 <% else %>
 Aucune info renseignée

@@ -1,9 +1,6 @@
 <div class="row justify-content-center">
 	<div class="col-12 col-lg-8">
 		<div class="row justify-content-center">
-			<div class="col-10 mt-4">
-				<h1><%=@article.titre%></h1>
-			</div>
 			<!--
 			<div class="col-10 mt-4">
 				<div style="width:70%">
@@ -15,9 +12,12 @@
 				<%= image_tag @article.image.url,:class=>"img-fluid mh-100", :style=>"float:left"%>
 				<p style="text-align:left"><%=sanitize @article.contenu%></p>
 			</div>
+			<div class="col-10 mt-4">
+				<h1><%=@article.titre%></h1>
+			</div>
 		</div>
 	</div>
 	<div class="col-12 col-lg-8 mt-4">
-		<%= link_to "Détruire", {:controller =>"articles", :action=>"destroy", :id=>@article.id}, class:"btn btn-danger"%>
-		<%= link_to "Modifier", {:controller =>"articles", :action=>"edit", :id=>@article.id}, class:"btn btn-info"%>
+		<%= link_to "Détruire", {:controller =>"blog", :action=>"destroy", :id=>@article.id}, class:"btn btn-danger"%>
+		<%= link_to "Modifier", {:controller =>"blog", :action=>"edit", :id=>@article.id}, class:"btn btn-info"%>
 </div>

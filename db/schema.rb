@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180830200424) do
+ActiveRecord::Schema.define(version: 20180905142858) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 20180830200424) do
     t.index ["deleted_at"], name: "index_annees_on_deleted_at"
   end
 
-  create_table "articles", force: :cascade do |t|
+  create_table "blogs", force: :cascade do |t|
     t.string "titre"
     t.text "contenu"
     t.string "image_file_name"
@@ -138,6 +138,14 @@ ActiveRecord::Schema.define(version: 20180830200424) do
     t.integer "dossier", default: 0
     t.string "dptm"
     t.datetime "deleted_at"
+    t.string "justificatif_identite_file_name"
+    t.string "justificatif_identite_content_type"
+    t.integer "justificatif_identite_file_size"
+    t.datetime "justificatif_identite_updated_at"
+    t.string "justificatif_diplome_file_name"
+    t.string "justificatif_diplome_content_type"
+    t.integer "justificatif_diplome_file_size"
+    t.datetime "justificatif_diplome_updated_at"
     t.index ["deleted_at"], name: "index_infoteachers_on_deleted_at"
   end
 

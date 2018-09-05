@@ -129,13 +129,13 @@ Rails.application.routes.draw do
 
   get 'annexe/CGU'
 
-  get 'articles/index'
-  get 'articles/create'
-  post 'articles/create' =>'articles#new'
-  get 'articles/show'
-  get 'articles/edit'
-  post 'articles/edit' =>'articles#update'
-  get 'articles/destroy'
+  get 'blog/index'
+  get 'blog/create'
+  post 'blog/create' =>'blog#new'
+  get 'blog/show'
+  get 'blog/edit'
+  post 'blog/edit' =>'blog#update'
+  get 'blog/destroy'
 
   resources :notifications do
     collection do 

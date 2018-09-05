@@ -13,7 +13,7 @@
 					    <h5 class="card-title"><%=a.titre%></h5>
 					    <p class="small"><%=a.date%></p>
 					    <p class="card-text"><%=a.accroche%></p>
-					    <%= link_to "Lire", {:controller =>"articles", :action=>"show", :id=>a.id}, class:"btn btn-primary"%>
+					    <%= link_to "Lire", {:controller =>"blog", :action=>"show", :id=>a.id}, class:"btn btn-primary"%>
 					  </div>
 					</div>
 				</div>
