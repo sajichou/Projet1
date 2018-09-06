@@ -45,4 +45,14 @@ class BlogController < ApplicationController
 		@articles = Blog.page(params[:page]).per(20)
 	end
 
+	private
+
+	def admin_validated
+
+		if !(teacher_signed_in? and current_teacher.role.power==2)
+			redirect_to root_path
+		end
+
+	end
+
 end
