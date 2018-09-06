@@ -196,29 +196,30 @@ task :paiement_test => :environment do
       #Calcul de la réménuration de l'enseignant selon le nb d eleves censés être présents a la lecon
       nb_eleves = lesson.presences.length
       if nb_eleves == 1 
-        @commission = ENV["COMMISSION1"].to_f
+        @amount_prof = ENV["REM1"].to_f
       elsif nb_eleves == 2 
-        @commission = ENV["COMMISSION2"].to_f
+        @amount_prof = ENV["REM2"].to_f
       elsif nb_eleves == 3
-        @commission = ENV["COMMISSION3"].to_f
+        @amount_prof = ENV["REM3"].to_f
       end 
-      @amount_prof = (@amount*(1-@commission/100)).to_i
 
       #On procede au paiement de chaque eleve et on enregistre dans son historique de paiement
       lesson.presences.each do |presence|
         #Paiement de chaque eleve qui n'a pas encore payé
         if !presence.perf
           puts "CCC"
+          begin
+
           stripe_customer_id = StripeCustomer.where(user_id:presence.user_id, cour_id:lesson.cour.id).last.stripe_customer_id
           stripe_teacher_id = lesson.cour.teacher.infoteacher.stripe_id
-          description = "Kamaraderie - Cour de " + lesson.cour.teacher.infoteacher.first_name
+          description = "TopNote - Cour de " + lesson.cour.teacher.infoteacher.first_name
           #On calcule le montant net que doit payer l eleve en fonction de ses codes promos
           if (User.find(presence.user_id).infouser.code == "LANCEMENT18" and !User.find(presence.user_id).infouser.code_used and nb_eleves > 1) 
             amount_eleve = (0.8*@amount).to_i
           else
             amount_eleve = @amount
           end
-          begin
+          
           puts "charge"
           charge = Stripe::Charge.create(
           :customer    => stripe_customer_id,
@@ -265,3 +266,12 @@ task :paiement_test => :environment do
   end
 end
 
+
+task :paiement_test_init => :environment do
+  Lesson.where(paid:true).each do |lesson|
+    l.update(paid:false)
+    l.presences.each do |p|
+      p.update(perf:false)
+    end
+  end
+end
