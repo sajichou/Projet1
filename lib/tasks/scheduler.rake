@@ -207,7 +207,8 @@ task :paiement_test => :environment do
       lesson.presences.each do |presence|
         #Paiement de chaque eleve qui n'a pas encore payé
         if !presence.perf
-          puts "CCC"
+          puts "@mount prof"
+          puts @amount_prof
           begin
 
           stripe_customer_id = StripeCustomer.where(user_id:presence.user_id, cour_id:lesson.cour.id).last.stripe_customer_id
@@ -219,7 +220,8 @@ task :paiement_test => :environment do
           else
             amount_eleve = @amount
           end
-          
+          puts"amount_eleve"
+          puts amount_eleve
           puts "charge"
           charge = Stripe::Charge.create(
           :customer    => stripe_customer_id,
