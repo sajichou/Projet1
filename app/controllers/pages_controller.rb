@@ -29,6 +29,9 @@ class PagesController < ApplicationController
     redirect_to '/pages/monespace'
   end
 
+  def abonnement
+  end
+
   def completer
     if params[:cgu].present?
       cgu = true

@@ -64,7 +64,7 @@ class ChargesController < ApplicationController
 
 
 		end
-		redirect_to controller: 'pages', action: 'dashboard'
+		redirect_to controller: 'pages', action: 'abonnement', cour_id:params[:cours_id]
 
 		rescue Stripe::CardError => e
 	  		flash[:error] = e.message

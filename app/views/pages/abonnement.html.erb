@@ -1,0 +1,10 @@
+<div class="row justify content">
+	<div class="col-12 col-lg-10">
+		<%if @cour.nombre_eleves < 1 %>
+			<p>Votre demande d'abonnement a bien été envoyée. Le professeur dispose de 24h pour accepter votre demande. </p>
+			<p>Vous pouvez annuler votre demande à tout moment depuis <a href="/pages/dashboard">votre tableau de bord </p>
+		<%else%>
+			<p>Félicitations, vous êtes désormais abonné au cours de <%=@cour.teacher.infoteacher.first_name%></p>
+		<%end>
+	</div>
+</div>

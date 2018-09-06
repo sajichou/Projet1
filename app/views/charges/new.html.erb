@@ -10,15 +10,35 @@
                         <h5 class="col-12 col-md-auto row align-items-center justify-content-center prix text-light">17
                             €</h5>
                     </div>
-                    <div class="col-12">
-                        <ul style="text-align: left">
-                            <li><i class="fa fa-circle"></i>Prélevé 1h avant chaque cours.</li>
-                            <!--
-                            <li><i class="fa fa-circle"></i>Prélèvement non-remboursable si l’abonnement est annulé après X heure avant le début du cours.</li>
-                          -->
-                            <li><i class="fa fa-circle"></i>Comprend un cours en groupe d’1h30 par semaine avec <%=Cour.find(@cours_id).teacher.infoteacher.first_name%> <%=Cour.find(@cours_id).teacher.infoteacher.last_name %> et donne accès à son espace de travail et de suivi.</li>
-                        </ul>
-                    </div>
+                    <% if Cour.find(@cours_id).nombre_eleves < 1 %>
+
+                      <div class="col-12">
+                            <ul style="text-align: left">
+                              <li><i class="fa fa-circle"></i>Prélevé 1h avant chaque cours. Vous ne serez débité que si le professeur accepte votre demande d'inscription.</li>
+                              <!--
+                              <li><i class="fa fa-circle"></i>Prélèvement non-remboursable si l’abonnement est annulé après X heure avant le début du cours.</li>
+                            -->
+                              <li><i class="fa fa-circle"></i>Le professeur dispose de 24h pour accepter votre demande d'inscription.</li>
+                              
+                              <li><i class="fa fa-circle"></i>Comprend un cours en groupe d’1h30 par semaine avec <%=Cour.find(@cours_id).teacher.infoteacher.first_name%> <%=Cour.find(@cours_id).teacher.infoteacher.last_name %> et donne accès à son espace de travail et de suivi.</li>
+                              
+
+                          </ul>
+                      </div>
+
+                    <%else%>
+
+                      <div class="col-12">
+                          <ul style="text-align: left">
+                              <li><i class="fa fa-circle"></i>Prélevé 1h avant chaque cours.</li>
+                              <!--
+                              <li><i class="fa fa-circle"></i>Prélèvement non-remboursable si l’abonnement est annulé après X heure avant le début du cours.</li>
+                            -->
+                              <li><i class="fa fa-circle"></i>Comprend un cours en groupe d’1h30 par semaine avec <%=Cour.find(@cours_id).teacher.infoteacher.first_name%> <%=Cour.find(@cours_id).teacher.infoteacher.last_name %> et donne accès à son espace de travail et de suivi.</li>
+                          </ul>
+                      </div>
+
+                    <%end%>
                 </div>
             </div>
 
@@ -26,7 +46,7 @@
                   
                     <% if (current_user.infouser.code == "LANCEMENT18" and !current_user.infouser.code_used) %>
                         <p>
-                          Super! Votre code est bien valide :) Vous ne serez pas débité sur votre premier cours.
+                          Super! Votre code est bien valide :) Vous serez débité non pas de 17€ mais de 13,6€
                         </p>
                     <% elsif (current_user.infouser.code == "LANCEMENT18" and current_user.infouser.code_used) %>
                         <p>Votre code promo n'est malheureusement plus valide.</p>

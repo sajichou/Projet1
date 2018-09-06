@@ -93,6 +93,8 @@ Rails.application.routes.draw do
 
   get 'pages/medesabonner'
 
+  get 'pages/abonnement'
+
   get 'pages/dashboard'
 
   get 'admin/candidates'

@@ -17,7 +17,7 @@
 								<div class="col-2" >
 									<div style="background-color: #e55966; height: 30px; width: 50px; border-top-left-radius: 10px">
 										<!-- Prix à rendre variable -->
-										<p class="text-white">15€</p>
+										<p class="text-white">17€</p>
 									</div>			
 								</div>
 								<div class="col-10">
@@ -234,16 +234,29 @@
 	
 	<div class="row justify-content-center mt-4">
 		<div class="col-12 col-lg-8">
+	<% if current_teacher.role.power == 0 %>
 
-	<%@cours_proposes.each do |cour| %>
+		<p>Vous pourrez créer des cours dès lors que nous aurons validé votre profil. Cela peut prendre jusqu'à 48h. </p>
 
+	<% elsif @cours_proposes.length < 1 %>
 		<div class="row justify-content-center">
+			<p>Vous n'avez pas encore créé d'annonces.</p>
+			<button type="button" class="btn btn-primary">Créer un cours</button>
+		</div>
 
-			<div class="col-12 mb-2" style="background-color: #F2F2F2">
-				<%= render partial:"annonce", locals:{cours:cour}%>
+	<% else %>
+
+		<%@cours_proposes.each do |cour| %>
+
+			<div class="row justify-content-center">
+
+				<div class="col-12 mb-2" style="background-color: #F2F2F2">
+					<%= render partial:"annonce", locals:{cours:cour}%>
+				</div>
+
 			</div>
 
-		</div>
+		<% end %>
 
 	<% end %>
 
