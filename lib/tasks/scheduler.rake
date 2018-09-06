@@ -269,8 +269,8 @@ end
 
 task :paiement_test_init => :environment do
   Lesson.where(paid:true).each do |lesson|
-    l.update(paid:false)
-    l.presences.each do |p|
+    lesson.update(paid:false)
+    lesson.presences.each do |p|
       p.update(perf:false)
     end
   end
