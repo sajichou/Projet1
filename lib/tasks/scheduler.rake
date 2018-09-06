@@ -201,9 +201,9 @@ task :paiement_test => :environment do
       if nb_eleves == 1 
         amount_prof = ENV["REM1"].to_f
       elsif nb_eleves == 2 
-        amount_prof = ENV["REM2"].to_f
+        amount_prof = (ENV["REM2"].to_f/2).to_i
       elsif nb_eleves == 3
-        amount_prof = ENV["REM3"].to_f
+        amount_prof = (ENV["REM3"].to_f/3).to_i
       end 
 
       #On procede au paiement de chaque eleve et on enregistre dans son historique de paiement
@@ -212,9 +212,6 @@ task :paiement_test => :environment do
         #Paiement de chaque eleve qui n'a pas encore payé
         if !presence.perf
           puts "amount prof"
-          puts amount_prof
-          puts "amount prof par eleve"
-          amount_prof = (amount_prof/nb_eleves).to_i
           puts amount_prof
           #begin
 
