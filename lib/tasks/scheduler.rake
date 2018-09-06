@@ -210,7 +210,7 @@ task :paiement_test => :environment do
           puts "@mount prof"
           puts @amount_prof
           puts "@mount prof par eleve"
-          @mount_prof = (@amount_prof/nb_eleves).to_i
+          @amount_prof = (@amount_prof/nb_eleves).to_i
           puts @amount_prof/nb_eleves
           #begin
 
