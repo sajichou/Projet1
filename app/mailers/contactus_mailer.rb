@@ -10,7 +10,7 @@ class ContactusMailer < ApplicationMailer
 		@sujet = sujet
 		@message = message
 		puts "ici"
-		mail to:"sajidsalhi@gmail.com", subject:@sujet, from:"sajid123@hotmail.fr"
+		mail to:"contact@topnote.fr", subject:@sujet, from:"sajid123@hotmail.fr"
 	end
 
 end

@@ -8,7 +8,7 @@ class UserMailer < ApplicationMailer
   def signup(user)
     @user = user
     mail( :to => @user.email,
-    :subject => 'Bienvenue dans la communauté de La Kamaraderie ' )
+    :subject => 'Bienvenue sur TopNote' )
   end
 
   def inscription(user, cour)
