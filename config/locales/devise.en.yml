@@ -18,7 +18,7 @@ en:
       unconfirmed: "Vous devez d'abord confirmer le mail de validation."
     mailer:
       confirmation_instructions:
-        subject: "Validation de ton compte TopNote! "
+        subject: "Validation de ton compte TopNote !"
       reset_password_instructions:
         subject: "Réinitialisation de votre mot de passe"
       unlock_instructions:
