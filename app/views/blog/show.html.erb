@@ -20,7 +20,10 @@
 
 		</div>
 	</div>
+	<% if teacher_signed_in? and current_teacher.role.power == 2 %>
 	<div class="col-12 col-lg-8 mt-4">
 		<%= link_to "Détruire", {:controller =>"blog", :action=>"destroy", :id=>@article.id}, class:"btn btn-danger"%>
 		<%= link_to "Modifier", {:controller =>"blog", :action=>"edit", :id=>@article.id}, class:"btn btn-info"%>
+	</div>
+	<%end%>
 </div>

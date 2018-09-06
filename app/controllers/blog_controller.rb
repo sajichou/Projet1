@@ -1,6 +1,6 @@
 class BlogController < ApplicationController
 
-	#before_action :admin_validated, only: [:create, :new, :destroy, :edit]
+	before_action :admin_validated, only: [:create, :new, :destroy, :edit]
 
 	def create
 	end
