@@ -6,7 +6,13 @@ class BlogController < ApplicationController
 	end
 
 	def new
-		Blog.create titre:params[:titre], contenu:params[:contenu],image:params[:image]
+		Blog.create(
+			titre:params[:titre], 
+			contenu:params[:contenu],
+			image:params[:image],
+			date:params[:date],
+			accroche:params[:accroche])
+
 		redirect_to "/blog/index"
 	end
 

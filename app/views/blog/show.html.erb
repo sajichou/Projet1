@@ -8,13 +8,16 @@
 				</div>
 			</div>
 			-->
+			<div class="col-12 mt-4">
+
+					<%= image_tag @article.image.url,:class=>"img-fluid"%>
+
+			</div>
 			<div class="col-12 mt-4" style="text-align:left">
-				<%= image_tag @article.image.url,:class=>"img-fluid mh-100", :style=>"float:left"%>
+				<h1><%=@article.titre%></h1>
 				<p style="text-align:left"><%=sanitize @article.contenu%></p>
 			</div>
-			<div class="col-10 mt-4">
-				<h1><%=@article.titre%></h1>
-			</div>
+
 		</div>
 	</div>
 	<div class="col-12 col-lg-8 mt-4">
