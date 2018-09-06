@@ -231,194 +231,23 @@
 <!-- Espace Prof -->
 
 <% elsif teacher_signed_in? %>
+	
+	<div class="row justify-content-center mt-4">
+		<div class="col-12 col-lg-8">
 
 	<%@cours_proposes.each do |cour| %>
-		<div class="row justify-content-center">
-			<div class="col-12 col-lg-6">	
-				<div id="annonce">
-					<div class="row">
 
-					<!-- Avatars prof et élèves-->	
-						<div class="col-sm-5 justify-content-center">
-							<div class="row">
-								<div class="col-2" >
-									<div style="background-color: #e55966; height: 30px; width: 50px; border-top-left-radius: 10px">
-										<!-- Prix à rendre variable -->
-										<p class="text-white">15€</p>
-									</div>			
-								</div>
-								<div class="col-10">
-									<!-- Ligne correspondant au bloc image prof-->
-									<div class="row">
-										<div class="col" style="margin-top: 15px">
-											<%=image_tag cour.teacher.infoteacher.avatar.url(:thumb), :class => "thumbnail2"%>
-											<div class="row justify-content-center">
-												<div class="col-10">
-												<!--						
-													<div class="d-flex">
-														<div style="color: #ffc400">
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>
-														</div>
-													</div>
-												-->
-													<div class="d-flex">
-														<div style="color: rgba(76, 175, 80, 0.7)">
-															<i class="fa fa-check-circle-o"></i>
-														</div>
-														<div>
-															<p class="ml-2" style="font-size: 90%">Profil vérifié</p>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-									<!-- Ligne correspondant au bloc image élèves-->
-									<div class="row justify-content-center">
-										<% if cour.nombre_eleves == 2%>
-												<div class="col">
-													<div class="avatar_occupe">
-														<i class="fa fa-user-circle-o"></i>
-													</div>
-												</div>
-												<div class="col">
-													<div class="avatar_occupe">
-														<i class="fa fa-user-circle-o"></i>
-													</div>
-												</div>										
-												<div class="col">
-													<div class="avatar_libre">
-														<i class="fa fa-user-circle-o"></i>
-													</div>
-												</div>
-											<!-- Cas où 3 eleves sont inscrits -->
-											<% elsif cour.nombre_eleves == 3 %>		
-												<div class="col-3"> 
-													<div class="avatar_occupe">
-														<i class="fa fa-user-circle-o"></i>
-													</div>
-												</div>
-												<div class="col-3">
-													<div class="avatar_occupe">
-														<i class="fa fa-user-circle-o"></i>
-													</div>
-												</div>											
-												<div class="col-3">
-													<div class="avatar_occupe">
-														<i class="fa fa-user-circle-o"></i>
-													</div>
-												</div>
-											<!-- Cas où 1 eleve est déjà inscrit -->
-											<% elsif cour.nombre_eleves == 1 %>		
-												<div class="col-3"> 
-													<div class="avatar_occupe">
-														<i class="fa fa-user-circle-o"></i>
-													</div>
-												</div>
-												<div class="col-3">
-													<div class="avatar_libre">
-														<i class="fa fa-user-circle-o"></i>
-													</div>
-												</div>											
-												<div class="col-3">
-													<div class="avatar_libre">
-														<i class="fa fa-user-circle-o"></i>
-													</div>
-												</div>
-											<!-- Aucun eleves d'inscrit -->
-											<% else %>
-												<div class="col">
-													<div class="avatar_libre">
-														<i class="fa fa-user-circle-o"></i>
-													</div>
-												</div>
-												<div class="col">
-													<div class="avatar_libre">
-														<i class="fa fa-user-circle-o"></i>
-													</div>
-												</div>										
-												<div class="col">
-													<div class="avatar_libre">
-														<i class="fa fa-user-circle-o"></i>
-													</div>
-												</div>
-											<% end %>	
-									</div>
-								</div>
-							</div>
-						</div>
-					<!-- Caractéristiques du cours-->
-						<div class="col-sm-7">
-							<h5 class="mt-2 mb-4">Titre du cours</h5>
-							<div class="d-flex py-0">
-								<div class="px-4 align-self-start" style="width:50px">
-									<i class="fa fa-calendar fa-lg"></i>
-								</div>
-								<div class="px-4 align-self-end">
-									<% if (cour.jour.present? and cour.heure.present?) %>
-										<p class="text-capitalize">
-											<% if cour.min == 0 %>
-												<%=cour.jour%> | <%=cour.heure %>h - <%=cour.heure+1 %>h30
-											<% else %>
-												<%=cour.jour%> | <%=cour.heure %>h30 - <%=cour.heure+2 %>h
-											<% end %>
-										</p>
-									<% else %>
-										<p>Plusieurs créneaux possibles</p>
-									<% end %>
-								</div>
-							</div>
-							<div class="d-flex mb-0">
-								<div class="px-4 align-self-start" style="width:50px">
-									<i class="fa fa-book fa-lg"></i>
-								</div>
-								<div class="px-4 align-self-end">
-									<p class="text-capitalize"><%= cour.matiere %>
-										<%cour.annees.each do |n| %>
-								 		| <%= Correspondance.find_by_niveau_id(n.niveau).nom%>	
-										<%end%>	
-									</p>
-								</div>
-							</div>
-							<div class="d-flex">
-								<div class="px-4 align-self-start" style="width:50px">
-									<i class="fa fa-map-marker fa-lg"></i>
-								</div>
-								<div class="px-4 align-self-end">
-									<p class="text-capitalize"><%= cour.lieu_court %>
-								</div>
-							</div>
-							<div class="d-flex">
-								<div class="px-4 align-self-start" style="width:50px">
-									<i class="fa fa-users fa-lg"></i>
-								</div>
-								<div class="px-4 align-self-end">
-									<% if cour.nombre_eleves<2 %>
-										<p><%= 3-cour.nombre_eleves %> places disponibles</p>
-									<% else %>
-										<p><%= 3-cour.nombre_eleves %> place disponible</p>
-									<% end %>
-								</div>
-							</div>
-						</div>
-					</div>			
-				</div>
-				<!-- Boutons "détails du cours" et "se désabonner"-->
-				<div class="row justify-content-center" >
-					<div class="col-4">
-						<div style="border-bottom-left-radius: 30px; border-bottom-right-radius: 30px; background: #e55966; height:40px">
-							<p class="text-white">
-								<%= link_to "Details du cours", {:controller =>"cours", :action=>"show", :id=>cour.id}, class:"link_to btn"%>
-							</p>				
-						</div>
-					</div>	
-				</div>
+		<div class="row justify-content-center">
+
+			<div class="col-12 mb-2" style="background-color: #F2F2F2">
+				<%= render partial:"annonce", locals:{cours:cour}%>
 			</div>
+
 		</div>
+
 	<% end %>
+
+		</div>
+	</div>
 
 <% end %>

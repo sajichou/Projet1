@@ -48,9 +48,9 @@
 
 <div class="row justify-content-center mt-3">
 	<div class="col-10 col-lg-8">
-		<div class="p-4" style="background-color: #F2F2F2">
+		<div class="p-4" >
 			<% for cours in @cours%>
-				<div class="mb-2">
+				<div class="mb-2" style="background-color: #F2F2F2">
 					<%= render partial:"annonce", locals:{cours:cours}%>
 				</div>
 			<% end %>
