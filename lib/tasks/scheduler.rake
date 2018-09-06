@@ -199,11 +199,11 @@ task :paiement_test => :environment do
       puts"nb eleves"
       puts nb_eleves
       if nb_eleves == 1 
-        @amount_prof = ENV["REM1"].to_f
+        amount_prof = ENV["REM1"].to_f
       elsif nb_eleves == 2 
-        @amount_prof = ENV["REM2"].to_f
+        amount_prof = ENV["REM2"].to_f
       elsif nb_eleves == 3
-        @amount_prof = ENV["REM3"].to_f
+        amount_prof = ENV["REM3"].to_f
       end 
 
       #On procede au paiement de chaque eleve et on enregistre dans son historique de paiement
@@ -211,11 +211,11 @@ task :paiement_test => :environment do
 
         #Paiement de chaque eleve qui n'a pas encore payé
         if !presence.perf
-          puts "@mount prof"
-          puts @amount_prof
-          puts "@mount prof par eleve"
-          @amount_prof = (@amount_prof/nb_eleves).to_i
-          puts @amount_prof/nb_eleves
+          puts "amount prof"
+          puts amount_prof
+          puts "amount prof par eleve"
+          amount_prof = (amount_prof/nb_eleves).to_i
+          puts amount_prof
           #begin
 
           stripe_customer_id = StripeCustomer.where(user_id:presence.user_id, cour_id:lesson.cour.id).last.stripe_customer_id
@@ -241,7 +241,7 @@ task :paiement_test => :environment do
             'lesson_id' => lesson.id,
             },
           :destination => {
-            :amount => @amount_prof,
+            :amount => amount_prof,
             :account => stripe_teacher_id,
             }
           )
@@ -249,7 +249,7 @@ task :paiement_test => :environment do
             user_id:presence.user_id, 
             teacher_id:lesson.cour.teacher.id, 
             lesson_id:lesson.id,
-            amount_prof: @amount_prof,
+            amount_prof: amount_prof,
             amount_eleve: amount_eleve,
             created_at:Time.zone.now,
             )
