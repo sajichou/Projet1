@@ -209,6 +209,9 @@ task :paiement_test => :environment do
         if !presence.perf
           puts "@mount prof"
           puts @amount_prof
+          puts "@mount prof par eleve"
+          @mount_prof = @amount_prof/nb_eleves
+          puts @amount_prof/nb_eleves
           begin
 
           stripe_customer_id = StripeCustomer.where(user_id:presence.user_id, cour_id:lesson.cour.id).last.stripe_customer_id
