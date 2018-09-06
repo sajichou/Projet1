@@ -1,20 +1,9 @@
 	<%=form_tag "/cours/modifier", method:"post" do %>
 
-	<div class="form-row justify-content-center mt-5">
-
-		<div class="col-12">
-		<h2>Date et horaire du prochain cours</h2>
-		</div>
-		<input type="text" name="datepicker" class="datepicker col-12 col-lg-3 form-search text-center m-2">
-
-		<input type="text" name="timepicker" class="timepicker col-12 col-lg-3 form-search text-center m-2">
-
-		<%= hidden_field_tag "id", params[:id] %>
-
-		<button type="submit" name="modifier_ex" class="col-12 col-lg-2 form-search-btn m-2">Envoyer</button>
-
-	</div>
 	<div class="form-row justify-content-center">
+    <div class="col-6 mx-auto">
+        <%= render partial:'/pages/annonce_prof', locals:{cour:Cour.find(params[:id])}%>
+    </div>
 		<div class="col-12">
 		<h2>Jour et horaire de tous les cours restants</h2>
 		</div>
@@ -66,10 +55,24 @@
 	<%end%>
 </div>
 
-<section class="row justify-content-center">
-	<div class="col-6 mx-auto">
-        <%= render partial:'/pages/annonce_prof', locals:{cour:Cour.find(params[:id])}%>
+
+    <div class="form-row justify-content-center mt-5">
+
+        <div class="col-12">
+        <h2>Date et horaire du prochain cours</h2>
+        </div>
+        <input type="text" name="datepicker" class="datepicker col-12 col-lg-3 form-search text-center m-2">
+
+        <input type="text" name="timepicker" class="timepicker col-12 col-lg-3 form-search text-center m-2">
+
+        <%= hidden_field_tag "id", params[:id] %>
+
+        <button type="submit" name="modifier_ex" class="col-12 col-lg-2 form-search-btn m-2">Envoyer</button>
+
     </div>
+
+<section class="row justify-content-center">
+
 
     <div class="col-12 bg-rose row justify-content-center align-items-center p-4" style="bottom:0px">
         <div class="col-auto row text-light align-items-center footer-page">
