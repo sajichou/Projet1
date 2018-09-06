@@ -199,7 +199,7 @@ task :paiement_test => :environment do
       puts"nb eleves"
       puts nb_eleves
       if nb_eleves == 1 
-        amount_prof = ENV["REM1"].to_f
+        amount_prof = ENV["REM1"].to_i
       elsif nb_eleves == 2 
         amount_prof = (ENV["REM2"].to_f/2).to_i
       elsif nb_eleves == 3
