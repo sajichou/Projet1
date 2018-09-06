@@ -193,20 +193,22 @@ task :paiement_test => :environment do
     if (date > auj)
       puts "BBB"
 
+
+      #Calcul de la réménuration de l'enseignant selon le nb d eleves censés être présents a la lecon
+      nb_eleves = lesson.presences.length
+      puts"nb eleves"
+      puts nb_eleves
+      if nb_eleves == 1 
+        @amount_prof = ENV["REM1"].to_f
+      elsif nb_eleves == 2 
+        @amount_prof = ENV["REM2"].to_f
+      elsif nb_eleves == 3
+        @amount_prof = ENV["REM3"].to_f
+      end 
+
       #On procede au paiement de chaque eleve et on enregistre dans son historique de paiement
       lesson.presences.each do |presence|
 
-        #Calcul de la réménuration de l'enseignant selon le nb d eleves censés être présents a la lecon
-          nb_eleves = lesson.presences.length
-          puts"nb eleves"
-          puts nb_eleves
-          if nb_eleves == 1 
-            @amount_prof = ENV["REM1"].to_f
-          elsif nb_eleves == 2 
-            @amount_prof = ENV["REM2"].to_f
-          elsif nb_eleves == 3
-            @amount_prof = ENV["REM3"].to_f
-          end 
         #Paiement de chaque eleve qui n'a pas encore payé
         if !presence.perf
           puts "@mount prof"
