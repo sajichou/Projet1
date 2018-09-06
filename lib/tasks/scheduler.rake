@@ -212,7 +212,7 @@ task :paiement_test => :environment do
           puts "@mount prof par eleve"
           @mount_prof = @amount_prof/nb_eleves
           puts @amount_prof/nb_eleves
-          begin
+          #begin
 
           stripe_customer_id = StripeCustomer.where(user_id:presence.user_id, cour_id:lesson.cour.id).last.stripe_customer_id
           stripe_teacher_id = lesson.cour.teacher.infoteacher.stripe_id
@@ -250,9 +250,9 @@ task :paiement_test => :environment do
             created_at:Time.zone.now,
             )
           presence.update(perf:true, stripe_charge:charge.id)
-          rescue
-            puts "ERRRRRRRROR DE PAIEMENT"
-          end
+          #rescue
+           # puts "ERRRRRRRROR DE PAIEMENT"
+          #end
         end
       end
       #On compte le nombre de paiements effectues
