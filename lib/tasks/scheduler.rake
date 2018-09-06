@@ -24,6 +24,13 @@ task :paye => :environment do
 
 end
 
+task :email => :environment do
+
+  UserMailer.signup(User.find(68)).deliver
+
+end
+
+
 task :paiement => :environment do 
   ### On parcourt les lessons non payées et passées et on fait payer les élèves qui 
   #### qui n'ont pas encore payés, sans quoi on inscrit une alerte
