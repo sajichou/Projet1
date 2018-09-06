@@ -30,6 +30,7 @@ class PagesController < ApplicationController
   end
 
   def abonnement
+    @cour = Cour.find(params[:cour_id])
   end
 
   def completer
