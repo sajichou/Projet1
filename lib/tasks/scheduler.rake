@@ -26,8 +26,8 @@ end
 
 task :email => :environment do
 
-  UserMailer.signup(User.find(77)).deliver
-  #UserMailer.signup(User.find(30)).deliver
+  #UserMailer.signup(User.find(77)).deliver
+  UserMailer.signup(User.find(30)).deliver
 
 
 end
