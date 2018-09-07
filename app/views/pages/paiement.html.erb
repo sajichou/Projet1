@@ -50,111 +50,60 @@
                     <!-- EXPLICATION DE STRIPE -->
                     <section class="row justify-content-center">
 
+                        <div class="col-12 mt-3">
+                            <%= image_tag "stripe.png", size: "240x80"%> 
+                        </div>
 
+                        <div class="col-12 mt-3">
+                         <p style="font-size: 1.2em">Nous utilisons le service de paiement Stripe pour automatiser et sécuriser vos rémunérations.</p>
+                        </div>
 
-                        <p style="font-size: 1.2em">Nous utilisons le service de paiement <%= image_tag "stripe.png", size: "60x20"%> pour automatiser et sécuriser les paiements.</p>
-                        <div class="col-12">
-                            <div class="row">
-                                <div class="col-12">
-                                    <p style="font-size: 1.1em; font-weight: bold; text-align: left">Qu'est ce que Stripe ?</p>
-                                </div>
-                                <div class="col-12">
-                                    <p style="text-align: left">Stripe est une solution de paiement en ligne externalisée et sécurisée. Aujourd'hui, plus de 100 000 entreprises font confiance à Stripe dont Adidas, Deliveroo, Heetch ou encore Amazon.</p>
-                                    <p>
-                                        <%= image_tag "StripeExamples.png", size:"700x100"%>
-                                    </p>
-                                </div>
-                                <div class="col-12">
-                                    <p style="font-size: 1.1em; font-weight: bold ; text-align: left">Comment ça marche ?</p>
-                                </div>
-                                <div class="col-12">
-                                    <p style="text-align: left">Nous prélevons chaques élève 48h avant le début du cours et nous vous transférons l'argent 24h après le cours.</p>
-                                </div>
-                                <div class="col-12">
-                                    <p style="font-size: 1.1em; font-weight: bold; text-align: left">Comment créer son compte ?</p>
-                                </div>
-                                <div class="col-12">
-                                    <p style="text-align: left">Il vous suffit de créer votre compte Stripe en cliquant sur "Créer" ci-dessous et de remplir les informations demandées en suivant le guide de création ci-dessous.</p>
-                                </div>
+                        <div class="col-12 mt-3">
+                            <div class="btn bg-rose" style="border-radius: 20px; padding-left:30px; padding-right: 30px;">
+                                <a target="_blank" href="<%=ENV["STRIPE_TEST_OAUTH"]%>" style="color:white;">
+                                    Créer mon compte Stripe
+                                </a>
                             </div>
                         </div>
-                    </section>
 
-                    <section class="row">
-                        <div class="col-12 row justify-content-center align-items-center p-3">
-
-                                <div class="col-12 col-md-6 col-md-auto row justify-content-center">
-                                    <div class="col-auto flex-row justify-content-around align-items-center">
-                                        <a target="_blank" href="<%=ENV["STRIPE_TEST_OAUTH"]%>">
-                                            <%= image_tag "ico/Plus.png", :class=>"ico-plus" %>
-                                        </a>
-                                    </div>
-                                    <h3 class="col-12 text-center text-secondary"><a target="_blank" href="<%=ENV["STRIPE_TEST_OAUTH"]%>">Créer</a></h3>
-                                    <div class="col-12 text-center">votre compte Stripe en cliquant sur le lien ci-dessus</div>
-                                </div>
-                        </div>
-                        <div class="col-12 row justify-content-center">
-                            <h2 class="col-12 text-secondary text-center">Guide de création de votre compte Stripe</h2>
-                            <div class="col-12 row text-center justify-content-center align-items-center">
+                        <div class="col-12 text-center justify-content-center align-items-center">
                                 <ul class="infos text-left mt-3">
                                     <li>
                                         <%= image_tag "ico/info_rose.png", :class=>"ico-infos mr-3" %>
-                                        <strong>Votre compte sera validé que lorsque
+                                        <strong>Votre compte TopNote ne sera validé que lorsque
                                         votre compte Stripe sera créé.</strong>
+                                    </li>
+                                    <li style="line-height: 90px">
+                                        <%= image_tag "ico/info_rose.png", :class=>"ico-infos mr-3" %>
+                                        <strong>Vous recevrez votre rémunération dans un délai maximum de 4 jours ouvrés après le cours.</strong>
                                     </li>
                                     <li>
                                         <%= image_tag "ico/info_rose.png", :class=>"ico-infos mr-3" %>
-                                        <strong>Munissez vous de votre IBAN pour créer votre
-                                        compte Stripe.</strong>
+                                        <strong>Lors de la création de votre compte Stripe :</strong>
+                                        <ul class="mt-4 mb-4" style="text-align: left; padding-left: 70px;"> 
+                                            <li><span class="fa fa-circle"></span>Munissez vous de votre IBAN</li>
+                                            <li><span class="fa fa-circle"></span>Choisissez le statut de "Particulier/Micro-entrepreneur/Auto-entrepreneur"</li>
+                                            <li><span class="fa fa-circle"></span>L'adresse de l'entreprise correspond à votre adresse postale</li>
+                                            <li><span class="fa fa-circle"></span>Le nom de votre entreprise correspond à votre Nom et Prénom</li>
+                                            <li><span class="fa fa-circle"></span>Le numéro de SIRET et de SIREN sont optionnels</li>
+                                        </ul>
                                     </li>
-                                    <li>
-                                        <%= image_tag "ico/info_rose.png", :class=>"ico-infos mr-3" %><strong>Ci-dessous le guide création pour créer votre
-                                        compte Stripe</strong>
+                                    <li style="line-height: 90px">
+                                        <%= image_tag "ico/info_rose.png", :class=>"ico-infos mr-3" %><strong>Pour toutes informations supplémentaires, référrez-vous au <a href="/annexe/Guide" classe="rose" target="_blank">guide de création</a> .
+                                        </strong>
                                     </li>
                                 </ul>
                             </div>
-                            <div class="col-12 row justify-content-center">
-                                <div class="col-12 col-md-auto">
-                                    <%= image_tag "Inscription_stripe_1.png", :class=>"img-fluid" %>
-                                </div>
-                                <p class="col-12 text-center">La description de votre activité est <span class="rose">"Soutien scolaire"</span></p>
-                                <p class="col-12 text-center">Votre site est : <span class="rose">"lakamaraderie.fr"</span></p>
-                            </div>
-                            <div class="col-12 row justify-content-center">
-                                <div class="col-12 col-md-auto">
-                                    <%= image_tag "Inscription_stripe_2.png", :class=>"img-fluid" %>
-                                </div>
-                                <p class="col-12 text-center">Le type d'organisation qui vous concerne est <span class="rose">"Particulier /
-                                    Micro-entrepreneur / Auto-entrepreneur</span></p>
-                                <p class="col-12 text-center">L'adresse de votre entreprise est votre adresse postale. Dans cet exemple, l'adresse de Monsieur
-                                    DUPONT Alexis est : <span class="rose">"10 rue de Rivoli, 75002, Paris"</span></p>
-                            </div>
-                            <div class="col-12 row justify-content-center">
-                                <div class="col-12 col-md-auto">
-                                    <%= image_tag "Inscription_stripe_3.png", :class=>"img-fluid" %>
-                                </div>
-                                <p class="col-12 text-center">Dans cette première partie, vous devez remplir vos informations
-                                    personnelles.</p>
-                                <p>Exemple: Monsieur DUPONT Alexis, professeur habitant au <span class="rose">"10 rue de Rivoli."</span></p>
-                            </div>
-                            <div class="col-12 row justify-content-center">
-                                <div class="col-12 col-md-auto">
-                                    <%= image_tag "Inscription_stripe_4.png", :class=>"img-fluid" %>
-                                </div>
-                                <p class="col-12 text-center">Vous êtes libre de choisir le nom de votre entreprise, le plus courant est
-                                d'indiquer votre nom et prénom comme dans l'exemple ci-dessus: <span class="rose">"Alexis DUPONT"</span></p>
-                            </div>
-                            <div class="col-12 row justify-content-center">
-                                <div class="col-12 col-md-auto">
-                                    <%= image_tag "Inscription_stripe_5.png", :class=>"img-fluid" %>
-                                </div>
-                                <p class="col-12 text-center">
-                                    <strong>Veuillez indiquer votre IBAN afin de recevoir
-                                    automatiquement votre rémunération.</strong>
+
+                            <div class="col-12 mt-3">
+                                <p style="font-size: 1.2em; color: gray; font-weight: bold">Ils utilisent Stripe... </p>
+                                <p>
+                                    <%= image_tag "StripeExamples.png", size:"700x100"%>
                                 </p>
                             </div>
-                        </div>
-                    </section>
+
+
+                        
                 </div>
             </div>
         </div>
