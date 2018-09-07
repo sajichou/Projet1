@@ -115,6 +115,8 @@ Rails.application.routes.draw do
 
   get 'admin/info_eleve'
 
+  get 'admin/really_detruire_prof'
+
   devise_for :users, controllers: { registrations:'user/registrations', sessions:'user/sessions', confirmations: 'user/confirmations'}
   devise_for :teachers, controllers: { registrations:'teachers/registrations', confirmations: 'teachers/confirmations'}
 

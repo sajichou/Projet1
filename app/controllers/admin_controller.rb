@@ -40,6 +40,12 @@ class AdminController < ApplicationController
     redirect_to '/admin/validated'
   end
 
+
+  def really_detruire_prof
+    Teacher.find(params[:id]).destroy
+    redirect_to '/admin/validated'
+  end
+
   def eleves
     @users=User.all
   end

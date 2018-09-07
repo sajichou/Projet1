@@ -21,15 +21,26 @@
 				<%=image_tag c.infoteacher.avatar.url(:thumb), :class => "thumbnail"%></td>
 			<% end %>
 			<td>
-				<div class="btn btn-danger">
-					<%= link_to "Devalider", {:controller => "admin", :action => "invalidate", :id => c.id, :class =>"btn"}%>
+
+				<div style="border:solid 1px black; background-color: blue">
+					<p class="text-white">
+					<%= link_to "Devalider", {:controller => "admin", :action => "invalidate", :id => c.id, :class =>"link_to"}%>
+					</p>
 				</div>
 			</td>
 			<td>
-				<button type="button" class="btn btn-danger" data-toggle="confirmation" >
-					<%= link_to "Supprimer", {:controller => "admin", :action => "detruire_prof", :id => c.id, :class =>"btn btn-danger"}%>
-				</button>
-
+				<div style="border:solid 1px black; background-color: orange">
+					<p class="text-white">
+						<%= link_to "Blacklister", {:controller => "admin", :action => "detruire_prof", :id => c.id, :class =>"link_to"}%>
+					</p>
+				</div>
+			</td>
+			<td>
+				<div style="border:solid 1px black; background-color: red;">
+					<p class="text-white">
+					<%= link_to "Supprimer", {:controller => "admin", :action => "really_detruire_prof", :id => c.id, :class =>"link_to"}%>
+					</p>
+				</div>
 			</td>
 		</tr>
 		<%end%>
