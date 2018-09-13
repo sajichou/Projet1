@@ -1,9 +1,9 @@
 	<%=form_tag "/cours/modifier", method:"post" do %>
 
 	<div class="form-row justify-content-center">
-    <div class="col-6 mx-auto">
-        <%= render partial:'/pages/annonce_prof', locals:{cour:Cour.find(params[:id])}%>
-    </div>
+        <div class="col-6 mx-auto">
+            <%= render partial:'/pages/annonce_prof', locals:{cour:Cour.find(params[:id])}%>
+        </div>
 		<div class="col-12">
 		<h2>Jour et horaire de tous les cours restants</h2>
 		</div>
@@ -52,8 +52,10 @@
             })
 
 		</script>
-	<%end%>
-</div>
+
+        <%= hidden_field_tag "id", params[:id] %>
+    	<%end%>
+    </div>
 
 
     <div class="form-row justify-content-center mt-5">
@@ -65,7 +67,7 @@
 
         <input type="text" name="timepicker" class="timepicker col-12 col-lg-3 form-search text-center m-2">
 
-        <%= hidden_field_tag "id", params[:id] %>
+        
 
         <button type="submit" name="modifier_ex" class="col-12 col-lg-2 form-search-btn m-2">Envoyer</button>
 

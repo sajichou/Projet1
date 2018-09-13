@@ -42,7 +42,7 @@ class AdminController < ApplicationController
 
 
   def really_detruire_prof
-    Teacher.find(params[:id]).destroy
+    Teacher.find(params[:id]).really_destroy!
     redirect_to '/admin/validated'
   end
 

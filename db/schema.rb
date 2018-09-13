@@ -10,16 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180905142858) do
+ActiveRecord::Schema.define(version: 20180912103401) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "absences", force: :cascade do |t|
-    t.integer "user_id"
+  create_table "absencesponctuelles", force: :cascade do |t|
     t.integer "cour_id"
-    t.string "date"
-    t.datetime "deleted_at"
+    t.integer "user_id"
+    t.integer "lesson_id"
+    t.datetime "created_at"
   end
 
   create_table "alertes", force: :cascade do |t|
@@ -44,6 +44,12 @@ ActiveRecord::Schema.define(version: 20180905142858) do
     t.datetime "image_updated_at"
     t.string "accroche"
     t.string "date"
+  end
+
+  create_table "chapitres", force: :cascade do |t|
+    t.integer "lesson_id"
+    t.integer "topic_id"
+    t.integer "cour_id"
   end
 
   create_table "commentaires", force: :cascade do |t|
@@ -93,6 +99,7 @@ ActiveRecord::Schema.define(version: 20180905142858) do
     t.string "country"
     t.string "lieu_court"
     t.datetime "deleted_at"
+    t.integer "objectif", default: 0
     t.index ["deleted_at"], name: "index_cours_on_deleted_at"
   end
 
@@ -274,6 +281,7 @@ ActiveRecord::Schema.define(version: 20180905142858) do
     t.boolean "perf"
     t.string "stripe_charge"
     t.datetime "deleted_at"
+    t.boolean "absence", default: false
   end
 
   create_table "roles", force: :cascade do |t|
@@ -310,6 +318,13 @@ ActiveRecord::Schema.define(version: 20180905142858) do
     t.index ["deleted_at"], name: "index_teachers_on_deleted_at"
     t.index ["email"], name: "index_teachers_on_email", unique: true
     t.index ["reset_password_token"], name: "index_teachers_on_reset_password_token", unique: true
+  end
+
+  create_table "topics", force: :cascade do |t|
+    t.integer "niveau_id"
+    t.string "matiere"
+    t.string "theme"
+    t.string "chapitre"
   end
 
   create_table "users", force: :cascade do |t|

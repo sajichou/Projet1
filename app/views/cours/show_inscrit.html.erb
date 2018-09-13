@@ -1,0 +1,258 @@
+<!-- SECTION RAPPEL CARACTERISTIQUES COURS SELECTIONNE -->
+
+<div class="row justify-content-center p-3">
+	<div class="col-11">
+
+		<div class="row justify-content-center mt-3">
+			<div class="col-12 p-3" style="position: relative; ">
+			<div style="position: absolute; top: 30%; left: 45%; border: solid 1px #e55966; height: 160px"></div>
+				<div class="row justify-content-center">
+					<div class="col-2">
+						<%= link_to :back do %>
+							<p style="color: #e55966"> <span class="fa fa-arrow-left fa-2x"></span></p>
+							<p style="color: #e55966">Retour</p>
+						<% end %>
+					</div>
+					<div class="col-10">
+						<p class="mt-3 text-capitalize" style="font-weight: bold; font-size: 1.4em"><%=@cour.matiere%>
+							<%@cour.annees.each do |n| %>
+								| <%= Correspondance.find_by_niveau_id(n.niveau).nom%>	
+							<%end%>
+						</p>
+					</div>
+
+				</div>
+				<div class="row justify-content-center">
+					<div class="col-10 col-lg-10">
+						<div class="row justify-content-center">
+							<!-- image -->
+							<div class="col-6">
+								<div class="row justify-content-center">
+									<%= image_tag @cour.teacher.infoteacher.avatar.url(:thumb), :class => "thumbnail_show" %>
+								</div>
+								<div class="row justify-content-center mt-2">
+									<div style="font-weight: bold;">
+										<%=@cour.teacher.infoteacher.first_name%> <%=@cour.teacher.infoteacher.last_name[0]%>.
+									</div>
+								</div>
+								<div class="row justify-content-center mt-2">
+									<div class="d-flex">
+										<div style="color: #e55966">
+											<i class="fa fa-check"></i>
+										</div>
+										<div>
+											<p class="ml-1" style="font-size: 90%">Profil vérifié</p>
+										</div>
+									</div>
+								</div>						
+							</div>
+							<!-- caractéristiques -->
+							<div class="col-6 pt-3">
+
+								<div class="row align-items-start">
+									<div class="col-12" style="text-align: start">
+										<p>
+											<%= @cour.descriptif[0..50] %>...
+										</p>
+									</div>
+								</div>
+								
+								<div class="row align-items-start">
+									<div class="col-12" style="text-align: start">
+										<% if (@cour.jour.present? and @cour.heure.present?) %>
+											<p>
+												<span style="font-weight: bold">Date du prochain cours : </span>
+
+												<% if @cour.min == 0 %>
+													<%=@cour.jour%> | <%=@cour.heure %>h - <%=@cour.heure+1 %>h30
+												<% else %>
+													<%=@cour.jour%> | <%=@cour.heure %>h30 - <%=@cour.heure+2 %>h
+												<% end %>
+											</p>
+										<% else %>
+											<p style="font-weight: bold">Plusieurs créneaux possibles</p>
+										<% end %>
+									</div>
+								</div>
+
+								<div class="row align-items-start">
+									<div class="col-12" style="text-align: start">
+										<p><span style="font-weight: bold">Lieu du cours : </span>
+											<%= @cour.lieu_court %> </p>
+									</div>
+								</div>
+								<div class="row align-items-start">
+									<div class="col-12" style="text-align: start; color: #e55966">
+										<% if @cour.nombre_eleves<2 %>
+											<p><%= 3-@cour.nombre_eleves %> places disponibles</p>
+										<% else %>
+											<p><%= 3-@cour.nombre_eleves %> place disponible</p>
+										<% end %>
+									</div>
+								</div>
+								<% if @cour.nombre_eleves > 0 %>
+									<div class="row align-items-start">
+										<div class="col-12" style="text-align: start">
+											<p><span style="font-weight: bold">Thème du cours : </span>
+												<% liste_themes = [] %>
+												<% Chapitre.where(lesson_id:@cour.lessons.last.id).each do |c| %>
+													<% if !liste_themes.include? Topic.find(c.topic_id).theme %>
+														<% if liste_themes.length > 0 %>
+														|
+														<% end %>
+														<%=Topic.find(c.topic_id).theme%> 
+													<% liste_themes.push(Topic.find(c.topic_id).theme)%>
+													<% end %>
+												<% end %> 
+											</p>
+										</div>
+									</div>
+								<%end%>
+
+								<div class="row justify-content-around">
+									
+								
+								<% if !teacher_signed_in? %>
+									<div class="col-5">
+										<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ContacterProf" style="border-radius:5px; color:white;">
+						  					Envoyer un message
+										</button>
+									</div>
+									<div class="col-5">
+										<div  class="bg-rose" style=" border-radius: 5px; ">
+											<input type="submit" class="btn btn-primary form-control" value="M'abonner" style="border-radius:5px" name="commit">
+										</div>
+
+									</div>
+								
+								<% elsif (teacher_signed_in? and current_teacher.id == @cour.teacher_id) %>
+									<div class="col-12 col-lg-5 bleu" style="border:solid 1px black; border-radius: 10px ; height:30px">
+										<%= link_to "Modifier", {:controller =>"cours", :action=>"modifier", :id=>@cour.id}, class:"link_to" %>
+									</div>
+									<div class="col-12 col-lg-5 bg-rouge" style="border:solid 1px black; border-radius: 10px">
+									
+										<button type="button" class="btn btn-link" data-toggle="modal" data-target="#exampleModal" style="height:30px">
+						  					<p>Supprimer ce cours</p>
+										</button>
+
+									</div>
+								
+								<%end%>	
+
+									<div class="col-12 col-lg-4 bleu" style="border:solid 1px black; border-radius: 10px ; height:30px">
+										<%= link_to "Me désabonner", {:controller =>"pages", :action=>"medesabonner", :id=>@cour.id}, class:"link_to" %>
+									</div>								
+
+								</div>	
+								
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Messages et absences-->
+
+<div class="row justify-content-center bg-gris p-3">
+	<div class="col-11">
+
+		<div class="row justify-content-between">
+
+			<div class="col-12 col-lg-6 bg-blanc p-3" style="border-right: solid 20px #F2F2F2" >
+					<div class="row justify-content-center">
+						<div class="col-12 ">
+							<p style="font-weight: bold; font-size: 1.4em">Conversation avec <%=@cour.teacher.infoteacher.first_name.capitalize%></p>
+							<p class="font-italic text-justify" style="font-size:90%"></p>
+							AAA
+
+							<% @messages.each do |m| %>
+								<div class="row mt-2">
+									<% if !m.ecritparuser %>
+										<div class="col-3 align-self-center">	
+											<%= image_tag m.teacher.infoteacher.avatar.url(:thumb), :class => "thumbnail1" %>
+										</div>
+										<div class="col-9">
+											<div class="px-3 py-2" style="background-color: #fafafa; border:solid 1px black; border-radius: 10px; ">
+												<p class="mb-0" style="text-align: left; font-weight: bold">
+													<%=m.teacher.infoteacher.first_name%> :</p>
+												<p class="mb-0" style="text-align: left"><%= m.message %></p>
+												<p class="mb-0" style="text-align: right; font-style: italic;">
+													<%= m.created_at.strftime("%Y-%m-%d") %> à <%=m.created_at.strftime("%H")%>h<%=m.created_at.strftime("%M") %></p>
+											</div>
+										</div>
+									<% elsif m.ecritparuser %>
+									
+										<div class="col-3">	
+											<!--
+											<%= image_tag m.teacher.infoteacher.avatar.url(:thumb), :class => "thumbnail1" %>
+											-->
+										</div>
+					
+										<div class="col-9">
+											<div class="px-3 py-2" style="background-color: #bdbdbd; border:solid 1px black; border-radius: 10px; color: white">
+												<p class="mb-0" style="text-align: left; font-weight: bold">
+													<%=m.user.infouser.first_name%> :</p>
+												<p class="mb-0" style="text-align: left"><%= m.message %></p>
+												<p class="mb-0" style="text-align: right; font-style: italic;">
+													<%= m.created_at.strftime("%Y-%m-%d") %> à <%=m.created_at.strftime("%H")%>h<%=m.created_at.strftime("%M") %></p>
+											</div>
+										</div>
+									<% end %>
+								</div>
+							<% end %>
+							AAA
+
+						</div>
+					</div>
+			</div>
+
+			<div class="col-12 col-lg-6 bg-blanc p-3">
+				<div class="row justify-content-center">
+					<div class="col-12  ">
+						<p style="font-weight: bold; font-size: 1.4em">Mes absences</p>
+						<p class="font-italic text-justify" style="font-size:90%; font-weight: bold">Signaler mon absence pour le prochain cours
+						</p>
+						<button class="btn btn-link">
+							<%= link_to "Envoyer", {:controller=>"absences", :action=>"ponctuelle", :id=>@cour.id} %>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+<!-- Experience et méthodologie-->
+
+<div class="row justify-content-center bg-gris p-3">
+	<div class="col-11">
+
+		<div class="row justify-content-between">
+
+			<div class="col-12 col-lg-6 bg-blanc p-3" style="border-right: solid 20px #F2F2F2" >
+					<div class="row justify-content-center">
+						<div class="col-12 ">
+							<p style="font-weight: bold; font-size: 1.4em">Expérience</p>
+							<p class="font-italic text-justify" style="font-size:90%"><%=@cour.teacher.infoteacher.experience%></p>			
+						</div>
+					</div>
+			</div>
+
+			<div class="col-12 col-lg-6 bg-blanc p-3">
+				<div class="row justify-content-center">
+					<div class="col-12  ">
+						<p style="font-weight: bold; font-size: 1.4em">Méthodologie</p>
+						<p class="font-italic text-justify" style="font-size:90%"><%=@cour.teacher.infoteacher.methodology%></p>				
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

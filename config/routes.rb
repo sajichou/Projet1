@@ -63,9 +63,7 @@ Rails.application.routes.draw do
 
   get 'cours/refuser_inscription'
 
-  get 'cours/absence_show'
-
-  get 'cours/absence'
+  get 'cours/show_inscrit'
 
   get 'cours/:id' => 'cours#show'
 
@@ -133,6 +131,8 @@ Rails.application.routes.draw do
 
   get 'annexe/CGU'
 
+  get 'annexe/Guide'
+
   get 'blog/index'
   get 'blog/create'
   post 'blog/create' =>'blog#new'
@@ -140,6 +140,8 @@ Rails.application.routes.draw do
   get 'blog/edit'
   post 'blog/edit' =>'blog#update'
   get 'blog/destroy'
+
+  get 'absences/ponctuelle'
 
   resources :notifications do
     collection do 

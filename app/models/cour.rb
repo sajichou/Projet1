@@ -10,7 +10,7 @@ class Cour < ActiveRecord::Base
 	has_many :inscriptions, dependent: :destroy
 	has_many :lessons
 	has_many :contactmessages
-	has_many :absences
+	has_many :absencesponctuelles
 	after_validation :affichage_lieu, on: [ :create, :update ]
 
 	#after_create :reminder

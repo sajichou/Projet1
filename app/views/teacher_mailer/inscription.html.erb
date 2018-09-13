@@ -9,6 +9,12 @@ Cours de <%=@cour.matiere%>, <%=@cour.jour%> à <%=@cour.heure%> h. </p>
 <p>
 <%=@eleve.infouser.first_name%>: <%=@eleve.infouser.phone%> | <%=@eleve.infouser.email%>
 </p>
+<p>
+L'élève a indiqué qu'il souhaiterait travailler au prochain cours les chapitre suivants : 
+</p>
+<%@topics.each do |t| %>
+	<p><%=Topic.find(t).chapitre%></p>
+<%end%>
 
 <p>Nous vous souhaitons un bon cours avec vos Kamarades,</p>
 

@@ -3,4 +3,5 @@ class Lesson < ActiveRecord::Base
 	has_many :presences
 	has_many :alertes
 	has_many :paiements
+	has_many :absencesponctuelles
 end

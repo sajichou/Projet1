@@ -10,23 +10,26 @@ class PagesController < ApplicationController
   end
 
   def medesabonner
-    inscription = Inscription.find(params[:id])
+    inscription = Inscription.find_by_cour_id(params[:id])
     cour = inscription.cour 
     cour.nombre_eleves = cour.nombre_eleves - 1
     cour.save
     inscription.destroy
-    #On supprime aussi sa presence
-    if (cour.lessons.last.present? and cour.lessons.last.presences.present?)
-      puts "desabonnement"
-      cour.lessons.last.presences.each do |p|
-        puts !p.perf
-        if (p.user_id == current_user.id and !p.perf)
-          puts "ici"
-          p.destroy 
-        end
-      end
+    #On supprime aussi sa presence non payée si delai respecté
+    lesson = Cour.find(params[:id]).lessons.last
+    presence = Presence.where(lesson_id:lesson.id, user_id:current_user.id).last
+    if presence.perf
+      flash[:info] = "Vous vous êtes bien désabonné."
+      redirect_to '/pages/monespace'
+    elsif (lesson.date.to_date - Time.zone.today > 1)
+      presence.destroy
+      flash[:info] = "Vous vous êtes bien désabonné sans frais !"
+      redirect_to '/pages/monespace'
+    else
+      flash[:info] = "Vous vous êtes bien désabonné. Vous serez débité pour le prochain cours"
+      redirect_to '/pages/monespace'
     end
-    redirect_to '/pages/monespace'
+
   end
 
   def abonnement

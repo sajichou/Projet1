@@ -1,0 +1,3 @@
+class Chapitre < ApplicationRecord
+
+end

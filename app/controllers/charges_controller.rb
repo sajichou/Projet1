@@ -6,6 +6,8 @@ class ChargesController < ApplicationController
 	def new
 		@cours_id = params[:id]
 		@dispo = params[:dispo]
+		@objectif = params[:objectif]
+		@topics = params[:topics]
 	end
 
 	def create
@@ -17,54 +19,8 @@ class ChargesController < ApplicationController
 	  	)
 	  	StripeCustomer.create user_id:current_user.id, cour_id:params[:cours_id],
 	   		stripe_customer_id:customer.id
-	   	nb = Cour.find(params[:cours_id]).nombre_eleves
-	   	if nb < 1
-		   	#On envoie une demande au professeur par mail 
-		   	dispo = params[:dispo].split(",") #"lundi,14,30"
-		   	puts "dispo"
-		   	puts dispo
-		   	if dispo == nil
-		   		jour = Cour.find(params[:cours_id]).jour
-		   		heure = Cour.find(params[:cours_id]).heure
-		   		min = Cour.find(params[:cours_id]).min
-		   	else
-			   	jour = dispo[0]
-			   	heure = dispo[1].to_i
-			   	min = dispo[2].to_i
-			end
-		   	TeacherMailer.demande_inscription(Cour.find(params[:cours_id]),current_user,jour,heure).deliver
-		   	#On envoie une demande par SMS
-		   	@twilio_number = ENV['TWILIO_NUMBER']
-		    account_sid = ENV['TWILIO_ACCOUNT_SID']
-		    @client = Twilio::REST::Client.new(account_sid, ENV['TWILIO_AUTH_TOKEN'])
-		    teacher_phone = "+33" + Cour.find(params[:cours_id]).teacher.infoteacher.phone
-		    twilio_phone_number = "TopNote"
-		    #time_str = ((self.time).localtime).strftime("%I:%M%p on %b. %d, %Y")
-		    #reminder = "Hi #{self.name}. Just a reminder that you have an appointment coming up at #{time_str}."
-		    reminder = "Hello, un élève souhaite s'inscrire à l'un de vos cours! Rendez-vous sur votre espace pour l'accepter. Sans réponse de votre part sous 24h, sa demande sera refusée. "
-		    message = @client.api.account.messages.create(
-		      #:from => '+33644640536',
-		      :from =>twilio_phone_number,
-		      #:to => self.phone_number,
-		      :to => teacher_phone,
-		      :body => reminder,
-		    )
-		   	#On sauvegarde la date d'envoie et le choix de créneau de l'eleve
-		   	Demande.create(user_id:current_user.id, cour_id:params[:cours_id], teacher_id: Cour.find(params[:cours_id]).teacher.id,
-		   		created_at:Time.zone.now, jour:jour, heure:heure)
 
-		elsif (nb > 0 and nb < 3)
-			Presence.create(lesson_id:Cour.find(params[:cours_id]).lessons.last.id, user_id:current_user.id, 
-	  		perf:false)
-	  		nb += 1
-	  		Cour.find(params[:cours_id]).update(nombre_eleves: nb)
-	  		Inscription.create user_id:current_user.id, cour_id:params[:cours_id]
-      		UserMailer.inscription(current_user, Cour.find(params[:cours_id])).deliver
-      		TeacherMailer.inscription(Cour.find(params[:cours_id]).teacher,Cour.find(params[:cours_id]),current_user).deliver
-
-
-		end
-		redirect_to controller: 'pages', action: 'abonnement', cour_id:params[:cours_id]
+		redirect_to controller: 'cours', action: 'inscription', id:params[:cours_id], dispo:params[:dispo], objectif:params[:objectif], topics:params[:topics]
 
 		rescue Stripe::CardError => e
 	  		flash[:error] = e.message

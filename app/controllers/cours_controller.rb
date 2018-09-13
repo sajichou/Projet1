@@ -102,6 +102,16 @@ class CoursController < ApplicationController
       @l=l_ord
     end
 
+    if @est_inscrit
+      redirect_to controller: 'cours', action: 'show_inscrit', id: @cour.id
+    end
+
+  end
+
+  def show_inscrit
+    @cour = Cour.find(params[:id])
+    @messages = Contactmessage.where(user_id:current_user.id, 
+      teacher_id:@cour.teacher.id, cour_id:@cour.id)
   end
 
   def update
@@ -113,12 +123,10 @@ class CoursController < ApplicationController
     inscriptions.each do |i|
       i.destroy
     end
-    if (cour.lessons.last.present? and cour.lessons.last.presences.present?)
+    if (cour.lessons.last.present? and cour.lessons.last.presences.present? and !cour.lessons.last.paid)
       puts "suppression"
       cour.lessons.last.presences.each do |p|
-        puts !p.perf
-        if (p.user_id == current_user.id and !p.perf)
-          puts "ici"
+        if (!p.perf)
           p.destroy 
         end
       end
@@ -213,19 +221,46 @@ class CoursController < ApplicationController
             delta_jours += 7
           end
           date_reg = Date.today + delta_jours
-          #Conversion implicite de la date au format 2018-05-04: strftime("%Y-%m-%d")
-          cour.update(date_reg:date_reg)
+          #On decale d'une semaine si l'eleve s'inscrit moins de 24h avant le début du cours
+          if delta_jours < 2
+            date_reg += 7
+          end
+        
+          cour.update(date_reg:date_reg, objectif:params[:objectif].to_i)
           #On cree la lesson et la presence associee
           #Lesson.create cour_id:cour.id, date:date_reg
-          Lesson.find_by_cour_id(cour.id).update(date:date_reg)
+          lesson = Lesson.create(cour_id:cour.id, date:date_reg,paid:false)
+          lesson.save
+          #On renseigne les choix de chapitres du 1er inscrit
+          eval(params[:topics]).each do |t|
+            Chapitre.create(lesson_id:lesson.id, cour_id:cour.id, topic_id:t)
+          end
+
         end
       cour.save
       
       Inscription.create user_id:current_user.id, cour_id:cour.id
       Presence.create lesson_id:cour.lessons.last.id, user_id:current_user.id, perf:false
 
+=begin
+      @twilio_number = ENV['TWILIO_NUMBER']
+      account_sid = ENV['TWILIO_ACCOUNT_SID']
+      @client = Twilio::REST::Client.new(account_sid, ENV['TWILIO_AUTH_TOKEN'])
+      teacher_phone = "+33" + Cour.find(cour.id).teacher.infoteacher.phone
+      twilio_phone_number = "TopNote"
+      #time_str = ((self.time).localtime).strftime("%I:%M%p on %b. %d, %Y")
+      #reminder = "Hi #{self.name}. Just a reminder that you have an appointment coming up at #{time_str}."
+      reminder = "Hello, un nouvel élève s'est inscrit à votre cours ! "
+      message = @client.api.account.messages.create(
+        #:from => '+33644640536',
+        :from =>twilio_phone_number,
+        #:to => self.phone_number,
+        :to => teacher_phone,
+        :body => reminder,
+      )
+=end
       UserMailer.inscription(current_user, cour).deliver
-      TeacherMailer.inscription(cour.teacher,cour,current_user).deliver
+      TeacherMailer.inscription(cour.teacher,cour,current_user, params[:topics]).deliver
       redirect_to '/pages/monespace'
     else
       redirect_to controller: 'cours', action: 'show', id: params[:id]
@@ -236,8 +271,8 @@ class CoursController < ApplicationController
   def accepter_inscription
     user = User.find(params[:user_id])
     cour = Cour.find(params[:cour_id])
-    Demande.find(params[:demande_id]).update(state:true)
-    demande = Demande.find(params[:demande_id])
+   # Demande.find(params[:demande_id]).update(state:true)
+   # demande = Demande.find(params[:demande_id])
 
     if cour.nombre_eleves < 3
     cour.nombre_eleves = cour.nombre_eleves + 1
@@ -357,7 +392,8 @@ class CoursController < ApplicationController
           redirect_to controller: 'cours', action:'show', id:params[:cour_id]
         end
     elsif params[:commit]
-      redirect_to controller: 'charges', action:'new', id:params[:id], dispo:params[:dispo]
+      redirect_to controller: 'charges', action:'new', id:params[:id], dispo:params[:dispo], 
+      objectif:params[:objectif], topics:params[:topics]
     elsif params[:commentaire]
       cour_id = params[:cour_id]
       now = Time.zone.now
@@ -378,36 +414,6 @@ class CoursController < ApplicationController
     end
   end
 
-  def absence_show
-  end
-
-  def absence
-
-    #On vérifie l'éligibilité selon les conditions d'annulation
-      #Conditions modérées:
-    #current_user.absences.where(cour_id:cour_id).each do |a|
-     # if (-a.date.to_date + 
-    #end
-    derniere_absence = 0
-    if Absence.where(user_id:current_user.id, cour_id:params[:cour_id]).present?
-      derniere_absence = Absence.where(user_id:current_user.id, cour_id:params[:cour_id]).last.to_date
-    end
-    if (Cour.find(params[:cour_id]).lessons.last.date.to_date - derniere_absence).day < 31
-      #verifier l'horaire
-      UserMailer.absence(current_user, Cour.find(params[:cour_id]).lessons.last).deliver
-      TeacherMailer.absence(current_user, Cour.find(params[:cour_id]).lessons.last).deliver
-      Presence.where(user_id:current_user.id, lesson_id:Cour.find(params[:cour_id]).lessons.last.id, perf:false).last.destroy
-      flash[:info]="Votre absence a bien été enregistré !"
-      redirect_to controller: 'cours', action:'accueil' 
-    else
-      flash[:info]="Vous avez malheureusement déjà signaler une absence il y'a moins d'un mois."
-      redirect_to  controller: 'cours', action:'absence_show'    
-    end
-    #On supprime la présence de l'élève éligible
-    #Mail prof
-    #Mail élève
-
-  end
 
   private
 

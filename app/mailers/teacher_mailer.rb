@@ -33,10 +33,11 @@ class TeacherMailer < ApplicationMailer
     :subject => "Un élève souhaite s'inscrire à votre cours!")
   end
 
-  def inscription(teacher,cour,eleve)
+  def inscription(teacher,cour,eleve, topics)
     @teacher = teacher
     @cour = cour
     @eleve= eleve
+    @topics = eval(topics)
     mail( :to => @teacher.email,
     :subject => 'Un nouvel élève a rejoint votre cours!' )
   end

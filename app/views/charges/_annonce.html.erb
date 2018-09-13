@@ -1,0 +1,170 @@
+<!-- SECTION RAPPEL CARACTERISTIQUES COURS SELECTIONNE -->
+<div class="row justify-content-center">
+	<div class="col-12 p-3" style="position: relative; ">
+	<div style="position: absolute; top: 10%; left: 45%; border: solid 1px #e55966; height: 200px"></div>
+
+		<div class="row justify-content-center">
+			<div class="col-10 col-lg-10">
+				<div class="row justify-content-center">
+					<!-- image -->
+					<div class="col-6">
+						<div class="row justify-content-center">
+							<%= image_tag cour.teacher.infoteacher.avatar.url(:thumb), :class => "thumbnail_show" %>
+						</div>
+						<div class="row justify-content-center mt-2">
+							<div style="font-weight: bold;">
+								<%=cour.teacher.infoteacher.first_name%> <%=cour.teacher.infoteacher.last_name[0]%>.
+							</div>
+						</div>
+						<div class="row justify-content-center mt-2">
+							<div class="d-flex">
+								<div style="color: #e55966">
+									<i class="fa fa-check"></i>
+								</div>
+								<div>
+									<p class="ml-1" style="font-size: 90%">Profil vérifié</p>
+								</div>
+							</div>
+						</div>						
+					</div>
+					<!-- caractéristiques -->
+					<div class="col-6 pt-3">
+
+						<div class="row align-items-start">
+							<div class="col-12" style="text-align: start">
+								<p>
+									<%= cour.descriptif[0..50] %>...
+								</p>
+							</div>
+						</div>
+						
+						<div class="row align-items-start">
+							<div class="col-12" style="text-align: start">
+								<% if (cour.jour.present? and cour.heure.present?) %>
+									<p>
+										<span style="font-weight: bold">Date du prochain cours : </span>
+
+										<% if cour.min == 0 %>
+											<%=cour.jour%> | <%=cour.heure %>h - <%=cour.heure+1 %>h30
+										<% else %>
+											<%=cour.jour%> | <%=cour.heure %>h30 - <%=cour.heure+2 %>h
+										<% end %>
+									</p>
+								<% else %>
+									<p style="font-weight: bold">Plusieurs créneaux possibles</p>
+								<% end %>
+							</div>
+						</div>
+
+						<div class="row align-items-start">
+							<div class="col-12" style="text-align: start">
+								<p><span style="font-weight: bold">Lieu du cours : </span>
+									<%= cour.lieu_court %> </p>
+							</div>
+						</div>
+
+						<!-- THEME -->
+
+						<% if cour.nombre_eleves > 0 %>
+							<div class="row align-items-start">
+								<div class="col-12" style="text-align: start">
+									<p><span style="font-weight: bold">Thématique du prochain cours : </span>
+										<% liste_themes = [] %>
+										<% Chapitre.where(lesson_id:cour.lessons.last.id).each do |c| %>
+											<% if !liste_themes.include? Topic.find(c.topic_id).theme %>
+												<% if liste_themes.length > 0 %>
+												|
+												<% end %>
+												<%=Topic.find(c.topic_id).theme%> 
+											<% liste_themes.push(Topic.find(c.topic_id).theme)%>
+											<% end %>
+										<% end %> 
+									</p>
+								</div>
+							</div>
+						<%else%>
+							<div class="row align-items-start">
+								<div class="col-12" style="text-align: start">
+									<p><span style="font-weight: bold">Thématique du prochain cours : </span>
+										<% if !topics.present? %>
+										Non définie
+										<% else %>
+											<% liste_themes = [] %>
+											<% topics.each do |t| %>
+												<% if !liste_themes.include? Topic.find(t).theme %>
+													<% if liste_themes.length > 0 %>
+													|
+													<% end %>
+												<%=Topic.find(t).theme%>
+												<% liste_themes.push(Topic.find(t).theme)%>
+												<% end %>
+											<%end%>
+										<% end %>
+									</p>
+								</div>
+							</div>
+						<%end%>
+
+						<!-- Objectif -->
+						<% if cour.nombre_eleves > 0 %>
+							<div class="row align-items-start">
+								<div class="col-12" style="text-align: start">
+									<p><span style="font-weight: bold">Objectif : </span>
+										<%if cour.objectif =="1" %>
+											Soutien scolaire
+										<%elsif cour.objectif == "2" %>
+										 	Perfectionnement scolaire
+										<%end%>
+									</p>
+								</div>
+							</div>
+						<% else %>
+							<div class="row align-items-start">
+								<div class="col-12" style="text-align: start">
+									<p><span style="font-weight: bold">Objectif : </span>
+										<%if objectif =="1" %>
+											Soutien scolaire
+										<%elsif objectif == "2" %>
+										 	Perfectionnement scolaire
+										<%end%>
+									</p>
+								</div>
+							</div>
+						<%end%>
+
+
+						<div class="row align-items-start">
+							<div class="col-12" style="text-align: start; color: #e55966">
+								<% if cour.nombre_eleves<2 %>
+									<p><%= 3-cour.nombre_eleves %> places disponibles</p>
+								<% else %>
+									<p><%= 3-cour.nombre_eleves %> place disponible</p>
+								<% end %>
+							</div>
+						</div>
+						<% if cour.nombre_eleves > 0 %>
+							<div class="row align-items-start">
+								<div class="col-12" style="text-align: start">
+									<p><span style="font-weight: bold">Thème du cours : </span>
+										<% liste_themes = [] %>
+										<% Chapitre.where(lesson_id:cour.lessons.last.id).each do |c| %>
+											<% if !liste_themes.include? Topic.find(c.topic_id).theme %>
+												<% if liste_themes.length > 0 %>
+												|
+												<% end %>
+												<%=Topic.find(c.topic_id).theme%> 
+											<% liste_themes.push(Topic.find(c.topic_id).theme)%>
+											<% end %>
+										<% end %> 
+									</p>
+								</div>
+							</div>
+						<%end%>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>

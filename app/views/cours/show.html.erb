@@ -92,6 +92,25 @@
 										<% end %>
 									</div>
 								</div>
+								<% if @cour.nombre_eleves > 0 %>
+									<div class="row align-items-start">
+										<div class="col-12" style="text-align: start">
+											<p><span style="font-weight: bold">Thème du cours : </span>
+												<% liste_themes = [] %>
+												<% Chapitre.where(lesson_id:@cour.lessons.last.id).each do |c| %>
+													<% if !liste_themes.include? Topic.find(c.topic_id).theme %>
+														<% if liste_themes.length > 0 %>
+														|
+														<% end %>
+														<%=Topic.find(c.topic_id).theme%> 
+													<% liste_themes.push(Topic.find(c.topic_id).theme)%>
+													<% end %>
+												<% end %> 
+											</p>
+										</div>
+									</div>
+								<%end%>
+
 								<div class="row justify-content-around">
 									
 								
@@ -215,12 +234,12 @@
 					<div class="col-12 col-lg-4">
 						<p style="font-weight: bold; font-size: 1.2em"><span style="font-size: 1.3em">2.</span> Choisissez votre objectif</p>
 						<p style="text-align: justify;">Veuillez choisir l'objectif qui vous convient :</p>
-						<div class="col-12">
-							<input type="button" class="btn btn-secondary col-9" value="Renforcement scolaire">
-						</div>
-						<div class="col-12 mt-1">
-							<input type="button" class="btn btn-info col-9" value="Perfectionnement scolaire">
-						</div>
+						 <label class="btn btn-info d-block">
+					    <input type="radio" name="objectif" id="1" value="1"  autocomplete="off" required> Soutien scolaire
+					  </label>
+					  <label class="btn btn-secondary d-block">
+					    <input type="radio" name="objectif" id="2" value="2" autocomplete="off" required> Perfectionnement scolaire
+					  </label>
 					</div>
 					<!--
 					<div class="col-12 col-lg-4">
@@ -230,12 +249,168 @@
 					-->
 				</div>
 			</div>
-		</div>
 
+			<!-- THEME -->
+			<% if user_signed_in? and current_user.infouser.niveau.present? %>
+				<div class="col-12 m-auto col-lg-6">
+					<p style="font-weight: bold; font-size: 1.2em"> Choisissez la thématique</p>
+					<div id="accordion">
+						<% iterator = 0 %>
+						<% Topic.where(niveau_id:current_user.infouser.niveau).select(:theme).map(&:theme).uniq.each do |theme| %>
+
+
+							<div class="card">
+								<div class="card-header" id="Heading">
+								  <h5 class="mb-0">
+								    	<button class="btn btn-link <%= 'collapsed' if iterator >0 %>" data-toggle="collapse" data-target='#<%=theme%>'aria-expanded="false" aria-controls='<%=theme%>'style="color:black">
+								      		<%=theme%>
+								    	</button>
+								  </h5>
+								</div>
+								<div id='<%=theme%>' class="collapse <%='show' if iterator==0%>" aria-labelledby='Heading' data-parent="#accordion">
+									<%Topic.where(niveau_id:current_user.infouser.niveau, theme:theme).each do |t|	%>
+
+										<div class="card-body">
+											<label class="btn btn-info d-block">
+											    <input type="checkbox" name="topics[]"" id="1" value='<%=t.id%>'> <%=t.chapitre%>
+											</label>
+										</div>
+
+									<%end%>
+								</div>
+							</div>
+							<% iterator += 1%>
+
+						<%end%>
+					</div>
+				</div>
+			<% elsif !user_signed_in? %>
+				<div class="col-12 m-auto col-lg-6">
+					<p style="font-weight: bold; font-size: 1.2em"> Choisissez la thématique</p>
+					<div id="accordion">
+						<% iterator = 0 %>
+						<% Topic.where(niveau_id:3).select(:theme).map(&:theme).uniq.each do |theme| %>
+
+
+							<div class="card">
+								<div class="card-header" id="Heading">
+								  <h5 class="mb-0">
+								    	<button class="btn btn-link <%= 'collapsed' if iterator >0 %>" data-toggle="collapse" data-target='#<%=theme%>'aria-expanded="false" aria-controls='<%=theme%>'style="color:black">
+								      		<%=theme%>
+								    	</button>
+								  </h5>
+								</div>
+								<div id='<%=theme%>' class="collapse <%='show' if iterator==0%>" aria-labelledby='Heading' data-parent="#accordion">
+									<%Topic.where(niveau_id:3, theme:theme).each do |t|	%>
+
+										<div class="card-body">
+											<label class="btn btn-info d-block">
+											    <input type="checkbox" name="topics[]"" id="1" value='<%=t.id%>'> <%=t.chapitre%>
+											</label>
+										</div>
+
+									<%end%>
+								</div>
+							</div>
+							<% iterator += 1%>
+
+						<%end%>
+					</div>
+		
+				</div>
+			<% end %>
+			<!--FIN  THEME -->
+
+		</div>
 		<!-- Cas où premier élève mais un seul créneau possible -->
 		<% elsif (@cour.nombre_eleves == 0 and @cour.jour.present? and @cour.heure.present?)%>
+			<div class="row justify-content-center bg-blanc mt-3 p-3">
+				<div class="col-12 col-lg-4">
+					<p style="font-weight: bold; font-size: 1.2em"><span style="font-size: 1.3em">2.</span> Choisissez votre objectif</p>
+					<p style="text-align: justify;">Veuillez choisir l'objectif qui vous convient :</p>				
+
+					  <label class="btn btn-info d-block">
+					    <input type="radio" name="objectif" id="1" value="1"  autocomplete="off" required> Soutien scolaire
+					  </label>
+					  <label class="btn btn-secondary d-block">
+					    <input type="radio" name="objectif" id="2" value="2" autocomplete="off" required> Perfectionnement scolaire
+					  </label>
+		
+				</div>
+				<!-- THEME -->
+				<% if user_signed_in? and current_user.infouser.niveau.present? %>
+					<div class="col-12 m-auto col-lg-6">
+						<p style="font-weight: bold; font-size: 1.2em"> Choisissez la thématique</p>
+						<div id="accordion">
+							<% iterator = 0 %>
+							<% Topic.where(niveau_id:current_user.infouser.niveau).select(:theme).map(&:theme).uniq.each do |theme| %>
+
+
+								<div class="card">
+									<div class="card-header" id="Heading">
+									  <h5 class="mb-0">
+									    	<button class="btn btn-link <%= 'collapsed' if iterator >0 %>" data-toggle="collapse" data-target='#<%=theme%>'aria-expanded="false" aria-controls='<%=theme%>'style="color:black">
+									      		<%=theme%>
+									    	</button>
+									  </h5>
+									</div>
+									<div id='<%=theme%>' class="collapse <%='show' if iterator==0%>" aria-labelledby='Heading' data-parent="#accordion">
+										<%Topic.where(niveau_id:current_user.infouser.niveau, theme:theme).each do |t|	%>
+
+											<div class="card-body">
+												<label class="btn btn-info d-block">
+												    <input type="checkbox" name="topics[]"" id="1" value='<%=t.id%>'> <%=t.chapitre%>
+												</label>
+											</div>
+
+										<%end%>
+									</div>
+								</div>
+								<% iterator += 1%>
+
+							<%end%>
+						</div>
+					</div>
+				<% elsif !user_signed_in? %>
+					<div class="col-12 m-auto col-lg-6">
+						<p style="font-weight: bold; font-size: 1.2em"> Choisissez la thématique</p>
+
+						<div id="accordion">
+							<% iterator = 0 %>
+							<% Topic.where(niveau_id:3).select(:theme).map(&:theme).uniq.each do |theme| %>
+
+								<div class="card">
+									<div class="card-header" id="Heading">
+									  <h5 class="mb-0">
+									    	<button class="btn btn-link <%= 'collapsed' if iterator >0 %>" data-toggle="collapse" data-target='#<%=theme%>'aria-expanded="false" aria-controls='<%=theme%>'style="color:black">
+									      		<%=theme%>
+									    	</button>
+									  </h5>
+									</div>
+									<div id='<%=theme%>' class="collapse <%='show' if iterator==0%>" aria-labelledby='Heading' data-parent="#accordion">
+										<%Topic.where(niveau_id:3, theme:theme).each do |t|	%>
+
+											<div class="card-body">
+												<label class="btn btn-info d-block">
+												    <input type="checkbox" name="topics[]"" id="1" value='<%=t.id%>'> <%=t.chapitre%>
+												</label>
+											</div>
+
+										<%end%>
+									</div>
+								</div>
+							<% iterator += 1%>
+							<%end%>
+						</div>
+			
+					</div>
+				<% end %>
+				<!--FIN  THEME -->
+			</div>
+
 
 		<% else %>
+		<!-- Cas où un ou deux élèves déjà inscrits -->
 
 			<div class="row justify-content-between mt-3">
 
@@ -243,7 +418,11 @@
 						<div class="row justify-content-center">
 							<div class="col-12 ">
 								<p style="font-weight: bold; font-size: 1.4em">Objectif</p>
-								<input type="button" class="btn btn-secondary col-9" value="Renforcement scolaire" style="border-radius: 10px">			
+								<% if @cour.objectif == 1 %>
+									<input type="button"  class="btn btn-info col-9" value="Soutien scolaire" style="border-radius: 10px">	
+								<% elsif @cour.objectif == 2 %>
+									<input type="button" class="btn btn-secondary col-9" value="Perfectionnement scolaire" style="border-radius: 10px">
+								<% end %>	
 							</div>
 						</div>
 				</div>
@@ -279,6 +458,37 @@
 					</div>
 				</div>
 
+				<div class="col-12 col-lg-4">
+					
+					<div id="accordion">
+						<% iterator = 0 %>
+						<% Topic.where(niveau_id:@cour.annees.last.niveau).select(:theme).map(&:theme).uniq.each do |theme| %>
+
+							<div class="card">
+								<div class="card-header" id="Heading">
+								  <h5 class="mb-0">
+								    	<button class="btn btn-link <%= 'collapsed' if iterator >0 %>" data-toggle="collapse" data-target='#<%=theme%>'aria-expanded="false" aria-controls='<%=theme%>'style="color:black">
+								      		<%=theme%>
+								    	</button>
+								  </h5>
+								</div>
+								<div id='<%=theme%>' class="collapse <%='show' if iterator==0%>" aria-labelledby='Heading' data-parent="#accordion">
+									<%Topic.where(niveau_id:@cour.annees.last.niveau, theme:theme).each do |t|	%>
+
+										<div class="card-body">
+											<label class="btn btn-info d-block">
+											    <input type="checkbox" name="topics[]"" id="1" value='<%=t.id%>'> <%=t.chapitre%>
+											</label>
+										</div>
+
+									<%end%>
+								</div>
+							</div>
+						<% iterator += 1%>
+						<%end%>
+					</div>
+				</div>
+
 			</div>
 
 		<% end %>
@@ -291,13 +501,10 @@
 				</div>
 			<% end %>
 
-
-		<%end%>	
-
-
 	</div>
 </div>
 
+<%end%>	
 
 
 						

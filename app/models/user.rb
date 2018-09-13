@@ -20,6 +20,6 @@ class User < ApplicationRecord
   has_many :contactmessages
   #has_many :notifications, foreign_key: :recipient_id
   has_many :notifications, as: :recipient
-  has_many :absences
+  has_many :absencesponctuelles
 
 end
