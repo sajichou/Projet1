@@ -10,7 +10,7 @@ class PagesController < ApplicationController
   end
 
   def medesabonner
-    inscription = Inscription.where(user_id:current_user.id, cour_id:params[:id])
+    inscription = Inscription.where(user_id:current_user.id, cour_id:params[:id]).last
     cour = inscription.cour 
     cour.nombre_eleves = cour.nombre_eleves - 1
     cour.save
