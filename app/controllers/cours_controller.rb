@@ -246,9 +246,13 @@ class CoursController < ApplicationController
           end
 
           liste_themes = []
-          params[:topics].each do |c|
-            if !liste_themes.include? Topic.find(c.topic_id).theme  
-                liste_themes.push(Topic.find(c.topic_id).theme)
+          puts "params[:topics]"
+          puts params[:topics]
+          puts "params[eval]"
+          puts eval(params[:topics])
+          eval(params[:topics]).each do |c|
+            if !liste_themes.include? Topic.find(c).theme  
+                liste_themes.push(Topic.find(c).theme)
             end 
           end
           cour.update(theme:liste_themes)
