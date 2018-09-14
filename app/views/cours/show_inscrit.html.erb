@@ -209,9 +209,8 @@
 						<p style="font-weight: bold; font-size: 1.4em">Mes absences</p>
 						<p class="font-italic text-justify" style="font-size:90%; font-weight: bold">Signaler mon absence pour le prochain cours
 						</p>
-						<button class="btn btn-link">
-							<%= link_to "Envoyer", {:controller=>"absences", :action=>"ponctuelle", :id=>@cour.id} %>
-						</button>
+						
+						<%= link_to "Envoyer", {:controller =>"absences", :action=>"ponctuelle", :id=>@cour.id}, class:"btn btn-info", role:"button" %>
 					</div>
 				</div>
 			</div>
