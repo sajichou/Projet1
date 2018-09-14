@@ -74,7 +74,7 @@ task :paiement => :environment do
       #On procede au paiement de chaque eleve et on enregistre dans son historique de paiement
       lesson.presences.each do |presence|
         #Paiement de chaque eleve qui n'a pas encore payé
-        if (!presence.perf or !presence.absence)
+        if (!presence.perf and !presence.absence)
           stripe_customer_id = StripeCustomer.where(user_id:presence.user_id, cour_id:lesson.cour.id).last.stripe_customer_id
           stripe_teacher_id = lesson.cour.teacher.infoteacher.stripe_id
           description = "Kamaraderie - Cour de " + lesson.cour.teacher.infoteacher.first_name
@@ -247,7 +247,7 @@ task :paiement_test => :environment do
       lesson.presences.each do |presence|
 
         #Paiement de chaque eleve qui n'a pas encore payé
-        if !presence.perf
+        if (!presence.perf and !presence.absence)
           puts "amount prof"
           puts amount_prof
           #begin
