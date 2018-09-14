@@ -246,10 +246,10 @@ class CoursController < ApplicationController
           end
 
           liste_themes = []
-          puts "params[:topics]"
-          puts params[:topics]
-          puts "params[eval]"
-          puts eval(params[:topics])
+          puts "params[:topics].class"
+          puts params[:topics].class
+          puts "params[eval].class"
+          puts eval(params[:topics]).class
           eval(params[:topics]).each do |c|
             if !liste_themes.include? Topic.find(c).theme  
                 liste_themes.push(Topic.find(c).theme)

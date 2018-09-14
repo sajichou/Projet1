@@ -105,6 +105,17 @@
 					</small></p>
 				</div>
 			</div>
+			<% if cours.theme.present? %>
+					<div class="row align-items-start">
+						<div class="col-12" style="text-align: start">
+							<p><span style="font-weight: bold">Thématique : </span>
+								<%cours.theme.each do |t| %>
+									<%=t%> - 
+								<%end%>
+							</p>
+						</div>
+					</div>
+			<%end%>
 			<div class="row align-items-start">
 				<div class="col-12" style="text-align: start; color: #e55966">
 					<% if cours.nombre_eleves<2 %>
