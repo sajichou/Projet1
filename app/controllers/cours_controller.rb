@@ -259,7 +259,7 @@ class CoursController < ApplicationController
       Inscription.create user_id:current_user.id, cour_id:cour.id
       Presence.create lesson_id:cour.lessons.last.id, user_id:current_user.id, perf:false
 
-=begin
+
       @twilio_number = ENV['TWILIO_NUMBER']
       account_sid = ENV['TWILIO_ACCOUNT_SID']
       @client = Twilio::REST::Client.new(account_sid, ENV['TWILIO_AUTH_TOKEN'])
@@ -275,7 +275,7 @@ class CoursController < ApplicationController
         :to => teacher_phone,
         :body => reminder,
       )
-=end
+
       UserMailer.inscription(current_user, cour).deliver
       TeacherMailer.inscription(cour.teacher,cour,current_user, params[:topics]).deliver
       redirect_to '/pages/monespace'
