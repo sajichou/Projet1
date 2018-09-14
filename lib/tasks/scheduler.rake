@@ -166,6 +166,41 @@ task :maj_cours => :environment do
   end
 end
 
+task :faux_maj_cours => :environment do
+  ### On update la date des cours passés et on cree la nouvelle lesson 
+  wday = {"lundi"=>1, "mardi"=>2, "mercredi"=>3, "jeudi"=>4, "vendredi"=>5,
+        "samedi"=>6, "dimanche"=>0}
+  auj = Time.zone.today
+  heure_auj = Time.zone.now.hour
+  Cour.where("nombre_eleves>?",0).each do |cour|
+
+    if cour.date_ex.present?
+      date = cour.date_ex.to_date
+      heure = cour.horaire_ex
+    else
+      date = cour.date_reg.to_date
+      heure = cour.heure
+    end
+
+    if (date > auj and heure < heure_auj)
+
+      delta_jours = (wday[cour.jour] - auj.wday)
+      if delta_jours <= 0 
+        delta_jours += 7
+      end
+      date_reg = auj + delta_jours
+
+      cour.update(date_ex:nil, horaire_ex:nil, min_ex:nil, date_reg:date_reg)
+      lesson = Lesson.create(cour_id:cour.id, date:date_reg, paid:false)
+      #On cree les presences par default des eleves inscrits
+      Inscription.where(cour_id:cour.id).each do |inscription|
+        Presence.create(lesson_id:lesson.id, user_id:inscription.user_id, perf:false)
+      end
+    end
+
+  end
+end
+
 ###Paiement pour tests
 
 task :paiement_test => :environment do 
