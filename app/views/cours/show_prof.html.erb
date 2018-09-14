@@ -1,0 +1,90 @@
+<div class="row justify-content-center mt-4">
+    <div class="col-12 col-lg-11">
+      <%= render partial:"en_tete", locals:{cour:@cour}%>
+    </div>
+</div>
+
+<div class="row justify-content-center bg-gris p-3">
+	<div class="col-11">
+
+		<!-- Experience et méthodologie-->
+
+		<div class="row justify-content-between">
+
+			<div class="col-12 col-lg-6 bg-blanc p-3" style="border-right: solid 20px #F2F2F2" >
+					<div class="row justify-content-center">
+						<div class="col-12 ">
+							<p style="font-weight: bold; font-size: 1.4em">Expérience</p>
+							<p class="font-italic text-justify" style="font-size:90%"><%=@cour.teacher.infoteacher.experience%></p>			
+						</div>
+					</div>
+			</div>
+
+			<div class="col-12 col-lg-6 bg-blanc p-3">
+				<div class="row justify-content-center">
+					<div class="col-12  ">
+						<p style="font-weight: bold; font-size: 1.4em">Méthodologie</p>
+						<p class="font-italic text-justify" style="font-size:90%"><%=@cour.teacher.infoteacher.methodology%></p>				
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+<div class="row justify-content-center bg-gris p-3">
+	<div class="col-11">
+		<div class="col-12 bg-blanc p-3" style="border-right: solid 20px #F2F2F2" >
+			<div class="row justify-content-center">
+				<div class="col-12 ">
+					<p style="font-weight: bold; font-size: 1.4em">Conversation pour ce groupe</p>
+					<%Contactmessage.where(cour_id:@cour.id, teacher_id:current_teacher.id).each do |m| %>
+						<div class="row">
+							<div class="col-3">
+								<p><%=m.user.infouser.first_name%></p>
+							</div>
+							<div class="col-6">
+								<p style="text-align: start"><%=m.message%></p>
+							</div>
+							<div class="col-3">
+								
+								<%= link_to "Répondre", {:controller =>"messages", :action=>"show", :message_id=>m.id}, class:"btn btn-info", role:"button" %>
+							</div>
+						</div>	
+					<%end%>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+<%  if @cour.nombre_eleves > 0 %>
+
+	<%=form_tag "/cours/show_prof", method:"post" do %>
+		<div class="row justify-content-center bg-gris p-3">
+			<div class="col-11 bg-blanc p-3">
+				<!-- THEME -->
+				<div class="col-12 m-auto col-lg-6">
+					<p style="font-weight: bold; font-size: 1.2em"> Indiquez les chapitres étudiés au prochain cours :</p>
+					<% Topic.where(niveau_id:@cour.annees.last.niveau).select(:theme).map(&:theme).uniq.each do |t| %>
+						<label class="btn btn-info d-block">
+						    <input type="checkbox" name="themes[]" id="1" value='<%=t%>'>
+						     <%=t%>
+						</label>
+					<% end %>
+				</div>
+
+			</div>
+		</div>
+	<input type="hidden" name="cour_id" value='<%=@cour.id%>'>
+	<input type="submit" class="col-3 btn btn-primary form-control" value="Enregistrer" style="border-radius: 15px">
+
+	
+
+	
+	<%end%>
+
+<%end%>

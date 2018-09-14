@@ -65,6 +65,10 @@ Rails.application.routes.draw do
 
   get 'cours/show_inscrit'
 
+  get 'cours/show_prof'
+
+  post 'cours/show_prof' =>'cours#maj'
+
   get 'cours/:id' => 'cours#show'
 
 

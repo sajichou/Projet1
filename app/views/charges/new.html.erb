@@ -16,7 +16,7 @@
 <div class="row justify-content-center mt-3">
     <div class="col-12 col-lg-11">
       <p style="font-weight: bold; font-size:1.3em">1. Récapitulatif de ma demande</p>
-      <%= render partial:"annonce", locals:{cour:Cour.find(@cours_id), topics:@topics, objectif:@objectif}%>
+      <%= render partial:"annonce", locals:{cour:Cour.find(@cours_id), topics:@topics, objectif:@objectif, dispo:@dispo}%>
     </div>
 </div>
 

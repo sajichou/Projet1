@@ -51,7 +51,25 @@
 										<% end %>
 									</p>
 								<% else %>
-									<p style="font-weight: bold">Plusieurs créneaux possibles</p>
+									<p>
+										<span style="font-weight: bold">Date du prochain cours : </span>
+										<% horaire = dispo.split(",") %>
+										<%
+										 wday = {"lundi"=>1, "mardi"=>2, "mercredi"=>3, "jeudi"=>4, "vendredi"=>5,
+								          "samedi"=>6, "dimanche"=>0}
+								          delta_jours = (wday[horaire[0]] - Date.today.wday)
+								          if delta_jours < 0 
+								            delta_jours += 7
+								          end
+								          date_reg = Date.today + delta_jours
+								          #On decale d'une semaine si l'eleve s'inscrit moins de 24h avant le début du cours
+								          if delta_jours < 2
+								            date_reg += 7
+								          end
+										%>
+										<%= date_reg.strftime("%d/%m/%Y") %> à <%=horaire[1]%>h<%=horaire[2]%>
+
+									</p>
 								<% end %>
 							</div>
 						</div>

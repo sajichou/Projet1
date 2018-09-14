@@ -92,20 +92,13 @@
 										<% end %>
 									</div>
 								</div>
-								<% if @cour.nombre_eleves > 0 %>
+								<% if @cour.theme.present? %>
 									<div class="row align-items-start">
 										<div class="col-12" style="text-align: start">
 											<p><span style="font-weight: bold">Thème du cours : </span>
-												<% liste_themes = [] %>
-												<% Chapitre.where(lesson_id:@cour.lessons.last.id).each do |c| %>
-													<% if !liste_themes.include? Topic.find(c.topic_id).theme %>
-														<% if liste_themes.length > 0 %>
-														|
-														<% end %>
-														<%=Topic.find(c.topic_id).theme%> 
-													<% liste_themes.push(Topic.find(c.topic_id).theme)%>
-													<% end %>
-												<% end %> 
+												<%@cour.theme.each do |t| %>
+													<%=t%> - 
+												<%end%>
 											</p>
 										</div>
 									</div>

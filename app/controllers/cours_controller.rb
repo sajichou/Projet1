@@ -75,6 +75,11 @@ class CoursController < ApplicationController
     else
       @est_inscrit = false
     end
+
+    if teacher_signed_in? and @cour.teacher.id = current_teacher.id
+      redirect_to controller: 'cours', action: 'show_prof', id: @cour.id
+    end
+
     # Si plusieurs créneaux disponibles :
 
     if @cour.dispos.length >1
@@ -112,6 +117,10 @@ class CoursController < ApplicationController
     @cour = Cour.find(params[:id])
     @messages = Contactmessage.where(user_id:current_user.id, 
       teacher_id:@cour.teacher.id, cour_id:@cour.id)
+  end
+
+  def show_prof
+    @cour = Cour.find(params[:id])
   end
 
   def update
@@ -236,6 +245,14 @@ class CoursController < ApplicationController
             Chapitre.create(lesson_id:lesson.id, cour_id:cour.id, topic_id:t)
           end
 
+          liste_themes = []
+          params[:topics].each do |c|
+            if !liste_themes.include? Topic.find(c.topic_id).theme  
+                liste_themes.push(Topic.find(c.topic_id).theme)
+            end 
+          end
+          cour.update(theme:liste_themes)
+
         end
       cour.save
       
@@ -328,6 +345,7 @@ class CoursController < ApplicationController
     redirect_to controller: 'pages', action: 'monespace'
   end
 
+
   def modifier
 
   end
@@ -413,6 +431,14 @@ class CoursController < ApplicationController
       redirect_to controller: 'cours', action:'show', id:params[:cour_id]
     end
   end
+
+  def maj
+    cour = Cour.find(params[:cour_id])
+    cour.update(theme:params[:themes])
+    redirect_to controller: 'cours', action:'show', id:params[:cour_id]
+
+  end
+
 
 
   private
