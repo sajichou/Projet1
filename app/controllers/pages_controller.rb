@@ -40,9 +40,9 @@ class PagesController < ApplicationController
     if params[:cgu].present?
       cgu = true
     end
-    puts params[:dptm]
-    if teacher_signed_in?
-      Infoteacher.find_by_teacher_id(current_teacher.id).update(
+    if teacher_signed_in? 
+
+      Infoteacher.find_by_teacher_id(current_teacher.id).update({
         first_name:params[:first_name],
         last_name:params[:last_name],
         email:params[:email],
@@ -50,9 +50,9 @@ class PagesController < ApplicationController
         dptm: params[:dptm],
         methodology: params[:methodology],
         experience: params[:experience],
-        cgu: cgu,
-        justificatif_identite: params[:justificatif_identite],
-        justificatif_diplome: params[:justificatif_diplome]
+        cgu:cgu,
+        justificatif_identite:params[:justificatif_identite],
+        justificatif_diplome:params[:justificatif_diplome]}.reject{|k,v| v.blank?}
         )
       
       if(session[:page_id].present?)
@@ -61,14 +61,15 @@ class PagesController < ApplicationController
         redirect_to '/pages/maphoto'
       end
     elsif user_signed_in?
-      Infouser.find_by_user_id(current_user.id).update(
+
+      Infouser.find_by_user_id(current_user.id).update({
         first_name:params[:first_name],
         last_name:params[:last_name],
         email:params[:email],
         phone: params[:phone],
         location: params[:location],
         niveau: params[:niveau],
-        cgu: cgu
+        cgu: cgu}.reject{|k,v| v.blank?}
         )
       if(session[:page_id].present?)
         redirect_to controller:"cours", action: "show", id: session[:page_id]

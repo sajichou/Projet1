@@ -54,7 +54,7 @@
 								<div class="row align-items-start">
 									<div class="col-12" style="text-align: start">
 										<p>
-											<%= @cour.descriptif[0..50] %>...
+											<%= @cour.descriptif %>...
 										</p>
 									</div>
 								</div>
@@ -106,8 +106,6 @@
 
 								<div class="row justify-content-around">
 									
-								
-								<% if !teacher_signed_in? %>
 									<div class="col-5">
 										<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ContacterProf" style="border-radius:5px; color:white;">
 						  					Envoyer un message
@@ -119,26 +117,7 @@
 										</div>
 
 									</div>
-								
-								<% elsif (teacher_signed_in? and current_teacher.id == @cour.teacher_id) %>
-									<div class="col-12 col-lg-5 bleu" style="border:solid 1px black; border-radius: 10px ; height:30px">
-										<%= link_to "Modifier", {:controller =>"cours", :action=>"modifier", :id=>@cour.id}, class:"link_to" %>
-									</div>
-									<div class="col-12 col-lg-5 bg-rouge" style="border:solid 1px black; border-radius: 10px">
-									
-										<button type="button" class="btn btn-link" data-toggle="modal" data-target="#exampleModal" style="height:30px">
-						  					<p>Supprimer ce cours</p>
-										</button>
-
-									</div>
-								
-								<%end%>	
-
-								<% if @est_inscrit%>
-									<div class="col-12 col-lg-4 bleu" style="border:solid 1px black; border-radius: 10px ; height:30px">
-										<%= link_to "Signaler mon absence", {:controller =>"cours", :action=>"absence_show", :cour_id=>@cour.id}, class:"link_to" %>
-									</div>								
-								<% end %>
+					
 
 								</div>	
 								
@@ -502,28 +481,6 @@
 
 						
 
-
-
-			<!-- Modal  Supprimer cours pour teacher-->
-			<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-			  <div class="modal-dialog" role="document">
-			    <div class="modal-content">
-			      <div class="modal-header">
-			        <h5 class="modal-title" id="exampleModalLabel">Supprimer ce cours</h5>
-			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-			          <span aria-hidden="true">&times;</span>
-			        </button>
-			      </div>
-			      <div class="modal-body">
-			        Je confirme mon souhait de supprimer ce cours. Avant de valider votre choix, nous vous conseillons de prévenir les élèves inscrits de la fin de leur cours. 
-			      </div>
-			      <div class="modal-footer">
-			        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-			        <%= link_to "Supprimer le cours", {:controller =>"cours", :action=>"destroy", :id=>@cour.id}, class:"btn btn-danger"%>
-			      </div>
-			    </div>
-			  </div>
-			</div>
 
 			<!-- Modal Contacter prof -->
 
