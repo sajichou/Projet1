@@ -114,12 +114,16 @@ section {
 }
 
 #corps {
-	padding-bottom:50px;	
+	padding-bottom:30px;	
 }
 
 #commentcamarche {
     background-image: image-url("commentcamarche.png");
     background-size: cover;
+}
+
+.text-accueil {
+    font-size:1.1em;
 }
 // MENU
 
@@ -442,7 +446,7 @@ section {
     max-width:150px; 
 }
 .icones{
-    height:50px;
+    height:65px;
 }
 .icones_prof{
     height:60px;

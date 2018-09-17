@@ -49,11 +49,12 @@ Rails.application.routes.draw do
 
   get 'cours/accueil'
 
-  get 'cours/search'
+  post 'cours/search' =>'cours#search'
 
   post 'cours/accueil' =>'cours#search'
 
-  post 'cours/search' =>'cours#search'
+  get 'cours/search'
+
 
   get 'cours/modifier'
 

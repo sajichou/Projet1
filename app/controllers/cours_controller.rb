@@ -144,15 +144,20 @@ class CoursController < ApplicationController
   end
 
   def accueil
-    
+    puts "ACCueil"
+    puts request.env['HTTP_REFERER']
   end
 
   def search
 
     niveau = params[:classe].to_i
+    if niveau.present?
+      @niveau = niveau
+    end
     #@cours = Cour.where("matiere=? AND nombre_eleves < ?  ", params[:matiere], 3)
     if params[:matiere].present?
       @cours = Cour.where("matiere=?", params[:matiere])
+      @matiere= params[:matiere]
     else
       #matiere non renseignee
       @cours = Cour.all
@@ -173,7 +178,7 @@ class CoursController < ApplicationController
     @lieu = params[:lieu]
     latitude = params[:latitude].to_f
     longitude = params[:longitude].to_f
-    if !latitude
+    if latitude == 0
       latitude = 48.87
       longitude = 2.30
     end
@@ -184,6 +189,7 @@ class CoursController < ApplicationController
     if(c.latitude.present? and c.longitude.present?)
    # a = Geocoder::Calculations.distance_between([c.latitude, c.longitude], @lieu, :units =>:km).round(2)
       a = Haversine.distance(c.latitude, c.longitude, latitude, longitude).to_kilometers.round(2)
+
     end
       @dist_hash[c] = a
       @dist[c.id] = a
@@ -194,6 +200,7 @@ class CoursController < ApplicationController
     @dist_hash_trie.each do |d|
       @cours.push(d[0])
     end
+
   end
 
 

@@ -2,38 +2,28 @@
 
 <!-- <p> Votre adresse : <%=@lieu%> </p> -->
 
-<div class="row justify-content-around mt-4">
-	<div class="col-sm-10">
+<div class="row justify-content-around mt-5 mx-0">
+	<div class="col-12 col-lg-10">
 		<%=form_tag "/cours/search", method:"post" do %>
 					<div class="form-row justify-content-center">
 						<select name="matiere" class="col-12 col-lg-3 form-search text-center m-2">
-							<option value="" disabled selected>Quelle matière ?</option>
-							<option value="mathematiques">Mathématiques</option>
-							<option value="francais">Français</option>
-							<option value="anglais">Anglais</option>
-							<option value="espagnol">Espagnol</option>
+							<option disabled selected>Quelle matière ?</option>
+							<%= options_for_select([['Mathématiques', "mathematiques"], ['Français', "francais"], ['Anglais', "anglais"], ['Espagnol', "espagnol"]], @matiere) %>
+
 						</select>
 						<select name="classe" class="col-12 col-lg-3 form-search text-center m-2">
 							<option disabled selected>Quelle classe ?</option>
 							<optgroup label="Collège">
-								<option value="1">6ème</option>
-								<option value="2">5ème</option>
-								<option value="3">4ème</option>
-								<option value="4">3ème</option>
+								<%= options_for_select([['6ème', "1"], ['5ème', "2"], ['4ème', "3"], ['3ème', "4"]], @niveau) %>
 							</optgroup>
 							<optgroup label="Lycée">
-								<option value="5">2nde</option>
-								<option value="6">1ère S</option>
-								<option value="7">1ère ES</option>
-								<option value="8">1ère L</option>
-								<option value="9">Terminale S</option>	
-								<option value="10">Terminale ES</option>
-								<option value="11">Terminale L</option>
+								<%= options_for_select([['2nde', "5"], ['1ère S', "6"], ['1ère ES', "7"], ['1ère L', "8"],['Terminale S', "9"], ['Terminale ES', "10"], ['Terminale L', "11"]], @niveau) %>
+
 							</optgroup>
 						</select>
 						<!-- Google Maps javascript API -->
 						<input id="lieu" name="lieu"
-                     	class="col-12 col-lg-3 form-search text-center m-2" placeholder="Entrez votre adresse, 3 rue...">
+                     	class="col-12 col-lg-3 form-search text-center m-2" placeholder="Entrez votre adresse, 3 rue..." value="<%=@lieu%>">
 		                <div>
 		                  <input id="latitude" name="latitude" type="hidden">
 		                  <input id="longitude" name="longitude" type="hidden">
@@ -47,10 +37,10 @@
 
 
 <div class="row justify-content-center mt-3">
-	<div class="col-10 col-lg-8">
-		<div class="p-4" >
+	<div class="col-12 col-lg-8" style="background-color: #F2F2F2">
+		<div class="p-2"  >
 			<% for cours in @cours%>
-				<div class="mb-2" style="background-color: #F2F2F2">
+				<div class="m-2">
 					<%= render partial:"annonce", locals:{cours:cours}%>
 				</div>
 			<% end %>
