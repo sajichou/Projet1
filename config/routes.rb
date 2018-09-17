@@ -24,6 +24,8 @@ Rails.application.routes.draw do
   root 'cours#accueil'
 
   get 'cours/create'
+
+  get 'cours/overlay'
  
   post 'cours/create' => 'cours#new'
 

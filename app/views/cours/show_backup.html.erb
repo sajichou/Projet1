@@ -1,3 +1,5 @@
+<%=form_tag "/cours/show", method:"post" do %>
+
 <!-- SECTION RAPPEL CARACTERISTIQUES COURS SELECTIONNE -->
 <div class="row justify-content-center p-3">
 	<div class="col-11">
@@ -8,7 +10,7 @@
 			<div style="position: absolute; top: 30%; left: 45%; border: solid 1px #e55966; height: 160px"></div>
 				<div class="row justify-content-center">
 					<div class="col-2">
-						<%= link_to :back do %>
+						<%= link_to "/cours/search" do %>
 							<p style="color: #e55966"> <span class="fa fa-arrow-left fa-2x"></span></p>
 							<p style="color: #e55966">Retour</p>
 						<% end %>
@@ -52,7 +54,7 @@
 								<div class="row align-items-start">
 									<div class="col-12" style="text-align: start">
 										<p>
-											<%= @cour.descriptif[0..50] %>...
+											<%= @cour.descriptif %>...
 										</p>
 									</div>
 								</div>
@@ -90,13 +92,56 @@
 										<% end %>
 									</div>
 								</div>
+								<% if @cour.theme.present? %>
+									<div class="row align-items-start">
+										<div class="col-12" style="text-align: start">
+											<p><span style="font-weight: bold">Thème du cours : </span>
+												<%@cour.theme.each do |t| %>
+													<%=t%> - 
+												<%end%>
+											</p>
+										</div>
+									</div>
+								<%end%>
+
+								<div class="row justify-content-around">
+									
+								
 								<% if !teacher_signed_in? %>
-									<div class="col-6">
-										<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#ContacterProf" style="border:solid 1px black; border-radius: 10px; color:white">
+									<div class="col-5">
+										<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ContacterProf" style="border-radius:5px; color:white;">
 						  					Envoyer un message
 										</button>
 									</div>
+									<div class="col-5">
+										<div  class="bg-rose" style=" border-radius: 5px; ">
+											<input type="submit" class="btn btn-primary form-control" value="M'abonner" style="border-radius:5px" name="commit">
+										</div>
+
+									</div>
+								
+								<% elsif (teacher_signed_in? and current_teacher.id == @cour.teacher_id) %>
+									<div class="col-12 col-lg-5 bleu" style="border:solid 1px black; border-radius: 10px ; height:30px">
+										<%= link_to "Modifier", {:controller =>"cours", :action=>"modifier", :id=>@cour.id}, class:"link_to" %>
+									</div>
+									<div class="col-12 col-lg-5 bg-rouge" style="border:solid 1px black; border-radius: 10px">
+									
+										<button type="button" class="btn btn-link" data-toggle="modal" data-target="#exampleModal" style="height:30px">
+						  					<p>Supprimer ce cours</p>
+										</button>
+
+									</div>
+								
+								<%end%>	
+
+								<% if @est_inscrit%>
+									<div class="col-12 col-lg-4 bleu" style="border:solid 1px black; border-radius: 10px ; height:30px">
+										<%= link_to "Signaler mon absence", {:controller =>"cours", :action=>"absence_show", :cour_id=>@cour.id}, class:"link_to" %>
+									</div>								
 								<% end %>
+
+								</div>	
+								
 							</div>
 						</div>
 					</div>
@@ -114,7 +159,7 @@
 
 		<div class="row justify-content-between">
 
-			<div class="col-12 col-lg-5 bg-blanc p-3" >
+			<div class="col-12 col-lg-6 bg-blanc p-3" style="border-right: solid 20px #F2F2F2" >
 					<div class="row justify-content-center">
 						<div class="col-12 ">
 							<p style="font-weight: bold; font-size: 1.4em">Expérience</p>
@@ -133,415 +178,330 @@
 			</div>
 		</div>
 
-		<!-- Explications si 1er élève inscrit-->
+		<% if !(@cour.jour.present? and @cour.heure.present?) %>
+
+		<!-- Cas où premier élève et plusieurs créneaux possibles -->
 
 		<div class="row justify-content-center mt-3 bg-blanc">
 			<div class="col-12 p-3 ">
 				<p class="rose" style="font-size: 1.4em; font-weight: bold">Aucun élève inscrit pour le moment</p>
 				<p>En vous inscrivant en premier à ce cours, vous pouvez définir les critères de votre groupe de travail: </p>
 				<div class="row justify-content-around">
-					<div class="col-12 col-lg-3">
-						<p style="font-weight: bold; font-size: 1.2em"><span style="font-size: 1.3em">1.</span> Choisissez le créneau</p>
-						<p style="text-align: start">qui vous convient le mieux parmi ceux proposés.</p>
-					</div>
-					<div class="col-12 col-lg-3">
-						<p style="font-weight: bold; font-size: 1.2em"><span style="font-size: 1.3em">2.</span> Choisissez votre objectif</p>
-						<p style="text-align: start">selon que vous souhaitiez rattraper des lacunes ou vous perfectionnez.</p>
-					</div>
 					<div class="col-12 col-lg-4">
-						<p style="font-weight: bold; font-size: 1.2em"><span style="font-size: 1.3em">3.</span> Choisissez le programme du cours</p>
-						<p style="text-align: start">selon le chapitre ou la thématique que tu souhaites étudier. Tu peux aussi ne rien sélectionner.</p>
+						<p style="font-weight: bold; font-size: 1.2em;"><span style="font-size: 1.3em;">1.</span> Choisissez le créneau</p>
+						<p style="text-align: justify;">Veuillez choisir le créneau qui vous convient :</p>
+					
+						<div class="d-flex flex-wrap justify-content-around">							
+							<% @l.each do |j| %>
+								<div>
+									<table class="table">
+										<thead>
+											<tr>
+												<th style="border:none;"><%=j%></th>
+											</tr>
+										</thead> 
+										<tbody>
+											<%@cour.dispos.where(jour:j).each do |jh| %>
+												<tr>
+													<th >
+														<div class="btn-group btn-group-toggle" data-toggle="buttons">
+														<label class="btn" id="btn_active" style="background-color: #e0e0e0">
+				   										 <input type="radio" name="dispo" id="option1" autocomplete="off" value="<%=j%>,<%=jh.heure%>,<%=jh.min%>" required>
+				   										 <% if jh.min == 0%>
+				   										 	<%=jh.heure%>h
+				   										 <% else %>
+				   										 	<%=jh.heure%>h<%=jh.min%>
+				   										 <% end%>
+				 										 </label>
+														</div>
+													</th>
+												</tr>
+											<% end %>
+										</tbody>
+									</table>
+								</div>
+							<%end%>	
+						</div>
 					</div>
+
+					<div class="col-12 col-lg-4">
+						<p style="font-weight: bold; font-size: 1.2em"><span style="font-size: 1.3em">2.</span> Choisissez votre objectif</p>
+						<p style="text-align: justify;">Veuillez choisir l'objectif qui vous convient :</p>
+						 <label class="btn btn-info d-block">
+					    <input type="radio" name="objectif" id="1" value="1"  autocomplete="off" required> Soutien scolaire
+					  </label>
+					  <label class="btn btn-secondary d-block">
+					    <input type="radio" name="objectif" id="2" value="2" autocomplete="off" required> Perfectionnement scolaire
+					  </label>
+					</div>
+					<!--
+					<div class="col-12 col-lg-4">
+						<p style="font-weight: bold; font-size: 1.2em"><span style="font-size: 1.3em">3.</span> Programme du cours</p>
+						<p style="text-align: justify">Une fois inscrit, c'est vous qui choisirez la thématique du premier cours</p>
+					</div>
+					-->
 				</div>
 			</div>
+
+			<!-- THEME -->
+			<% if user_signed_in? and current_user.infouser.niveau.present? %>
+				<div class="col-12 m-auto col-lg-6">
+					<p style="font-weight: bold; font-size: 1.2em"> Choisissez la thématique</p>
+					<div id="accordion">
+						<% iterator = 0 %>
+						<% Topic.where(niveau_id:current_user.infouser.niveau).select(:theme).map(&:theme).uniq.each do |theme| %>
+
+
+							<div class="card">
+								<div class="card-header" id="Heading">
+								  <h5 class="mb-0">
+								    	<button class="btn btn-link <%= 'collapsed' if iterator >0 %>" data-toggle="collapse" data-target='#<%=theme%>'aria-expanded="false" aria-controls='<%=theme%>'style="color:black">
+								      		<%=theme%>
+								    	</button>
+								  </h5>
+								</div>
+								<div id='<%=theme%>' class="collapse <%='show' if iterator==0%>" aria-labelledby='Heading' data-parent="#accordion">
+									<%Topic.where(niveau_id:current_user.infouser.niveau, theme:theme).each do |t|	%>
+
+										<div class="card-body">
+											<label class="btn btn-info d-block">
+											    <input type="checkbox" name="topics[]"" id="1" value='<%=t.id%>'> <%=t.chapitre%>
+											</label>
+										</div>
+
+									<%end%>
+								</div>
+							</div>
+							<% iterator += 1%>
+
+						<%end%>
+					</div>
+				</div>
+			<% elsif !user_signed_in? %>
+				<div class="col-12 m-auto col-lg-6">
+					<p style="font-weight: bold; font-size: 1.2em"> Choisissez la thématique</p>
+					<div id="accordion">
+						<% iterator = 0 %>
+						<% Topic.where(niveau_id:3).select(:theme).map(&:theme).uniq.each do |theme| %>
+
+
+							<div class="card">
+								<div class="card-header" id="Heading">
+								  <h5 class="mb-0">
+								    	<button class="btn btn-link <%= 'collapsed' if iterator >0 %>" data-toggle="collapse" data-target='#<%=theme%>'aria-expanded="false" aria-controls='<%=theme%>'style="color:black">
+								      		<%=theme%>
+								    	</button>
+								  </h5>
+								</div>
+								<div id='<%=theme%>' class="collapse <%='show' if iterator==0%>" aria-labelledby='Heading' data-parent="#accordion">
+									<%Topic.where(niveau_id:3, theme:theme).each do |t|	%>
+
+										<div class="card-body">
+											<label class="btn btn-info d-block">
+											    <input type="checkbox" name="topics[]"" id="1" value='<%=t.id%>'> <%=t.chapitre%>
+											</label>
+										</div>
+
+									<%end%>
+								</div>
+							</div>
+							<% iterator += 1%>
+
+						<%end%>
+					</div>
+		
+				</div>
+			<% end %>
+			<!--FIN  THEME -->
+
 		</div>
+		<!-- Cas où premier élève mais un seul créneau possible -->
+		<% elsif (@cour.nombre_eleves == 0 and @cour.jour.present? and @cour.heure.present?)%>
+			<div class="row justify-content-center bg-blanc mt-3 p-3">
+				<div class="col-12 col-lg-4">
+					<p style="font-weight: bold; font-size: 1.2em"><span style="font-size: 1.3em">2.</span> Choisissez votre objectif</p>
+					<p style="text-align: justify;">Veuillez choisir l'objectif qui vous convient :</p>				
 
-		<!-- Objectif et Créneaux-->
+					  <label class="btn btn-info d-block">
+					    <input type="radio" name="objectif" id="1" value="1"  autocomplete="off" required> Soutien scolaire
+					  </label>
+					  <label class="btn btn-secondary d-block">
+					    <input type="radio" name="objectif" id="2" value="2" autocomplete="off" required> Perfectionnement scolaire
+					  </label>
+		
+				</div>
+				<!-- THEME -->
+				<% if user_signed_in? and current_user.infouser.niveau.present? %>
+					<div class="col-12 m-auto col-lg-6">
+						<p style="font-weight: bold; font-size: 1.2em"> Choisissez la thématique</p>
+						<div id="accordion">
+							<% iterator = 0 %>
+							<% Topic.where(niveau_id:current_user.infouser.niveau).select(:theme).map(&:theme).uniq.each do |theme| %>
 
-		<%=form_tag "/cours/show", method:"post" do %>
-		<div class="row justify-content-between mt-3 bg-blanc">
 
-					<!-- Créneaux -->
-			<div class="col-12 col-lg-4">
-				<div class="row justify-content-center bg-blanc p-3">
-					<div class="col-12">
-						<p style="font-weight: bold; font-size: 1.4em">Créneaux disponibles</p>
+								<div class="card">
+									<div class="card-header" id="Heading">
+									  <h5 class="mb-0">
+									    	<button class="btn btn-link <%= 'collapsed' if iterator >0 %>" data-toggle="collapse" data-target='#<%=theme%>'aria-expanded="false" aria-controls='<%=theme%>'style="color:black">
+									      		<%=theme%>
+									    	</button>
+									  </h5>
+									</div>
+									<div id='<%=theme%>' class="collapse <%='show' if iterator==0%>" aria-labelledby='Heading' data-parent="#accordion">
+										<%Topic.where(niveau_id:current_user.infouser.niveau, theme:theme).each do |t|	%>
+
+											<div class="card-body">
+												<label class="btn btn-info d-block">
+												    <input type="checkbox" name="topics[]"" id="1" value='<%=t.id%>'> <%=t.chapitre%>
+												</label>
+											</div>
+
+										<%end%>
+									</div>
+								</div>
+								<% iterator += 1%>
+
+							<%end%>
+						</div>
 					</div>
-					<div class="col-12">
-						<p>Veuillez choisir le créneau qui vous convient :</p>
+				<% elsif !user_signed_in? %>
+					<div class="col-12 m-auto col-lg-6">
+						<p style="font-weight: bold; font-size: 1.2em"> Choisissez la thématique</p>
+
+						<div id="accordion">
+							<% iterator = 0 %>
+							<% Topic.where(niveau_id:3).select(:theme).map(&:theme).uniq.each do |theme| %>
+
+								<div class="card">
+									<div class="card-header" id="Heading">
+									  <h5 class="mb-0">
+									    	<button class="btn btn-link <%= 'collapsed' if iterator >0 %>" data-toggle="collapse" data-target='#<%=theme%>'aria-expanded="false" aria-controls='<%=theme%>'style="color:black">
+									      		<%=theme%>
+									    	</button>
+									  </h5>
+									</div>
+									<div id='<%=theme%>' class="collapse <%='show' if iterator==0%>" aria-labelledby='Heading' data-parent="#accordion">
+										<%Topic.where(niveau_id:3, theme:theme).each do |t|	%>
+
+											<div class="card-body">
+												<label class="btn btn-info d-block">
+												    <input type="checkbox" name="topics[]"" id="1" value='<%=t.id%>'> <%=t.chapitre%>
+												</label>
+											</div>
+
+										<%end%>
+									</div>
+								</div>
+							<% iterator += 1%>
+							<%end%>
+						</div>
+			
 					</div>
-					<div class="col-12">
-							<div class="d-flex flex-wrap justify-content-around">							
-								<% @l.each do |j| %>
-									<div>
-										<table class="table">
-											<thead>
-												<tr style="border-bottom: solid 1px red">
-													<th><%=j%></th>
-												</tr>
-											</thead> 
-											<tbody>
-												<%@cour.dispos.where(jour:j).each do |jh| %>
-													<tr>
-														<th>
-															<div class="btn-group btn-group-toggle" data-toggle="buttons">
-															<label class="btn" id="btn_active" style="background-color: #e0e0e0">
-					   										 <input type="radio" name="dispo" id="option1" autocomplete="off" value="<%=j%>,<%=jh.heure%>,<%=jh.min%>" required>
-					   										 <% if jh.min == 0%>
-					   										 	<%=jh.heure%>h
-					   										 <% else %>
-					   										 	<%=jh.heure%>h<%=jh.min%>
-					   										 <% end%>
-					 										 </label>
-															</div>
-														</th>
-													</tr>
-												<% end %>
-											</tbody>
-										</table>
+				<% end %>
+				<!--FIN  THEME -->
+			</div>
+
+
+		<% else %>
+		<!-- Cas où un ou deux élèves déjà inscrits -->
+
+			<div class="row justify-content-between mt-3">
+
+				<div class="col-12 col-lg-6 bg-blanc p-3" style="border-right: solid 20px #F2F2F2" >
+						<div class="row justify-content-center">
+							<div class="col-12 ">
+								<p style="font-weight: bold; font-size: 1.4em">Objectif</p>
+								<% if @cour.objectif == 1 %>
+									<input type="button"  class="btn btn-info col-9" value="Soutien scolaire" style="border-radius: 10px">	
+								<% elsif @cour.objectif == 2 %>
+									<input type="button" class="btn btn-secondary col-9" value="Perfectionnement scolaire" style="border-radius: 10px">
+								<% end %>	
+							</div>
+						</div>
+				</div>
+
+				<div class="col-12 col-lg-6 bg-blanc p-3">
+					<div class="row justify-content-center">
+						<div class="col-12">
+							<p style="font-weight: bold; font-size: 1.4em">Élèves</p>
+							<div class="row justify-content-center">
+								<% Inscription.where(cour_id:@cour.id).each do |i| %>
+									<div class="col-3">
+										<div class="row justify-content-center">
+											<div class="col-12">
+												<div class="m-auto" style="border-radius: 50%; background-color: #4897D8; width: 50px; height: 50px;">
+												</div>
+											</div>
+											<div class="col-12"><%=User.find(i.user_id).infouser.first_name.capitalize %></div>
+										</div>
+									</div>
+								<% end %>
+								<% (3-@cour.nombre_eleves).times do %>
+									<div class="col-3">
+										<div class="row justify-content-center">
+											<div class="col-12">
+												<div class="m-auto" style="border-radius: 50%; background-color: #e55966; width: 50px; height: 50px;">
+												</div>
+											</div>
+										</div>
 									</div>
 								<%end%>	
+							</div>			
+						</div>
+					</div>
+				</div>
+
+				<div class="col-12 col-lg-4">
+					
+					<div id="accordion">
+						<% iterator = 0 %>
+						<% Topic.where(niveau_id:@cour.annees.last.niveau).select(:theme).map(&:theme).uniq.each do |theme| %>
+
+							<div class="card">
+								<div class="card-header" id="Heading">
+								  <h5 class="mb-0">
+								    	<button class="btn btn-link <%= 'collapsed' if iterator >0 %>" data-toggle="collapse" data-target='#<%=theme%>'aria-expanded="false" aria-controls='<%=theme%>'style="color:black">
+								      		<%=theme%>
+								    	</button>
+								  </h5>
+								</div>
+								<div id='<%=theme%>' class="collapse <%='show' if iterator==0%>" aria-labelledby='Heading' data-parent="#accordion">
+									<%Topic.where(niveau_id:@cour.annees.last.niveau, theme:theme).each do |t|	%>
+
+										<div class="card-body">
+											<label class="btn btn-info d-block">
+											    <input type="checkbox" name="topics[]"" id="1" value='<%=t.id%>'> <%=t.chapitre%>
+											</label>
+										</div>
+
+									<%end%>
+								</div>
 							</div>
-									
-					</div>
-
-				</div>
-			</div>
-			<!-- fin créneau -->
-
-
-			<div class="col-12 col-lg-4 ">
-				<div class="row justify-content-center bg-blanc p-3">
-					<div class="col-12">
-						<p style="font-weight: bold; font-size: 1.4em">Objectif</p>
-					</div>
-					<div class="col-12">
-						<p>Veuillez choisir l'objectif qui vous convient :</p>
-					</div>
-					<div class="col-12">
-						<input type="button" class="btn btn-secondary col-9" value="Renforcement scolaire">
-					</div>
-					<div class="col-12 mt-1">
-						<input type="button" class="btn btn-info col-9" value="Perfectionnement scolaire">
+						<% iterator += 1%>
+						<%end%>
 					</div>
 				</div>
-			</div>	
 
-			<div class="col-12 col-lg-4">
-				<div class="row justify-content-center bg-blanc p-3">
-					<div class="col-12">
-						<p style="font-weight: bold; font-size: 1.4em">Programme du cours</p>
-					</div>
-					<div class="col-12">
-						<p>Une fois inscrit, c'est vous qui choisirez la thématique du premier cours.</p>
-					</div>
-				</div>
 			</div>
 
-		</div>
+		<% end %>
+
 
 		<%= hidden_field_tag "id", @cour.id %>
-			<div class="row justify-content-center mt-3">
-				<div  class="col-3 bleu" style="border:solid 1px black; border-top-left-radius: 15px; border-top-right-radius: 15px; height:30px">
+			<% if !(teacher_signed_in? and current_teacher.id == @cour.teacher_id) %>
+				<div class="row justify-content-center mt-3">
+					<input type="submit" class="col-3 btn btn-primary form-control" value="M'inscire" style="border-radius: 15px" name="commit">	
 				</div>
-			</div>
-		<%end%>	
+			<% end %>
 
 	</div>
 </div>
 
+<%end%>	
 
 
-
-<div class="row justify-content-center my-5">
-	<div class="col-11">
-		<div class="row">
-			<!-- Rappel des caractéristiques du cours -->
-			<div class="col-sm-3">
-				<div class="d-flex mb-1 show_pastille">
-					<div class="pl-4">
-						<i class="fa fa-map-marker fa-lg"></i>
-					</div>
-					<div class="pl-2">
-						<%= @cour.lieu_court %>
-					</div>
-				</div>
-				<div class="d-flex mb-1 show_pastille">
-					<div class="pl-4">
-						<i class="fa fa-book fa-lg"></i>
-					</div>
-					<div class="pl-2">
-						<%= @cour.matiere %>
-						<%@cour.annees.each do |n| %>
-							| <%= Correspondance.find_by_niveau_id(n.niveau).nom%>	
-						<%end%>	
-					</div>
-				</div>
-				<div class="d-flex mb-1 show_pastille">
-					<div class="pl-4">
-						<i class="fa fa-users fa-lg"></i>
-					</div>
-					<div class="pl-2">
-						<% if @cour.nombre_eleves<2 %>
-							<%= 3-@cour.nombre_eleves %> places disponibles
-						<% else %>
-							<%= 3-@cour.nombre_eleves %> place disponible
-						<% end %>
-					</div>
-				</div>	
-				<!--Horaire -->
-				<!-- 1er cas : Horaire déjà fixé -->
-				<% if (@cour.jour.present? and @cour.heure.present?) %>
-					<div class="d-flex mb-1 show_pastille">
-						<div class="pl-4">
-							<i class="fa fa-calendar fa-lg"></i>
-						</div>
-						<div class="pl-2" style="text-transform: capitalize">
-							<% if @cour.min == 0 %>
-								<%=@cour.jour%> | <%=@cour.heure %>h - <%=@cour.heure+1 %>h30
-							<% else %>
-								<%=@cour.jour%> | <%=@cour.heure %>h30 - <%=@cour.heure+2 %>h
-							<% end %>
-						</div>
-					</div>
-				<!-- 2eme cas : Horaire pas encore fixé -->		
-				<% else %>
-					<div class="d-flex show_pastille_speciale">
-						<div class="pl-4">
-							<i class="fa fa-calendar fa-lg"></i>
-						</div>
-						<div class="pl-2">
-							Choisis ton horaire :
-						</div>
-					</div>
-					<div style="border:solid 1px #e55966; background-color: #eeeeee">
-						<div class="row">
-							<div class="col-12">
-								<%=form_tag "/cours/show", method:"post" do %>
-									<div class="d-flex flex-wrap justify-content-center">							
-										<% @l.each do |j| %>
-											<div>
-												<table class="table">
-													<thead>
-														<tr>
-															<th><%=j%></th>
-														</tr>
-													</thead> 
-													<tbody>
-														<%@cour.dispos.where(jour:j).each do |jh| %>
-															<tr>
-																<th>
-																	<div class="btn-group btn-group-toggle" data-toggle="buttons">
-																	<label class="btn" id="btn_active" style="background-color: #e0e0e0">
-							   										 <input type="radio" name="dispo" id="option1" autocomplete="off" value="<%=j%>,<%=jh.heure%>,<%=jh.min%>" required>
-							   										 <% if jh.min == 0%>
-							   										 	<%=jh.heure%>h
-							   										 <% else %>
-							   										 	<%=jh.heure%>h<%=jh.min%>
-							   										 <% end%>
-							 										 </label>
-																	</div>
-																</th>
-															</tr>
-														<% end %>
-													</tbody>
-												</table>
-											</div>
-										<%end%>	
-									</div>
-									<%= hidden_field_tag "id", @cour.id %>
-									<div class="row justify-content-center">
-										<div  class="col-6 bleu" style="border:solid 1px black; border-top-left-radius: 15px; border-top-right-radius: 15px; height:30px"><%= submit_tag "M'inscrire", class:"submit_tag"%>
-										</div>
-									</div>
-								<%end%>				
-							</div>
-						</div>
-					</div>	
-					
-				<% end %>
-				<!-- Fin horaire -->	
-			</div>
-			<div class="col-sm-9">			
-				<div class="row justify-content-center">
-					<div class="col-sm-4 mh-100">
-						<div class="row justify-content-center">
-							<div class="col-12">
-							<%= image_tag @cour.teacher.infoteacher.avatar.url(:thumb), :class => "thumbnail2" %>
-							</div>
-							<div class="col-12">
-							<%= @cour.teacher.infoteacher.first_name %>
-							</div>
-							<div class="col-12"">
-								<div class="row justify-content-center" >
-									<div class="col-10">
-
-									<!--	NOTATION ENSEIGNANT						
-										<div class="d-flex">
-											<div style="color: #ffc400">
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="small">(9 avis)</i>
-											</div>
-										</div>
-									-->
-										<div class="d-flex">
-											<div style="color: rgba(76, 175, 80, 0.7)">
-												<i class="fa fa-check-circle-o"></i>
-											</div>
-											<div>
-												<p class="ml-2" style="font-size: 90%">Profil vérifié</p>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!-- Avatars eleves -->
-						<div class="row justify-content-center">
-							<!-- Cas où 2 eleves sont déjà inscrits -->
-							<% if @cour.nombre_eleves == 2%>
-								<div class="col">
-									<div class="avatar_occupe">
-										<i class="fa fa-user-circle-o"></i>
-									</div>
-								</div>
-								<div class="col">
-									<div class="avatar_occupe">
-										<i class="fa fa-user-circle-o"></i>
-									</div>
-								</div>										
-								<div class="col">
-									<div class="avatar_libre">
-										<i class="fa fa-user-circle-o"></i>
-									</div>
-								</div>
-							<!-- Cas où 3 eleves sont déjà inscrits -->
-							<% elsif @cour.nombre_eleves == 3%>
-								<div class="col">
-									<div class="avatar_occupe">
-										<i class="fa fa-user-circle-o"></i>
-									</div>
-								</div>
-								<div class="col">
-									<div class="avatar_occupe">
-										<i class="fa fa-user-circle-o"></i>
-									</div>
-								</div>										
-								<div class="col">
-									<div class="avatar_occupe">
-										<i class="fa fa-user-circle-o"></i>
-									</div>
-								</div>
-							<!-- Cas où 1 eleve est déjà inscrit -->
-							<% elsif @cour.nombre_eleves == 1 %>		
-								<div class="col-3">
-									<div class="avatar_occupe">
-										<i class="fa fa-user-circle-o"></i>
-									</div>
-								</div>
-								<div class="col-3">
-									<div class="avatar_libre">
-										<i class="fa fa-user-circle-o"></i>
-									</div>
-								</div>											
-								<div class="col-3">
-									<div class="avatar_libre">
-										<i class="fa fa-user-circle-o"></i>
-									</div>
-								</div>
-							<!-- Aucun eleves d'inscrit -->
-							<% else %>
-								<div class="col">
-									<div class="avatar_libre">
-										<i class="fa fa-user-circle-o"></i>
-									</div>
-								</div>
-								<div class="col">
-									<div class="avatar_libre">
-										<i class="fa fa-user-circle-o"></i>
-									</div>
-								</div>										
-								<div class="col">
-									<div class="avatar_libre">
-										<i class="fa fa-user-circle-o"></i>
-									</div>
-								</div>
-							<% end %>										
-						</div>				
-					</div>
-						<!-- fin avatars eleves -->
-						<!-- Section de droite -->
-					<div class="col-sm-8" >
-						<div class="row">
-							<div class="col-12" style="background-color: #eeeeee; border-radius: 10px">
-								<h5 class="mt-2">Description du cours</h5>
-								<p class="font-italic text-justify" style="font-size:90%"><%=@cour.descriptif%></p>
-								<h5 class="mt-2">Expérience</h5>
-								<p class="font-italic text-justify" style="font-size:90%"><%=@cour.teacher.infoteacher.experience%></p>
-								<h5>Méthodologie</h5>
-								<p class="font-italic text-justify" style="font-size:90%"><%=@cour.teacher.infoteacher.methodology%></p>								
-							</div>
 						
-							<% if (@cour.nombre_eleves<3 and !teacher_signed_in? and @cour.jour.present? and @cour.heure.present?) %>
-									<div class="col-12 col-lg-4 bleu" style="border:solid 1px black; border-radius: 10px; height:30px">
-										
-										<%= link_to "M'inscrire", {:controller =>"charges", :action=>"new", :id=>@cour.id}, class:"link_to" %>
 
-									</div>
-								
-							<% elsif (teacher_signed_in? and current_teacher.id == @cour.teacher_id) %>
-									<div class="col-12 col-lg-4 bleu" style="border:solid 1px black; border-radius: 10px ; height:30px">
-										<%= link_to "Modifier", {:controller =>"cours", :action=>"modifier", :id=>@cour.id}, class:"link_to" %>
-									</div>
-									<div class="col-12 col-lg-4 ml-auto bleu" style="border:solid 1px black; border-radius: 10px; height:30px">
-										<button type="button" class="btn btn-link" data-toggle="modal" data-target="#exampleModal" style="">
-						  					Supprimer ce cours
-										</button>
-									</div>
-								
-							<%end%>	
-							<% if !teacher_signed_in? %>
-								<div class="col-12 col-lg-4 bleu" style="border:solid 1px black; border-radius: 10px; height:30px">
-									<button type="button" class="btn btn-link" data-toggle="modal" data-target="#ContacterProf">
-					  					Contacter
-									</button>
-								</div>
-							<% end %>
-							<% if @est_inscrit%>
-								<div class="col-12 col-lg-4 bleu" style="border:solid 1px black; border-radius: 10px ; height:30px">
-									<%= link_to "Signaler mon absence", {:controller =>"cours", :action=>"absence_show", :cour_id=>@cour.id}, class:"link_to" %>
-								</div>								
-							<% end %>
-						</div>
-					</div>			
-				</div>
-			</div>
-
-
-			<!-- Modal  Supprimer cours pour teacher-->
-			<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-			  <div class="modal-dialog" role="document">
-			    <div class="modal-content">
-			      <div class="modal-header">
-			        <h5 class="modal-title" id="exampleModalLabel">Supprimer ce cours</h5>
-			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-			          <span aria-hidden="true">&times;</span>
-			        </button>
-			      </div>
-			      <div class="modal-body">
-			        Je confirme mon souhait de supprimer ce cours. Avant de valider votre choix, nous vous conseillons de prévenir les élèves inscrits de la fin de leur cours. 
-			      </div>
-			      <div class="modal-footer">
-			        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-			        <%= link_to "Supprimer le cours", {:controller =>"cours", :action=>"destroy", :id=>@cour.id}, class:"btn btn-danger"%>
-			      </div>
-			    </div>
-			  </div>
-			</div>
 
 			<!-- Modal Contacter prof -->
 

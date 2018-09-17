@@ -15,7 +15,10 @@
 *= require pickadate/default.date
 *= require pickadate/default.time
 *= require trix
+*= require_tree .
+*= require_self
  */
+
  
 $theme-colors: (
   "primary": #e55966,
@@ -143,7 +146,19 @@ section {
 	}
 }
 
-
+.overlay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  z-index: 2;
+  opacity: 0;
+  background: rgba(39, 42, 43, 0.8);
+  transition: opacity 200ms ease-in-out;
+  border-radius: 4px;
+  margin: -15px 0 0 -15px;
+  opacity: 1;
+}
 
 // FORM SEARCH
 
@@ -202,6 +217,8 @@ section {
 #opacity {
 	background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.7) );
 }
+
+
 
 #gradient_rose {
     background: linear-gradient($rose, rgba(0, 0, 0, 0) );

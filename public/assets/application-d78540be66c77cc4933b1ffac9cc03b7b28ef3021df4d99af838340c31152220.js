@@ -20809,6 +20809,10 @@ http://trix-editor.org/
 
 }).call(this);
 (function() {
+
+
+}).call(this);
+(function() {
   var context = this;
 
   (function() {
@@ -21455,7 +21459,7 @@ http://trix-editor.org/
           return function() {
             return _this.getNewNotifications();
           };
-        })(this)), 1000000);
+        })(this)), 1000);
       }
     }
 
@@ -21532,4 +21536,23 @@ http://trix-editor.org/
 
 
 
-;
+
+var sizeTheOverlays = function() {
+    $(".overlay").resize().each(function() {
+    var h = $(this).parent().outerHeight();
+    var w = $(this).parent().outerWidth();
+    $(this).css("height", h);
+    $(this).css("width", w);
+  });
+};
+
+sizeTheOverlays();
+
+
+var width = $(window).width();
+$(window).resize(function(){
+   if($(this).width() != width){
+      width = $(this).width();
+      sizeTheOverlays();
+   }
+});

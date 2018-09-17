@@ -889,6 +889,10 @@ trix-editor .attachment__remove--icon {
     padding: 0.4em 1em;
     border: 1px solid #bbb;
     border-radius: 5px; }
+/* line 5, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/cours.scss */
+table a {
+  color: green;
+}
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
@@ -901,6 +905,9 @@ trix-editor .attachment__remove--icon {
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
+
+
+
 
 
 
@@ -14788,68 +14795,68 @@ a.text-roseclair:hover, a.text-roseclair:focus {
   clip: auto;
 }
 
-/* line 42, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 46, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 #grad {
   background-color: #ffb750;
 }
 
-/* line 47, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 51, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 .bg-rose {
   background-color: #e55966;
 }
 
-/* line 51, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 55, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 .bg-rouge {
   background-color: #ff1744;
 }
 
-/* line 55, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 59, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 .bg-orange {
   background-color: #ffb750;
 }
 
-/* line 59, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 63, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 .bg-rose-clair {
   background-color: #fc6270;
 }
 
-/* line 63, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 67, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 .rose {
   color: #e55966;
 }
 
-/* line 67, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 71, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 .bleu {
   background-color: #4897D8;
 }
 
-/* line 71, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 75, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 .turquoise {
   background-color: #59e5d8;
 }
 
-/* line 75, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 79, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 #grad_rose {
   background-image: linear-gradient(to bottom, white, #e55966);
 }
 
-/* line 79, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 83, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 .bg-gris {
   background-color: #F2F2F2;
 }
 
-/* line 83, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 87, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 .bg-blanc {
   background-color: white;
 }
 
-/* line 89, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 93, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 * {
   margin: 0;
   padding: 0;
 }
 
-/* line 94, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 98, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 body, html {
   display: block;
   position: absolute;
@@ -14858,53 +14865,73 @@ body, html {
   margin: 0;
 }
 
-/* line 101, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 105, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 body {
   text-align: center;
   padding-top: 45px;
   color: #444A55;
 }
 
-/* line 107, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 111, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 section {
   min-height: 100%;
 }
 
-/* line 110, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 114, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 #main {
   min-height: 100%;
   margin: 0;
   position: relative;
 }
 
-/* line 117, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 121, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 #corps {
-  padding-bottom: 50px;
+  padding-bottom: 30px;
 }
 
-/* line 121, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 125, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 #commentcamarche {
   background-image: url(/assets/commentcamarche-26378cc51b2ec037ec6835def869ad7bfcb1d88d69673ac4bec747b75683f2b3.png);
   background-size: cover;
 }
 
-/* line 127, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 130, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
+.text-accueil {
+  font-size: 1.1em;
+}
+
+/* line 135, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 .navbar-default {
   background-color: #e55966;
 }
 
-/* line 131, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 139, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 .give-lesson {
   background-color: white;
   border-radius: 50px;
 }
 
-/* line 138, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 146, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 #bs-example-navbar-collapse-1 ul li a {
   color: white;
 }
 
-/* line 145, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 151, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
+.overlay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  z-index: 2;
+  opacity: 0;
+  background: rgba(39, 42, 43, 0.8);
+  transition: opacity 200ms ease-in-out;
+  border-radius: 4px;
+  margin: -15px 0 0 -15px;
+  opacity: 1;
+}
+
+/* line 167, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 .form-search {
   border: solid 1px #e55966;
   color: #e55966;
@@ -14912,7 +14939,7 @@ section {
   min-width: 200px;
 }
 
-/* line 153, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 175, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 .form-search-btn {
   background-color: #ffb750;
   border: 1px solid #ffb750;
@@ -14920,109 +14947,109 @@ section {
   cursor: pointer;
 }
 
-/* line 162, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 184, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 .thumbnail {
   border-radius: 50%;
 }
 
-/* line 166, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 188, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 .value_success {
   border-color: #33cc33;
   color: black;
 }
 
-/* line 171, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 193, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 .value_danger {
   border-color: red;
   color: black;
 }
 
-/* line 178, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 200, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 #footer {
   background-color: #e55966;
 }
-/* line 180, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 202, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 #footer ul li {
   display: inline;
   padding-left: 50px;
 }
-/* line 183, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 205, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 #footer ul li a {
   color: white;
 }
 
-/* line 189, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 211, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 #devise_subcontent {
   color: #e55966;
   background-color: white;
   border-radius: 10px;
 }
 
-/* line 197, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 219, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 #opacity {
   background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.7));
 }
 
-/* line 201, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 225, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 #gradient_rose {
   background: linear-gradient(#e55966, rgba(0, 0, 0, 0));
 }
 
-/* line 205, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 229, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 .jacket {
   color: white;
   background-image: url(/assets/Adolescents-48f20d6fa946a50e4efc2178f130763ecba6d4d079d637338cfd6eccd6af503f.jpg);
   background-size: cover;
 }
 
-/* line 211, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 235, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 .jacket-title {
   font-family: 'Roboto', sans-serif;
   font-size: 3vw;
 }
 
-/* line 216, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 240, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 .jacket-title2 {
   font-family: 'Roboto', sans-serif;
   font-size: 1.7em;
 }
 
-/* line 221, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 245, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 .jacket-title3 {
   font-family: 'Roboto', sans-serif;
   font-size: 1.2em;
 }
 
-/* line 226, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 250, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 .jacket-title4 {
   font-size: 1.1em;
   font-weight: bold;
 }
 
-/* line 232, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 256, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 .roboto {
   font-family: 'Roboto', sans-serif;
 }
 
-/* line 236, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 260, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 .jacket-text {
   font-family: 'Lato',sans-serif;
   font-size: 2vw;
 }
 
-/* line 241, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 265, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 #cover {
   position: absolute;
   top: 75%;
   width: 100%;
 }
 
-/* line 247, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 271, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 .title-simple {
   color: #e55966;
 }
 
-/* line 251, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 275, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 .round {
   margin-bottom: 10px;
   border-radius: 50%;
@@ -15031,77 +15058,77 @@ section {
   justify-content: center;
 }
 
-/* line 263, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 287, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 #annonce {
   background-color: white;
   box-shadow: 2px 2px 2px 2px #aaa;
 }
 
-/* line 271, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 295, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 #annonce_avatars {
   min-height: 150px;
   border-radius: 50%;
   background-color: #bdbdbd;
 }
 
-/* line 277, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 301, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 .thumbnail_notif {
   border-radius: 50%;
   height: 30px;
   width: 30px;
 }
 
-/* line 283, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 307, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 .thumbnail1 {
   border-radius: 50%;
   height: 50px;
   width: 50px;
 }
 
-/* line 289, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 313, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 .thumbnail2 {
   border-radius: 50%;
   height: 140px;
   width: 140px;
 }
 
-/* line 295, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 319, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 .thumbnail_show {
   border-radius: 50%;
   height: 170px;
   width: 170px;
 }
 
-/* line 301, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 325, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 .thumbnail3 {
   border-radius: 50%;
   height: 130px;
   width: 130px;
 }
 
-/* line 307, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 331, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 .avatar_occupe {
   font-size: 2em;
   color: #e55966;
 }
 
-/* line 312, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 336, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 .avatar_libre {
   font-size: 2em;
   color: #4897D8;
 }
 
-/* line 317, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 341, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 .link_to {
   color: white;
 }
 
-/* line 321, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 345, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 .btn-link {
   color: white;
 }
 
-/* line 325, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 349, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 .show_pastille {
   color: white;
   background: #e55966;
@@ -15111,7 +15138,7 @@ section {
   align-items: center;
 }
 
-/* line 334, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 358, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 .show_pastille_speciale {
   color: white;
   background: #e55966;
@@ -15121,38 +15148,38 @@ section {
   align-items: center;
 }
 
-/* line 345, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 369, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 #my_tab li a {
   color: white;
 }
-/* line 349, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 373, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 #my_tab a.active {
   background-color: #e55966;
 }
-/* line 353, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 377, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 #my_tab a:focus {
   background-color: #e55966;
 }
 
-/* line 359, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 383, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 .macheckbox {
   -webkit-transform: scale(1.5);
           transform: scale(1.5);
 }
 
-/* line 364, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 388, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 #btn_active input.active {
   background-color: #59e5d8;
 }
 
-/* line 369, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 393, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 .submit_tag_rose {
   background-color: #e55966;
   color: white;
   border: none;
 }
 
-/* line 375, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 399, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 .submit_tag_bleu {
   background-color: #4897D8;
   color: white;
@@ -15160,68 +15187,68 @@ section {
 }
 
 /*  FOOTER  */
-/* line 383, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 407, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 .footer {
   background-color: #e55966;
   position: absolute;
   bottom: 0px;
   height: 150px;
 }
-/* line 388, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 412, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 .footer ul li {
   display: inline;
   padding-left: 50px;
 }
-/* line 392, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 416, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 .footer a {
   color: white;
 }
 
-/* line 397, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 421, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 .suscribe-footer {
   top: -40px;
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
 }
-/* line 400, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 424, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 .suscribe-footer a {
   border-radius: 25px;
   padding: 10px;
   background-color: #ffb84f;
 }
 
-/* line 407, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 431, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 .icones-title {
   max-height: 40px;
 }
 
 /* ADDITIVES MEDIA */
 @media (min-width: 1200px) {
-  /* line 413, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+  /* line 437, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
   .form-pic {
     height: 100%;
   }
 }
 /* DEVENIR PROFESSEUR */
-/* line 420, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 444, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 .box-icones {
   max-height: 80px;
   max-width: 80px;
 }
 
-/* line 424, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 448, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 .prof-flex {
   min-height: 100px;
   border: 1px solid gainsboro;
 }
 
-/* line 428, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 452, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 .prof-flex-title {
   color: #ee6183;
 }
 
-/* line 432, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 456, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 .prof-flex-icon {
   font-size: 40px;
   padding: 15px;
@@ -15230,64 +15257,64 @@ section {
   border: #ee6183 1px solid;
 }
 
-/* line 439, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 463, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 .prof-avatar {
   border-radius: 50%;
   max-width: 150px;
 }
 
-/* line 443, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 467, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 .icones {
-  height: 50px;
+  height: 65px;
 }
 
-/* line 446, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 470, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 .icones_prof {
   height: 60px;
 }
 
-/* line 449, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 473, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 .iconespetits {
   height: 45px;
 }
 
-/* line 452, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 476, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 .join-btn {
   border-radius: 25px;
   color: white;
 }
 
-/* line 457, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 481, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 .test {
   min-height: 50%;
 }
 
 /* GUIDE STRIPE */
-/* line 463, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 487, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 .ico-plus {
   width: 100px;
   height: 100px;
 }
 
-/* line 467, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 491, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 .ico-right {
   width: 100px;
   height: 100px;
 }
 
-/* line 471, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 495, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 .ico-infos {
   width: 20px;
   height: 20px;
 }
 
-/* line 476, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 500, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 .infos li {
   list-style-type: none;
 }
 
 /* PAIEMENT */
-/* line 481, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 505, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 body, html {
   display: block;
   position: absolute;
@@ -15296,72 +15323,72 @@ body, html {
   margin: 0;
 }
 
-/* line 488, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 512, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 body {
   padding-top: 56px;
 }
 
-/* line 492, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 516, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 .col {
   margin: 0px;
   padding: 0px;
 }
 
 /*  CONTENT */
-/* line 500, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 524, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 section {
   min-height: 100%;
   width: 100%;
 }
 
-/* line 505, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 529, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 .avatar {
   height: 100px;
 }
 
-/* line 508, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 532, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 .block-avatars {
   max-height: 200px;
   border-bottom: #868e96 3px solid;
 }
 
-/* line 512, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 536, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 .block-eleve {
   height: 90px;
   overflow: hidden;
 }
 
-/* line 517, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 541, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 .box-prix {
   border: 3px solid #ee6183;
 }
 
-/* line 520, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 544, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 .logo-prix {
   height: 50px;
 }
 
-/* line 523, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 547, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 .prix {
   background-color: #ee6183;
   border-bottom-left-radius: 35%;
   border-top-left-radius: 35%;
 }
 
-/* line 529, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 553, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 .fa-circle {
   color: #ffb84f;
   padding-right: 4px;
 }
 
-/* line 533, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 557, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 li {
   list-style-type: none;
   margin-bottom: 0.5rem;
   padding-right: 0.5rem;
 }
 
-/* line 539, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 563, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 .input-paiement {
   background-color: #ee6183;
   border: none;
@@ -15371,49 +15398,49 @@ li {
   cursor: pointer;
 }
 
-/* line 548, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 572, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 .gcu-style::after {
   border: 3px solid #ee6183;
   background: #f5c6cb;
   cursor: pointer;
 }
 
-/* line 553, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 577, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 a:hover, input[type=submit]:hover {
   text-decoration: none;
   color: #007bff;
 }
 
 /* QUI SOMMES NOUS ? */
-/* line 560, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 584, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 .Button:hover {
   background-color: #eb675e;
 }
 
-/* line 563, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 587, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 .Button:active {
   position: relative;
   top: 1px;
 }
 
-/* line 567, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 591, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 #carouselTeam {
   width: 200px;
 }
 
-/* line 570, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 594, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 .img-valeur {
   height: 250px;
 }
 
-/* line 573, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 597, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 .avatar {
   height: 200px;
   width: 200px;
   overflow: hidden;
 }
 
-/* line 578, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 602, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 .team-bloc {
   margin-left: 1.5rem;
   margin-right: 1.5rem;
@@ -15421,25 +15448,25 @@ a:hover, input[type=submit]:hover {
   max-height: 200px;
 }
 
-/* line 585, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 609, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 .quadran {
   max-height: 400px;
 }
 
-/* line 589, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 613, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 .img-quadran {
   width: 340px;
   height: 175px;
 }
 
-/* line 594, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 618, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 .quadran-btn {
   max-height: 40px;
   color: white;
 }
 
 /* Notifications */
-/* line 601, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 05092018/app/assets/stylesheets/application.scss */
+/* line 625, /Users/sajid/Documents/Programmation 2018/RoR/Projet1 07092018/app/assets/stylesheets/application.scss */
 .unread {
   border-left: 3px solid red;
   background-color: #fc6270;

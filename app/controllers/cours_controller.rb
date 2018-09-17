@@ -14,6 +14,9 @@ class CoursController < ApplicationController
   def create
   end
 
+  def overlay
+  end
+  
   def new
 
     # Si creneau non renseigne
@@ -106,6 +109,8 @@ class CoursController < ApplicationController
       end
       @l=l_ord
     end
+
+    
 
     if @est_inscrit
       redirect_to controller: 'cours', action: 'show_inscrit', id: @cour.id

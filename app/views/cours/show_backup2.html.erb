@@ -1,0 +1,528 @@
+<%=form_tag "/cours/show", method:"post" do %>
+
+<!-- SECTION RAPPEL CARACTERISTIQUES COURS SELECTIONNE -->
+<div class="row justify-content-center p-3">
+	<div class="col-11">
+		<%=render partial:"en_tete_eleve", locals:{cour:@cour}%>
+	</div>
+</div>
+
+<!-- Experience et méthodologie-->
+<div class="row justify-content-center bg-gris p-3">
+	<div class="col-11">
+		<div class="row justify-content-between">
+			<div class="col-12 col-lg-6 bg-blanc p-3" style="border-right: solid 20px #F2F2F2" >
+					<div class="row justify-content-center">
+						<div class="col-12 ">
+							<p style="font-weight: bold; font-size: 1.4em">Expérience</p>
+							<p class="font-italic text-justify" style="font-size:90%"><%=@cour.teacher.infoteacher.experience%></p>			
+						</div>
+					</div>
+			</div>
+			<div class="col-12 col-lg-6 bg-blanc p-3">
+				<div class="row justify-content-center">
+					<div class="col-12  ">
+						<p style="font-weight: bold; font-size: 1.4em">Méthodologie</p>
+						<p class="font-italic text-justify" style="font-size:90%"><%=@cour.teacher.infoteacher.methodology%></p>				
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Autres Rubriques -->
+
+<% if !(@cour.jour.present? and @cour.heure.present?) %>
+<!-- Cas où premier élève et plusieurs créneaux possibles -->
+
+	<% if user_signed_in? %>
+
+		<div class="row justify-content-center bg-gris p-3">
+			<div class="col-11">
+				<div class="row justify-content-center mt-3 bg-blanc">
+					<div class="col-12 p-3 ">
+						<p class="rose" style="font-size: 1.4em; font-weight: bold">Aucun élève inscrit pour le moment</p>
+						<p>En vous inscrivant en premier à ce cours, vous pouvez définir les critères de votre groupe de travail: </p>
+						<div class="row justify-content-around">
+							<div class="col-12 col-lg-4">
+								<p style="font-weight: bold; font-size: 1.2em;"><span style="font-size: 1.3em;">1.</span> Choisissez le créneau</p>
+								<p style="text-align: justify;">Veuillez choisir le créneau qui vous convient :</p>
+							
+								<div class="d-flex flex-wrap justify-content-around">							
+									<% @l.each do |j| %>
+										<div>
+											<table class="table">
+												<thead>
+													<tr>
+														<th style="border:none;"><%=j%></th>
+													</tr>
+												</thead> 
+												<tbody>
+													<%@cour.dispos.where(jour:j).each do |jh| %>
+														<tr>
+															<th >
+																<div class="btn-group btn-group-toggle" data-toggle="buttons">
+																<label class="btn" id="btn_active" style="background-color: #e0e0e0">
+						   										 <input type="radio" name="dispo" id="option1" autocomplete="off" value="<%=j%>,<%=jh.heure%>,<%=jh.min%>" required>
+						   										 <% if jh.min == 0%>
+						   										 	<%=jh.heure%>h
+						   										 <% else %>
+						   										 	<%=jh.heure%>h<%=jh.min%>
+						   										 <% end%>
+						 										 </label>
+																</div>
+															</th>
+														</tr>
+													<% end %>
+												</tbody>
+											</table>
+										</div>
+									<%end%>	
+								</div>
+							</div>
+
+							<div class="col-12 col-lg-4">
+								<p style="font-weight: bold; font-size: 1.2em"><span style="font-size: 1.3em">2.</span> Choisissez votre objectif</p>
+								<p style="text-align: justify;">Veuillez choisir l'objectif qui vous convient :</p>
+								 <label class="btn btn-info d-block">
+							    <input type="radio" name="objectif" id="1" value="1"  autocomplete="off" required> Soutien scolaire
+							  </label>
+							  <label class="btn btn-secondary d-block">
+							    <input type="radio" name="objectif" id="2" value="2" autocomplete="off" required> Perfectionnement scolaire
+							  </label>
+							</div>
+							<!--
+							<div class="col-12 col-lg-4">
+								<p style="font-weight: bold; font-size: 1.2em"><span style="font-size: 1.3em">3.</span> Programme du cours</p>
+								<p style="text-align: justify">Une fois inscrit, c'est vous qui choisirez la thématique du premier cours</p>
+							</div>
+							-->
+						</div>
+					</div>
+
+					<!-- THEME -->
+					<% if current_user.infouser.niveau.present? %>
+						<div class="col-12 m-auto col-lg-6">
+							<p style="font-weight: bold; font-size: 1.2em"> Choisissez la thématique</p>
+							<div id="accordion">
+								<% iterator = 0 %>
+								<% Topic.where(niveau_id:current_user.infouser.niveau).select(:theme).map(&:theme).uniq.each do |theme| %>
+
+
+									<div class="card">
+										<div class="card-header" id="Heading">
+										  <h5 class="mb-0">
+										    	<button class="btn btn-link <%= 'collapsed' if iterator >0 %>" data-toggle="collapse" data-target='#<%=theme%>'aria-expanded="false" aria-controls='<%=theme%>'style="color:black">
+										      		<%=theme%>
+										    	</button>
+										  </h5>
+										</div>
+										<div id='<%=theme%>' class="collapse <%='show' if iterator==0%>" aria-labelledby='Heading' data-parent="#accordion">
+											<%Topic.where(niveau_id:current_user.infouser.niveau, theme:theme).each do |t|	%>
+
+												<div class="card-body">
+													<label class="btn btn-info d-block">
+													    <input type="checkbox" name="topics[]"" id="1" value='<%=t.id%>'> <%=t.chapitre%>
+													</label>
+												</div>
+
+											<%end%>
+										</div>
+									</div>
+									<% iterator += 1%>
+
+								<%end%>
+							</div>
+						</div>
+					
+					<% end %>
+					<!--FIN  THEME -->
+
+				</div>
+			</div>
+		</div>
+
+	<%else%>
+	<!-- Eleve non connecté/inscrit -->
+	
+		<div class="row justify-content-center bg-gris p-3" style="position:relative;">
+			<div style="
+			  display: flex;
+              justify-content: center;
+              align-items: center;
+              position: absolute;
+              top:0;
+              left:0;
+              width:100%;
+              height: 100%;
+              z-index: 2;
+              opacity: 0;
+              background: rgba(39, 42, 43, 0.8);
+              border-radius: 4px;
+              opacity: 1;
+			">
+				<div>			
+					<a class="btn btn-lg" href="/users/sign_in" role="button" style="width: 100%; height: 100%; background-color: #4897D8; color:white">Connectez-vous</a>
+					<br/>
+					<p class="mt-3" style="color: white">Ou</p>
+					<a class="btn btn-lg " href="/users/sign_up" role="button" style="width: 100%; height: 100%;background-color: #4897D8; color:white">Inscrivez-vous</a>
+				</div>
+
+			</div>
+			<div class="col-12">
+				<div class="row justify-content-center mt-3">
+					<div class="col-12 p-3">
+						<p class="rose" style="font-size: 1.4em; font-weight: bold">Aucun élève inscrit pour le moment</p>
+						<p>En vous inscrivant en premier à ce cours, vous pouvez définir les critères de votre groupe de travail: </p>
+
+						<div class="row justify-content-around">
+
+							<div class="col-12 col-lg-4">
+								<p style="font-weight: bold; font-size: 1.2em;"><span style="font-size: 1.3em;">1.</span> Choisissez le créneau</p>
+								<p style="text-align: justify;">Veuillez choisir le créneau qui vous convient :</p>
+							
+								<div class="d-flex flex-wrap justify-content-around">							
+									<% @l.each do |j| %>
+										<div>
+											<table class="table">
+												<thead>
+													<tr>
+														<th style="border:none;"><%=j%></th>
+													</tr>
+												</thead> 
+												<tbody>
+													<%@cour.dispos.where(jour:j).each do |jh| %>
+														<tr>
+															<th >
+																<div class="btn-group btn-group-toggle" data-toggle="buttons">
+																<label class="btn" id="btn_active" style="background-color: #e0e0e0">
+						   										 <input type="radio" name="dispo" id="option1" autocomplete="off" value="<%=j%>,<%=jh.heure%>,<%=jh.min%>" disabled>
+						   										 <% if jh.min == 0%>
+						   										 	<%=jh.heure%>h
+						   										 <% else %>
+						   										 	<%=jh.heure%>h<%=jh.min%>
+						   										 <% end%>
+						 										 </label>
+																</div>
+															</th>
+														</tr>
+													<% end %>
+												</tbody>
+											</table>
+										</div>
+									<%end%>	
+								</div>
+							</div>
+
+							<div class="col-12 col-lg-4">
+								<p style="font-weight: bold; font-size: 1.2em"><span style="font-size: 1.3em">2.</span> Choisissez votre objectif</p>
+								<p style="text-align: justify;">Veuillez choisir l'objectif qui vous convient :</p>
+								 <label class="btn btn-info d-block">
+							    <input type="radio" name="objectif" id="1" value="1"  autocomplete="off" disabled> Soutien scolaire
+							  </label>
+							  <label class="btn btn-secondary d-block">
+							    <input type="radio" name="objectif" id="2" value="2" autocomplete="off" disabled> Perfectionnement scolaire
+							  </label>
+							</div>
+
+						
+
+					<!-- THEME -->
+
+							<div class="col-12  col-lg-4">
+								<p style="font-weight: bold; font-size: 1.2em">3.Choisissez la thématique</p>
+								<div id="accordion">
+							
+									<% Topic.where(niveau_id:3).select(:theme).map(&:theme).uniq.each do |theme| %>
+
+
+										<div class="card">
+											<div class="card-header" id="Heading">
+											  <h5 class="mb-0">
+											    	<button class="btn btn-link collapsed" data-toggle="collapse" data-target='#<%=theme%>'aria-expanded="false" aria-controls='<%=theme%>'style="color:black">
+											      		<%=theme%>
+											    	</button>
+											  </h5>
+											</div>
+											<div id='<%=theme%>' class="collapse" aria-labelledby='Heading' data-parent="#accordion">
+												<%Topic.where(niveau_id:3, theme:theme).each do |t|	%>
+
+													<div class="card-body">
+														<label class="btn btn-info d-block">
+														    <input type="checkbox" name="topics[]"" id="1" value='<%=t.id%>' disabled> <%=t.chapitre%>
+														</label>
+													</div>
+
+												<%end%>
+											</div>
+										</div>
+									
+
+									<%end%>
+								</div>
+							</div>							
+					<!--FIN  THEME -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	<%end%>
+
+
+
+<!-- Cas où premier élève mais un seul créneau possible -->
+<% elsif (@cour.nombre_eleves == 0 and @cour.jour.present? and @cour.heure.present?)%>
+	<div class="row justify-content-center bg-blanc mt-3 p-3">
+		<div class="col-12 col-lg-4">
+			<p style="font-weight: bold; font-size: 1.2em"><span style="font-size: 1.3em">2.</span> Choisissez votre objectif</p>
+			<p style="text-align: justify;">Veuillez choisir l'objectif qui vous convient :</p>				
+
+			  <label class="btn btn-info d-block">
+			    <input type="radio" name="objectif" id="1" value="1"  autocomplete="off" required> Soutien scolaire
+			  </label>
+			  <label class="btn btn-secondary d-block">
+			    <input type="radio" name="objectif" id="2" value="2" autocomplete="off" required> Perfectionnement scolaire
+			  </label>
+
+		</div>
+		<!-- THEME -->
+		<% if user_signed_in? and current_user.infouser.niveau.present? %>
+			<div class="col-12 m-auto col-lg-6">
+				<p style="font-weight: bold; font-size: 1.2em"> Choisissez la thématique</p>
+				<div id="accordion">
+					<% iterator = 0 %>
+					<% Topic.where(niveau_id:current_user.infouser.niveau).select(:theme).map(&:theme).uniq.each do |theme| %>
+
+
+						<div class="card">
+							<div class="card-header" id="Heading">
+							  <h5 class="mb-0">
+							    	<button class="btn btn-link <%= 'collapsed' if iterator >0 %>" data-toggle="collapse" data-target='#<%=theme%>'aria-expanded="false" aria-controls='<%=theme%>'style="color:black">
+							      		<%=theme%>
+							    	</button>
+							  </h5>
+							</div>
+							<div id='<%=theme%>' class="collapse <%='show' if iterator==0%>" aria-labelledby='Heading' data-parent="#accordion">
+								<%Topic.where(niveau_id:current_user.infouser.niveau, theme:theme).each do |t|	%>
+
+									<div class="card-body">
+										<label class="btn btn-info d-block">
+										    <input type="checkbox" name="topics[]"" id="1" value='<%=t.id%>'> <%=t.chapitre%>
+										</label>
+									</div>
+
+								<%end%>
+							</div>
+						</div>
+						<% iterator += 1%>
+
+					<%end%>
+				</div>
+			</div>
+		<% elsif !user_signed_in? %>
+			<div class="col-12 m-auto col-lg-6">
+				<p style="font-weight: bold; font-size: 1.2em"> Choisissez la thématique</p>
+
+				<div id="accordion">
+					<% iterator = 0 %>
+					<% Topic.where(niveau_id:3).select(:theme).map(&:theme).uniq.each do |theme| %>
+
+						<div class="card">
+							<div class="card-header" id="Heading">
+							  <h5 class="mb-0">
+							    	<button class="btn btn-link <%= 'collapsed' if iterator >0 %>" data-toggle="collapse" data-target='#<%=theme%>'aria-expanded="false" aria-controls='<%=theme%>'style="color:black">
+							      		<%=theme%>
+							    	</button>
+							  </h5>
+							</div>
+							<div id='<%=theme%>' class="collapse <%='show' if iterator==0%>" aria-labelledby='Heading' data-parent="#accordion">
+								<%Topic.where(niveau_id:3, theme:theme).each do |t|	%>
+
+									<div class="card-body">
+										<label class="btn btn-info d-block">
+										    <input type="checkbox" name="topics[]"" id="1" value='<%=t.id%>'> <%=t.chapitre%>
+										</label>
+									</div>
+
+								<%end%>
+							</div>
+						</div>
+					<% iterator += 1%>
+					<%end%>
+				</div>
+	
+			</div>
+		<% end %>
+		<!--FIN  THEME -->
+	</div>
+
+
+		<% else %>
+		<!-- Cas où un ou deux élèves déjà inscrits -->
+
+			<div class="row justify-content-between mt-3">
+
+				<div class="col-12 col-lg-6 bg-blanc p-3" style="border-right: solid 20px #F2F2F2" >
+						<div class="row justify-content-center">
+							<div class="col-12 ">
+								<p style="font-weight: bold; font-size: 1.4em">Objectif</p>
+								<% if @cour.objectif == 1 %>
+									<input type="button"  class="btn btn-info col-9" value="Soutien scolaire" style="border-radius: 10px">	
+								<% elsif @cour.objectif == 2 %>
+									<input type="button" class="btn btn-secondary col-9" value="Perfectionnement scolaire" style="border-radius: 10px">
+								<% end %>	
+							</div>
+						</div>
+				</div>
+
+				<div class="col-12 col-lg-6 bg-blanc p-3">
+					<div class="row justify-content-center">
+						<div class="col-12">
+							<p style="font-weight: bold; font-size: 1.4em">Élèves</p>
+							<div class="row justify-content-center">
+								<% Inscription.where(cour_id:@cour.id).each do |i| %>
+									<div class="col-3">
+										<div class="row justify-content-center">
+											<div class="col-12">
+												<div class="m-auto" style="border-radius: 50%; background-color: #4897D8; width: 50px; height: 50px;">
+												</div>
+											</div>
+											<div class="col-12"><%=User.find(i.user_id).infouser.first_name.capitalize %></div>
+										</div>
+									</div>
+								<% end %>
+								<% (3-@cour.nombre_eleves).times do %>
+									<div class="col-3">
+										<div class="row justify-content-center">
+											<div class="col-12">
+												<div class="m-auto" style="border-radius: 50%; background-color: #e55966; width: 50px; height: 50px;">
+												</div>
+											</div>
+										</div>
+									</div>
+								<%end%>	
+							</div>			
+						</div>
+					</div>
+				</div>
+
+				<div class="col-12 col-lg-4">
+					
+					<div id="accordion">
+						<% iterator = 0 %>
+						<% Topic.where(niveau_id:@cour.annees.last.niveau).select(:theme).map(&:theme).uniq.each do |theme| %>
+
+							<div class="card">
+								<div class="card-header" id="Heading">
+								  <h5 class="mb-0">
+								    	<button class="btn btn-link <%= 'collapsed' if iterator >0 %>" data-toggle="collapse" data-target='#<%=theme%>'aria-expanded="false" aria-controls='<%=theme%>'style="color:black">
+								      		<%=theme%>
+								    	</button>
+								  </h5>
+								</div>
+								<div id='<%=theme%>' class="collapse <%='show' if iterator==0%>" aria-labelledby='Heading' data-parent="#accordion">
+									<%Topic.where(niveau_id:@cour.annees.last.niveau, theme:theme).each do |t|	%>
+
+										<div class="card-body">
+											<label class="btn btn-info d-block">
+											    <input type="checkbox" name="topics[]"" id="1" value='<%=t.id%>'> <%=t.chapitre%>
+											</label>
+										</div>
+
+									<%end%>
+								</div>
+							</div>
+						<% iterator += 1%>
+						<%end%>
+					</div>
+				</div>
+
+			</div>
+
+		<% end %>
+
+
+		<%= hidden_field_tag "id", @cour.id %>
+			<% if !(teacher_signed_in? and current_teacher.id == @cour.teacher_id) %>
+				<div class="row justify-content-center mt-3">
+					<input type="submit" class="col-3 btn btn-primary form-control" value="M'inscire" style="border-radius: 15px" name="commit">	
+				</div>
+			<% end %>
+
+	</div>
+</div>
+
+<%end%>	
+
+
+			</div>
+		</div>
+	</div>
+</div>						
+
+
+			<!-- Modal Contacter prof -->
+
+			<div class="modal fade" id="ContacterProf" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			    <div class="modal-dialog" role="document">
+			        <div class="modal-content">
+			            <div class="modal-header text-center">
+			                <h4 class="modal-title w-100 font-weight-bold">Envoyer un message</h4>
+			                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			                    <span aria-hidden="true">&times;</span>
+			                </button>
+			            </div>
+			            <div class="modal-body mx-3">
+
+			            <%=form_tag("/cours/show", method: "post") do %>
+<!--
+						<label class="sr-only" for="Email">Email</label>
+			            <div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<div class="input-group-text"><span class="fa fa-envelope-o"></span></div>
+							</div>
+							<input type="text" class="form-control" id="Email" name="email" placeholder="Email">
+						</div>
+-->
+			            <div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<div class="input-group-text"><span class="fa fa-pencil"></span></div>
+							</div>
+							<textarea type="text" class="form-control" id="Message" name="message"></textarea>
+						</div>
+						<input type="hidden" name="cour_id" value='<%=@cour.id%>'>
+			            <div class="modal-footer">
+			                <div class="input-group mb-3">
+								<div class="input-group-prepend">
+									<div class="input-group-text"><span class="fa fa-paper-plane-o"></span></div>
+								</div>
+								<input type="submit" class="btn btn-primary form-control" value="Envoyer" name="contactprof">
+							</div>
+			            </div>
+			            <% end %>
+			        </div>
+			    </div>
+			</div>
+			<!-- Fin Modal contacter prof -->
+			
+
+
+
+<script type="text/javascript">
+		 	$.extend($.fn.pickadate.defaults, {
+			  monthsFull: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+			  weekdaysShort: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
+			  today: '',
+			  clear: '',
+			  close: 'Fermer',
+			  formatSubmit: 'dd-mm-yyyy',
+			})
+
+			$('.datepicker').pickadate({
+				hiddenName:true
+			})
+
+
+		</script>
