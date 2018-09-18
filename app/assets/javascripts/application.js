@@ -19,3 +19,7 @@
 //= require pickadate/picker.time 
 //= require trix
 //= require_tree .
+
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})

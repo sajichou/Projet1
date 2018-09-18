@@ -4,26 +4,20 @@
 
 	<div class="col-12 col-lg-8 mt-4" style="text-align: left">
 		<h4 class="pl-3" style="border-bottom: solid 1px black">
-			Informations en attente ()
+			Informations en attente :
 		</h4>
+		<%@info_manquantes.each do |i| %>
+			<span style="color: red">
+				<i class="fa fa-exclamation-triangle"></i>
+			</span>
+			<p class="d-inline p-1">
+				
+				Vous n'avez pas encore renseigné : <%=i%>.
+			</p>
+		<%end%>
+
 	</div>
-	<% if teacher_signed_in? and @demandes.present?%>
-	<div class="col-12 col-lg-8" style="text-align: left">
-		<% @demandes.each do |d| %>
-			<%= link_to cours_show_path(:id => d.cour_id) do%>
-				<p class="pl-3" style="background-color: #eeeeee ">
-					<% if d.min == 0 %>
-						<%=User.find(d.user_id).infouser.first_name%> souhaite s'inscire à votre cours de <%=Cour.find(d.cour_id).matiere %> pour le <%=d.jour%> à <%=d.heure%>h.
-					<% else %>
-						<%=User.find(d.user_id).infouser.first_name%> souhaite s'inscire à votre cours de <%=Cour.find(d.cour_id).matiere %> pour le <%=d.jour%> à <%=d.heure%>h30.
-					<% end %>
-				</p>
-			<% end %>
-			<%= link_to "Accepter", {:controller =>"cours", :action=>"accepter_inscription", :cour_id=>d.cour.id, :user_id=>d.user_id, :demande_id=>d.id}, class:"btn btn-primary"%>
-			<%= link_to "Refuser", {:controller =>"cours", :action=>"refuser_inscription", :user_id=>d.user.id, :demande_id=>d.id}, class:"btn btn-danger"%>
-		<% end %>
-	</div>
-	<% end %>
+	
 	<div class="col-12 col-lg-8 mt-5" style="text-align: left">
 		<h4 class="pl-3" style="border-bottom: solid 1px black">
 			Nouveaux messages (<%=@nb_nouveaux_messages%>)
@@ -36,7 +30,7 @@
 					<% if notif.actor.class == Teacher %>
 						<p><%= image_tag notif.actor.infoteacher.avatar.url(:thumb), :class => "thumbnail1" %><%=notif.actor.email%> vous a envoyé un message</p>
 					<% else %>
-						<p> <%=notif.actor.email%> vous a envoyé un message</p>
+						<p> <%=notif.actor.infouser.first_name.capitalize%> vous a envoyé un message</p>
 					<% end %>
 				</div>
 			<% end %>

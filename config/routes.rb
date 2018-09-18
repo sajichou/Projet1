@@ -60,7 +60,10 @@ Rails.application.routes.draw do
 
   get 'cours/modifier'
 
+  get 'cours/modifier_ex_def'
+
   post 'cours/modifier' =>'cours#modifier_ex_def'
+
 
   get 'cours/accepter_inscription'
 

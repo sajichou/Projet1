@@ -164,7 +164,16 @@ class PagesController < ApplicationController
         @notifications = Notification.where(recipient: current_teacher).unread
         @nb_nouveaux_messages = @notifications.length
         #Les demandes d'inscription envoyées par les eleves
-        @demandes = Demande.where("state IS NULL",teacher_id=current_teacher.id)
+        #@demandes = Demande.where("state IS NULL",teacher_id=current_teacher.id)
+        #Informations manquantes
+        @info_manquantes =[]
+        @info_manquantes.push("votre compte Stripe") unless current_teacher.infoteacher.stripe_id.present?
+        @info_manquantes.push("votre justificatif d'identité") unless current_teacher.infoteacher.justificatif_identite.present?
+        @info_manquantes.push("votre justificatif de diplôme") unless current_teacher.infoteacher.justificatif_diplome.present?
+        @info_manquantes.push("votre photo") unless current_teacher.infoteacher.avatar.present?
+        @info_manquantes.push("votre accord pour les CGU") unless current_teacher.infoteacher.cgu
+
+
     end
   end
 

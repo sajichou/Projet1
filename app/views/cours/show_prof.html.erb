@@ -1,74 +1,175 @@
-<div class="row justify-content-center mt-4">
-    <div class="col-12 col-lg-11">
-      <%= render partial:"en_tete", locals:{cour:@cour}%>
-    </div>
-</div>
+<%=form_tag "/cours/show_prof", method:"post" do %>
 
-<div class="row justify-content-center bg-gris p-3">
-	<div class="col-11">
+	<div class="row justify-content-center mt-4">
+	    <div class="col-12 col-lg-11">
+	      <%= render partial:"en_tete", locals:{cour:@cour}%>
+	    </div>
+	</div>
 
-		<!-- Experience et méthodologie-->
+	<div class="row justify-content-center p-3">	
+		<div class="col-3">
+			<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" style="border-radius:5px; color:white;">
+					Dissoudre ce cours
+			</button>
+		</div>
+	</div>
 
-		<div class="row justify-content-between">
+	<div class="row justify-content-center bg-gris p-3">
+		<div class="col-11">
 
-			<div class="col-12 col-lg-6 bg-blanc p-3" style="border-right: solid 20px #F2F2F2" >
+			<!-- Experience et méthodologie-->
+
+			<div class="row justify-content-between">
+
+				<div class="col-12 col-lg-6 bg-blanc p-3" style="border-right: solid 20px #F2F2F2" >
+						<div class="row justify-content-center">
+							<div class="col-12 ">
+								<p style="font-weight: bold; font-size: 1.4em">Expérience</p>
+								<p class="font-italic text-justify" style="font-size:90%"><%=@cour.teacher.infoteacher.experience%></p>			
+							</div>
+						</div>
+				</div>
+
+				<div class="col-12 col-lg-6 bg-blanc p-3">
 					<div class="row justify-content-center">
-						<div class="col-12 ">
-							<p style="font-weight: bold; font-size: 1.4em">Expérience</p>
-							<p class="font-italic text-justify" style="font-size:90%"><%=@cour.teacher.infoteacher.experience%></p>			
+						<div class="col-12  ">
+							<p style="font-weight: bold; font-size: 1.4em">Méthodologie</p>
+							<p class="font-italic text-justify" style="font-size:90%"><%=@cour.teacher.infoteacher.methodology%></p>				
 						</div>
 					</div>
+				</div>
 			</div>
 
-			<div class="col-12 col-lg-6 bg-blanc p-3">
-				<div class="row justify-content-center">
-					<div class="col-12  ">
-						<p style="font-weight: bold; font-size: 1.4em">Méthodologie</p>
-						<p class="font-italic text-justify" style="font-size:90%"><%=@cour.teacher.infoteacher.methodology%></p>				
+		</div>
+	</div>
+
+
+	<div class="row justify-content-center bg-gris p-3">
+		<div class="col-11">
+			<div class="col-12 bg-blanc p-3" >
+				<div class="row justify-content-between">
+					<div class="col-12 ">
+						<p style="font-weight: bold; font-size: 1.4em">Conversation pour ce groupe</p>
+						<%Contactmessage.where(cour_id:@cour.id, teacher_id:current_teacher.id).order(created_at: :desc).uniq{|p| p.user_id}.each do |m| %>
+
+							<%if m.ecritparuser%>
+
+								<div class="row align-items-center">
+
+									<div class="col-2">	
+										<div class="d-flex align-items-center" >
+											<div class="d-flex justify-content-center align-items-center" style="border-radius: 50%; background-color: orange; width: 50px; height: 50px; color: white; font-weight: bold;">
+												<%=m.user.infouser.first_name.capitalize[0]%>
+											</div>
+											<div>
+												<%=m.user.infouser.first_name.capitalize%>
+											</div>
+										</div>
+									</div>
+									<div class="col-8">
+										<p class="p-0 m-0" style="text-align: start"><%=m.message%></p>
+									</div>
+									<div class="col-2">
+										<%= link_to "Répondre", {:controller =>"messages", :action=>"show", :message_id=>m.id}, class:"btn btn-info", role:"button" %>
+									</div>
+								</div>
+
+							<%else %>
+
+							<%end%>
+
+						<%end%>
 					</div>
 				</div>
 			</div>
 		</div>
-
 	</div>
-</div>
 
-<div class="row justify-content-center bg-gris p-3">
-	<div class="col-11">
-		<div class="col-12 bg-blanc p-3" style="border-right: solid 20px #F2F2F2" >
-			<div class="row justify-content-center">
-				<div class="col-12 ">
-					<p style="font-weight: bold; font-size: 1.4em">Conversation pour ce groupe</p>
-					<%Contactmessage.where(cour_id:@cour.id, teacher_id:current_teacher.id).each do |m| %>
-						<div class="row">
-							<div class="col-3">
-								<p><%=m.user.infouser.first_name%></p>
-							</div>
-							<div class="col-6">
-								<p style="text-align: start"><%=m.message%></p>
-							</div>
-							<div class="col-3">
-								
-								<%= link_to "Répondre", {:controller =>"messages", :action=>"show", :message_id=>m.id}, class:"btn btn-info", role:"button" %>
-							</div>
-						</div>	
-					<%end%>
+	<!-- Absences -->
+	<div class="row justify-content-center bg-gris p-3">
+		<div class="col-11">
+			<div class="col-12 bg-blanc p-3" >
+				<div class="row justify-content-between">
+					<div class="col-12 ">
+						<p style="font-weight: bold; font-size: 1.4em">Absences</p>
+						<%@absents.each do |a| %>
+							<p class="rose">
+								<%=User.find(a).infouser.first_name.capitalize%> a signalé son absence pour le prochain cours.
+							</p>
+						<%end%>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
+
+	<!-- Modifier la date du cours -->
+	<div class="row justify-content-center bg-gris p-3">
+		<div class="col-11">
+			<div class="col-12 bg-blanc p-3" >
+				<div class="row justify-content-between">
+					<div class="col-12 ">
+						<p style="font-weight: bold; font-size: 1.4em">Gérer le calendrier du cours</p>
+					</div>
+					<div class="col-12 mt-2">
+						<p style="font-weight: bold; font-size: 1.2em">Déplacer le prochain cours</p>
+						<div>
+							<p style="text-align: left">
+								Cette rubrique vous permet de modifier la date du
+				                prochain cours et d'en informer automatiquement vos élèves en cas d'absence, de vacances, ou
+				                autre éventuelles situations. Les élèves recevront un email leur indiquant la sate du prochain
+				                cours. Leur abonnement sera alors suspendu jusqu'à cette nouvelle date. Ils seront libre de se
+				                désinscrire si ils le souhaitent.</br><strong>Exemple : </strong> Les vacances arrivent et je
+				                ne suis pas présent, je peux indiquer que les cours n'auront pas lieu les deux prochaines
+				                semaines et qu'ils reprendront le jeudi d'après comme d'habitude.
+							</p>
+							<input type="text" name="datepicker" class="datepicker col-12 col-lg-3 form-search text-center m-2">
+
+	        				<input type="text" name="timepicker" class="timepicker col-12 col-lg-3 form-search text-center m-2">
+
+	        				<input type="submit" name="modifier_ex" class="btn col-12 col-lg-2 form-search-btn m-2" style="height:50px; line-height:30px; text-align-last: center" value="Envoyer">
+
+						</div>
+					</div>
+					<div class="col-12 mt-2">
+						<p style="font-weight: bold; font-size: 1.2em">Modifier le créneau de tous les cours restants</p>
+						<div>
+							<p style="text-align: left">
+								Cette rubrique vous permet de modifier de manière
+				                permanenete le jour et l'heure auxquels se passe le cours.</br><strong>Exemple : </strong>Le
+				                cours se passe habituellement le jeudi à 18h mais vous avez convenu avec vos élèves qu'il se
+				                passerait le mercredi à 14h. Vous pouvez le modifier vous même en validant ci-dessous la
+				                nouvelle date.
+							</p>
+							<select name="jour" class="col-12 col-lg-3 text-center m-2" style="height:50px; line-height:30px; text-align-last: center">
+								<option value="lundi">Lundi</option>
+								<option value="mardi">Mardi</option>
+								<option value="mercredi">Mercredi</option>
+								<option value="jeudi">Jeudi</option>
+								<option value="vendredi">Vendredi</option>
+								<option value="samedi">Samedi</option>
+								<option value="dimanche">Dimanche</option>
+							</select>
+
+	        				<input type="text" name="timepicker_def" class="timepicker col-12 col-lg-3 form-search text-center m-2" style="height:50px; line-height:30px; text-align-last: center">
+	        				<input type="submit" name="modifier_def" class="btn col-12 col-lg-2 form-search-btn m-2" style="height:50px; line-height:30px; text-align-last: center" value="Envoyer">
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 
 
-<%  if @cour.nombre_eleves > 0 %>
 
-	<%=form_tag "/cours/show_prof", method:"post" do %>
+	<%  if @cour.nombre_eleves > 0 %>
 		<div class="row justify-content-center bg-gris p-3">
 			<div class="col-11 bg-blanc p-3">
 				<!-- THEME -->
 				<div class="col-12 m-auto col-lg-6">
-					<p style="font-weight: bold; font-size: 1.2em"> Indiquez les chapitres étudiés au prochain cours :</p>
+					<p style="font-weight: bold; font-size: 1.2em"> Indiquez les thématiques étudiées au prochain cours </p>
 					<% Topic.where(niveau_id:@cour.annees.last.niveau).select(:theme).map(&:theme).uniq.each do |t| %>
 						<label class="btn btn-info d-block">
 						    <input type="checkbox" name="themes[]" id="1" value='<%=t%>'>
@@ -79,12 +180,63 @@
 
 			</div>
 		</div>
-	<input type="hidden" name="cour_id" value='<%=@cour.id%>'>
-	<input type="submit" class="col-3 btn btn-primary form-control" value="Enregistrer" style="border-radius: 15px">
-
-	
-
-	
+		<input type="hidden" name="cour_id" value='<%=@cour.id%>'>
+		<input type="submit" class="col-3 btn btn-primary form-control" value="Enregistrer" name="submit_theme" style="border-radius: 15px">
 	<%end%>
 
 <%end%>
+
+
+<!-- Modal  Supprimer cours pour teacher-->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Supprimer ce cours</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Je confirme mon souhait de supprimer ce cours. Avant de valider votre choix, nous vous conseillons de prévenir les élèves inscrits de la fin de leur cours. 
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+        <%= link_to "Supprimer le cours", {:controller =>"cours", :action=>"destroy", :id=>@cour.id}, class:"btn btn-danger"%>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+ 	$.extend($.fn.pickadate.defaults, {
+	  monthsFull: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+	  weekdaysShort: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
+	  today: '',
+	  clear: '',
+	  close: 'Fermer',
+	  formatSubmit: 'yyyy-mm-dd',
+	  firstDay: 1,
+	  min: 1
+	})
+
+	$('.datepicker').pickadate({
+		hiddenName:true
+	})
+
+	$.extend($.fn.pickatime.defaults, {
+        clear: 'Effacer',
+        interval: 30,
+        min: [10,0],
+        max: [20,0],
+        format: 'H:i !h.',
+        formatLabel: 'H:i',
+        formatSubmit: 'H:i'
+
+    })      
+
+    $('.timepicker').pickatime({
+        hiddenName:true
+    })
+</script>

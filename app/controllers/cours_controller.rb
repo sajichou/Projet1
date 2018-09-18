@@ -16,7 +16,7 @@ class CoursController < ApplicationController
 
   def overlay
   end
-  
+
   def new
 
     # Si creneau non renseigne
@@ -110,8 +110,6 @@ class CoursController < ApplicationController
       @l=l_ord
     end
 
-    
-
     if @est_inscrit
       redirect_to controller: 'cours', action: 'show_inscrit', id: @cour.id
     end
@@ -119,13 +117,35 @@ class CoursController < ApplicationController
   end
 
   def show_inscrit
+    @est_inscrit=true
     @cour = Cour.find(params[:id])
     @messages = Contactmessage.where(user_id:current_user.id, 
       teacher_id:@cour.teacher.id, cour_id:@cour.id)
+
+    if Absencesponctuelle.where(user_id:current_user.id, cour_id:params[:id]).length < 1
+      date_derniere_abs = 0
+    else
+      derniere_abs = Absencesponctuelle.where(user_id:current_user.id, cour_id:params[:id]).last
+      date_derniere_abs = Lesson.find(derniere_abs.lesson_id).date.to_date
+    end
+
+    if (Time.zone.today - date_derniere_abs) < 30
+      @absenceponctuelle = true
+    else
+      @absenceponctuelle = false
+    end
+
   end
 
   def show_prof
     @cour = Cour.find(params[:id])
+    date = Time.zone.today
+    @absents = []
+    Absencesponctuelle.where(cour_id:params[:id]).each do |a|
+      if Lesson.find(a.lesson_id).date.to_date >= date
+        @absents.push(a.user_id)
+      end
+    end
   end
 
   def update
@@ -397,14 +417,13 @@ class CoursController < ApplicationController
       date_reg = Date.today + delta_jours
       cour.update(jour:jour, heure:heure, min:min, date_reg:date_reg)
       cour.save
-      if cour.lessons.last.present?
+      if cour.lessons.last.present? and !cour.lessons.last.paid
         cour.lessons.last.update(date:date_reg)
       end
     end
     #UserMailer.modifier(Cour.find(params[:id])).deliver
-
     #TeacherMailer.inscription(Cour.find(params[:id]).teacher).deliver
-    redirect_to controller: 'cours', action:'modifier', id:params[:id]
+    redirect_to controller: 'cours', action:'show_prof', id:params[:id]
   end
 
   def contacter_prof
@@ -449,9 +468,23 @@ class CoursController < ApplicationController
   end
 
   def maj
+
     cour = Cour.find(params[:cour_id])
-    cour.update(theme:params[:themes])
-    redirect_to controller: 'cours', action:'show', id:params[:cour_id]
+    if params[:submit_theme].present?
+      cour.update(theme:params[:themes])
+      redirect_to controller: 'cours', action:'show', id:params[:cour_id]
+    elsif params[:modifier_ex].present?
+
+      redirect_to controller: 'cours', action:'modifier_ex_def', id:params[:cour_id],
+      datepicker:params[:datepicker], timepicker:params[:timepicker], 
+      modifier_ex:params[:modifier_ex]
+    elsif params[:modifier_def].present?
+
+      redirect_to controller: 'cours', action:'modifier_ex_def', id:params[:cour_id],
+      jour:params[:jour], timepicker_def:params[:timepicker_def], 
+      modifier_def:params[:modifier_def]
+
+    end
 
   end
 

@@ -1,9 +1,13 @@
 <!-- SECTION RAPPEL CARACTERISTIQUES COURS SELECTIONNE -->
 <div class="row justify-content-center">
-	<div class="col-12 p-3" style="position: relative; ">
-	<div style="position: absolute; top: 10%; left: 45%; border: solid 1px #e55966; height: 200px"></div>
-
-		<div class="row justify-content-center">
+	<div class="col-12 p-3" >
+		<p class="d-inline text-capitalize" style="font-weight: bold; font-size: 1.4em"><%=cour.matiere%>
+			<%cour.annees.each do |n| %>
+				| <%= Correspondance.find_by_niveau_id(n.niveau).nom%>	
+			<%end%>
+		</p>
+		<div class="row justify-content-center mt-3" style="position: relative;">
+			<div style="position: absolute; top: 10%; left: 45%; border: solid 1px #e55966; height: 200px"></div>
 			<div class="col-10 col-lg-10">
 				<div class="row justify-content-center">
 					<!-- image -->
@@ -40,7 +44,21 @@
 						
 						<div class="row align-items-start">
 							<div class="col-12" style="text-align: start">
-								<% if (cour.jour.present? and cour.heure.present?) %>
+								<% if cour.date_ex.present? %>
+									<p>
+										<span style="font-weight: bold">Date du prochain cours : </span>
+										<%=cour.date_ex.to_date.strftime("%d-%m-%Y")%>
+										à <%=cour.horaire_ex%>h<%=cour.min_ex%>
+									</p>
+
+								<%elsif cour.date_reg.present? %>
+									<p>
+										<span style="font-weight: bold">Date du prochain cours : </span>
+										<%=cour.date_reg.to_date.strftime("%d-%m-%Y")%>
+										à <%=cour.heure%>h<%=cour.min%>
+									</p>
+
+								<% elsif (cour.jour.present? and cour.heure.present?) %>
 									<p>
 										<span style="font-weight: bold">Date du prochain cours : </span>
 
@@ -54,7 +72,7 @@
 									<p>
 										<span style="font-weight: bold">Plusieurs créneaux possibles : </span>
 										<%cour.dispos.each do |dispo| %>
-											<%=dispo.jour %> à <@cour.heure%>h<%=@cour.min%>>
+											<%=dispo.jour %> à <%=dispo.heure%>h<%=dispo.min%> |
 										<%end%>
 
 									</p>
@@ -88,9 +106,9 @@
 						<div class="row align-items-start">
 							<div class="col-12" style="text-align: start">
 								<p><span style="font-weight: bold">Objectif : </span>
-									<%if cour.objectif =="1" %>
+									<%if cour.objectif ==1 %>
 										Soutien scolaire
-									<%elsif cour.objectif == "2" %>
+									<%elsif cour.objectif == 2 %>
 									 	Perfectionnement scolaire
 									<% else%>
 										Non définie
