@@ -131,7 +131,7 @@ class PagesController < ApplicationController
         end
       end
     end
-  end
+  end 
 
   def maphoto
     if teacher_signed_in?
@@ -189,7 +189,7 @@ class PagesController < ApplicationController
     current_user.infouser.update(code:params[:code])
     if params[:id].present?
       #redirect_to '/charges/new'
-      redirect_to controller: 'charges', action: 'new', id: params[:id], dispo: params[:dispo]
+      redirect_to controller: 'charges', action: 'new', id: params[:id], dispo: params[:dispo], topics:params[:topics], objectif:params[:objectif]
     else
       redirect_to '/pages/code_promo'
     end

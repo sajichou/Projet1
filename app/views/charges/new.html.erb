@@ -68,12 +68,12 @@
         <% elsif (current_user.infouser.code == "LANCEMENT18" and current_user.infouser.code_used) %>
             <p>Votre code promo n'est malheureusement plus valide.</p>
             <p>Si vous disposez d'un nouveau code promo, veillez le saisir dans votre espace personnel:
-            <%= link_to "Code promo", {:controller =>"pages", :action=>"code_promo", :id=>@cours_id, :dispo=>@dispo}%>
+            <%= link_to "Code promo", {:controller =>"pages", :action=>"code_promo", :id=>@cours_id, :dispo=>@dispo, :topics=>@topics, :objectif=>@objectif}%>
             </p>
           <%else%>
             <p>
             Si vous disposez d'un code promo, veillez le saisir dans votre espace personnel: 
-            <%= link_to "Code promo", {:controller =>"pages", :action=>"code_promo", :id=>@cours_id, :dispo=>@dispo}%>
+            <%= link_to "Code promo", {:controller =>"pages", :action=>"code_promo", :id=>@cours_id, :dispo=>@dispo, :topics=>@topics, :objectif=>@objectif}%>
             </p>
           <%end%>
 
