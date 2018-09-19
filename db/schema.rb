@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180914115530) do
+ActiveRecord::Schema.define(version: 20180919163739) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -274,6 +274,8 @@ ActiveRecord::Schema.define(version: 20180914115530) do
     t.datetime "created_at"
     t.float "amount_eleve"
     t.float "amount_prof"
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_paiements_on_deleted_at"
   end
 
   create_table "presences", force: :cascade do |t|
