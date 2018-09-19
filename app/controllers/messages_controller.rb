@@ -30,9 +30,8 @@ class MessagesController < ApplicationController
         twilio_phone_number = "TopNote"
         #time_str = ((self.time).localtime).strftime("%I:%M%p on %b. %d, %Y")
         #reminder = "Hi #{self.name}. Just a reminder that you have an appointment coming up at #{time_str}."
-        reminder = "Hello"+ message.teacher.infoteacher.first_name + " vous a envoyé un message. 
-        Rendez-vous sur votre espace personnel pour le lire:
-        https://www.topnote.fr/pages/messages "
+        reminder = "Hello, "+ message.teacher.infoteacher.first_name + " vous a envoyé un message. 
+        Rendez-vous sur votre espace personnel pour le lire."
         message = @client.api.account.messages.create(
           #:from => '+33644640536',
           :from =>twilio_phone_number,
@@ -52,8 +51,7 @@ class MessagesController < ApplicationController
         #time_str = ((self.time).localtime).strftime("%I:%M%p on %b. %d, %Y")
         #reminder = "Hi #{self.name}. Just a reminder that you have an appointment coming up at #{time_str}."
         reminder = "Hello"+ message.teacher.infoteacher.first_name + " a répondu à votre message. 
-        Rendez-vous sur votre espace personnel pour le lire:
-        https://www.topnote.fr/pages/messages "
+        Rendez-vous sur votre espace personnel pour le lire."
         message = @client.api.account.messages.create(
           #:from => '+33644640536',
           :from =>twilio_phone_number,
