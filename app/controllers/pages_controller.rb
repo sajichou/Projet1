@@ -20,9 +20,9 @@ class PagesController < ApplicationController
     #On supprime aussi sa presence non payée si delai respecté
     lesson = Cour.find(params[:id]).lessons.last
     if cour.horaire_ex.present?
-      heure = cour.horaire_ex
+      heure = cour.horaire_ex.to_i
     else
-      heure = cour.heure
+      heure = cour.heure.to_i
     end
     presence = Presence.where(lesson_id:lesson.id, user_id:current_user.id).last
     if presence.perf
