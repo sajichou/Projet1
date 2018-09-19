@@ -78,7 +78,7 @@ class CoursController < ApplicationController
       @est_inscrit = false
     end
 
-    if teacher_signed_in? and @cour.teacher.id = current_teacher.id
+    if (teacher_signed_in? and @cour.teacher.id == current_teacher.id)
       redirect_to controller: 'cours', action: 'show_prof', id: @cour.id
     end
 
