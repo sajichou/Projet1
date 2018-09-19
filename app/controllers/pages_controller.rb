@@ -148,6 +148,12 @@ class PagesController < ApplicationController
     if params[:dispo].present?
       @dispo = params[:dispo]
     end
+    if params[:topics].present?
+      @topics = params[:topics]
+    end
+    if params[:objectif].present?
+      @objectif = params[:objectif]
+    end
   end
 
   def paiement
