@@ -19,11 +19,16 @@ class PagesController < ApplicationController
     inscription.destroy
     #On supprime aussi sa presence non payée si delai respecté
     lesson = Cour.find(params[:id]).lessons.last
+    if cour.horaire_ex.present?
+      heure = cour.horaire_ex
+    else
+      heure = cour.heure
+    end
     presence = Presence.where(lesson_id:lesson.id, user_id:current_user.id).last
     if presence.perf
       flash[:info] = "Vous vous êtes bien désabonné."
       redirect_to '/pages/monespace'
-    elsif (lesson.date.to_date - Time.zone.today > 1)
+    elsif (lesson.date.to_date - Time.zone.today > 0 and heure - Time.zone.now.hour >= 0 )
       presence.destroy
       flash[:info] = "Vous vous êtes bien désabonné sans frais !"
       redirect_to '/pages/monespace'
