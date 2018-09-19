@@ -78,10 +78,6 @@ class CoursController < ApplicationController
       @est_inscrit = false
     end
 
-    if (teacher_signed_in? and @cour.teacher.id == current_teacher.id)
-      redirect_to controller: 'cours', action: 'show_prof', id: @cour.id
-    end
-
     # Si plusieurs créneaux disponibles :
 
     if @cour.dispos.length >1
@@ -111,6 +107,14 @@ class CoursController < ApplicationController
 
     if @est_inscrit
       redirect_to controller: 'cours', action: 'show_inscrit', id: @cour.id
+
+    elsif (teacher_signed_in? and @cour.teacher.id == current_teacher.id)
+      puts "cond2"
+      puts @cour.teacher.id
+      puts current_teacher.id
+      puts @cour.teacher.id == current_teacher.id
+      redirect_to controller: 'cours', action: 'show_prof', id: @cour.id
+    
     end
 
   end
