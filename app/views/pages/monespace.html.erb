@@ -30,7 +30,9 @@
 	<% elsif @cours_proposes.length < 1 %>
 		<div class="row justify-content-center">
 			<p>Vous n'avez pas encore créé d'annonces.</p>
-			<button type="button" class="btn btn-primary">Créer un cours</button>
+			<p>
+				<a class="btn btn-primary" href="cours/create" role="button">Créer un cours</a>
+			</p>
 		</div>
 
 	<% else %>
