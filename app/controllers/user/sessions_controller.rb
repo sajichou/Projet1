@@ -39,9 +39,7 @@ class User::SessionsController < Devise::SessionsController
 
   end
 
-end
-  
-private
+
 
   def nice_destroy
     today = Time.zone.today
