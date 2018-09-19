@@ -30,8 +30,7 @@ class CoursController < ApplicationController
     # Si adresse reconnue 
     elsif (params[:latitude].present? and params[:longitude].present?)
       cour = Cour.create teacher_id:current_teacher.id, matiere:params[:matiere], lieu:params[:lieu],
-       latitude:params[:latitude], longitude:params[:longitude], titre:params[:titre], 
-       descriptif:params[:descriptif], street_number:params[:street_number], route:params[:route],
+       latitude:params[:latitude], longitude:params[:longitude], descriptif:params[:descriptif], street_number:params[:street_number], route:params[:route],
        locality:params[:locality], postal_code:params[:postal_code], country:params[:country]
       params[:classe].each do |c|
         Annee.create cour_id:cour.id, teacher_id:current_teacher.id, niveau:c

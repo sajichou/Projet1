@@ -1,5 +1,7 @@
 class PagesController < ApplicationController
 
+  before_action :connected ,only: [:monespace, :monprofil, :maphoto, :info_perso, :dashboard, :messages, :paiement, :code_promo]
+
   def monespace
     #On affiche la liste des cours proposés si teacher et la liste des cours suivis si user
     if user_signed_in?
@@ -221,4 +223,11 @@ def user_complet(user)
   user.infouser.first_name.present? and user.infouser.last_name.present? and user.infouser.niveau.present? and
   user.infouser.email.present? and user.infouser.cgu
   
+end
+
+def connected
+  if !user_signed_in? and !teacher_signed_in?
+    flash[:info] = "Vous devez d'abord vous connecter."
+    redirect_to controller: 'cours', action: 'accueil'
+  end
 end
