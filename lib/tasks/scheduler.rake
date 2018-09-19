@@ -184,7 +184,7 @@ task :faux_maj_cours => :environment do
 
     if (date > auj)
 
-      delta_jours = (wday[cour.jour] - date)
+      delta_jours = (wday[cour.jour] - date.wday)
       if delta_jours <= 0 
         delta_jours += 7
       end
