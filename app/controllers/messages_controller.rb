@@ -17,10 +17,7 @@ class MessagesController < ApplicationController
     Contactmessage.create cour_id:message.cour_id, user_id:message.user_id, message:params[:message], teacher_id:message.teacher_id, ecritparuser:bool  
     #Envoyer un mail et une notif  
     if bool 
-      Notification.create recipient:message.teacher, 
-      actor:message.user, 
-      action:"envoyé", 
-      notifiable:message
+      Notification.create actor:message.user, recipient:message.teacher, action:"envoyé", notifiable:message
       TeacherMailer.contact(message.teacher,message.user).deliver
       #On envoie une demande par SMS
         @twilio_number = ENV['TWILIO_NUMBER']
@@ -50,7 +47,7 @@ class MessagesController < ApplicationController
         twilio_phone_number = "TopNote"
         #time_str = ((self.time).localtime).strftime("%I:%M%p on %b. %d, %Y")
         #reminder = "Hi #{self.name}. Just a reminder that you have an appointment coming up at #{time_str}."
-        reminder = "Hello"+ message.teacher.infoteacher.first_name + " a répondu à votre message. 
+        reminder = "Hello, "+ message.teacher.infoteacher.first_name + " a répondu à votre message. 
         Rendez-vous sur votre espace personnel pour le lire."
         message = @client.api.account.messages.create(
           #:from => '+33644640536',
