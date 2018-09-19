@@ -16,7 +16,10 @@ class MessagesController < ApplicationController
     message = Contactmessage.find(params[:message_id])
     Contactmessage.create cour_id:message.cour_id, user_id:message.user_id, message:params[:message], teacher_id:message.teacher_id, ecritparuser:bool  
     #Envoyer un mail et une notif  
+    puts "bool"
+    puts bool
     if bool 
+      puts "ICIIII"
       Notification.create actor:message.user, recipient:message.teacher, action:"envoyé", notifiable:message
       TeacherMailer.contact(message.teacher,message.user).deliver
       #On envoie une demande par SMS

@@ -435,14 +435,29 @@ class CoursController < ApplicationController
           #Sauvergarder le message envoye
           message = Contactmessage.create cour_id:params[:cour_id], user_id:current_user.id, message:params[:message], teacher_id:Cour.find(params[:cour_id]).teacher_id, ecritparuser:true
           message.save
-          Notification.create recipient:message.teacher, 
-          actor:current_user, 
-          action:"envoyé", 
-          notifiable:message
+          Notification.create recipient:message.teacher, actor:current_user, action:"envoyé", notifiable:message
           #Envoyer une notification au prof 
           teacher = Cour.find(params[:cour_id]).teacher
+          #On envoie une demande par SMS
+          @twilio_number = ENV['TWILIO_NUMBER']
+          account_sid = ENV['TWILIO_ACCOUNT_SID']
+          @client = Twilio::REST::Client.new(account_sid, ENV['TWILIO_AUTH_TOKEN'])
+          teacher_phone = "+33" + message.teacher.infoteacher.phone
+          twilio_phone_number = "TopNote"
+          #time_str = ((self.time).localtime).strftime("%I:%M%p on %b. %d, %Y")
+          #reminder = "Hi #{self.name}. Just a reminder that you have an appointment coming up at #{time_str}."
+          reminder = "Hello, "+ message.teacher.infoteacher.first_name + " vous a envoyé un message. 
+          Rendez-vous sur votre espace personnel pour le lire."
+          message = @client.api.account.messages.create(
+            #:from => '+33644640536',
+            :from =>twilio_phone_number,
+            #:to => self.phone_number,
+            :to => teacher_phone,
+            :body => reminder,
+          )
           TeacherMailer.contact(teacher,current_user).deliver
           redirect_to controller: 'cours', action:'show', id:params[:cour_id]
+
         else
           flash[:info] = "Vous devez d'abord vous connecter."
           redirect_to controller: 'cours', action:'show', id:params[:cour_id]
