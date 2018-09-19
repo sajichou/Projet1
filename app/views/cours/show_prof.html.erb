@@ -50,34 +50,37 @@
 				<div class="row justify-content-between">
 					<div class="col-12 ">
 						<p style="font-weight: bold; font-size: 1.4em">Conversation pour ce groupe</p>
-						<%Contactmessage.where(cour_id:@cour.id, teacher_id:current_teacher.id).order(created_at: :desc).uniq{|p| p.user_id}.each do |m| %>
+						<% if Contactmessage.where(cour_id:@cour.id, teacher_id:current_teacher.id).length == 0%>
+							<p>Aucun message reçu pour le moment.</p>
+						<%else%>
+							<%Contactmessage.where(cour_id:@cour.id, teacher_id:current_teacher.id).order(created_at: :desc).uniq{|p| p.user_id}.each do |m| %>
 
-							<%if m.ecritparuser%>
+								<%if m.ecritparuser%>
 
-								<div class="row align-items-center">
+									<div class="row align-items-center">
 
-									<div class="col-2">	
-										<div class="d-flex align-items-center" >
-											<div class="d-flex justify-content-center align-items-center" style="border-radius: 50%; background-color: orange; width: 50px; height: 50px; color: white; font-weight: bold;">
-												<%=m.user.infouser.first_name.capitalize[0]%>
-											</div>
-											<div>
-												<%=m.user.infouser.first_name.capitalize%>
+										<div class="col-2">	
+											<div class="d-flex align-items-center" >
+												<div class="d-flex justify-content-center align-items-center" style="border-radius: 50%; background-color: orange; width: 50px; height: 50px; color: white; font-weight: bold;">
+													<%=m.user.infouser.first_name.capitalize[0]%>
+												</div>
+												<div>
+													<%=m.user.infouser.first_name.capitalize%>
+												</div>
 											</div>
 										</div>
+										<div class="col-8">
+											<p class="p-0 m-0" style="text-align: start"><%=m.message%></p>
+										</div>
+										<div class="col-2">
+											<%= link_to "Répondre", {:controller =>"messages", :action=>"show", :message_id=>m.id}, class:"btn btn-info", role:"button" %>
+										</div>
 									</div>
-									<div class="col-8">
-										<p class="p-0 m-0" style="text-align: start"><%=m.message%></p>
-									</div>
-									<div class="col-2">
-										<%= link_to "Répondre", {:controller =>"messages", :action=>"show", :message_id=>m.id}, class:"btn btn-info", role:"button" %>
-									</div>
-								</div>
 
-							<%else %>
+								<%else %>
 
+								<%end%>
 							<%end%>
-
 						<%end%>
 					</div>
 				</div>
@@ -92,10 +95,14 @@
 				<div class="row justify-content-between">
 					<div class="col-12 ">
 						<p style="font-weight: bold; font-size: 1.4em">Absences</p>
-						<%@absents.each do |a| %>
-							<p class="rose">
-								<%=User.find(a).infouser.first_name.capitalize%> a signalé son absence pour le prochain cours.
-							</p>
+						<% if !@absents.present?%>
+							<p>Aucune absence d'élève notifiée.</p>
+						<%else%>
+							<%@absents.each do |a| %>
+								<p class="rose">
+									<%=User.find(a).infouser.first_name.capitalize%> a signalé son absence pour le prochain cours.
+								</p>
+							<%end%>
 						<%end%>
 					</div>
 				</div>
