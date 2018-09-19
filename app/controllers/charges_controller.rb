@@ -38,7 +38,7 @@ class ChargesController < ApplicationController
 		request = Net::HTTP::Post.new(uri)
 		request.set_form_data(
 			#A changer selon test ou prod mode !!!!!!!!!!!!!
-		  "client_secret" =>ENV["STRIPE_TEST_SECRET_KEY"],
+		  "client_secret" =>ENV["STRIPE_SECRET_KEY"],
 		  "code" => params[:code],
 		  "grant_type" => "authorization_code",
 		)
