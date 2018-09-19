@@ -184,7 +184,11 @@ task :faux_maj_cours => :environment do
 
     if (date > auj)
 
-      date_reg += 7
+      delta_jours = (wday[cour.jour] - date)
+      if delta_jours <= 0 
+        delta_jours += 7
+      end
+      date_reg = date + delta_jours
 
       cour.update(date_ex:nil, horaire_ex:nil, min_ex:nil, date_reg:date_reg)
       lesson = Lesson.create(cour_id:cour.id, date:date_reg, paid:false)
