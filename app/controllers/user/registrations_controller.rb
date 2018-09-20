@@ -3,6 +3,7 @@
 class User::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
+    before_action :nice_destroy ,only: [:destroy]
 
   # GET /resource/sign_up
   # def new
@@ -67,4 +68,32 @@ class User::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
+
+
+  def nice_destroy
+    today = Time.zone.today
+    hour = Time.zone.now.hour
+    Inscription.where(user_id:current_user.id).each do |inscription|
+      cour = inscription.cour 
+      cour.nombre_eleves = cour.nombre_eleves - 1
+      cour.save
+      #On supprime aussi sa presence non payée si delai respecté
+      lesson = Cour.find(inscription.cour_id).lessons.last
+      if cour.horaire_ex.present?
+        heure = cour.horaire_ex.to_i
+      else
+        heure = cour.heure.to_i
+      end
+      presence = Presence.where(lesson_id:lesson.id, user_id:current_user.id, perf:false).last
+      if (lesson.date.to_date - today > 0 and heure - hour >= 0 )
+        presence.destroy
+      elsif lesson.date.to_date - today > 1
+        presence.destroy
+      end
+      inscription.destroy
+    end
+
+  end
+
+
 end

@@ -28,7 +28,7 @@ class PagesController < ApplicationController
     if presence.perf
       flash[:info] = "Vous vous êtes bien désabonné."
       redirect_to '/pages/monespace'
-    elsif (lesson.date.to_date - Time.zone.today > 0 and heure - Time.zone.now.hour >= 0 )
+    elsif (lesson.date.to_date - Time.zone.today > 0 and heure - Time.zone.now.hour >= 0 ) or (lesson.date.to_date - Time.zone.today > 1)
       presence.destroy
       flash[:info] = "Vous vous êtes bien désabonné sans frais !"
       redirect_to '/pages/monespace'
