@@ -105,10 +105,10 @@
 									<p style="font-weight: bold; font-size: 1.2em"><span style="font-size: 1.3em">2.</span> Choisissez votre objectif</p>
 									<p style="text-align: justify;">Veuillez choisir l'objectif qui vous convient :</p>
 									 <label class="btn btn-info d-block">
-								    <input type="radio" name="objectif" id="1" value="1"  autocomplete="off" required > Soutien scolaire
+								    <input type="radio" name="objectif" id="1" value="1"  autocomplete="off" required alt="Objectif : Rattaper ses lacunes" title="Objectif : Combler ses lacunes"> Soutien scolaire
 								  </label>
 								  <label class="btn btn-secondary d-block">
-								    <input type="radio" name="objectif" id="2" value="2" autocomplete="off" required> Perfectionnement scolaire
+								    <input type="radio" name="objectif" id="2" value="2" autocomplete="off" required alt="Objectif : Perfectionner ses acquis" title="Objectif : Perfectionner ses acquis"> Perfectionnement scolaire
 								  </label>
 								</div>
 								<!--
@@ -124,19 +124,19 @@
 									<div class="col-12 col-lg-4">
 										<p style="font-weight: bold; font-size: 1.2em"><span style="font-size: 1.3em">3.</span> Choisissez la thématique</p>
 										<div id="accordion">
-											<% iterator = 0 %>
+										
 											<% Topic.where(niveau_id:current_user.infouser.niveau).select(:theme).map(&:theme).uniq.each do |theme| %>
 
 
 												<div class="card">
 													<div class="card-header" id="Heading">
 													  <h5 class="mb-0">
-													    	<button class="btn btn-link <%= 'collapsed' if iterator >0 %>" data-toggle="collapse" data-target='#<%=theme%>'aria-expanded="false" aria-controls='<%=theme%>'style="color:black">
+													    	<button class="btn btn-link" data-toggle="collapse" data-target='#<%=theme%>'aria-expanded="false" aria-controls='<%=theme%>'style="color:black">
 													      		<%=theme%>
 													    	</button>
 													  </h5>
 													</div>
-													<div id='<%=theme%>' class="collapse <%='show' if iterator==0%>" aria-labelledby='Heading' data-parent="#accordion">
+													<div id='<%=theme%>' class="collapse" aria-labelledby='Heading' data-parent="#accordion">
 														<%Topic.where(niveau_id:current_user.infouser.niveau, theme:theme).each do |t|	%>
 
 															<div class="card-body">
@@ -148,7 +148,7 @@
 														<%end%>
 													</div>
 												</div>
-												<% iterator += 1%>
+												
 
 											<%end%>
 										</div>
@@ -309,10 +309,10 @@
 									<p style="font-weight: bold; font-size: 1.2em"><span style="font-size: 1.3em">1.</span> Choisissez votre objectif</p>
 									<p style="text-align: justify;">Veuillez choisir l'objectif qui vous convient :</p>
 									 <label class="btn btn-info d-block">
-								    <input type="radio" name="objectif" id="1" value="1"  autocomplete="off" required> Soutien scolaire
+								    <input type="radio" name="objectif" id="1" value="1"  autocomplete="off" required alt="Objectif : Rattaper ses lacunes" title="Objectif : Combler ses lacunes"> Soutien scolaire
 								  </label>
 								  <label class="btn btn-secondary d-block">
-								    <input type="radio" name="objectif" id="2" value="2" autocomplete="off" required> Perfectionnement scolaire
+								    <input type="radio" name="objectif" id="2" value="2" autocomplete="off" required alt="Objectif : Perfectionner ses acquis" title="Objectif : Perfectionner ses acquis"> Perfectionnement scolaire
 								  </label>
 								</div>
 						
@@ -322,19 +322,19 @@
 									<div class="col-12 col-lg-5">
 										<p style="font-weight: bold; font-size: 1.2em"><span style="font-size: 1.3em">2.</span> Choisissez la thématique</p>
 										<div id="accordion">
-											<% iterator = 0 %>
+											
 											<% Topic.where(niveau_id:current_user.infouser.niveau).select(:theme).map(&:theme).uniq.each do |theme| %>
 
 
 												<div class="card">
 													<div class="card-header" id="Heading">
 													  <h5 class="mb-0">
-													    	<button class="btn btn-link <%= 'collapsed' if iterator >0 %>" data-toggle="collapse" data-target='#<%=theme%>'aria-expanded="false" aria-controls='<%=theme%>'style="color:black">
+													    	<button class="btn btn-link collapsed" data-toggle="collapse" data-target='#<%=theme%>'aria-expanded="false" aria-controls='<%=theme%>'style="color:black">
 													      		<%=theme%>
 													    	</button>
 													  </h5>
 													</div>
-													<div id='<%=theme%>' class="collapse <%='show' if iterator==0%>" aria-labelledby='Heading' data-parent="#accordion">
+													<div id='<%=theme%>' class="collapse " aria-labelledby='Heading' data-parent="#accordion">
 														<%Topic.where(niveau_id:current_user.infouser.niveau, theme:theme).each do |t|	%>
 
 															<div class="card-body">
@@ -346,7 +346,7 @@
 														<%end%>
 													</div>
 												</div>
-												<% iterator += 1%>
+										
 
 											<%end%>
 										</div>
@@ -461,10 +461,11 @@
 							<div class="col-12 ">
 								<p style="font-weight: bold; font-size: 1.4em">Objectif</p>
 								<% if @cour.objectif == 1 %>
-									<input type="button"  class="btn btn-info col-9" value="Soutien scolaire" style="border-radius: 10px">	
+									<input type="button"  class="btn btn-info col-9" value="Soutien scolaire" alt="Objectif : Rattaper ses lacunes" title="Objectif : Combler ses lacunes" style="border-radius: 10px">	
 								<% elsif @cour.objectif == 2 %>
-									<input type="button" class="btn btn-secondary col-9" value="Perfectionnement scolaire" style="border-radius: 10px">
+									<input type="button" class="btn btn-secondary col-9" value="Perfectionnement scolaire" alt="Objectif : Perfectionner ses acquis" title="Objectif : Perfectionner ses acquis" style="border-radius: 10px">
 								<% end %>	
+	
 							</div>
 						</div>
 					</div>
@@ -510,12 +511,12 @@
 						<div class="card">
 							<div class="card-header" id="Heading" style= "<%='background-color: #00e676' if @cour.theme.include? theme %>">
 							  <h5 class="mb-0">
-							    	<button class="btn btn-link <%= 'collapsed' if iterator >0 %>" data-toggle="collapse" data-target='#<%=theme%>'aria-expanded="false" aria-controls='<%=theme%>'style="<%='color:black' if !@cour.theme.include? theme%>">
+							    	<button class="btn btn-link collapsed" data-toggle="collapse" data-target='#<%=theme%>'aria-expanded="false" aria-controls='<%=theme%>'style="<%='color:black' if !@cour.theme.include? theme%>">
 							      		<%=theme%>
 							    	</button>
 							  </h5>
 							</div>
-							<div id='<%=theme%>' class="collapse <%='show' if iterator==0%>" aria-labelledby='Heading' data-parent="#accordion">
+							<div id='<%=theme%>' class="collapse" aria-labelledby='Heading' data-parent="#accordion">
 								<%Topic.where(niveau_id:@cour.annees.last.niveau, theme:theme).each do |t|	%>
 
 									<div class="card-body">

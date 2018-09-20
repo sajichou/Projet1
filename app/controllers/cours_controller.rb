@@ -109,10 +109,7 @@ class CoursController < ApplicationController
       redirect_to controller: 'cours', action: 'show_inscrit', id: @cour.id
 
     elsif (teacher_signed_in? and @cour.teacher.id == current_teacher.id)
-      puts "cond2"
-      puts @cour.teacher.id
-      puts current_teacher.id
-      puts @cour.teacher.id == current_teacher.id
+
       redirect_to controller: 'cours', action: 'show_prof', id: @cour.id
     
     end
@@ -172,8 +169,7 @@ class CoursController < ApplicationController
   end
 
   def accueil
-    puts "ACCueil"
-    puts request.env['HTTP_REFERER']
+
   end
 
   def search

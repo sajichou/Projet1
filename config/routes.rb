@@ -143,6 +143,8 @@ Rails.application.routes.draw do
 
   get 'annexe/Guide'
 
+  get 'annexe/professeur'
+
   get 'blog/index'
   get 'blog/create'
   post 'blog/create' =>'blog#new'

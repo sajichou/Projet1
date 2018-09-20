@@ -36,7 +36,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Le soutien scolaire en petit groupe de 3 chez le professeur, et préparation aux concours BAC et BREVET!" />
 
-    <link rel="icon" href="Topnote.ico">
+    <%= favicon_link_tag asset_path('topnote_tab.png'), :rel => 'icon', :type =>  'image/png' %>
 
   </head>
 
@@ -74,17 +74,12 @@
           <%= yield %>       
         </section> 
 
+      </div>
 
-
-          </div>
-        </div>
-
-    </div>
-
-    
           <footer>
             <%= render partial: "shared/footer" %>
           </footer>
+
   </body>
   <script type="text/javascript"
             src="https://maps.googleapis.com/maps/api/js?libraries=places&amp;key=AIzaSyCmOpoeHGn3B-LSaL4_1LngRYrg9uR0IGE" data-turbolinks-eval="false"></script>

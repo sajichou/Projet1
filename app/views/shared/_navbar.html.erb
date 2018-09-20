@@ -13,13 +13,17 @@
       
       <ul class="navbar-nav ml-auto mr-3 ">    
         <!-- Index pour admin et Proposer un cours -->
-        <li class="nav-item  give-lesson my-auto" style="width: 200px"><a href="/cours/create" style="color:#e55966"><i class="fa fa-plus"></i> Proposer un cours</a>
-        </li>
+        <% if teacher_signed_in? %>
+            <li class="nav-item  give-lesson my-auto" style="width: 200px"><a href="/cours/create" style="color:#e55966"><i class="fa fa-plus"></i> Proposer un cours</a>
+            </li>
+        <%else%>
+            <li class="nav-item  give-lesson my-auto" style="width: 200px"><a href="/teachers/sign_in" style="color:#e55966"><i class="fa fa-plus"></i> Devenir professeur</a>
+            </li>
+        <%end%>
+
       </ul>
 
       <ul class="navbar-nav mr-4 ">
-
-
 
         <!-- Inscrire et se connecter -->
         <% if !user_signed_in? and !teacher_signed_in? %>
