@@ -27,10 +27,10 @@ class User::ConfirmationsController < Devise::ConfirmationsController
    def after_confirmation_path_for(resource_name, resource)
      super(resource_name, resource)
      sign_in(resource)
-     if(session[:page_id].present? and Cour.where(:id => session[:page_id]).present?)
-        cours_show_path(session[:page_id])
-    else
+     #if(session[:page_id].present? and Cour.where(:id => session[:page_id]).present?)
+        #cours_show_path(session[:page_id])
+    #else
       '/pages/monprofil'  
-    end
+   # end
    end
 end

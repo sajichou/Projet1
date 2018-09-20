@@ -31,7 +31,7 @@
                 <%= image_tag "ico/icon_rgb_site.png", :class=>"img-fluid logo-prix" %>
                 <h5 class="col-auto row align-items-center" style="color:#e55966">Abonnement sans engagement</h5>
             </div>
-            <h5 class="col-12 col-md-auto row align-items-center justify-content-center prix text-light">15
+            <h5 class="col-12 col-md-auto row align-items-center justify-content-center prix text-light">22,5
                 €</h5>
         </div>
         <% if Cour.find(@cours_id).nombre_eleves < 1 %>
@@ -42,7 +42,7 @@
                   <!--
                   <li><i class="fa fa-circle"></i>Prélèvement non-remboursable si l’abonnement est annulé après X heure avant le début du cours.</li>
                 -->
-                  <li><i class="fa fa-circle"></i>Vous pouvez vous désabonner sans frais supplémentaire à condition de le signaler au moins 24h avant le cours.</li>
+                  <li><i class="fa fa-circle"></i>Vous pouvez vous désabonner sans frais supplémentaires à condition de le signaler au moins 24h avant le cours.</li>
                   
               </ul>
           </div>
@@ -63,7 +63,7 @@
       
         <% if (current_user.infouser.code == "LANCEMENT18" and !current_user.infouser.code_used) %>
             <p>
-              Super! Votre code est bien valide :) Vous serez débité non pas de 17€ mais de 13,6€
+              Super! Votre code est bien valide :) Vous serez débité non pas de 22,5€ mais de 18€.
             </p>
         <% elsif (current_user.infouser.code == "LANCEMENT18" and current_user.infouser.code_used) %>
             <p>Votre code promo n'est malheureusement plus valide.</p>
