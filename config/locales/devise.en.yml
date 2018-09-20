@@ -4,7 +4,7 @@ en:
   devise:
     confirmations:
       confirmed: "Votre mail a bien été validé. Nous vous invitons à completer votre profil."
-      send_instructions: "Vous allez recevoir un mail de validation d'ici quelques minutes. Pensez à regarder dans vos spams."
+      send_instructions: "Vous allez recevoir un mail de validation. Pensez à regarder dans vos spams."
       send_paranoid_instructions: "Si votre email existe dans notre base de données, vous recevrez un email vous invitant à confirmer votre email d'ici quelques minutes."
     failure:
       already_authenticated: "Vous êtes déjà connecté."
@@ -15,7 +15,7 @@ en:
       not_found_in_database: "Mauvais %{authentication_keys} ou mot de passe."
       timeout: "Votre session est expirée. Connectez-vous pour continuer."
       unauthenticated: "Vous devez d'abord vous connecter."
-      unconfirmed: "Vous devez d'abord confirmer le mail de validation."
+      unconfirmed: "Vous devez d'abord confirmer le mail de validation. Pensez à vérifier vos spams."
     mailer:
       confirmation_instructions:
         subject: "Validation de ton compte TopNote !"
@@ -34,14 +34,14 @@ en:
       no_token: "You can't access this page without coming from a password reset email. If you do come from a password reset email, please make sure you used the full URL provided."
       send_instructions: "Vous allez recevoir un mail de réinitialisation d'ici quelques minutes."
       send_paranoid_instructions: "If your email address exists in our database, you will receive a password recovery link at your email address in a few minutes."
-      updated: "Votre mot a bien été modifié. Vous êtes maintenant connecté."
-      updated_not_active: "Votre mot a bien été modifié."
+      updated: "Votre mot de passe a bien été modifié. Vous êtes maintenant connecté."
+      updated_not_active: "Votre mot de passe a bien été modifié."
     registrations:
       destroyed: "Aurevoir! Vous compte a bien été supprimé. Nous espérons vous revoir bientôt."
       signed_up: "Bienvenue! Votre compte a bien été créé."
       signed_up_but_inactive: "You have signed up successfully. However, we could not sign you in because your account is not yet activated."
       signed_up_but_locked: "You have signed up successfully. However, we could not sign you in because your account is locked."
-      signed_up_but_unconfirmed: "Un email de validation vous a été envoyé."
+      signed_up_but_unconfirmed: "Un email de validation vous a été envoyé. Pensez à regarder dans vos spams."
       update_needs_confirmation: "You updated your account successfully, but we need to verify your new email address. Please check your email and follow the confirm link to confirm your new email address."
       updated: "Votre compte a bien été mis à jour."
     sessions:
@@ -60,5 +60,5 @@ en:
       not_found: "introuvable"
       not_locked: "was not locked"
       not_saved:
-        one: "1 erreur a empêché l'enregistrement de %{resource} :"
+        one: ""
         other: "%{count} erreurs ont empêché l'enregistrement %{resource} :"

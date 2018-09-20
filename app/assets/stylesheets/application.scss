@@ -39,11 +39,17 @@ $link-color: white;
 $gris: #eeeeee;
 $bleu: #4897D8;
 
+$jaune:#FFF7DE;
+
 $orange: #ffb750;
 
 #grad {
   
   background-color:$orange;
+}
+
+.bg-jaune{
+    background-color:$jaune;
 }
 
 .bg-rose {
@@ -466,6 +472,11 @@ section {
 .icones{
     height:65px;
 }
+
+.icones_xl{
+    height:80px;
+}
+
 .icones_prof{
     height:60px;
 }

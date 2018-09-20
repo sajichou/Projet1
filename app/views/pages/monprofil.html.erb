@@ -63,21 +63,6 @@
 				</p>
 				<% end %>
 
-				<!-- ADRESSE EXACTE
-				<% if @current_teacher.infoteacher.location.present? %>
-				<p>
-					<label for="lieu"> Adresse </label>
-					<input type="text" id="lieu" class="form-control value_success" name="lieu" value='<%= current_teacher.infoteacher.location %>'>
-				</p>
-				<% else %>
-				<p>
-					<label for="lieu"> Adresse </label>
-					<input type="text" id="lieu" class="form-control value_danger" name="lieu" placeholder="Entrez votre adresse, 3 rue ..." >
-				</p>
-				<% end %>
-				
-				-->
-
 				<% if @current_teacher.infoteacher.dptm.present? %>
 				<p>
 					<label for="dptm"> Code Postal </label>
@@ -160,7 +145,7 @@
 						<input type="checkbox" name="cgu" value="true" checked disabled>
 					</div>
 					<div>
-						<p>Veuillez lire et accepter les <a href="/annexe/CGU">condition générales d'utilisation</a>.</p>
+						<p>Veuillez lire et accepter les <a href="/annexe/CGU" target="_blank">condition générales d'utilisation</a>, et les <a href="/annexe/politique_de_confidentialite" target="_blank"> politiques de confidentialité</a>.</p>
 					</div>
 				</div>
 				<% else %>
@@ -169,7 +154,7 @@
 						<input type="checkbox" name="cgu" value="true" required>
 					</div>
 					<div>
-						<p>Veuillez lire et accepter les <a href="/annexe/CGU">condition générales d'utilisation</a>.</p>
+						<p>Veuillez lire et accepter les <a href="/annexe/CGU" target="_blank">conditions générales d'utilisation</a>, et les <a href="/annexe/politique_de_confidentialite" target="_blank"> politiques de confidentialité</a>.</p>
 					</div>
 				</div>
 				<% end %>
@@ -309,7 +294,7 @@
 						<input type="checkbox" name="cgu" value="true" checked disabled>
 					</div>
 					<div>
-						<p>Veuillez lire et accepter les <a href="/annexe/CGU">condition générales d'utilisation</a>.</p>
+						<p>Veuillez lire et accepter les <a href="/annexe/CGU" target="_blank">condition générales d'utilisation</a>, et les <a href="/annexe/politique_de_confidentialite" target="_blank"> politiques de confidentialité</a>.</p>
 					</div>
 				</div>
 				<% else %>
@@ -318,7 +303,7 @@
 						<input type="checkbox" name="cgu" value="true" required>
 					</div>
 					<div>
-						<p>Veuillez lire et accepter les <a href="/annexe/CGU">condition générales d'utilisation</a>.</p>
+						<p>Veuillez lire et accepter les <a href="/annexe/CGU" target="_blank">condition générales d'utilisation</a>, et les <a href="/annexe/politique_de_confidentialite" target="_blank"> politiques de confidentialité</a>.</p>
 					</div>
 				</div>
 				<% end %>
