@@ -145,6 +145,8 @@ Rails.application.routes.draw do
 
   get 'annexe/professeur'
 
+  get 'annexe/politique_de_confidentialite'
+
   get 'blog/index'
   get 'blog/create'
   post 'blog/create' =>'blog#new'

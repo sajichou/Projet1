@@ -5,11 +5,11 @@ class Notification < ActiveRecord::Base
     scope :unread, ->{ where(read_at: nil) }
   	scope :recent, ->{ order(created_at: :desc).limit(5) }
 
-  	def user
+  def user
 	  User.unscoped { super }
 	end
 
-  	def teacher
+  def teacher
 	  Teacher.unscoped { super }
 	end
 
