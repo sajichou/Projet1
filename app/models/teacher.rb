@@ -29,7 +29,9 @@ class Teacher < ApplicationRecord
   end
 
   def edit_infoteacher
-    self.infoteacher.update(email:self.email)
+    if self.infoteacher.present?
+      self.infoteacher.update(email:self.email)
+    end
   end
 
 

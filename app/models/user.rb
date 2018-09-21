@@ -29,7 +29,9 @@ class User < ApplicationRecord
   end
 
   def edit_infouser
-    self.infouser.update(email:self.email)
+    if self.infouser.present?
+      self.infouser.update(email:self.email)
+    end
   end
 
 end

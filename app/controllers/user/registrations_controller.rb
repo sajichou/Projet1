@@ -60,7 +60,7 @@ class User::RegistrationsController < Devise::RegistrationsController
     if(session[:page_id].present?)
         cours_show_path(session[:page_id])
     else
-      '/cours/accueil'  
+      '/users/sign_up'  
     end
    end
 
