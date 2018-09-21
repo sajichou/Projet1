@@ -24,8 +24,12 @@
 				</div>
 			<%end%>
 			<div class="col-12 mt-3">
-				<%=current_teacher.infoteacher.first_name.capitalize%>
-				<%=current_teacher.infoteacher.last_name.capitalize[0]%>.
+				<% if current_teacher.infoteacher.first_name.present? %>
+					<%=current_teacher.infoteacher.capitalize%>
+				<%end%>
+				<% if current_teacher.infoteacher.last_name.present? %>
+					<%=current_teacher.infoteacher.capitalize[0]%>
+				<%end%>
 			</div>
 
 		</div>
@@ -40,15 +44,19 @@
 				<h4 class="pl-3" style="border-bottom: solid 1px black">
 					Informations en attente :
 				</h4>
-				<%@info_manquantes.each do |i| %>
-					<span style="color: red">
-						<i class="fa fa-exclamation-triangle"></i>
-					</span>
-					<p class="d-inline p-1">
-						
-						Vous n'avez pas encore renseigné : <%=i%>.
-					</p>
-				<%end%>
+				<div class="row">
+					<%@info_manquantes.each do |i| %>
+						<div class="col-12 mt-1">
+							<span style="color: red">
+								<i class="fa fa-exclamation-triangle"></i>
+							</span>
+							<p class="d-inline p-1">
+								
+								Vous n'avez pas encore renseigné : <%=i%>.
+							</p>
+						</div>
+					<%end%>
+				</div>
 
 			</div>
 			

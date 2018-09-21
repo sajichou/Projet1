@@ -232,7 +232,7 @@ private
 def user_complet(user)
 
   user.infouser.first_name.present? and user.infouser.last_name.present? and user.infouser.niveau.present? and
-  user.infouser.email.present? and user.infouser.cgu
+  user.infouser.email.present?
   
 end
 

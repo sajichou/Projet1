@@ -505,7 +505,7 @@ private
   def teacher_complet(teacher)
 
     teacher.infoteacher.first_name.present? and teacher.infoteacher.last_name.present? and teacher.infoteacher.dptm.present? and
-    teacher.infoteacher.email.present? and teacher.infoteacher.cgu and teacher.infoteacher.stripe_id.present? and
+    teacher.infoteacher.email.present?  and teacher.infoteacher.stripe_id.present? and
     teacher.infoteacher.experience.present? and teacher.infoteacher.methodology.present? and teacher.infoteacher.phone.present?
   
   end
