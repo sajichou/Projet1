@@ -22,7 +22,7 @@
 							</p>
 
 							<% else %>
-								<input type="text" class="form-control value_danger  input-lg" name="first_name" >			
+								<input type="text" class="form-control value_danger " name="first_name" placeholder="Prénom">			
 							<% end %>
 
 							<% if @current_teacher.infoteacher.last_name.present? %>
@@ -38,7 +38,7 @@
 							
 							<% if @current_teacher.infoteacher.email.present? %>
 							<p>
-								<input type="text" class="form-control value_success" name="email" value='<%= @current_teacher.infoteacher.email%>' placeholder="Email">
+								<input type="text" class="form-control value_success" name="email" value='<%= @current_teacher.infoteacher.email%>' disabled>
 							</p>
 							<% else %>
 							<p>
@@ -92,11 +92,11 @@
 
 									<% if @current_teacher.infoteacher.experience.present? %>
 									<p>
-										<textarea type="text" class="form-control value_success" name="experience" minlength=200 maxlength=800 placeholder="Ex : Je suis ingénieur(e) / professeur... Je donne des cours dans les matières... Je suis professeur au lycée depuis..." ><%= @current_teacher.infoteacher.experience%></textarea> 
+										<textarea type="text" class="form-control value_success" name="experience" minlength=100 maxlength=600 placeholder="Ex : Je suis ingénieur(e) / professeur... Je donne des cours dans les matières... Je suis professeur au lycée depuis..." ><%= @current_teacher.infoteacher.experience%></textarea> 
 									</p>
 									<% else %>
 									<p>
-										<textarea type="text" class="form-control value_danger" name="experience" minlength=200 maxlength=800 placeholder="Ex : Je suis ingénieur(e) / professeur... Je donne des cours dans les matières... Je suis professeur au lycée depuis..."></textarea> 
+										<textarea type="text" class="form-control value_danger" name="experience" minlength=100 maxlength=600 placeholder="Ex : Je suis ingénieur(e) / professeur... Je donne des cours dans les matières... Je suis professeur au lycée depuis..."></textarea> 
 									</p>
 									<% end %>
 								</div>
@@ -110,11 +110,11 @@
 
 									<% if @current_teacher.infoteacher.methodology.present? %>
 									<p>
-										<textarea type="text" class="form-control value_success" name="methodology" minlength=200 maxlength=800 placeholder="Ex : Correction des exos de la semaine précédente, relecture du dernier chapitre étudié en cours (10-15 mins) ... "><%= @current_teacher.infoteacher.methodology%></textarea> 
+										<textarea type="text" class="form-control value_success" name="methodology" minlength=100 maxlength=600 placeholder="Ex : Correction des exos de la semaine précédente, relecture du dernier chapitre étudié en cours (10-15 mins) ... "><%= @current_teacher.infoteacher.methodology%></textarea> 
 									</p>
 									<% else %>
 									<p>
-										<textarea type="text" class="form-control value_danger" name="methodology" minlength=200 maxlength=800 placeholder="Ex : Correction des exos de la semaine précédente, relecture du dernier chapitre étudié en cours (10-15 mins) ... "></textarea>
+										<textarea type="text" class="form-control value_danger" name="methodology" minlength=100 maxlength=600 placeholder="Ex : Correction des exos de la semaine précédente, relecture du dernier chapitre étudié en cours (10-15 mins) ... "></textarea>
 									</p>
 									<% end %>
 
@@ -144,7 +144,7 @@
 
 												<div class="d-flex">
 													<div>
-														<p>Votre justificatif d'identité a bien été enregistré. Pour le modifier :</p>
+														<p style="font-size: 0.9em">Votre justificatif d'identité a bien été enregistré. Pour le modifier :</p>
 														<input type="file" class="form-control" name="justificatif_identite" >
 													</div>
 												</div>
@@ -152,7 +152,7 @@
 											<% else %>
 												<div class="d-flex">
 													<div>
-														<p>Ajouter la photo/scan d'un justificatif d'identité (permis, carte d'identité...) <span style="font-size: 0.8em">formats acceptés: jpg, jpeg, png</span></p>
+														<p style="font-size: 0.9em">Ajouter la photo/scan d'un justificatif d'identité (permis, carte d'identité...) <span style="font-size: 0.8em">formats acceptés: jpg, jpeg, png</span></p>
 														<input type="file" class="form-control" name="justificatif_identite" required>
 													</div>
 												</div>
@@ -183,14 +183,14 @@
 											<% if @current_teacher.infoteacher.justificatif_diplome.present? %>
 												<div class="d-flex">
 													<div>
-														<p>Votre justificatif de scolarité/diplôme a bien été enregistré. Pour le modifier : </p>
+														<p style="font-size: 0.9em">Votre justificatif de scolarité/diplôme a bien été enregistré. Pour le modifier : </p>
 														<input type="file" class="form-control" name="justificatif_diplome" >
 													</div>
 												</div>
 											<% else %>
 												<div class="d-flex">
 													<div>
-														<p>Ajouter la photo de votre diplôme ou la photo d'un justificatif de scolarité <span style="font-size: 0.8em">formats acceptés: jpg, jpeg, png</span></p>
+														<p style="font-size: 0.9em">Ajouter la photo de votre diplôme ou la photo d'un justificatif de scolarité <span style="font-size: 0.8em">formats acceptés: jpg, jpeg, png</span></p>
 														<input type="file" class="form-control value_danger" name="justificatif_diplome" required>
 													</div>
 												</div>
@@ -304,7 +304,7 @@
 				<% if @current_user.infouser.email.present? %>
 				<p>
 					<label for="email"> Email </label>
-					<input type="text" class="form-control value_success" name="email" value='<%= @current_user.infouser.email%>'>
+					<input type="text" class="form-control value_success" name="email" value='<%= @current_user.infouser.email%>' disabled>
 				</p>
 				<% else %>
 				<p>

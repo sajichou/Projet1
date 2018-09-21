@@ -4,6 +4,7 @@ class Teacher < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
+  after_update :edit_infoteacher
 
   def after_confirmation
   	Role.create teacher_id:self.id
@@ -25,6 +26,10 @@ class Teacher < ApplicationRecord
 
   def infoteacher
     Infoteacher.unscoped { super }
+  end
+
+  def edit_infoteacher
+    self.infoteacher.update(email:self.email)
   end
 
 

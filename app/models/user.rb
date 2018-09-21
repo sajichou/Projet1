@@ -4,6 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
+  after_update :edit_infouser
+
 
   def after_confirmation
 	  Infouser.create user_id:self.id, email:self.email
@@ -24,6 +26,10 @@ class User < ApplicationRecord
 
   def infouser
     Infouser.unscoped { super }
+  end
+
+  def edit_infouser
+    self.infouser.update(email:self.email)
   end
 
 end
