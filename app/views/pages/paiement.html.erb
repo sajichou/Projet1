@@ -42,23 +42,23 @@
 
     <% else%>
 
-        <div class="row justify-content-center mt-4">
-            <div class="col-12 col-lg-8"> 
+        <div class="row justify-content-center mt-4 mb-4">
+            <div class="col-12 col-lg-10"> 
 
                 <div class="row justify-content-center">
 
                     <!-- EXPLICATION DE STRIPE -->
                     <section class="row justify-content-center">
 
-                        <div class="col-12 mt-3">
+                        <div class="col-12 mt-3" style="text-align: center">
                             <%= image_tag "stripe.png", size: "240x80"%> 
                         </div>
 
-                        <div class="col-12 mt-3">
+                        <div class="col-12 mt-3" style="text-align: center">
                          <p style="font-size: 1.2em">Nous utilisons le service de paiement Stripe pour automatiser et sécuriser vos rémunérations.</p>
                         </div>
 
-                        <div class="col-12 mt-3">
+                        <div class="col-12 mt-3" style="text-align: center">
                             <div class="btn bg-rose" style="border-radius: 20px; padding-left:30px; padding-right: 30px;">
                                 <a target="_blank" href="<%=ENV["STRIPE_OAUTH"]%>" style="color:white;">
                                     Créer mon compte Stripe
@@ -66,14 +66,14 @@
                             </div>
                         </div>
 
-                        <div class="col-12 text-center justify-content-center align-items-center">
+                        <div class="col-12 mt-3 text-center justify-content-center align-items-center" style="text-align: center">
                                 <ul class="infos text-left mt-3">
                                     <li>
                                         <%= image_tag "ico/info_rose.png", :class=>"ico-infos mr-3" %>
                                         <strong>Votre compte TopNote ne sera validé que lorsque
                                         votre compte Stripe sera créé.</strong>
                                     </li>
-                                    <li style="line-height: 90px">
+                                    <li style="line-height: 70px">
                                         <%= image_tag "ico/info_rose.png", :class=>"ico-infos mr-3" %>
                                         <strong>Vous recevrez votre rémunération dans un délai maximum de 5 jours ouvrés après le cours.</strong>
                                     </li>
@@ -88,7 +88,7 @@
                                             <li><span class="fa fa-circle"></span>Le numéro de SIRET et de SIREN sont optionnels</li>
                                         </ul>
                                     </li>
-                                    <li style="line-height: 90px">
+                                    <li style="line-height: 70px">
                                         <%= image_tag "ico/info_rose.png", :class=>"ico-infos mr-3" %><strong>Pour toutes informations supplémentaires, référrez-vous au <a href="/annexe/Guide" classe="rose" target="_blank">guide de création</a> .
                                         </strong>
                                     </li>
@@ -96,9 +96,9 @@
                             </div>
 
                             <div class="col-12 mt-3">
-                                <p style="font-size: 1.2em; color: gray; font-weight: bold">Ils utilisent Stripe... </p>
+                                <p style="font-size: 1.2em; font-weight: bold">Ils utilisent Stripe... </p>
                                 <p>
-                                    <%= image_tag "StripeExamples.png", size:"800x150"%>
+                                    <%= image_tag "Stripe_clients.png", class:"img-fluid"%>
                                 </p>
                             </div>
 

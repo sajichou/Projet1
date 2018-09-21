@@ -1,176 +1,225 @@
 <%= render partial: "shared/sousmenu", locals: {tabname:"monprofil"}  %>
 
-<div class="row justify-content-center mb-4">
-	<div class="col-12 col-lg-8" style="background-color: #eeeeee">
+<% if teacher_signed_in? %>
+	<%=form_tag "/pages/monprofil", method:"post", multipart:true  do %>
+	<fieldset class="mb-5"> 
 
-		<% if teacher_signed_in? %>
+		<div class="row justify-content-center mb-4">
+			<div class="col-12 col-lg-11">
+				<div class="row justify-content-center mx-0 p-3" style="background-color:#eeeeee">
 
+					<!-- Informations personnelles -->
 
-			<%=form_tag "/pages/monprofil", method:"post", multipart:true  do %>
-			<fieldset> 
-				<% if @current_teacher.infoteacher.first_name.present? %>
-				<p>
-					<label for="first_name"> Prénom </label>
-					<input type="text" class="form-control value_success" name="first_name" value='<%=@current_teacher.infoteacher.first_name%>'>
-				</p>
-				<% else %>
-					<label for="first_name"> Prénom </label>
-					<input type="text" class="form-control value_danger" name="first_name" >			
-				<% end %>
+					<div class="col-12 col-lg-3 p-3">
 
-				<% if @current_teacher.infoteacher.last_name.present? %>
-				<p>
-					<label for="last_name"> Nom<span style="font-style: italic; font-size: 0.8em; margin-left: 10px"> Visible uniquement pour les élèves inscrits à vos cours</span> </label>
-					<input type="text" class="form-control value_success" name="last_name" value='<%= @current_teacher.infoteacher.last_name%>'>
-				</p>
-				<% else %>
-				<p>
-					<label for="last_name"> Nom </label>
-					<input type="text" class="form-control value_danger" name="last_name">
-				</p>
-				<% end %>
-				<% if @current_teacher.infoteacher.email.present? %>
-				<p>
-					<label for="email"> Email </label>
-					<input type="text" class="form-control value_success" name="email" value='<%= @current_teacher.infoteacher.email%>'>
-				</p>
-				<% else %>
-				<p>
-					<label for="email"> Email </label>
-					<input type="text" class="form-control value_danger" name="email">
-				</p>
-				<% end %>
+						<div class="p-3" style="background-color: white; border-radius: 10px; ">
 
-				<% if @current_teacher.infoteacher.phone.present? %>
-				<p>
-					<label for="phone"> Téléphone </label>
-					<div class="input-group">
-			        	<div class="input-group-prepend">
-			            	<span class="input-group-text" style="font-weight: 500; background-color: white">+33</span>
-			          	</div>
-						<input type="text" pattern=".{9}" class="form-control value_success" name="phone" value='<%= @current_teacher.infoteacher.phone%>' required title="Format invalide">
+							<p class="mb-3" style="font-size: 1.1em; font-weight: bold">Informations générales</p>
+			
+							<% if @current_teacher.infoteacher.first_name.present? %>
+							<p>
+								<input type="text" class="form-control value_success" name="first_name" value='<%=@current_teacher.infoteacher.first_name%>' placeholder="Prénom">
+							</p>
+
+							<% else %>
+								<input type="text" class="form-control value_danger  input-lg" name="first_name" >			
+							<% end %>
+
+							<% if @current_teacher.infoteacher.last_name.present? %>
+							<p>
+								<input type="text" class="form-control value_success" name="last_name" value='<%= @current_teacher.infoteacher.last_name%>' placeholder="Nom">
+							</p>
+							<% else %>
+							<p>
+								<input type="text" class="form-control value_danger" name="last_name" placeholder="Nom">
+							</p>
+							<% end %>
+
+							
+							<% if @current_teacher.infoteacher.email.present? %>
+							<p>
+								<input type="text" class="form-control value_success" name="email" value='<%= @current_teacher.infoteacher.email%>' placeholder="Email">
+							</p>
+							<% else %>
+							<p>
+								<input type="text" class="form-control value_danger" name="email" placeholder="Email">
+							</p>
+							<% end %>
+
+							
+							<% if @current_teacher.infoteacher.phone.present? %>
+							<p>
+								<div class="input-group">
+						        	<div class="input-group-prepend">
+						            	<span class="input-group-text" style="font-weight: 500; background-color: white">+33</span>
+						          	</div>
+									<input type="text" pattern=".{9}" class="form-control value_success" name="phone" value='<%= @current_teacher.infoteacher.phone%>' required placeholder="Téléphone">
+								</div>
+							</p>
+							<% else %>
+							<p>
+								<div class="input-group">
+						        	<div class="input-group-prepend">
+						            	<span class="input-group-text" style="font-weight: 500; background-color: white">+33</span>
+						          	</div>
+									<input type="text" pattern=".{9}" class="form-control value_danger " name="phone" required placeholder="Téléphone">
+								</div>
+							</p>
+							<% end %>
+
+						
+							<% if @current_teacher.infoteacher.dptm.present? %>
+							<p >
+								<input type="text" maxlength="5" id="dptm" class="form-control value_success" name="dptm" required value='<%= current_teacher.infoteacher.dptm %>' placeholder="Code postal">
+							</p>
+							<% else %>
+							<p>
+								<input type="text" maxlength="5" id="dptm" class="form-control value_danger" name="dptm" required placeholder="Numéro de votre code postal" placeholder="Code postal" >
+							</p>
+							<% end %>
+						</div>
 					</div>
-				</p>
-				<% else %>
-				<p>
-					<label for="phone"> Téléphone </label>
-					<div class="input-group">
-			        	<div class="input-group-prepend">
-			            	<span class="input-group-text" style="font-weight: 500; background-color: white">+33</span>
-			          	</div>
-						<input type="text" pattern=".{9}" class="form-control value_danger " name="phone" required title="Format invalide">
+
+					<div class="col-12 col-lg-9">
+
+						<div class="row justify-content-center mx-0">
+
+							<div class="col-12 p-3 pb-0">
+
+								<div class="p-3" style="background-color: white; border-radius: 10px; ">
+
+									<p class="mb-4" style="font-size: 1.1em; font-weight: bold; text-align: start">Votre expérience <span class="rose ml-2" style="font-size: 0.9em">40 mots minimum</span></p>
+
+									<% if @current_teacher.infoteacher.experience.present? %>
+									<p>
+										<textarea type="text" class="form-control value_success" name="experience" minlength=200 maxlength=800 placeholder="Ex : Je suis ingénieur(e) / professeur... Je donne des cours dans les matières... Je suis professeur au lycée depuis..." ><%= @current_teacher.infoteacher.experience%></textarea> 
+									</p>
+									<% else %>
+									<p>
+										<textarea type="text" class="form-control value_danger" name="experience" minlength=200 maxlength=800 placeholder="Ex : Je suis ingénieur(e) / professeur... Je donne des cours dans les matières... Je suis professeur au lycée depuis..."></textarea> 
+									</p>
+									<% end %>
+								</div>
+							</div>
+
+							<div class="col-12 p-3 pb-0">
+
+								<div class="p-3" style="background-color: white; border-radius: 10px; ">
+
+									<p class="mb-4" style="font-size: 1.1em; font-weight: bold; text-align: start;">Votre méthodologie <span class="rose ml-2" style="font-size: 0.9em">  40 mots minimum</span></p>
+
+									<% if @current_teacher.infoteacher.methodology.present? %>
+									<p>
+										<textarea type="text" class="form-control value_success" name="methodology" minlength=200 maxlength=800 placeholder="Ex : Correction des exos de la semaine précédente, relecture du dernier chapitre étudié en cours (10-15 mins) ... "><%= @current_teacher.infoteacher.methodology%></textarea> 
+									</p>
+									<% else %>
+									<p>
+										<textarea type="text" class="form-control value_danger" name="methodology" minlength=200 maxlength=800 placeholder="Ex : Correction des exos de la semaine précédente, relecture du dernier chapitre étudié en cours (10-15 mins) ... "></textarea>
+									</p>
+									<% end %>
+
+								</div>
+							</div>
+						</div>
 					</div>
-				</p>
-				<% end %>
 
-				<% if @current_teacher.infoteacher.dptm.present? %>
-				<p>
-					<label for="dptm"> Code Postal </label>
-					<input type="text" maxlength="5" id="dptm" class="form-control value_success" name="dptm" required value='<%= current_teacher.infoteacher.dptm %>'>
-				</p>
-				<% else %>
-				<p>
-					<label for="dptm"> Code Postal </label>
-					<input type="text" maxlength="5" id="dptm" class="form-control value_danger" name="dptm" required placeholder="Numéro de votre code postal" >
-				</p>
-				<% end %>
+						<div class="row justify-content-center mx-0">
 
-				<% if @current_teacher.infoteacher.experience.present? %>
-				<p>
-					<label for="experience"> Expérience </label>
-					<textarea type="text" class="form-control value_success" name="experience" ><%= @current_teacher.infoteacher.experience%></textarea> 
-				</p>
-				<% else %>
-				<p>
-					<label for="experience"> Expérience </label>
-					<textarea type="text" class="form-control value_danger" name="experience"></textarea> 
-				</p>
-				<% end %>
+							<div class="col-11 col-lg-6 p-3">
 
-				<% if @current_teacher.infoteacher.methodology.present? %>
-				<p>
-					<label for="methodology"> Méthodologie </label>
-					<textarea type="text" class="form-control value_success" name="methodology"><%= @current_teacher.infoteacher.methodology%></textarea> 
-				</p>
-				<% else %>
-				<p>
-					<label for="methodology"> Méthodologie </label>
-					<textarea type="text" class="form-control value_danger" name="methodology"></textarea>
-				</p>
-				<% end %>
+								<div class="p-2" style="background-color: white; border-radius: 10px; ">
 
-				<!-- UPLOAD JUSTIFICATIF IDENTITE -->
+									<p class="mb-4" style="font-size: 1.1em; font-weight: bold; text-align: center;">Justificatif d'identité</p>
 
-				<% if @current_teacher.infoteacher.justificatif_identite.present? %>
+									<div class="row justify-content-center mx-0">
+										<div class="col-12 col-lg-4">
 
-				<div class="d-flex">
-					<div>
-						<p>Votre justificatif d'identité a bien été enregistré.</p>
-					</div>
+											<div class="row justify-content-center">
+												<%= image_tag "justificatif_identite.png", style:"width:120px; height:120px;" %>
+											</div>
+											
+										</div>
+										<div class="col-12 col-lg-8" style="text-align: start">
+											<% if @current_teacher.infoteacher.justificatif_identite.present? %>
+
+												<div class="d-flex">
+													<div>
+														<p>Votre justificatif d'identité a bien été enregistré. Pour le modifier :</p>
+														<input type="file" class="form-control" name="justificatif_identite" >
+													</div>
+												</div>
+
+											<% else %>
+												<div class="d-flex">
+													<div>
+														<p>Ajouter la photo/scan d'un justificatif d'identité (permis, carte d'identité...) <span style="font-size: 0.8em">formats acceptés: jpg, jpeg, png</span></p>
+														<input type="file" class="form-control" name="justificatif_identite" required>
+													</div>
+												</div>
+
+											<% end %>	
+
+
+										</div>
+									</div>							
+
+								</div>
+							</div>
+
+							<div class="col-11 col-lg-6 p-3">
+
+								<div class="p-2" style="background-color: white; border-radius: 10px; ">
+
+									<p class="mb-4" style="font-size: 1.1em; font-weight: bold; text-align: center;">Justificatif de scolarité/diplôme</p>
+
+									<div class="row justify-content-center mx-0">
+
+										<div class="col-12 col-lg-4">
+											<%= image_tag "justificatif_diplome.png", style:"width:120px; height:120px;" %>
+										</div>
+
+										<div class="col-12 col-lg-8" style="text-align: start">
+
+											<% if @current_teacher.infoteacher.justificatif_diplome.present? %>
+												<div class="d-flex">
+													<div>
+														<p>Votre justificatif de scolarité/diplôme a bien été enregistré. Pour le modifier : </p>
+														<input type="file" class="form-control" name="justificatif_diplome" >
+													</div>
+												</div>
+											<% else %>
+												<div class="d-flex">
+													<div>
+														<p>Ajouter la photo de votre diplôme ou la photo d'un justificatif de scolarité <span style="font-size: 0.8em">formats acceptés: jpg, jpeg, png</span></p>
+														<input type="file" class="form-control value_danger" name="justificatif_diplome" required>
+													</div>
+												</div>
+										<% end %>
+
+										</div>
+
+									</div>
+
+								</div>
+							</div>
+
+
+						</div>		
+				
 				</div>
+			</div>
 
-				<% else %>
-				<div class="d-flex">
-					<div>
-						<p>Ajouter la photo/scan d'un justificatif d'identité (permis, carte d'identité...) <span style="font-size: 0.8em">formats acceptés: jpg, jpeg, png</span></p>
-						<input type="file" class="form-control value_danger" name="justificatif_identite" required>
-					</div>
-				</div>
+		</div>
+			<button type="submit" class=" btn bg-orange mt-1" style="color:white; min-width: 200px;">Enregistrer</button>
+	</fieldset>
+	<%end%>
+	<!-- Update devise registration -->
 
-				<% end %>
+	<!-- Profil eleve-->
+<% elsif user_signed_in? %>
 
-
-				<!-- UPLOAD JUSTIFICATIF DIPLOME -->
-
-				<% if @current_teacher.infoteacher.justificatif_diplome.present? %>
-				<div class="d-flex">
-					<div>
-						<p>Votre justificatif de scolarité/diplôme a bien été enregistré.</p>
-					</div>
-				</div>
-				<% else %>
-				<div class="d-flex">
-					<div>
-						<p>Ajouter la photo de votre diplôme ou la photo d'un justificatif de scolarité <span style="font-size: 0.8em">formats acceptés: jpg, jpeg, png</span></p>
-						<input type="file" class="form-control value_danger" name="justificatif_diplome" required>
-					</div>
-				</div>
-				<% end %>
-
-				<!-- CGU -->
-
-				<% if @current_teacher.infoteacher.cgu %>
-				<div class="d-flex mt-3">
-					<div>
-						<input type="checkbox" name="cgu" value="true" checked disabled>
-					</div>
-					<div>
-						<p>Veuillez lire et accepter les <a href="/annexe/CGU" target="_blank">condition générales d'utilisation</a>, et les <a href="/annexe/politique_de_confidentialite" target="_blank"> politiques de confidentialité</a>.</p>
-					</div>
-				</div>
-				<% else %>
-				<div class="d-flex mt-3">
-					<div>
-						<input type="checkbox" name="cgu" value="true" required>
-					</div>
-					<div>
-						<p>Veuillez lire et accepter les <a href="/annexe/CGU" target="_blank">conditions générales d'utilisation</a>, et les <a href="/annexe/politique_de_confidentialite" target="_blank"> politiques de confidentialité</a>.</p>
-					</div>
-				</div>
-				<% end %>
-
-
-			</fieldset>
-			<button type="submit" class=" btn btn-primary">Envoyer</button>
-			<%end%>
-
-
-
-
-		<!-- Update devise registration -->
-
-		<!-- Profil eleve-->
-		<% elsif user_signed_in? %>
+	<div class="row justify-content-center mb-4">
+		<div class="col-12 col-lg-8 p-3" style="background-color: #eeeeee; border-radius: 15px;">
 
 			<%=form_tag "/pages/monprofil", method:"post" do %>
 			<fieldset>
@@ -286,35 +335,13 @@
 				</p>
 				<% end %>
 
-				<!-- CGU -->
-
-				<% if @current_user.infouser.cgu %>
-				<div class="d-flex">
-					<div>
-						<input type="checkbox" name="cgu" value="true" checked disabled>
-					</div>
-					<div>
-						<p>Veuillez lire et accepter les <a href="/annexe/CGU" target="_blank">condition générales d'utilisation</a>, et les <a href="/annexe/politique_de_confidentialite" target="_blank"> politiques de confidentialité</a>.</p>
-					</div>
-				</div>
-				<% else %>
-				<div class="d-flex">
-					<div>
-						<input type="checkbox" name="cgu" value="true" required>
-					</div>
-					<div>
-						<p>Veuillez lire et accepter les <a href="/annexe/CGU" target="_blank">condition générales d'utilisation</a>, et les <a href="/annexe/politique_de_confidentialite" target="_blank"> politiques de confidentialité</a>.</p>
-					</div>
-				</div>
-				<% end %>
-
 
 
 			</fieldset>
 			<button type="submit" class=" btn btn-primary">Envoyer</button>
 			<% end %>
-
-		<% end %>
-
+		</div>
 	</div>
-</div>
+
+<% end %>
+

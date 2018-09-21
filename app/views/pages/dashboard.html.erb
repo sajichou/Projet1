@@ -1,40 +1,82 @@
 <%= render partial: "shared/sousmenu", locals: {tabname:"dashboard"}  %>
 
-<div class="row justify-content-center">
-
-	<div class="col-12 col-lg-8 mt-4" style="text-align: left">
-		<h4 class="pl-3" style="border-bottom: solid 1px black">
-			Informations en attente :
-		</h4>
-		<%@info_manquantes.each do |i| %>
-			<span style="color: red">
-				<i class="fa fa-exclamation-triangle"></i>
-			</span>
-			<p class="d-inline p-1">
-				
-				Vous n'avez pas encore renseigné : <%=i%>.
-			</p>
-		<%end%>
-
-	</div>
-	
-	<div class="col-12 col-lg-8 mt-5" style="text-align: left">
-		<h4 class="pl-3" style="border-bottom: solid 1px black">
-			Nouveaux messages (<%=@nb_nouveaux_messages%>)
-		</h4>
-	</div>
-	<div class="col-12 col-lg-8" style="text-align: left">
-		<% @notifications.each do |notif| %>
-			<%= link_to messages_mark_as_read_and_read_path(:message_id => notif.notifiable_id) do%>
-				<div style="background-color: #eeeeee ">
-					<% if notif.actor.class == Teacher %>
-						<p><%= image_tag notif.actor.infoteacher.avatar.url(:thumb), :class => "thumbnail1" %><%=notif.actor.email%> vous a envoyé un message</p>
-					<% else %>
-						<p> <%=notif.actor.infouser.first_name.capitalize%> vous a envoyé un message</p>
-					<% end %>
+<div class="row justify-content-center mx-0 mt-4" >
+	<div class="col-12 col-lg-4 p-3">
+		<div class="row">
+			<% if !current_teacher.infoteacher.avatar.present? %>
+				<div class="col-12">
+					<%=link_to "/pages/maphoto" do %>
+						<div>
+							<%=image_tag "photo_profil_topnote.png", style:"max-width:200px;", class:"img-fluid"%>
+						</div>
+					<%end%>
 				</div>
-			<% end %>
-		<% end %>
-		<p class="text-right"><a href="/pages/messages">Voir tous les messages</a></p>
+			<%else %>
+				<div class="col-12">
+					<div class="row justify-content-center">
+						<%=link_to "/pages/maphoto" do %>
+							<div>
+								<%=image_tag current_teacher.infoteacher.avatar.url(:normal), class:"thumbnail"%>
+							</div>
+
+						<%end%>
+					</div>
+				</div>
+			<%end%>
+			<div class="col-12 mt-3">
+				<%=current_teacher.infoteacher.first_name.capitalize%>
+				<%=current_teacher.infoteacher.last_name.capitalize[0]%>.
+			</div>
+
+		</div>
+
+		
+	</div>
+
+	<div class="col-12 col-lg-8 p-3">
+		<div class="row">
+
+			<div class="col-12 col-lg-8 mt-4" style="text-align: left">
+				<h4 class="pl-3" style="border-bottom: solid 1px black">
+					Informations en attente :
+				</h4>
+				<%@info_manquantes.each do |i| %>
+					<span style="color: red">
+						<i class="fa fa-exclamation-triangle"></i>
+					</span>
+					<p class="d-inline p-1">
+						
+						Vous n'avez pas encore renseigné : <%=i%>.
+					</p>
+				<%end%>
+
+			</div>
+			
+			<div class="col-12 col-lg-8 mt-5" style="text-align: left">
+				<h4 class="pl-3" style="border-bottom: solid 1px black">
+					Nouveaux messages (<%=@nb_nouveaux_messages%>)
+				</h4>
+			</div>
+			<div class="col-12 col-lg-8" style="text-align: left">
+				<% @notifications.each do |notif| %>
+					<%= link_to messages_mark_as_read_and_read_path(:message_id => notif.notifiable_id) do%>
+						<div style="background-color: #eeeeee ">
+							<% if notif.actor.class == Teacher %>
+								<p><%= image_tag notif.actor.infoteacher.avatar.url(:thumb), :class => "thumbnail1" %><%=notif.actor.email%> vous a envoyé un message</p>
+							<% else %>
+								<p> <%=notif.actor.infouser.first_name.capitalize%> vous a envoyé un message</p>
+							<% end %>
+						</div>
+					<% end %>
+				<% end %>
+				<p class="text-right"><a href="/pages/messages">Voir tous les messages</a></p>
+			</div>
+		</div>
 	</div>
 </div>
+
+							
+								
+
+
+							

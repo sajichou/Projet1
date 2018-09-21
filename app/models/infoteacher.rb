@@ -4,7 +4,7 @@ class Infoteacher < ActiveRecord::Base
 	#validates_length_of :methodology, :minimum => 5, :maximum => 40, :allow_blank => true
 	#validates_length_of :experience, :minimum => 5, :maximum => 40, :allow_blank => true
 
-	has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100#" }
+	has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100#", :normal => "200x200#" }
 	validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
 
 	has_attached_file :justificatif_diplome, :styles => { :medium => "600x600>", :thumb => "100x100#" }

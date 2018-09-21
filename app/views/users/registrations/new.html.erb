@@ -1,8 +1,8 @@
 <div class="row justify-content-around mt-5">
 
-  <div class="col-sm-6" id="devise_subcontent">
+  <div class="col-12 col-lg-6" id="devise_subcontent">
 
-    <h2>Inscription élève</h2>
+    <h2 class="mb-4">Inscription élève</h2>
 
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
       <%= devise_error_messages! %>
@@ -40,6 +40,9 @@
         <%= f.password_field :password_confirmation, class: 'form-control',autocomplete: "off" %>
         </div>
       </div>
+      <br>
+
+      <p style="color: black">En vous inscrivant, vous acceptez les <a href="/annexe/CGU" target="_blank">conditions générales d'utilisation</a>, et les <a href="/annexe/politique_de_confidentialite" target="_blank"> politiques de confidentialité</a>.</p>
 
       </br>
       <div class="actions">
