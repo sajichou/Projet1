@@ -22,7 +22,9 @@
 							</p>
 
 							<% else %>
-								<input type="text" class="form-control value_danger " name="first_name" placeholder="Prénom">			
+							<p>
+								<input type="text" class="form-control value_danger " name="first_name" placeholder="Prénom">	
+							</p>		
 							<% end %>
 
 							<% if @current_teacher.infoteacher.last_name.present? %>
@@ -53,7 +55,7 @@
 						        	<div class="input-group-prepend">
 						            	<span class="input-group-text" style="font-weight: 500; background-color: white">+33</span>
 						          	</div>
-									<input type="text" pattern=".{9}" class="form-control value_success" name="phone" value='<%= @current_teacher.infoteacher.phone%>' required placeholder="Téléphone">
+									<input type="text" pattern=".{9}" class="form-control value_success" name="phone" value='<%= @current_teacher.infoteacher.phone%>'   placeholder="Téléphone">
 								</div>
 							</p>
 							<% else %>
@@ -62,7 +64,7 @@
 						        	<div class="input-group-prepend">
 						            	<span class="input-group-text" style="font-weight: 500; background-color: white">+33</span>
 						          	</div>
-									<input type="text" pattern=".{9}" class="form-control value_danger " name="phone" required placeholder="Téléphone">
+									<input type="text" pattern=".{9}" class="form-control value_danger " name="phone"   placeholder="Téléphone">
 								</div>
 							</p>
 							<% end %>
@@ -70,11 +72,11 @@
 						
 							<% if @current_teacher.infoteacher.dptm.present? %>
 							<p >
-								<input type="text" maxlength="5" id="dptm" class="form-control value_success" name="dptm" required value='<%= current_teacher.infoteacher.dptm %>' placeholder="Code postal">
+								<input type="text" maxlength="5" id="dptm" class="form-control value_success" name="dptm"   value='<%= current_teacher.infoteacher.dptm %>' placeholder="Code postal">
 							</p>
 							<% else %>
 							<p>
-								<input type="text" maxlength="5" id="dptm" class="form-control value_danger" name="dptm" required placeholder="Numéro de votre code postal" placeholder="Code postal" >
+								<input type="text" maxlength="5" id="dptm" class="form-control value_danger" name="dptm"   placeholder="Numéro de votre code postal" placeholder="Code postal" >
 							</p>
 							<% end %>
 						</div>
@@ -153,7 +155,7 @@
 												<div class="d-flex">
 													<div>
 														<p style="font-size: 0.9em">Ajouter la photo/scan d'un justificatif d'identité (permis, carte d'identité...) <span style="font-size: 0.8em">formats acceptés: jpg, jpeg, png</span></p>
-														<input type="file" class="form-control" name="justificatif_identite" required>
+														<input type="file" class="form-control" name="justificatif_identite"  >
 													</div>
 												</div>
 
@@ -191,7 +193,7 @@
 												<div class="d-flex">
 													<div>
 														<p style="font-size: 0.9em">Ajouter la photo de votre diplôme ou la photo d'un justificatif de scolarité <span style="font-size: 0.8em">formats acceptés: jpg, jpeg, png</span></p>
-														<input type="file" class="form-control value_danger" name="justificatif_diplome" required>
+														<input type="file" class="form-control value_danger" name="justificatif_diplome"  >
 													</div>
 												</div>
 										<% end %>
@@ -320,7 +322,7 @@
 			        	<div class="input-group-prepend">
 			            	<span class="input-group-text" style="font-weight: 500; background-color: white">+33</span>
 			          	</div>
-						<input type="text" class="form-control value_success" name="phone" value='<%=@current_user.infouser.phone%>' required title="Format invalide">
+						<input type="text" class="form-control value_success" name="phone" value='<%=@current_user.infouser.phone%>' >
 					</div>
 				</p>
 				<% else %>
@@ -330,7 +332,7 @@
 			        	<div class="input-group-prepend">
 			            	<span class="input-group-text" style="font-weight: 500; background-color: white">+33</span>
 			          	</div>
-						<input type="text" class="form-control value_danger " name="phone" required title="Format invalide">
+						<input type="text" class="form-control value_danger " name="phone">
 					</div>
 				</p>
 				<% end %>
