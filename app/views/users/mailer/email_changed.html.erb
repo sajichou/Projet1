@@ -1,10 +1,10 @@
-<h4>TopNote</h4>
 
-<p>Hello <%= @email %>,</p>
+
+<p style="color: #000000;">Hello <%= @email %>,</p>
 
 <% if @resource.try(:unconfirmed_email?) %>
-  <p>Nous t'informons que ton email est en train d'être modifié vers : <%= @resource.unconfirmed_email %>.</p>
+  <p style="color: #000000;">Nous t'informons que ton email est en train d'être modifié vers : <%= @resource.unconfirmed_email %>.</p>
 <% else %>
-  <p>Nous t'informons que ton email a été modifié et que c'est désormais : <%= @resource.email %>.</p>
+  <p style="color: #000000;">Nous t'informons que ton email a été modifié et que c'est désormais : <%= @resource.email %>.</p>
 <% end %>
 
