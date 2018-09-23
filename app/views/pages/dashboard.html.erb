@@ -16,7 +16,11 @@
 					<div class="row justify-content-center">
 						<%=link_to "/pages/maphoto" do %>
 							<div>
-								<%=image_tag current_teacher.infoteacher.avatar.url(:normal), class:"thumbnail"%>
+								<% if current_teacher.infoteacher.avatar.url(:normal).present? %>
+									<%=image_tag current_teacher.infoteacher.avatar.url(:normal), class:"thumbnail"%>
+								<% else %>
+									<%=image_tag current_teacher.infoteacher.avatar.url(:thumb), class:"thumbnail"%>
+								<% end %>
 							</div>
 
 						<%end%>
