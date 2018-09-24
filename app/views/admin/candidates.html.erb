@@ -6,6 +6,7 @@
 			<th>Nom</th>
 			<th>Prénom</th>
 			<th>email</th>
+			<th>Confirmed_at</th>
 			<th>Téléphone</th>
 			<th>Code postal</th>
 			<th>Avatar</th>
@@ -22,6 +23,7 @@
 			<td><%=c.infoteacher.try(:first_name)%></td>
 			<td><%=c.infoteacher.try(:last_name)%></td>
 			<td><%=c.infoteacher.try(:email)%></td>
+			<td><%=c.confirmed_at%></td>
 			<td><%=c.infoteacher.try(:phone)%></td>
 			<td><%=c.infoteacher.try(:dptm)%></td>
 			<td> 

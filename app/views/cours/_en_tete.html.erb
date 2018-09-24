@@ -48,14 +48,22 @@
 									<p>
 										<span style="font-weight: bold">Date du prochain cours : </span>
 										<%=cour.date_ex.to_date.strftime("%d-%m-%Y")%>
-										à <%=cour.horaire_ex%>h<%=cour.min_ex%>
+										<% if cour.min_ex == 0  %>
+											à <%=cour.horaire_ex%>h00
+										<% else %>
+											à <%=cour.horaire_ex%>h<%=cour.min%>
+										<%end%>
 									</p>
 
 								<%elsif cour.date_reg.present? %>
 									<p>
 										<span style="font-weight: bold">Date du prochain cours : </span>
 										<%=cour.date_reg.to_date.strftime("%d-%m-%Y")%>
-										à <%=cour.heure%>h<%=cour.min%>
+										<% if cour.min == 0  %>
+											à <%=cour.heure%>h00
+										<% else %>
+											à <%=cour.heure%>h<%=cour.min%>
+										<%end%>
 									</p>
 
 								<% elsif (cour.jour.present? and cour.heure.present?) %>

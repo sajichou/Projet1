@@ -21443,6 +21443,10 @@ http://trix-editor.org/
 
 }).call(this);
 (function() {
+
+
+}).call(this);
+(function() {
   var Notifications,
     bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
@@ -21556,14 +21560,7 @@ $(window).resize(function(){
 
 
 
-
-var sizeTheOverlays = function() {
-    $(".overlay").resize().each(function() {
-    var h = $(this).parent().outerHeight();
-    var w = $(this).parent().outerWidth();
-    $(this).css("height", h);
-    $(this).css("width", w);
-  });
-};
-
-sizeTheOverlays();
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+;

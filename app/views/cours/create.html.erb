@@ -304,3 +304,79 @@
 </fieldset>
 <%end%>
 
+
+		<table class="table">
+			  <thead>
+			    <tr>
+			    	<th scope="col"></th>
+					<th scope="col">Lundi</th>
+					<th scope="col">Mardi</th>
+					<th scope="col">Mercredi</th>
+					<th scope="col">Jeudi</th>
+					<th scope="col">Vendredi</th>
+					<th scope="col">Samedi</th>
+					<th scope="col">Dimanche</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			    <tr>
+			      <th scope="row">1</th>
+			      <td>Mark</td>
+			      <td>Otto</td>
+			      <td>@mdo</td>
+			    </tr>
+			    <tr>
+			      <th scope="row">2</th>
+			      <td>Jacob</td>
+			      <td>Thornton</td>
+			      <td>@fat</td>
+			    </tr>
+			    <tr>
+			      <th scope="row">3</th>
+			      <td>Larry</td>
+			      <td>the Bird</td>
+			      <td>@twitter</td>
+			    </tr>
+			  </tbody>
+		</div>
+
+
+<div class="row justify-content-center">
+	<div class="col-6">
+
+<div id="calendar"></div>
+
+	</div>
+</div>
+
+<script type="text/javascript">
+	$('#calendar').fullCalendar({
+
+	dayClick: function(date, jsEvent, view) {
+
+    alert('Clicked on: ' + date.format());
+
+    alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
+
+    alert('Current view: ' + view.name);
+
+    // change the day's background color just for fun
+    $(this).css('background-color', 'green');
+
+  },
+  
+		header: { 
+			left:'prev, next, today', 
+			center: 'title',
+			right: 'month, agendaWeek, agendaDay'
+			 },
+		locale :'fr',
+		selectable: true,
+		selectHelpger: true,
+		editable: true,
+		eventLimit: true,
+
+		defaultView: 'agendaWeek'
+
+});
+</script>

@@ -17,9 +17,12 @@
 //= require pickadate/picker 
 //= require pickadate/picker.date 
 //= require pickadate/picker.time 
+//= require moment 
+//= require fullcalendar
+//= require fullcalendar/locale-all
 //= require trix
 //= require_tree .
 
-$(function () {
-  $('[data-toggle="tooltip"]').tooltip()
-})
+
+
+$('#calendar').fullCalendar({});
