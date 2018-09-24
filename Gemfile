@@ -10,6 +10,9 @@ ruby '2.3.1'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.4'
 
+# Error monitoring
+gem 'airbrake', '~> 7.3'
+
 #Environment keys
 gem 'figaro'
 #Postgresql

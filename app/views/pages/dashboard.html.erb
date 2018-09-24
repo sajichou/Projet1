@@ -29,10 +29,10 @@
 			<%end%>
 			<div class="col-12 mt-3">
 				<% if current_teacher.infoteacher.first_name.present? %>
-					<%=current_teacher.infoteacher.capitalize%>
+					<%=current_teacher.infoteacher.first_name.capitalize%>
 				<%end%>
 				<% if current_teacher.infoteacher.last_name.present? %>
-					<%=current_teacher.infoteacher.capitalize[0]%>
+					<%=current_teacher.infoteacher.last_name.capitalize[0]%>
 				<%end%>
 			</div>
 

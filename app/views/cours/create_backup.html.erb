@@ -1,0 +1,230 @@
+
+<div class="row justify-content-center mt-0">
+	<div class="col-12 col-lg-8">
+		<%=form_tag "/cours/create", method:"post" do %>
+	<fieldset>
+		<legend class="mb-3 pt-3" style="background-color: rgb(252,98,112); color:white"> Créez votre annonce </legend>
+		<div class="form-group">
+			<p style="background-color: #eeeeee" > Quelle matière souhaitez-vous enseigner? </p>
+			<select name="matiere" class="form-control" required>
+				<option value="mathematiques"> Mathématiques </option>
+				<option value="francais"> Français </option>
+				<option value="anglais"> Anglais </option>
+				<option value="espagnol"> Espagnol </option>
+			</select>
+		</div>
+		<p style="background-color: #eeeeee">Cochez les niveaux que vous pouvez enseigner</p>
+		<div class="row justify-content-center">
+			<div class="col-sm-4">
+				<div class="form-check ">
+				  	<input class="form-check-input" name="classe[]" type="checkbox" id="inlineCheckbox1" value="1">
+				  	<label class="form-check-label" for="inlineCheckbox1">6ème</label>
+				</div>
+				<div class="form-check ">
+				  <input class="form-check-input" name="classe[]" type="checkbox" id="inlineCheckbox2" value="2">
+				  <label class="form-check-label" for="inlineCheckbox2">5ème</label>
+				</div>
+				<div class="form-check ">
+				  <input class="form-check-input" name="classe[]" type="checkbox" id="inlineCheckbox3" value="3">
+				  <label class="form-check-label" for="inlineCheckbox3">4ème</label>
+				</div>
+				<div class="form-check ">
+				  <input class="form-check-input" name="classe[]" type="checkbox" id="inlineCheckbox4" value="4">
+				  <label class="form-check-label" for="inlineCheckbox4">3ème</label>
+				</div>
+			</div>
+			<div class="col-sm-4">
+				<div class="form-check ">
+				  <input class="form-check-input" name="classe[]" type="checkbox" id="inlineCheckbox6" value="5">
+				  <label class="form-check-label" for="inlineCheckbox6">2nde</label>
+				</div>
+				<div class="form-check ">
+				  <input class="form-check-input" name="classe[]" type="checkbox" id="inlineCheckbox7" value="6">
+				  <label class="form-check-label" for="inlineCheckbox7">1ère S</label>
+				</div>
+				<div class="form-check ">
+				  <input class="form-check-input" name="classe[]" type="checkbox" id="inlineCheckbox8" value="7">
+				  <label class="form-check-label" for="inlineCheckbox8">1ère ES</label>
+				</div>
+			</div>
+			<div class="col-sm-4">
+				<div class="form-check ">
+				  <input class="form-check-input" name="classe[]" type="checkbox" id="inlineCheckbox9" value="8">
+				  <label class="form-check-label" for="inlineCheckbox9">1ère L</label>
+				</div>
+				<div class="form-check ">
+				  <input class="form-check-input" name="classe[]" type="checkbox" id="inlineCheckbox10" value="9">
+				  <label class="form-check-label" for="inlineCheckbox10">Terminale S</label>
+				</div>
+				<div class="form-check ">
+				  <input class="form-check-input" name="classe[]" type="checkbox" id="inlineCheckbox11" value="10">
+				  <label class="form-check-label" for="inlineCheckbox11">Terminale ES</label>
+				</div>
+				<div class="form-check ">
+				  <input class="form-check-input" name="classe[]" type="checkbox" id="inlineCheckbox12" value="11">
+				  <label class="form-check-label" for="inlineCheckbox12">Terminale L</label>
+				</div>
+			</div>
+			<div class="col-sm-6">
+				<div class="form-check ">
+				  <input class="form-check-input"  name="classe[]" type="checkbox" id="inlineCheckbox9" value="13">
+				  <label class="form-check-label" for="inlineCheckbox13">Tous les niveaux</label>
+				</div>
+			</div>
+
+		</div>
+		<br/>
+		<p style="background-color: #eeeeee">Détails de votre annonce</p>
+	
+		<!--
+			<div class="form-group">
+				<label for="titre">Titre de votre annonce <span style="font-size: 0.8em">10 caractères minimum - 50 caractères maximum</span></label>
+				<input id="titre" minlength="10" maxlength="50" name="titre" class="form-control" style="text-align: left">
+			</div>
+		-->
+
+			<div class="form-group">
+				<label for="descriptif">Description de votre annonce <span style="font-size: 0.8em">50 caractères minimum - 400 caractères maximum</span></label>
+				<textarea id="descriptif" minlength="10" maxlength="400" name="descriptif" class="form-control" style="text-align: left"></textarea>
+			</div>
+
+		<p style="background-color: #eeeeee">L'adresse où se tiendra le cours</p>
+		<!-- Google Maps javascript API -->
+				<div class="form-group">
+					<label for="lieu" class="sr-only">Adresse ou quartier ?</label>
+						<input id="lieu" name="lieu"
+                     class="form-control" placeholder="Entrez votre adresse, 3 rue...">
+				</div>
+	            <div>
+                  <input id="latitude" name="latitude" type="hidden">
+                  <input id="longitude" name="longitude" type="hidden">
+                  <input id="street_number" name="street_number" type="hidden">
+                  <input id="route" name="route" type="hidden">
+                  <input id="postal_code" name="postal_code" type="hidden">
+                  <input id="locality" name="locality" type="hidden">
+                  <input id="country" name="country" type="hidden">
+                </div>
+		<!-- Fin de Google Maps Javascript API -->
+
+		
+		<p style="background-color: #eeeeee">Veuillez saisir un ou plusieurs créneaux pour ce cours</p>
+
+		<div class="row justify-content-center">
+			<div class="col-12">
+				<div class="row align-items-center justify-content-center">
+					<!-- Pastille nouveau créneau -->
+					<div class="col-4 col-lg-2 px-0 pt-2" style="max-width: 100%; border: solid 1px gray; border-top-left-radius: 15px; border-top-right-radius: 15px; background-color: #eeeeee;">
+						<div class="row">
+							<div class="col-12">
+								<select name="jour[]" class="col-12 col-lg-3 form-search text-center m-2" style="text-align-last: center; height: 40px">
+								<option disabled selected value>Jour</option>
+								<option value="lundi">Lundi</option>
+								<option value="mardi">Mardi</option>
+								<option value="mercredi">Mercredi</option>
+								<option value="jeudi">Jeudi</option>
+								<option value="vendredi">Vendredi</option>
+								<option value="samedi">Samedi</option>
+								<option value="dimanche">Dimanche</option>
+							</select>
+							</div>
+							<div class="col-12">
+								<input type="text" name="heure[]" class="timepicker col-12 col-lg-3 form-search text-center m-2" placeholder="Heure">
+							</div>
+						</div>
+					</div>
+					<div class="col-1 px-0" style="color: rgb(252,98,112)">
+						<i class="fa fa-plus-circle" style="font-size: 2em"></i>
+					</div>	
+					<!-- Fin d'une pastille -->	
+					<!-- Pastille nouveau créneau -->
+					<div class="col-4 col-lg-2 px-0 pt-2" style="max-width: 100%; border: solid 1px gray; border-top-left-radius: 15px; border-top-right-radius: 15px; background-color: #eeeeee;">
+						<div class="row">
+							<div class="col-12">
+								<select name="jour[]" class="col-12 col-lg-3 form-search text-center m-2" style="text-align-last: center; height: 40px">
+								<option disabled selected value>Jour</option>
+								<option value="lundi">Lundi</option>
+								<option value="mardi">Mardi</option>
+								<option value="mercredi">Mercredi</option>
+								<option value="jeudi">Jeudi</option>
+								<option value="vendredi">Vendredi</option>
+								<option value="samedi">Samedi</option>
+								<option value="dimanche">Dimanche</option>
+							</select>
+							</div>
+							<div class="col-12">
+								<input type="text" name="heure[]" class="timepicker col-12 col-lg-3 form-search text-center m-2" placeholder="Heure">
+							</div>
+						</div>
+					</div>
+					<div class="col-1 px-0" style="color: rgb(252,98,112)">
+						<i class="fa fa-plus-circle" style="font-size: 2em"></i>
+					</div>	
+					<!-- Fin d'une pastille -->	
+					<!-- Pastille nouveau créneau -->
+					<div class="col-4 col-lg-2 px-0 pt-2" style="max-width: 100%; border: solid 1px gray; border-top-left-radius: 15px; border-top-right-radius: 15px; background-color: #eeeeee;">
+						<div class="row">
+							<div class="col-12">
+								<select name="jour[]" class="col-12 col-lg-3 form-search text-center m-2" style="text-align-last: center; height: 40px ">
+								<option disabled selected value>Jour</option>
+								<option value="lundi">Lundi</option>
+								<option value="mardi">Mardi</option>
+								<option value="mercredi">Mercredi</option>
+								<option value="jeudi">Jeudi</option>
+								<option value="vendredi">Vendredi</option>
+								<option value="samedi">Samedi</option>
+								<option value="dimanche">Dimanche</option>
+							</select>
+							</div>
+							<div class="col-12">
+								<input type="text" name="heure[]" class="timepicker col-12 col-lg-3 form-search text-center m-2" placeholder="Heure">
+							</div>
+						</div>
+					</div>
+					<!-- Fin d'une pastille -->	
+
+				</div>
+			</div>
+		</div>
+
+		<script type="text/javascript">
+		 	$.extend($.fn.pickadate.defaults, {
+			  monthsFull: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+			  weekdaysShort: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
+			  today: '',
+			  clear: '',
+			  close: 'Fermer',
+			  formatSubmit: 'yyyy-mm-dd',
+			  firstDay: 1,
+			  min: 1
+			})
+
+			$('.datepicker').pickadate({
+				hiddenName:true
+			})
+
+			$.extend($.fn.pickatime.defaults, {
+	  			clear: 'Effacer',
+	  			interval: 30,
+				min: [10,0],
+	  			max: [20,0],
+	  			format: 'H:i !h.',
+	  			formatLabel: 'H:i',
+	  			formatSubmit: 'H:i'
+
+			})		
+
+			$('.timepicker').pickatime({
+				hiddenName:true
+			})
+
+		</script>
+
+		
+	</fieldset>
+	<br/>
+	<input type="submit" class="btn col-3 bleu" value="Valider" style="border: solid 1px black; font-weight: bold; color:white">
+<%end%>
+
+	</div>
+</div>
+

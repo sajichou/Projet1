@@ -1,17 +1,17 @@
 <!-- SECTION RAPPEL CARACTERISTIQUES COURS SELECTIONNE -->
-<div class="row justify-content-center">
-	<div class="col-12 p-3" >
+<div class="row justify-content-center mx-0">
+	<div class="col-12 p-0 mt-5 mt-lg-0" >
 		<p class="d-inline text-capitalize" style="font-weight: bold; font-size: 1.4em"><%=cour.matiere%>
 			<%cour.annees.each do |n| %>
 				| <%= Correspondance.find_by_niveau_id(n.niveau).nom%>	
 			<%end%>
 		</p>
-		<div class="row justify-content-center mt-3" style="position: relative;">
-			<div style="position: absolute; top: 10%; left: 45%; border: solid 1px #e55966; height: 200px"></div>
-			<div class="col-10 col-lg-10">
-				<div class="row justify-content-center">
+		<div class="row justify-content-center mt-3 mx-0" style="position: relative;">
+			<div class="d-none d-lg-block" style="position: absolute; top: 10%; left: 45%; border: solid 1px #e55966; height: 200px"></div>
+			<div class="col-12 col-lg-10 p-1">
+				<div class="row justify-content-center mx-0">
 					<!-- image -->
-					<div class="col-6">
+					<div class="col-12 col-lg-6">
 						<div class="row justify-content-center">
 							<%= image_tag cour.teacher.infoteacher.avatar.url(:thumb), :class => "thumbnail_show" %>
 						</div>
@@ -32,7 +32,7 @@
 						</div>						
 					</div>
 					<!-- caractéristiques -->
-					<div class="col-6 pt-3">
+					<div class="col-12 col-lg-6 pt-3">
 
 						<div class="row align-items-start">
 							<div class="col-12" style="text-align: start">
