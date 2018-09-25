@@ -3,15 +3,16 @@
     <a class="navbar-brand mr-5" href="/cours/accueil">
       <%= image_tag "Topnote_logo_blanc_couleurs.png", alt:"Logo", width:"135px", height:"26.5px"%>
     </a>
-    <span class="navbar-text m-auto" style="color: white"><a href="tel:+33628036226" style="color: white"><span style="font-size: 1.5em"><i class="fa fa-mobile pr-2"></i></span>06 28 03 62 26</a></span>
+    
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
       <span class="navbar-toggler-icon"></span>
     </button>
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
-      
-      <ul class="navbar-nav ml-auto mr-3 ">    
+      <span class="navbar-text mr-auto" style="color: white"><a href="tel:+33628036226" style="color: white"><span style="font-size: 1.5em"><i class="fa fa-mobile pr-2"></i></span>06 28 03 62 26</a></span>
+
+      <ul class="navbar-nav mr-4 ">    
         <!-- Index pour admin et Proposer un cours -->
         <% if teacher_signed_in? %>
             <li class="nav-item  give-lesson my-auto" style="width: 200px"><a href="/cours/create" style="color:#e55966"><i class="fa fa-plus"></i> Proposer un cours</a>

@@ -43,19 +43,71 @@
     <% else%>
 
         <div class="row justify-content-center mt-4 mb-4">
-            <div class="col-12 col-lg-10"> 
+            <div class="col-12 col-lg-11"> 
 
                 <div class="row justify-content-center">
 
                     <!-- EXPLICATION DE STRIPE -->
-                    <section class="row justify-content-center">
+                    <section class="row justify-content-center" >
 
+<!--
                         <div class="col-12 mt-3" style="text-align: center">
-                            <%= image_tag "stripe.png", size: "240x80"%> 
+                            <%= image_tag "stripe.png", size: "120x40"%> 
+                        </div>
+-->
+                        <div class="col-12 mt-3">
+                             <p style="font-size: 1.1em; text-align: left"><%= image_tag "ico/info_rose.png", :class=>"ico-infos mr-3" %> Nous utilisons le service de paiement <a href="https://stripe.com/"><%= image_tag "stripe.png", size: "60x20"%> </a> (équivalent de Paypal) pour automatiser et sécuriser vos rémunérations.</p>
+                             <p style="font-size: 1.1em; text-align: left"><%= image_tag "ico/info_rose.png", :class=>"ico-infos mr-3" %> Avant de créer votre compte Stripe, munissez-vous de votre IBAN et lisez les informations ci-dessous :</p>
                         </div>
 
-                        <div class="col-12 mt-3" style="text-align: center">
-                         <p style="font-size: 1.2em">Nous utilisons le service de paiement Stripe pour automatiser et sécuriser vos rémunérations.</p>
+
+
+                        <div class="col-12 mt-3 text-center justify-content-center align-items-center" style="text-align: center">
+                            <div class="row justify-content-center p-3" >
+                                <div class="col-12 col-lg-6 p-3" style="background-color:#FFF2DE ; color:black;">
+                                    <p style="font-weight: bold; font-size: 1.1em">Si vous êtes un particulier</p>
+                                    <ul class="infos text-left mt-3">
+                                        <li>
+                                            <ul class="mt-4 mb-4" style="text-align: left;"> 
+                                                <li><span class="fa fa-circle pr-4"></span>Choisissez le statut de "Particulier/Micro-entrepreneur/Auto-entrepreneur"</li>
+                                                <li><span class="fa fa-circle pr-4"></span>L'adresse de l'entreprise correspond à votre adresse postale</li>
+                                                <li><span class="fa fa-circle pr-4"></span>Le nom de votre entreprise correspond à votre Nom et Prénom</li>
+                                                <li><span class="fa fa-circle pr-4"></span>Ne rien renseigner pour les champs SIRET et SIREN</li>
+                                            </ul>
+                                        </li>
+                                    <!--
+                                    <li style="line-height: 70px">
+                                        <%= image_tag "ico/info_rose.png", :class=>"ico-infos mr-3" %><strong>Pour toutes informations supplémentaires, référrez-vous au <a href="/annexe/Guide" classe="rose" target="_blank">guide de création</a> .
+                                        </strong>
+                                    </li>
+                                    -->
+                                    </ul>
+                                </div>
+                                <div class="col-12 col-lg-6 p-3 "  style="background-color: #FDE0E0; color: black;">
+                                    <p style="font-weight: bold; font-size: 1.1em">Si vous êtes un auto-entrepreneur :</p>
+                                    <ul class="infos text-left mt-3">
+                                        <li>
+                                            
+                                            <ul class="mt-4 mb-4" style="text-align: left;"> 
+                                                <li><span class="fa fa-circle pr-4"></span>Choisissez le statut de "Particulier/Micro-entrepreneur/Auto-entrepreneur"</li>
+                                                <li><span class="fa fa-circle pr-4"></span>Renseignez l'adresse de votre entreprise</li>
+                                                <li><span class="fa fa-circle pr-4"></span>Renseignez la dénomination sociale de votre ent4eprise</li>
+                                                <li><span class="fa fa-circle pr-4"></span>Renseignez vos numéros de SIRET ET SIREN</li>
+                                            </ul>
+                                        </li>
+                                        <!--
+                                        <li style="line-height: 70px">
+                                            <%= image_tag "ico/info_rose.png", :class=>"ico-infos mr-3" %><strong>Pour toutes informations supplémentaires, référrez-vous au <a href="/annexe/Guide" classe="rose" target="_blank">guide de création</a> .
+                                            </strong>
+                                        </li>
+                                    -->
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 mt-3">
+                            <p style="font-size: 0.8em; text-align: left">Si vous souhaitez obtenir le statut d'auto-entrepreneur, vous pouvez faire la démarche <a href="https://www.cfe.urssaf.fr">ici</a></p>
                         </div>
 
                         <div class="col-12 mt-3" style="text-align: center">
@@ -66,43 +118,16 @@
                             </div>
                         </div>
 
-                        <div class="col-12 mt-3 text-center justify-content-center align-items-center" style="text-align: center">
-                                <ul class="infos text-left mt-3">
-                                    <li>
-                                        <%= image_tag "ico/info_rose.png", :class=>"ico-infos mr-3" %>
-                                        <strong>Votre compte TopNote ne sera validé que lorsque
-                                        votre compte Stripe sera créé.</strong>
-                                    </li>
-                                    <li style="line-height: 70px">
-                                        <%= image_tag "ico/info_rose.png", :class=>"ico-infos mr-3" %>
-                                        <strong>Vous recevrez votre rémunération dans un délai maximum de 5 jours ouvrés après le cours.</strong>
-                                    </li>
-                                    <li>
-                                        <%= image_tag "ico/info_rose.png", :class=>"ico-infos mr-3" %>
-                                        <strong>Lors de la création de votre compte Stripe :</strong>
-                                        <ul class="mt-4 mb-4" style="text-align: left; padding-left: 70px;"> 
-                                            <li><span class="fa fa-circle"></span>Munissez vous de votre IBAN</li>
-                                            <li><span class="fa fa-circle"></span>Choisissez le statut de "Particulier/Micro-entrepreneur/Auto-entrepreneur"</li>
-                                            <li><span class="fa fa-circle"></span>L'adresse de l'entreprise correspond à votre adresse postale</li>
-                                            <li><span class="fa fa-circle"></span>Le nom de votre entreprise correspond à votre Nom et Prénom</li>
-                                            <li><span class="fa fa-circle"></span>Le numéro de SIRET et de SIREN sont optionnels</li>
-                                        </ul>
-                                    </li>
-                                    <li style="line-height: 70px">
-                                        <%= image_tag "ico/info_rose.png", :class=>"ico-infos mr-3" %><strong>Pour toutes informations supplémentaires, référrez-vous au <a href="/annexe/Guide" classe="rose" target="_blank">guide de création</a> .
-                                        </strong>
-                                    </li>
-                                </ul>
-                            </div>
-
-                            <div class="col-12 mt-3">
-                                <p style="font-size: 1.2em; font-weight: bold">Ils utilisent Stripe... </p>
-                                <p>
-                                    <%= image_tag "Stripe_clients.png", class:"img-fluid"%>
-                                </p>
-                            </div>
 
 
+                        <div class="col-12 mt-5">
+                            <p class="mb-0" style="font-size: 1.2em; font-weight: bold">Ils utilisent Stripe... </p>
+                            <p class="mt-0">
+                                <%= image_tag "Stripe_clients.png", class:"img-fluid"%>
+                            </p>
+                        </div>
+
+                    </section>
                         
                 </div>
             </div>
@@ -139,3 +164,6 @@
     </div>
 <% end %>
 
+<!--
+ <%= image_tag "ico/info_rose.png", :class=>"ico-infos mr-3" %>
+-->
