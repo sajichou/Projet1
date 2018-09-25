@@ -184,7 +184,7 @@ class PagesController < ApplicationController
         @info_manquantes.push("votre justificatif d'identité") unless current_teacher.infoteacher.justificatif_identite.present?
         @info_manquantes.push("votre justificatif de diplôme") unless current_teacher.infoteacher.justificatif_diplome.present?
         @info_manquantes.push("votre photo") unless current_teacher.infoteacher.avatar.present?
-        @info_manquantes.push("votre accord pour les CGU") unless current_teacher.infoteacher.cgu
+
 
 
     end
