@@ -1,43 +1,37 @@
-<div class="row justify-content-around mt-5">
+<div class="row justify-content-around p-3 mt-5">
 
   <div class="col-12 col-lg-6" id="devise_subcontent">
 
-    <h2 class="mb-4">Inscription élève</h2>
+    <p class="mb-4" style="font-size: 1.5em">Inscription</p>
 
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
       <%= devise_error_messages! %>
 
 
       <div class="form_group">
-        <%= f.label :email, 'Adresse e-mail', class:"control-label" %><br />
         <div class="input-group">
           <div class="input-group-prepend">
             <span class="input-group-text"><span class="fa fa-envelope-o"></span></span>
            </div>
-        <%= f.email_field :email, class: 'form-control',autocomplete: "email" %>
+        <%= f.email_field :email, class: 'form-control',autocomplete: "email", placeholder:"Email" %>
         </div>
       </div>
       <br />
       <div class="form_group">
-        <%= f.label :password, 'Mot de passe', class:"control-label" %>
-        <% if @minimum_password_length %>
-        <em>(<%= @minimum_password_length %> caractères minimum)</em>
-        <% end %><br />
         <div class="input-group">
           <div class="input-group-prepend">
             <span class="input-group-text"><span class="fa fa-lock"></span></span>
           </div>
-        <%= f.password_field :password, class: 'form-control',autocomplete: "off" %>
+        <%= f.password_field :password, class: 'form-control',autocomplete: "off", placeholder:"Mot de passe" %>
         </div>
       </div>
       <br />
       <div class="form_group">
-        <%= f.label :password_confirmation, 'Confirmation du mot de passe', class:"control-label" %><br />
         <div class="input-group">
           <div class="input-group-prepend">
             <span class="input-group-text"><span class="fa fa-lock"></span></span>
           </div>
-        <%= f.password_field :password_confirmation, class: 'form-control',autocomplete: "off" %>
+        <%= f.password_field :password_confirmation, class: 'form-control',autocomplete: "off", placeholder:"Confirmation du mot de passe" %>
         </div>
       </div>
       <br>
