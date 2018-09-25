@@ -186,7 +186,6 @@ class PagesController < ApplicationController
         @info_manquantes.push("votre photo") unless current_teacher.infoteacher.avatar.present?
 
 
-
     end
   end
 
