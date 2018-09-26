@@ -10,6 +10,10 @@ class AdminController < ApplicationController
     end
   end
 
+  def spams
+    @spams = Teacher.where(confirmed_at:nil)
+  end
+
   def validate
     Role.where(teacher_id:params[:id]).last.update(power:1)
     TeacherMailer.validated(Teacher.find(params[:id])).deliver

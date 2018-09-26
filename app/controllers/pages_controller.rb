@@ -62,8 +62,8 @@ class PagesController < ApplicationController
         justificatif_diplome:params[:justificatif_diplome]}.reject{|k,v| v.blank?}
         )
       
-      if(session[:page_id].present?)
-        redirect_to controller:"cours", action: "show", id: session[:page_id]
+      if(current_teacher.infoteacher.avatar.present?)
+        redirect_to controller:"pages", action: "paiement"
       else
         redirect_to '/pages/maphoto'
       end

@@ -127,6 +127,8 @@ Rails.application.routes.draw do
 
   get 'admin/really_detruire_prof'
 
+  get 'admin/spams'
+
   devise_for :users, controllers: { registrations:'user/registrations', sessions:'user/sessions', confirmations: 'user/confirmations'}
   devise_for :teachers, controllers: { registrations:'teachers/registrations', confirmations: 'teachers/confirmations'}
 

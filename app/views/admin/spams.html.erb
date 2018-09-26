@@ -1,0 +1,23 @@
+<h3 class="mt-5">SPAMS</h3>
+<table class="table">
+		<tr>
+			<th></th>
+			<th>Email</th>
+			<th>Created_at</th>
+		</tr>
+		<% @spams.each do |c| %>
+		<tr>
+			<td></td>
+			<td><%=c.email%></td>
+			<td><%=c.created_at%></td>
+			<!--
+			<td>
+				<div class="btn btn-success">
+					<%= link_to "Valider", {:controller => "admin", :action => "validate", :id => c.id, :class =>"btn"}%>
+				</div>
+			</td>
+			-->	
+		</tr>
+		<%end%>
+</table>
+
