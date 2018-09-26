@@ -164,8 +164,223 @@ Topic.create(niveau_id:9, matiere:"mathematiques",theme:"Spécialisation Mathém
 
 ###Français   francais
 
+##Classe de sixième
 
-###Anglais   anglais
+Topic.create(niveau_id:1, matiere:"francais",theme:"Étude de la langue", chapitre:"Grammaire")
+Topic.create(niveau_id:1, matiere:"francais",theme:"Étude de la langue", chapitre:"Orthographe")
+Topic.create(niveau_id:1, matiere:"francais",theme:"Étude de la langue", chapitre:"Lexique")
+Topic.create(niveau_id:1, matiere:"francais",theme:"Lecture", chapitre:"Textes de l'antiquité")
+Topic.create(niveau_id:1, matiere:"francais",theme:"Lecture", chapitre:"Contes et récits merveilleux")
+Topic.create(niveau_id:1, matiere:"francais",theme:"Lecture", chapitre:"Initiation à la poésie")
+Topic.create(niveau_id:1, matiere:"francais",theme:"Lecture", chapitre:"Étude de l'image")
+Topic.create(niveau_id:1, matiere:"francais",theme:"Expression écrite")
+Topic.create(niveau_id:1, matiere:"francais",theme:"Expression orale")
+
+##Classe de cinquième
+
+Topic.create(niveau_id:2, matiere:"francais",theme:"Étude de la langue", chapitre:"Grammaire")
+Topic.create(niveau_id:2, matiere:"francais",theme:"Étude de la langue", chapitre:"Orthographe")
+Topic.create(niveau_id:2, matiere:"francais",theme:"Étude de la langue", chapitre:"Lexique")
+Topic.create(niveau_id:2, matiere:"francais",theme:"Lecture", chapitre:"Littérature du Moyen âge")
+Topic.create(niveau_id:2, matiere:"francais",theme:"Lecture", chapitre:"Récits d'aventure")
+Topic.create(niveau_id:2, matiere:"francais",theme:"Lecture", chapitre:"Poésie")
+Topic.create(niveau_id:2, matiere:"francais",theme:"Lecture", chapitre:"Théâtre : la comédie")
+Topic.create(niveau_id:2, matiere:"francais",theme:"Lecture", chapitre:"Étude de l'image")
+Topic.create(niveau_id:2, matiere:"francais",theme:"Expression écrite")
+Topic.create(niveau_id:2, matiere:"francais",theme:"Expression orale")
+
+##Classe de 4ème
+
+Topic.create(niveau_id:3, matiere:"francais",theme:"Étude de la langue", chapitre:"Grammaire")
+Topic.create(niveau_id:3, matiere:"francais",theme:"Étude de la langue", chapitre:"Orthographe")
+Topic.create(niveau_id:3, matiere:"francais",theme:"Étude de la langue", chapitre:"Lexique")
+Topic.create(niveau_id:3, matiere:"francais",theme:"Lecture", chapitre:"La lettre")
+Topic.create(niveau_id:3, matiere:"francais",theme:"Lecture", chapitre:"Le récit au XIXème siècle")
+Topic.create(niveau_id:3, matiere:"francais",theme:"Lecture", chapitre:"Poésie : le lyrisme")
+Topic.create(niveau_id:3, matiere:"francais",theme:"Lecture", chapitre:"Théâtre :  faire, rire, émouvoir, faire pleurer")
+Topic.create(niveau_id:3, matiere:"francais",theme:"Lecture", chapitre:"Étude de l'image")
+Topic.create(niveau_id:3, matiere:"francais",theme:"Expression écrite")
+Topic.create(niveau_id:3, matiere:"francais",theme:"Expression orale")
+
+##Classe de 3ème
+
+Topic.create(niveau_id:4, matiere:"francais",theme:"Étude de la langue", chapitre:"Grammaire")
+Topic.create(niveau_id:4, matiere:"francais",theme:"Étude de la langue", chapitre:"Orthographe")
+Topic.create(niveau_id:4, matiere:"francais",theme:"Étude de la langue", chapitre:"Lexique")
+Topic.create(niveau_id:4, matiere:"francais",theme:"Lecture", chapitre:"Formes du récit aux XXème siècle et XXIème siècle")
+Topic.create(niveau_id:4, matiere:"francais",theme:"Lecture", chapitre:"La poésie dans le monde et dans le siècle")
+Topic.create(niveau_id:4, matiere:"francais",theme:"Lecture", chapitre:"Théâtre : continuité et renouvellement")
+Topic.create(niveau_id:4, matiere:"francais",theme:"Expression écrite")
+Topic.create(niveau_id:4, matiere:"francais",theme:"Expression orale")
+Topic.create(niveau_id:4, matiere:"francais",theme:"L'histoire des arts")
+
+##Classe de 2nde
+Topic.create(niveau_id:5, matiere:"francais",theme:"Étude de la langue", chapitre:"La lecture")
+Topic.create(niveau_id:5, matiere:"francais",theme:"Étude de la langue", chapitre:"L'écriture")
+Topic.create(niveau_id:5, matiere:"francais",theme:"Étude de la langue", chapitre:"L'oral")
+Topic.create(niveau_id:5, matiere:"francais",theme:"Argumentation", chapitre:"Démontrer, convaincre et persuader")
+Topic.create(niveau_id:5, matiere:"francais",theme:"Argumentation", chapitre:"L'éloge et le blâme")
+Topic.create(niveau_id:5, matiere:"francais",theme:"Les objets d'étude", chapitre:"le roman et la nouvelle au XIXe siècle : réalisme et naturalisme")
+Topic.create(niveau_id:5, matiere:"francais",theme:"Les objets d'étude", chapitre:"La tragédie et la comédie au XVIIe siècle : le classicisme")
+Topic.create(niveau_id:5, matiere:"francais",theme:"Les objets d'étude", chapitre:"La poésie du XIXe au XXe siècle : du romantisme au surréalisme")
+Topic.create(niveau_id:5, matiere:"francais",theme:"Les objets d'étude", chapitre:"Genres et formes de l’argumentation : XVIIe et XVIIIe siècle")
+Topic.create(niveau_id:5, matiere:"francais",theme:"Histoire littéraire et culturelle")
+Topic.create(niveau_id:5, matiere:"francais",theme:"Production, diffusion et réception de textes")
+
+##Classe de 1ère S
+Topic.create(niveau_id:6, matiere:"francais",theme:"Le personnage de roman, du XVIIème siècle à nos jours")
+Topic.create(niveau_id:6, matiere:"francais",theme:"Le texte théâtral et sa représentation, du XVIIème siècle à nos jours")
+Topic.create(niveau_id:6, matiere:"francais",theme:"Écriture poétique et quête du sens, du Moyen Âge à nos jours")
+Topic.create(niveau_id:6, matiere:"francais",theme:"La question de l’Homme dans les genres de l’argumentation du XVIème siècle à nos jours")
+
+##Classe de 1ère ES
+Topic.create(niveau_id:7, matiere:"francais",theme:"Le personnage de roman, du XVIIème siècle à nos jours")
+Topic.create(niveau_id:7, matiere:"francais",theme:"Le texte théâtral et sa représentation, du XVIIème siècle à nos jours")
+Topic.create(niveau_id:7, matiere:"francais",theme:"Écriture poétique et quête du sens, du Moyen Âge à nos jours")
+Topic.create(niveau_id:7, matiere:"francais",theme:"La question de l’Homme dans les genres de l’argumentation du XVIème siècle à nos jours")
+
+##Classe de 1ère L
+Topic.create(niveau_id:8, matiere:"francais",theme:"Pratique raisonnée de la langue", chapitre:"Figures de style ou de rhétorique")
+Topic.create(niveau_id:8, matiere:"francais",theme:"Pratique raisonnée de la langue", chapitre:"Catégories linguistiques")
+Topic.create(niveau_id:8, matiere:"francais",theme:"Pratique raisonnée de la langue", chapitre:"Catégories prosodiques")
+Topic.create(niveau_id:8, matiere:"francais",theme:"Pratique raisonnée de la langue", chapitre:"Catégories narratologiques")
+Topic.create(niveau_id:8, matiere:"francais",theme:"Pratique raisonnée de la langue", chapitre:"Catégories dramaturgiques")
+Topic.create(niveau_id:8, matiere:"francais",theme:"Pratique raisonnée de la langue", chapitre:"Catégories stylistiques")
+Topic.create(niveau_id:8, matiere:"francais",theme:"Pratique raisonnée de la langue", chapitre:"Catégories logiques")
+Topic.create(niveau_id:8, matiere:"francais",theme:"Pratique raisonnée de la langue", chapitre:"Catégories esthétiques")
+Topic.create(niveau_id:8, matiere:"francais",theme:"Exercices oraux et écrits")
+Topic.create(niveau_id:8, matiere:"francais",theme:"Objets d'étude", chapitre:"Le personnage de roman, du XVIIème siècle à nos jours")
+Topic.create(niveau_id:8, matiere:"francais",theme:"Objets d'étude", chapitre:"Le texte théâtral et sa représentation, du XVIIème siècle à nos jours")
+Topic.create(niveau_id:8, matiere:"francais",theme:"Objets d'étude", chapitre:"Ecriture poétique et quête du sens, du Moyen Âge à nos jours")
+Topic.create(niveau_id:8, matiere:"francais",theme:"Objets d'étude", chapitre:"La question de l’Homme dans les genres de l’argumentation du XVIème siècle à nos jours")
+Topic.create(niveau_id:8, matiere:"francais",theme:"Objets d'étude", chapitre:"Vers un espace culturel européen : Renaissance et humanisme")
+Topic.create(niveau_id:8, matiere:"francais",theme:"Objets d'étude", chapitre:"Les réécritures, du XVIIème siècle jusqu’à nos jours")
 
 
-###Espagnol   espagnol
+##Classe de Terminale L
+Topic.create(niveau_id:11, matiere:"francais",theme:"Littérature et langages de l’image")
+Topic.create(niveau_id:11, matiere:"francais",theme:"Lire – écrire – publier : l’œuvre littéraire, un processus complexe")
+
+###SES
+
+##Classe de 1ère ES
+Topic.create(niveau_id:7, matiere:"ses",theme:"Sciences économiques", chapitre:"Les grandes questions des économistes")
+Topic.create(niveau_id:7, matiere:"ses",theme:"Sciences économiques", chapitre:"La production dans l’entreprise")
+Topic.create(niveau_id:7, matiere:"ses",theme:"Sciences économiques", chapitre:"La coordination par le marché")
+Topic.create(niveau_id:7, matiere:"ses",theme:"Sciences économiques", chapitre:"La monnaie et le financement")
+Topic.create(niveau_id:7, matiere:"ses",theme:"Sciences économiques", chapitre:"Régulations et déséquilibres macroéconomiques")
+Topic.create(niveau_id:7, matiere:"ses",theme:"Sociologie générale et politique", chapitre:"Les processus de socialisation et la construction des identités sociales")
+Topic.create(niveau_id:7, matiere:"ses",theme:"Sociologie générale et politique", chapitre:"Groupes et réseaux sociaux")
+Topic.create(niveau_id:7, matiere:"ses",theme:"Sociologie générale et politique", chapitre:"Contrôle social et déviance")
+Topic.create(niveau_id:7, matiere:"ses",theme:"Sociologie générale et politique", chapitre:"GOrdre politique et légitimation")
+
+##Classe de Terminale ES
+Topic.create(niveau_id:10, matiere:"ses",theme:"Croissance, fluctuations et crises")
+Topic.create(niveau_id:10, matiere:"ses",theme:"Mondialisation, finance internationale et intégration sociale")
+Topic.create(niveau_id:10, matiere:"ses",theme:"Économie du développement durable")
+Topic.create(niveau_id:10, matiere:"ses",theme:"Classes, stratification et mobilité sociale")
+Topic.create(niveau_id:10, matiere:"ses",theme:"Intégration, conflit, changement social")
+Topic.create(niveau_id:10, matiere:"ses",theme:"Justice sociale et inégalités")
+Topic.create(niveau_id:10, matiere:"ses",theme:"Travail, emploi, chômage")
+
+###PC   
+
+##Classe de 5ème
+
+Topic.create(niveau_id:2, matiere:"pc",theme:"L'eau dans notre environnement", chapitre:"L’eau dans notre environnement")
+Topic.create(niveau_id:2, matiere:"pc",theme:"L'eau dans notre environnement", chapitre:"Mélange aqueux")
+Topic.create(niveau_id:2, matiere:"pc",theme:"L'eau dans notre environnement", chapitre:"Mélanges homogènes et corps purs")
+Topic.create(niveau_id:2, matiere:"pc",theme:"L'eau dans notre environnement", chapitre:"Les changements d’état de l’eau")
+Topic.create(niveau_id:2, matiere:"pc",theme:"L'eau dans notre environnement", chapitre:"L’eau solvant")
+Topic.create(niveau_id:2, matiere:"pc",theme:"Les circuits électriques", chapitre:"Circuit électrique")
+Topic.create(niveau_id:2, matiere:"pc",theme:"Les circuits électriques", chapitre:"Circuit électrique en série")
+Topic.create(niveau_id:2, matiere:"pc",theme:"Les circuits électriques", chapitre:"Circuit électrique comportant une dérivation")
+Topic.create(niveau_id:2, matiere:"pc",theme:"La lumière", chapitre:"Sources de lumière – vision d’un objet")
+Topic.create(niveau_id:2, matiere:"pc",theme:"La lumière", chapitre:"Propagation de la lumière")
+
+##Classe de 4ème
+
+Topic.create(niveau_id:3, matiere:"pc",theme:"De l'air qui nous entoure à la molécule", chapitre:"Composition de l’air")
+Topic.create(niveau_id:3, matiere:"pc",theme:"De l'air qui nous entoure à la molécule", chapitre:"Volume et masse de l’air")
+Topic.create(niveau_id:3, matiere:"pc",theme:"De l'air qui nous entoure à la molécule", chapitre:"Une description moléculaire pour comprendre")
+Topic.create(niveau_id:3, matiere:"pc",theme:"De l'air qui nous entoure à la molécule", chapitre:"Les combustions")
+Topic.create(niveau_id:3, matiere:"pc",theme:"De l'air qui nous entoure à la molécule", chapitre:"Les atomes pour comprendre la transformation chimique")
+Topic.create(niveau_id:3, matiere:"pc",theme:"Les lois du courant continu", chapitre:"Intensité et tension")
+Topic.create(niveau_id:3, matiere:"pc",theme:"Les lois du courant continu", chapitre:"La résistance")
+Topic.create(niveau_id:3, matiere:"pc",theme:"Les lois du courant continu", chapitre:"La loi d’Ohm")
+Topic.create(niveau_id:3, matiere:"pc",theme:"La lumière", chapitre:"Lumières colorées et couleur des objets")
+Topic.create(niveau_id:3, matiere:"pc",theme:"La lumière", chapitre:"Lentilles, foyers et images")
+Topic.create(niveau_id:3, matiere:"pc",theme:"La lumière", chapitre:"Vitesse de la lumière")
+
+##Classe de 3ème
+
+Topic.create(niveau_id:4, matiere:"pc",theme:"La chimie, science de la transformation", chapitre:"Conduction électrique")
+Topic.create(niveau_id:4, matiere:"pc",theme:"La chimie, science de la transformation", chapitre:"Synthèse d’espèces chimiques")
+Topic.create(niveau_id:4, matiere:"pc",theme:"Énergie électrique et circuits alternatifs", chapitre:"De la centrale électrique à l’utilisateur")
+Topic.create(niveau_id:4, matiere:"pc",theme:"Énergie électrique et circuits alternatifs", chapitre:"Puissance et énergie électrique")
+Topic.create(niveau_id:4, matiere:"pc",theme:"Gravité et énergie mécanique", chapitre:"Interaction gravitationnelle")
+Topic.create(niveau_id:4, matiere:"pc",theme:"Gravité et énergie mécanique", chapitre:"Energie cinétique et sécurité routière")
+
+##Classe de 2nde
+
+Topic.create(niveau_id:5, matiere:"pc",theme:"Chimie", chapitre:"Chimique ou naturel ?")
+Topic.create(niveau_id:5, matiere:"pc",theme:"Chimie", chapitre:"Constitution et transformation de la matière")
+Topic.create(niveau_id:5, matiere:"pc",theme:"Chimie", chapitre:"Solution : solvant, soluté, dissolution")
+Topic.create(niveau_id:5, matiere:"pc",theme:"Physique", chapitre:"Exploration de l'espace")
+Topic.create(niveau_id:5, matiere:"pc",theme:"Physique", chapitre:"L'Univers en mouvements et le temps")
+Topic.create(niveau_id:5, matiere:"pc",theme:"Physique", chapitre:"L'air qui nous entoure")
+
+##Classe de 1S
+
+Topic.create(niveau_id:6, matiere:"pc",theme:"Observer : couleurs et images", chapitre:"Couleur, vision et image")
+Topic.create(niveau_id:6, matiere:"pc",theme:"Observer : couleurs et images", chapitre:"Sources de lumière colorée")
+Topic.create(niveau_id:6, matiere:"pc",theme:"Observer : couleurs et images", chapitre:"Matières colorées")
+Topic.create(niveau_id:6, matiere:"pc",theme:"Comprendre : lois et modèles", chapitre:"Cohésion et transformations de la matière")
+Topic.create(niveau_id:6, matiere:"pc",theme:"Comprendre : lois et modèles", chapitre:"Champs et forces")
+Topic.create(niveau_id:6, matiere:"pc",theme:"Comprendre : lois et modèles", chapitre:"Formes et principes de conversion de l’énergie")
+Topic.create(niveau_id:6, matiere:"pc",theme:"Agir : défis du XXIème siècle", chapitre:"Convertir l’énergie")
+Topic.create(niveau_id:6, matiere:"pc",theme:"Agir : défis du XXIème siècle", chapitre:"Synthétiser des molécules")
+Topic.create(niveau_id:6, matiere:"pc",theme:"Agir : défis du XXIème siècle", chapitre:"Créer et innover")
+
+
+##Classe de TS
+
+Topic.create(niveau_id:9, matiere:"pc",theme:"Ondes et matières", chapitre:"Ondes et particules")
+Topic.create(niveau_id:9, matiere:"pc",theme:"Ondes et matières", chapitre:"Analyse spectrale")
+Topic.create(niveau_id:9, matiere:"pc",theme:"Lois et modèles", chapitre:"Temps, mouvement et évolution")
+Topic.create(niveau_id:9, matiere:"pc",theme:"Lois et modèles", chapitre:"Structure et transformation de la matière")
+Topic.create(niveau_id:9, matiere:"pc",theme:"Lois et modèles", chapitre:"Énergie, matière et rayonnement")
+Topic.create(niveau_id:9, matiere:"pc",theme:"Défis du XXIème siècle", chapitre:"Économiser les ressources")
+Topic.create(niveau_id:9, matiere:"pc",theme:"Défis du XXIème siècle", chapitre:"Synthétiser des molécules")
+Topic.create(niveau_id:9, matiere:"pc",theme:"Défis du XXIème siècle", chapitre:"Créer et innover")
+
+
+
+###Anglais   
+Topic.create(niveau_id:13, matiere:"anglais",theme:"Compréhension orale")
+Topic.create(niveau_id:13, matiere:"anglais",theme:"Compréhension écrite")
+Topic.create(niveau_id:13, matiere:"anglais",theme:"Expression écrite")
+Topic.create(niveau_id:13, matiere:"anglais",theme:"Expression orale")
+
+
+###Espagnol   
+Topic.create(niveau_id:13, matiere:"espagnol",theme:"Compréhension orale")
+Topic.create(niveau_id:13, matiere:"espagnol",theme:"Compréhension écrite")
+Topic.create(niveau_id:13, matiere:"espagnol",theme:"Expression écrite")
+Topic.create(niveau_id:13, matiere:"espagnol",theme:"Expression orale")
+
+###Russe   
+Topic.create(niveau_id:13, matiere:"russe",theme:"Compréhension orale")
+Topic.create(niveau_id:13, matiere:"russe",theme:"Compréhension écrite")
+Topic.create(niveau_id:13, matiere:"russe",theme:"Expression écrite")
+Topic.create(niveau_id:13, matiere:"russe",theme:"Expression orale")
+
+###Allemand   
+Topic.create(niveau_id:13, matiere:"allemand",theme:"Compréhension orale")
+Topic.create(niveau_id:13, matiere:"allemand",theme:"Compréhension écrite")
+Topic.create(niveau_id:13, matiere:"allemand",theme:"Expression écrite")
+Topic.create(niveau_id:13, matiere:"allemand",theme:"Expression orale")
+
+
+
+

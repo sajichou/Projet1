@@ -133,7 +133,7 @@
 										<p style="font-weight: bold; font-size: 1.2em"><span style="font-size: 1.3em">3. </span> Choisissez la thématique</p>
 										<div id="accordion">
 										
-											<% Topic.where(niveau_id:current_user.infouser.niveau).select(:theme).map(&:theme).uniq.each do |theme| %>
+											<% Topic.where(niveau_id:current_user.infouser.niveau, matiere:@cour.matiere).select(:theme).map(&:theme).uniq.each do |theme| %>
 
 
 												<div class="card">
@@ -145,7 +145,7 @@
 													  </h5>
 													</div>
 													<div id='<%=theme%>' class="collapse" aria-labelledby='Heading' data-parent="#accordion">
-														<%Topic.where(niveau_id:current_user.infouser.niveau, theme:theme).each do |t|	%>
+														<%Topic.where(niveau_id:current_user.infouser.niveau, matiere:@cour.matiere, theme:theme).each do |t|	%>
 
 															<div class="card-body">
 																<label class="btn btn-info d-block">
@@ -263,7 +263,7 @@
 									<p style="font-weight: bold; font-size: 1.2em">3. Choisissez la thématique</p>
 									<div id="accordion">
 								
-										<% Topic.where(niveau_id:3).select(:theme).map(&:theme).uniq.each do |theme| %>
+										<% Topic.where(niveau_id:3, matiere:@cour.matiere).select(:theme).map(&:theme).uniq.each do |theme| %>
 
 
 											<div class="card">
@@ -275,7 +275,7 @@
 												  </h5>
 												</div>
 												<div id='<%=theme%>' class="collapse" aria-labelledby='Heading' data-parent="#accordion">
-													<%Topic.where(niveau_id:3, theme:theme).each do |t|	%>
+													<%Topic.where(niveau_id:3, matiere:@cour.matiere, theme:theme).each do |t|	%>
 
 														<div class="card-body">
 															<label class="btn btn-info d-block">
@@ -331,7 +331,7 @@
 										<p style="font-weight: bold; font-size: 1.2em"><span style="font-size: 1.3em">2.</span> Choisissez la thématique</p>
 										<div id="accordion">
 											
-											<% Topic.where(niveau_id:current_user.infouser.niveau).select(:theme).map(&:theme).uniq.each do |theme| %>
+											<% Topic.where(niveau_id:current_user.infouser.niveau, matiere:@cour.matiere).select(:theme).map(&:theme).uniq.each do |theme| %>
 
 
 												<div class="card">
@@ -343,7 +343,7 @@
 													  </h5>
 													</div>
 													<div id='<%=theme%>' class="collapse " aria-labelledby='Heading' data-parent="#accordion">
-														<%Topic.where(niveau_id:current_user.infouser.niveau, theme:theme).each do |t|	%>
+														<%Topic.where(niveau_id:current_user.infouser.niveau, matiere:@cour.matiere, theme:theme).each do |t|	%>
 
 															<div class="card-body">
 																<label class="btn btn-info d-block">
@@ -421,7 +421,7 @@
 									<p style="font-weight: bold; font-size: 1.2em"><span style="font-size: 1.3em">2.</span>Choisissez la thématique</p>
 									<div id="accordion">
 								
-										<% Topic.where(niveau_id:3).select(:theme).map(&:theme).uniq.each do |theme| %>
+										<% Topic.where(niveau_id:3, matiere:@cour.matiere).select(:theme).map(&:theme).uniq.each do |theme| %>
 
 
 											<div class="card">
@@ -433,7 +433,7 @@
 												  </h5>
 												</div>
 												<div id='<%=theme%>' class="collapse" aria-labelledby='Heading' data-parent="#accordion">
-													<%Topic.where(niveau_id:3, theme:theme).each do |t|	%>
+													<%Topic.where(niveau_id:3, matiere:@cour.matiere, theme:theme).each do |t|	%>
 
 														<div class="card-body">
 															<label class="btn btn-info d-block">
@@ -514,7 +514,7 @@
 				<p style="font-weight: bold; font-size: 1.4em">Thématique</p>		
 				<div id="accordion">
 					<% iterator = 0 %>
-					<% Topic.where(niveau_id:@cour.annees.last.niveau).select(:theme).map(&:theme).uniq.each do |theme| %>
+					<% Topic.where(niveau_id:@cour.annees.last.niveau, matiere:@cour.matiere).select(:theme).map(&:theme).uniq.each do |theme| %>
 
 						<div class="card">
 							<div class="card-header" id="Heading" style= "<%='background-color: #00e676' if @cour.theme.include? theme %>">
@@ -525,7 +525,7 @@
 							  </h5>
 							</div>
 							<div id='<%=theme%>' class="collapse" aria-labelledby='Heading' data-parent="#accordion">
-								<%Topic.where(niveau_id:@cour.annees.last.niveau, theme:theme).each do |t|	%>
+								<%Topic.where(niveau_id:@cour.annees.last.niveau, matiere:@cour.matiere, theme:theme).each do |t|	%>
 
 									<div class="card-body">
 										<label class="btn btn-info d-block">

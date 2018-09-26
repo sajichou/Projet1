@@ -2,7 +2,7 @@
 
 <table class="table">
 		<tr>
-			<th></th>
+			<th>Id</th>
 			<th>Nom</th>
 			<th>Prénom</th>
 			<th>email</th>
@@ -19,6 +19,7 @@
 		</tr>
 		<% @candidates.each do |c| %>
 		<tr>
+			<td><%=c.id%></td>
 			<td> <%= link_to "Infos", {:controller => "admin", :action => "teacher_profile", :id => c.id} %></td>
 			<td><%=c.infoteacher.try(:first_name)%></td>
 			<td><%=c.infoteacher.try(:last_name)%></td>
