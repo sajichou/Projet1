@@ -9,15 +9,15 @@ Cours de <%=@cour.matiere%>, <%=@cour.jour%> à <%=@cour.heure%> h. </p>
 <p style="color: #000000;">
 <%=@eleve.infouser.first_name%>: <%=@eleve.infouser.phone%> | <%=@eleve.infouser.email%>
 </p>
-<p style="color: #000000;">
-L'élève a indiqué qu'il souhaiterait travailler au prochain cours les chapitre suivants : 
-</p>
-<%@topics.each do |t| %>
-	<p><%=Topic.find(t).chapitre%></p>
+<% if @topics.present? %>
+	<p style="color: #000000;">
+	L'élève a indiqué qu'il souhaiterait travailler au prochain cours les chapitre suivants : 
+	</p>
+	<%@topics.each do |t| %>
+		<p><%=Topic.find(t).chapitre%></p>
+	<%end%>
 <%end%>
 
-<p style="color: #000000;">Nous vous souhaitons un bon cours avec vos Kamarades,</p>
 
-<p style="color: #000000;">Si vous avez des questions ou besoin d’aide, Margot, Ines, Arthur, ou Kevin se fera le plaisir de vous répondre dans la journée !</p>
 
 

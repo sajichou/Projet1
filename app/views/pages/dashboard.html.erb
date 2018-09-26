@@ -1,94 +1,181 @@
 <%= render partial: "shared/sousmenu", locals: {tabname:"dashboard"}  %>
-
-<div class="row justify-content-center mx-0 mt-4" >
-	<div class="col-12 col-lg-4 p-3">
-		<div class="row">
-			<% if !current_teacher.infoteacher.avatar.present? %>
-				<div class="col-12">
-					<%=link_to "/pages/maphoto" do %>
-						<div>
-							<%=image_tag "photo_profil_topnote.png", style:"max-width:200px;", class:"img-fluid"%>
-						</div>
-					<%end%>
-				</div>
-			<%else %>
-				<div class="col-12">
-					<div class="row justify-content-center">
+<% if teacher_signed_in? %>
+	<div class="row justify-content-center mx-0 mt-4" >
+		<div class="col-12 col-lg-4 p-3">
+			<div class="row">
+				<% if !current_teacher.infoteacher.avatar.present? %>
+					<div class="col-12">
 						<%=link_to "/pages/maphoto" do %>
 							<div>
-								<% if current_teacher.infoteacher.avatar.url(:normal).present? %>
-									<%=image_tag current_teacher.infoteacher.avatar.url(:normal), class:"thumbnail"%>
-								<% else %>
-									<%=image_tag current_teacher.infoteacher.avatar.url(:thumb), class:"thumbnail"%>
-								<% end %>
+								<%=image_tag "photo_profil_topnote.png", style:"max-width:200px;", class:"img-fluid"%>
 							</div>
-
 						<%end%>
 					</div>
-				</div>
-			<%end%>
-			<div class="col-12 mt-3">
-				<% if current_teacher.infoteacher.first_name.present? %>
-					<%=current_teacher.infoteacher.first_name.capitalize%>
-				<%end%>
-				<% if current_teacher.infoteacher.last_name.present? %>
-					<%=current_teacher.infoteacher.last_name.capitalize[0]%>
-				<%end%>
-			</div>
+				<%else %>
+					<div class="col-12">
+						<div class="row justify-content-center">
+							<%=link_to "/pages/maphoto" do %>
+								<div>
+									<% if current_teacher.infoteacher.avatar.url(:normal).present? %>
+										<%=image_tag current_teacher.infoteacher.avatar.url(:normal), class:"thumbnail"%>
+									<% else %>
+										<%=image_tag current_teacher.infoteacher.avatar.url(:thumb), class:"thumbnail"%>
+									<% end %>
+								</div>
 
-		</div>
-
-		
-	</div>
-
-	<div class="col-12 col-lg-8 p-3">
-		<div class="row">
-
-			<div class="col-12 col-lg-8 mt-4" style="text-align: left">
-				<h4 class="pl-3" style="border-bottom: solid 1px black">
-					Informations en attente :
-				</h4>
-				<div class="row">
-					<%@info_manquantes.each do |i| %>
-						<div class="col-12 mt-1">
-							<span style="color: red">
-								<i class="fa fa-exclamation-triangle"></i>
-							</span>
-							<p class="d-inline p-1">
-								
-								Vous n'avez pas encore renseigné : <%=i%>.
-							</p>
+							<%end%>
 						</div>
+					</div>
+				<%end%>
+				<div class="col-12 mt-3">
+					<% if current_teacher.infoteacher.first_name.present? %>
+						<%=current_teacher.infoteacher.first_name.capitalize%>
+					<%end%>
+					<% if current_teacher.infoteacher.last_name.present? %>
+						<%=current_teacher.infoteacher.last_name.capitalize[0]%>
 					<%end%>
 				</div>
 
 			</div>
+
 			
-			<div class="col-12 col-lg-8 mt-5" style="text-align: left">
-				<h4 class="pl-3" style="border-bottom: solid 1px black">
-					Nouveaux messages (<%=@nb_nouveaux_messages%>)
-				</h4>
-			</div>
-			<div class="col-12 col-lg-8" style="text-align: left">
-				<% @notifications.each do |notif| %>
-					<%= link_to messages_mark_as_read_and_read_path(:message_id => notif.notifiable_id) do%>
-						<div style="background-color: #eeeeee ">
-							<% if notif.actor.class == Teacher %>
-								<p><%= image_tag notif.actor.infoteacher.avatar.url(:thumb), :class => "thumbnail1" %><%=notif.actor.email%> vous a envoyé un message</p>
-							<% else %>
-								<p> <%=notif.actor.infouser.first_name.capitalize%> vous a envoyé un message</p>
-							<% end %>
-						</div>
+		</div>
+
+		<div class="col-12 col-lg-8 p-3">
+			<div class="row">
+
+				<div class="col-12 col-lg-8 mt-4" style="text-align: left">
+					<h4 class="pl-3" style="border-bottom: solid 1px black">
+						Informations en attente :
+					</h4>
+					<div class="row">
+						<%@info_manquantes.to_a.each do |i| %>
+							<div class="col-12 mt-1">
+								<span style="color: red">
+									<i class="fa fa-exclamation-triangle"></i>
+								</span>
+								<p class="d-inline p-1">
+									
+									Vous n'avez pas encore renseigné : <%=i%>.
+								</p>
+							</div>
+						<%end%>
+					</div>
+
+				</div>
+				
+				<div class="col-12 col-lg-8 mt-5" style="text-align: left">
+					<h4 class="pl-3" style="border-bottom: solid 1px black">
+						Nouveaux messages (<%=@nb_nouveaux_messages%>)
+					</h4>
+				</div>
+				<div class="col-12 col-lg-8" style="text-align: left">
+					<% @notifications.each do |notif| %>
+						<%= link_to messages_mark_as_read_and_read_path(:message_id => notif.notifiable_id) do%>
+							<div style="background-color: #eeeeee ">
+								<% if notif.actor.class == Teacher %>
+									<p><%= image_tag notif.actor.infoteacher.avatar.url(:thumb), :class => "thumbnail1" %><%=notif.actor.email%> vous a envoyé un message</p>
+								<% else %>
+									<p> <%=notif.actor.infouser.first_name.capitalize%> vous a envoyé un message</p>
+								<% end %>
+							</div>
+						<% end %>
 					<% end %>
-				<% end %>
-				<p class="text-right"><a href="/pages/messages">Voir tous les messages</a></p>
+					<p class="text-right"><a href="/pages/messages">Voir tous les messages</a></p>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
+<%else%>
 
 							
-								
+	<div class="row justify-content-center mx-0 mt-4" >
+		<div class="col-12 col-lg-4 p-3">
+			<div class="row">
+				<% if !current_user.infouser.avatar.present? %>
+					<div class="col-12">
+			
+							<div>
+								<%=image_tag "photo_profil_topnote.png", style:"max-width:200px;", class:"img-fluid"%>
+							</div>
+			
+					</div>
+				<%else %>
+					<div class="col-12">
+						<div class="row justify-content-center">
+							<%=link_to "/pages/maphoto" do %>
+								<div>
+									<% if current_user.infouser.avatar.url(:normal).present? %>
+										<%=image_tag current_user.infouser.avatar.url(:normal), class:"thumbnail"%>
+									<% else %>
+										<%=image_tag current_user.infouser.avatar.url(:thumb), class:"thumbnail"%>
+									<% end %>
+								</div>
 
+							<%end%>
+						</div>
+					</div>
+				<%end%>
+				<div class="col-12 mt-3">
+					<% if current_user.infouser.first_name.present? %>
+						<%=current_user.infouser.first_name.capitalize%>
+					<%end%>
+					<% if current_user.infouser.last_name.present? %>
+						<%=current_user.infouser.last_name.capitalize[0]%>
+					<%end%>
+				</div>
+
+			</div>
+
+			
+		</div>
+
+		<div class="col-12 col-lg-8 p-3">
+			<div class="row">
+
+				<div class="col-12 col-lg-8 mt-4" style="text-align: left">
+					<h4 class="pl-3" style="border-bottom: solid 1px black">
+						Informations en attente :
+					</h4>
+					<div class="row">
+						<%@info_manquantes.to_a.each do |i| %>
+							<div class="col-12 mt-1">
+								<span style="color: red">
+									<i class="fa fa-exclamation-triangle"></i>
+								</span>
+								<p class="d-inline p-1">
+									
+									Vous n'avez pas encore renseigné : <%=i%>.
+								</p>
+							</div>
+						<%end%>
+					</div>
+
+				</div>
+				
+				<div class="col-12 col-lg-8 mt-5" style="text-align: left">
+					<h4 class="pl-3" style="border-bottom: solid 1px black">
+						Nouveaux messages (<%=@nb_nouveaux_messages%>)
+					</h4>
+				</div>
+				<div class="col-12 col-lg-8" style="text-align: left">
+					<% @notifications.each do |notif| %>
+						<%= link_to messages_mark_as_read_and_read_path(:message_id => notif.notifiable_id) do%>
+							<div style="background-color: #eeeeee ">
+								<% if notif.actor.class == Teacher %>
+									<p><%= image_tag notif.actor.infoteacher.avatar.url(:thumb), :class => "thumbnail1" %><%=notif.actor.email%> vous a envoyé un message</p>
+								<% else %>
+									<p> <%=notif.actor.infouser.first_name.capitalize%> vous a envoyé un message</p>
+								<% end %>
+							</div>
+						<% end %>
+					<% end %>
+					<p class="text-right"><a href="/pages/messages">Voir tous les messages</a></p>
+				</div>
+			</div>
+		</div>
+	</div>						
+
+<%end%>
 
 							

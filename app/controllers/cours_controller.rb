@@ -230,90 +230,99 @@ class CoursController < ApplicationController
 
   def inscription
     cour = Cour.find(params[:id])
-    if cour.nombre_eleves < 3
-      cour.nombre_eleves = cour.nombre_eleves + 1
-      #Si premier inscrit alors le niveau du cours est celui de l'élève mais encore faut-il que l'élève ait 
-      #renseigné sa classe lors de son inscription => before action premier_eleve
-        if cour.nombre_eleves < 2
-          cour.annees.each do |a|
-            a.destroy
-          end
-          Annee.create cour_id:cour.id, teacher_id:cour.teacher_id, niveau:current_user.infouser.niveau
-          cour.dispos.each do |a|
-            a.destroy
-          end
+    begin
+      if cour.nombre_eleves < 3
+        cour.nombre_eleves = cour.nombre_eleves + 1
+        #Si premier inscrit alors le niveau du cours est celui de l'élève mais encore faut-il que l'élève ait 
+        #renseigné sa classe lors de son inscription => before action premier_eleve
+          if cour.nombre_eleves < 2
+            cour.annees.each do |a|
+              a.destroy
+            end
+            Annee.create cour_id:cour.id, teacher_id:cour.teacher_id, niveau:current_user.infouser.niveau
+            cour.dispos.each do |a|
+              a.destroy
+            end
+            
+            if !cour.jour or !cour.heure or !cour.min
+              dispo = params[:dispo].split(",")
+              dispo[1] = dispo[1].to_i
+              dispo[2] = dispo[2].to_i
+              Dispo.create cour_id:cour.id, jour:dispo[0], heure:dispo[1], min:dispo[2]
+              cour.update(jour:dispo[0])
+              cour.update(heure:dispo[1])
+              cour.update(min:dispo[2])
+            end
+
+            #On calcule la date reguliere
+            wday = {"lundi"=>1, "mardi"=>2, "mercredi"=>3, "jeudi"=>4, "vendredi"=>5,
+            "samedi"=>6, "dimanche"=>0}
+            delta_jours = (wday[cour.jour] - Date.today.wday)
+            if delta_jours < 0 
+              delta_jours += 7
+            end
+            date_reg = Date.today + delta_jours
+            #On decale d'une semaine si l'eleve s'inscrit moins de 24h avant le début du cours
+            if delta_jours < 2
+              date_reg += 7
+            end
           
-          if !cour.jour or !cour.heure or !cour.min
-            dispo = params[:dispo].split(",")
-            dispo[1] = dispo[1].to_i
-            dispo[2] = dispo[2].to_i
-            Dispo.create cour_id:cour.id, jour:dispo[0], heure:dispo[1], min:dispo[2]
-            cour.update(jour:dispo[0])
-            cour.update(heure:dispo[1])
-            cour.update(min:dispo[2])
-          end
+            cour.update(date_reg:date_reg, objectif:params[:objectif].to_i)
+            #On cree la lesson et la presence associee
+            #Lesson.create cour_id:cour.id, date:date_reg
+            lesson = Lesson.create(cour_id:cour.id, date:date_reg,paid:false)
+            lesson.save
+            #On renseigne les choix de chapitres du 1er inscrit
+            if params[:topics].present?
+              eval(params[:topics]).each do |t|
+                Chapitre.create(lesson_id:lesson.id, cour_id:cour.id, topic_id:t)
+              end
+              liste_themes = []
+              eval(params[:topics]).each do |c|
+                if !liste_themes.include? Topic.find(c).theme  
+                    liste_themes.push(Topic.find(c).theme)
+                end 
+              end
+              cour.update(theme:liste_themes)
 
-          #On calcule la date reguliere
-          wday = {"lundi"=>1, "mardi"=>2, "mercredi"=>3, "jeudi"=>4, "vendredi"=>5,
-          "samedi"=>6, "dimanche"=>0}
-          delta_jours = (wday[cour.jour] - Date.today.wday)
-          if delta_jours < 0 
-            delta_jours += 7
+            end
+
           end
-          date_reg = Date.today + delta_jours
-          #On decale d'une semaine si l'eleve s'inscrit moins de 24h avant le début du cours
-          if delta_jours < 2
-            date_reg += 7
-          end
+        cour.save
         
-          cour.update(date_reg:date_reg, objectif:params[:objectif].to_i)
-          #On cree la lesson et la presence associee
-          #Lesson.create cour_id:cour.id, date:date_reg
-          lesson = Lesson.create(cour_id:cour.id, date:date_reg,paid:false)
-          lesson.save
-          #On renseigne les choix de chapitres du 1er inscrit
-          eval(params[:topics]).each do |t|
-            Chapitre.create(lesson_id:lesson.id, cour_id:cour.id, topic_id:t)
-          end
-
-          liste_themes = []
-          eval(params[:topics]).each do |c|
-            if !liste_themes.include? Topic.find(c).theme  
-                liste_themes.push(Topic.find(c).theme)
-            end 
-          end
-          cour.update(theme:liste_themes)
-
-        end
-      cour.save
-      
-      Inscription.create user_id:current_user.id, cour_id:cour.id
-      Presence.create lesson_id:cour.lessons.last.id, user_id:current_user.id, perf:false
+        Inscription.create user_id:current_user.id, cour_id:cour.id
+        Presence.create lesson_id:cour.lessons.last.id, user_id:current_user.id, perf:false
 
 
-      @twilio_number = ENV['TWILIO_NUMBER']
-      account_sid = ENV['TWILIO_ACCOUNT_SID']
-      @client = Twilio::REST::Client.new(account_sid, ENV['TWILIO_AUTH_TOKEN'])
-      teacher_phone = "+33" + Cour.find(cour.id).teacher.infoteacher.phone
-      twilio_phone_number = "TopNote"
-      #time_str = ((self.time).localtime).strftime("%I:%M%p on %b. %d, %Y")
-      #reminder = "Hi #{self.name}. Just a reminder that you have an appointment coming up at #{time_str}."
-      reminder = "Hello, un nouvel élève s'est inscrit à votre cours ! "
-      message = @client.api.account.messages.create(
-        #:from => '+33644640536',
-        :from =>twilio_phone_number,
-        #:to => self.phone_number,
-        :to => teacher_phone,
-        :body => reminder,
-      )
+        @twilio_number = ENV['TWILIO_NUMBER']
+        account_sid = ENV['TWILIO_ACCOUNT_SID']
+        @client = Twilio::REST::Client.new(account_sid, ENV['TWILIO_AUTH_TOKEN'])
+        teacher_phone = "+33" + Cour.find(cour.id).teacher.infoteacher.phone
+        twilio_phone_number = "TopNote"
+        #time_str = ((self.time).localtime).strftime("%I:%M%p on %b. %d, %Y")
+        #reminder = "Hi #{self.name}. Just a reminder that you have an appointment coming up at #{time_str}."
+        reminder = "Hello, un nouvel élève s'est inscrit à votre cours ! "
+        message = @client.api.account.messages.create(
+          #:from => '+33644640536',
+          :from =>twilio_phone_number,
+          #:to => self.phone_number,
+          :to => teacher_phone,
+          :body => reminder,
+        )
 
-      UserMailer.inscription(current_user, cour).deliver
-      TeacherMailer.inscription(cour.teacher,cour,current_user, params[:topics]).deliver
-      redirect_to '/pages/monespace'
-    else
-      redirect_to controller: 'cours', action: 'show', id: params[:id]
-      flash[:info] = "Ce cours est complet."
+        UserMailer.inscription(current_user, cour).deliver
+        TeacherMailer.inscription(cour.teacher,cour,current_user, params[:topics]).deliver
+        redirect_to '/pages/monespace'
+      else
+        redirect_to controller: 'cours', action: 'show', id: params[:id]
+        flash[:info] = "Ce cours est complet."
+      end
+
+    rescue 
+      flash[:info] = "Une erreur est survenue, vous ne serez pas débité." 
+      render :accueil
     end
+
   end
 
   def accepter_inscription
