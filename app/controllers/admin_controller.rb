@@ -8,6 +8,7 @@ class AdminController < ApplicationController
     roles.each do |r|
       @candidates << Teacher.find(r.teacher_id)
     end
+
   end
 
   def spams
