@@ -1,7 +1,28 @@
 <%= link_to cours_show_path(:id => cours.id), style:"color:#444A55" do%>
-<div  id="annonce" style="position: relative">
+<div  id="annonce" style="position: relative;">
 	<div class="d-none d-lg-block d-xl-none" style="position: absolute; top: 20%; left: 30%; border: solid 1px #e55966; height: 170px"></div>
 	<div class="row" >
+		<% if cours.nombre_eleves == 3 %>
+			<div style="
+			  display: flex;
+		      justify-content: center;
+		      align-items: center;
+		      position: absolute;
+		      top:0;
+		      left:0;
+		      width:100%;
+		      height: 100%;
+		      z-index: 2;
+		      opacity: 0;
+		      background: rgba(39, 42, 43, 0.8);
+		      border-radius: 4px;
+		      opacity: 0.8;
+			">
+				<div>			
+					<p style="font-weight: bold; color:white; font-size: 1.2em;">Cours complet</p>
+				</div>
+			</div>
+		<%end%>
 
 	<!-- Avatars prof et élèves-->	
 		<div class="col-12 col-lg-4">
@@ -119,9 +140,9 @@
 			<div class="row align-items-start">
 				<div class="col-12" style="text-align: start; color: #e55966">
 					<% if cours.nombre_eleves<2 %>
-						<p><%= 3-cours.nombre_eleves %> places disponibles</p>
+						<p><%= 3-cours.nombre_eleves %>/3 places disponibles</p>
 					<% else %>
-						<p><%= 3-cours.nombre_eleves %> place disponible</p>
+						<p><%= 3-cours.nombre_eleves %>/3 place disponible</p>
 					<% end %>
 				</div>
 			</div>

@@ -94,11 +94,11 @@
 
 									<% if @current_teacher.infoteacher.experience.present? %>
 									<p>
-										<textarea type="text" class="form-control value_success" name="experience" minlength=100 maxlength=600 placeholder="Ex : Je suis ingénieur(e) / professeur... Je donne des cours dans les matières... Je suis professeur au lycée depuis..." ><%= @current_teacher.infoteacher.experience%></textarea> 
+										<textarea type="text" class="form-control value_success" name="experience" minlength=100 maxlength=700 placeholder="Ex : Je suis ingénieur(e) / professeur... Je donne des cours dans les matières... Je suis professeur au lycée depuis..." ><%= @current_teacher.infoteacher.experience%></textarea> 
 									</p>
 									<% else %>
 									<p>
-										<textarea type="text" class="form-control value_danger" name="experience" minlength=100 maxlength=600 placeholder="Ex : Je suis ingénieur(e) / professeur... Je donne des cours dans les matières... Je suis professeur au lycée depuis..."></textarea> 
+										<textarea type="text" class="form-control value_danger" name="experience" minlength=100 maxlength=700 placeholder="Ex : Je suis ingénieur(e) / professeur... Je donne des cours dans les matières... Je suis professeur au lycée depuis..."></textarea> 
 									</p>
 									<% end %>
 								</div>
@@ -112,11 +112,11 @@
 
 									<% if @current_teacher.infoteacher.methodology.present? %>
 									<p>
-										<textarea type="text" class="form-control value_success" name="methodology" minlength=100 maxlength=600 placeholder="Ex : Correction des exos de la semaine précédente, relecture du dernier chapitre étudié en cours (10-15 mins) ... "><%= @current_teacher.infoteacher.methodology%></textarea> 
+										<textarea type="text" class="form-control value_success" name="methodology" minlength=100 maxlength=700 placeholder="Ex : Correction des exos de la semaine précédente, relecture du dernier chapitre étudié en cours (10-15 mins) ... "><%= @current_teacher.infoteacher.methodology%></textarea> 
 									</p>
 									<% else %>
 									<p>
-										<textarea type="text" class="form-control value_danger" name="methodology" minlength=100 maxlength=600 placeholder="Ex : Correction des exos de la semaine précédente, relecture du dernier chapitre étudié en cours (10-15 mins) ... "></textarea>
+										<textarea type="text" class="form-control value_danger" name="methodology" minlength=100 maxlength=800 placeholder="Ex : Correction des exos de la semaine précédente, relecture du dernier chapitre étudié en cours (10-15 mins) ... "></textarea>
 									</p>
 									<% end %>
 

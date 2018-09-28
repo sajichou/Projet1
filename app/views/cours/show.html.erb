@@ -2,6 +2,9 @@
 
 	<!-- SECTION RAPPEL CARACTERISTIQUES COURS SELECTIONNE -->
 	<div class="row justify-content-center p-3">
+		<div class="col-12">
+			<% flash.now[:info] = params[:flash_info] if params[:flash_info] %>
+		</div>
 		<div class="col-11">
 			<%=render partial:"en_tete", locals:{cour:@cour}%>
 		</div>
@@ -9,12 +12,19 @@
 
 	<!-- Boutons -->
 
-	<div class="row justify-content-center p-3">	
-		<div class="col-6 col-lg-3">
-			<button type="button" class="btn bg-orange" data-toggle="modal" data-target="#ContacterProf" style="border-radius:5px; color:white; width: 100%">
-					Envoyer un message
-			</button>
-		</div>
+	<div class="row justify-content-center p-3">
+		<!-- Si user connecté il peut envoyer un message -->
+		<% if user_signed_in? %>	
+			<div class="col-6 col-lg-3">
+				<button type="button" class="btn bg-orange" data-toggle="modal" data-target="#ContacterProf" style="border-radius:5px; color:white; width: 100%">
+						Envoyer un message
+				</button>
+			</div>
+		<% else %>
+			<div class="col-6 col-lg-3">
+				<%= link_to "Envoyer un message", {:controller =>"cours", :action=>"show", :id=>@cour.id,:flash_info=>"Vous devez d'abord être connecté pour envoyer un message"}, class:"btn bg-orange", role:"button", style:"color:white; width:100%"%>
+			</div>
+		<% end%>
 		<% if !@est_inscrit %>
 			<div class="col-6 col-lg-3">
 				<input class="btn bg-orange" type="submit" value="M'abonner" style="border-radius:5px; color: white; width: 100%" name="commit">
