@@ -42,7 +42,7 @@ task :paiement => :environment do
   #### qui n'ont pas encore payés, sans quoi on inscrit une alerte
 
   @amount = ENV["AMOUNT"].to_i
-  @codes = ["LANCEMENT18", "TOPDEPART18", "PASPARFAIT18"]
+  @codes = ["LANCEMENT18", "TOPDEPART18", "PASPARFAIT18", "TOPLBC18"]
   wday = {"lundi"=>1, "mardi"=>2, "mercredi"=>3, "jeudi"=>4, "vendredi"=>5,
         "samedi"=>6, "dimanche"=>0}
   #auj = Time.zone.now.strftime("%d-%m-%Y") #jj/mm/YYYY
@@ -210,7 +210,7 @@ task :paiement_test => :environment do
   #### qui n'ont pas encore payés, sans quoi on inscrit une alerte
 
   @amount = ENV["AMOUNT"].to_i
-  @codes = ["LANCEMENT18", "TOPDEPART18", "PASPARFAIT18"]
+  @codes = ["LANCEMENT18", "TOPDEPART18", "PASPARFAIT18", "TOPLBC18"]
   wday = {"lundi"=>1, "mardi"=>2, "mercredi"=>3, "jeudi"=>4, "vendredi"=>5,
         "samedi"=>6, "dimanche"=>0}
   #auj = Time.zone.now.strftime("%d-%m-%Y") #jj/mm/YYYY
