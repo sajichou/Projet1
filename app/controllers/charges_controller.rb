@@ -8,6 +8,8 @@ class ChargesController < ApplicationController
 		@dispo = params[:dispo]
 		@objectif = params[:objectif]
 		@topics = params[:topics]
+		#On check le code promo
+		@codes = ["LANCEMENT18", "TOPDEPART18"]
 	end
 
 	def create

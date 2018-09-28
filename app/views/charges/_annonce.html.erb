@@ -5,9 +5,9 @@
 
 		<div class="row justify-content-center">
 			<div class="col-12 col-lg-10">
-				<div class="row justify-content-center">
+				<div class="row justify-content-center align-items-center ">
 					<!-- image -->
-					<div class="col-12 col-lg-6">
+					<div class="col-12 col-lg-6 align-items-center">
 						<div class="row justify-content-center">
 							<%= image_tag cour.teacher.infoteacher.avatar.url(:thumb), :class => "thumbnail_show" %>
 						</div>
@@ -33,7 +33,7 @@
 						<div class="row align-items-start">
 							<div class="col-12" style="text-align: start">
 								<p>
-									<%= cour.descriptif[0..50] %>...
+									<%= cour.descriptif %>
 								</p>
 							</div>
 						</div>
@@ -67,7 +67,11 @@
 								            date_reg += 7
 								          end
 										%>
-										<%= date_reg.strftime("%d/%m/%Y") %> à <%=horaire[1]%>h<%=horaire[2]%>
+										<% if horaire[2].to_i == 30 %>
+											<%= date_reg.strftime("%d/%m/%Y") %> à <%=horaire[1]%>h<%=horaire[2]%>
+										<%elsif horaire[2].to_i == 0 %>
+											<%= date_reg.strftime("%d/%m/%Y") %> à <%=horaire[1]%>h
+										<%end%>
 
 									</p>
 								<% end %>

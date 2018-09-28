@@ -34,7 +34,11 @@
         </div>
         <div class="col-2 justify-content-center align-items-center p-0" s>
             <div class="ml-auto pt-3" style="background-color: #e55966; height: 50px; width: 60px; border-bottom-left-radius: 10px">
+              <% if (@codes.include? current_user.infouser.code and !current_user.infouser.code_used) %>
+                <p class="text-white" style="font-weight: bold">18€</p>
+              <% else %>
                 <p class="text-white" style="font-weight: bold">22,5€</p>
+              <%end%>
             </div>
         </div>
 
@@ -56,11 +60,11 @@
   <div class="col-12">
       <div class="custom-control custom-checkbox m-3">
       
-        <% if (current_user.infouser.code == "LANCEMENT18" and !current_user.infouser.code_used) %>
+        <% if (@codes.include? current_user.infouser.code and !current_user.infouser.code_used) %>
             <p>
               Super! Votre code est bien valide :) Vous serez débité non pas de 22,5€ mais de 18€.
             </p>
-        <% elsif (current_user.infouser.code == "LANCEMENT18" and current_user.infouser.code_used) %>
+        <% elsif (@codes.include? current_user.infouser.code and current_user.infouser.code_used) %>
             <p>Votre code promo n'est malheureusement plus valide.</p>
             <p>Si vous disposez d'un nouveau code promo, veillez le saisir dans votre espace personnel:
             <%= link_to "Code promo", {:controller =>"pages", :action=>"code_promo", :id=>@cours_id, :dispo=>@dispo, :topics=>@topics, :objectif=>@objectif}%>
