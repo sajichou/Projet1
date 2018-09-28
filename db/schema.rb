@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180919163739) do
+ActiveRecord::Schema.define(version: 20180928124516) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -246,6 +246,11 @@ ActiveRecord::Schema.define(version: 20180919163739) do
     t.string "message_id"
     t.index ["notification_id"], name: "index_mailboxer_receipts_on_notification_id"
     t.index ["receiver_id", "receiver_type"], name: "index_mailboxer_receipts_on_receiver_id_and_receiver_type"
+  end
+
+  create_table "matieres", force: :cascade do |t|
+    t.string "intern"
+    t.string "extern"
   end
 
   create_table "messages", force: :cascade do |t|

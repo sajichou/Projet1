@@ -139,7 +139,8 @@
 									<i class="fa fa-book fa-lg"></i>
 								</div>
 								<div class="px-4 align-self-end">
-									<p class="text-capitalize"><%= cour.matiere %>
+									<p class="text-capitalize">
+										<%= Matiere.where(intern:cour.matiere).last.extern %>
 										<%cour.annees.each do |n| %>
 								 		| <%= Correspondance.find_by_niveau_id(n.niveau).nom%>	
 										<%end%>	

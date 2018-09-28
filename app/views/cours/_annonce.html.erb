@@ -84,7 +84,7 @@
 		<div class="col-12 col-lg-8 px-5 p-lg-2 mt-0">
 			<div class="row mb-1 ">
 				<div class="col-12">
-					<p class="mt-3 text-capitalize" style="text-align: start; font-weight: bold; font-size: 1.2em"><%=cours.matiere%>
+					<p class="mt-3 text-capitalize" style="text-align: start; font-weight: bold; font-size: 1.2em"><%=Matiere.where(intern:cours.matiere).last.extern%>
 						<%cours.annees.each do |n| %>
 							| <%= Correspondance.find_by_niveau_id(n.niveau).nom%>	
 						<%end%>

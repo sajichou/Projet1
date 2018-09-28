@@ -1,7 +1,8 @@
 <!-- SECTION RAPPEL CARACTERISTIQUES COURS SELECTIONNE -->
 <div class="row justify-content-center mt-3 mx-0">
 	<div class="col-12 p-0 mt-5 mt-lg-0" >
-		<p class="d-inline text-capitalize" style="font-weight: bold; font-size: 1.4em"><%=cour.matiere%>
+		<p class="d-inline text-capitalize" style="font-weight: bold; font-size: 1.4em">
+			<%=Matiere.where(intern:cour.matiere).last.extern%>
 			<%cour.annees.each do |n| %>
 				| <%= Correspondance.find_by_niveau_id(n.niveau).nom%>	
 			<%end%>
