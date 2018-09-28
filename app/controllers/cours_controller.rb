@@ -491,7 +491,7 @@ class CoursController < ApplicationController
     cour = Cour.find(params[:cour_id])
     if params[:submit_theme].present?
       cour.update(theme:params[:themes])
-      Chapitres.where(lesson_id:cour.lessons.last.id, paid:false).each do |c|
+      Chapitre.where(lesson_id:cour.lessons.last.id, paid:false).each do |c|
         c.destroy
       end
       redirect_to controller: 'cours', action:'show', id:params[:cour_id]
