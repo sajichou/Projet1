@@ -87,20 +87,13 @@
 
 						<!-- THEME -->
 
-						<% if cour.nombre_eleves > 0 %>
+						<% if cour.nombre_eleves > 0 and cour.theme.present?%>
 							<div class="row align-items-start">
 								<div class="col-12" style="text-align: start">
 									<p><span style="font-weight: bold">Thématique du prochain cours : </span>
-										<% liste_themes = [] %>
-										<% Chapitre.where(lesson_id:cour.lessons.last.id).each do |c| %>
-											<% if !liste_themes.include? Topic.find(c.topic_id).theme %>
-												<% if liste_themes.length > 0 %>
-												|
-												<% end %>
-												<%=Topic.find(c.topic_id).theme%> 
-											<% liste_themes.push(Topic.find(c.topic_id).theme)%>
-											<% end %>
-										<% end %> 
+										<%cour.theme.each do |t| %>
+											<%=t%> - 
+										<%end%>
 									</p>
 								</div>
 							</div>
@@ -132,9 +125,9 @@
 							<div class="row align-items-start">
 								<div class="col-12" style="text-align: start">
 									<p><span style="font-weight: bold">Objectif : </span>
-										<%if cour.objectif =="1" %>
+										<%if cour.objectif ==1 %>
 											Soutien scolaire
-										<%elsif cour.objectif == "2" %>
+										<%elsif cour.objectif == 2 %>
 										 	Perfectionnement scolaire
 										<%end%>
 									</p>

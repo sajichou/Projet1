@@ -177,7 +177,7 @@
 				<!-- THEME -->
 				<div class="col-12 m-auto col-lg-6">
 					<p style="font-weight: bold; font-size: 1.2em"> Indiquez les thématiques étudiées au prochain cours </p>
-					<% Topic.where(niveau_id:@cour.annees.last.niveau).select(:theme).map(&:theme).uniq.each do |t| %>
+					<% Topic.where(niveau_id:@cour.annees.last.niveau, matiere:@cour.matiere).select(:theme).map(&:theme).uniq.each do |t| %>
 						<label class="btn btn-info d-block">
 						    <input type="checkbox" name="themes[]" id="1" value='<%=t%>'>
 						     <%=t%>
