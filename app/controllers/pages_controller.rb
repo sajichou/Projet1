@@ -159,7 +159,7 @@ class PagesController < ApplicationController
     if params[:objectif].present?
       @objectif = params[:objectif]
     end
-    @codes = ["LANCEMENT18", "TOPDEPART18"]
+    @codes = ["LANCEMENT18", "TOPDEPART18", "PASPARFAIT18"]
   end
 
   def paiement
@@ -167,6 +167,16 @@ class PagesController < ApplicationController
       @paiements = Paiement.where(user_id:current_user.id)
     elsif teacher_signed_in?
       @paiements = Paiement.where(teacher_id:current_teacher.id)
+      @lien = ENV["STRIPE_OAUTH"]+ 
+      "&stripe_user[email]=" + current_teacher.email.to_s + 
+      "&stripe_user[url]=https://www.topnote.fr" + "&stripe_user[country]=FR" + 
+      "&stripe_user[product_category]=education" +
+      "&stripe_user[product_description]=Plateforme%20de%20mise%20en%20relation%20entre%20professeurs%20et%20eleves%20pour%20du%20soutien%20scolaire" +
+      "&stripe_user[business_name]=topnote.fr" +
+      "&stripe_user[business_type]=sole_prop" +
+      "&stripe_user[phone_number]=" + current_teacher.infoteacher.phone.to_s + 
+      "&stripe_user[first_name]=" + current_teacher.infoteacher.first_name.to_s + 
+      "&stripe_user[last_name]=" + current_teacher.infoteacher.last_name.to_s
     end
   end
 

@@ -42,6 +42,7 @@ task :paiement => :environment do
   #### qui n'ont pas encore payés, sans quoi on inscrit une alerte
 
   @amount = ENV["AMOUNT"].to_i
+  @codes = ["LANCEMENT18", "TOPDEPART18", "PASPARFAIT18"]
   wday = {"lundi"=>1, "mardi"=>2, "mercredi"=>3, "jeudi"=>4, "vendredi"=>5,
         "samedi"=>6, "dimanche"=>0}
   #auj = Time.zone.now.strftime("%d-%m-%Y") #jj/mm/YYYY
@@ -79,8 +80,9 @@ task :paiement => :environment do
           stripe_teacher_id = lesson.cour.teacher.infoteacher.stripe_id
           description = "Kamaraderie - Cour de " + lesson.cour.teacher.infoteacher.first_name
           #On calcule le montant net que doit payer l eleve en fonction de ses codes promos
-          if (User.find(presence.user_id).infouser.code == "LANCEMENT18" and !User.find(presence.user_id).infouser.code_used and nb_eleves > 1) 
+          if (@codes.include? User.find(presence.user_id).infouser.code and !User.find(presence.user_id).infouser.code_used and nb_eleves > 1) 
             amount_eleve = (0.8*@amount).to_i
+
           else
             amount_eleve = @amount
           end
@@ -208,6 +210,7 @@ task :paiement_test => :environment do
   #### qui n'ont pas encore payés, sans quoi on inscrit une alerte
 
   @amount = ENV["AMOUNT"].to_i
+  @codes = ["LANCEMENT18", "TOPDEPART18", "PASPARFAIT18"]
   wday = {"lundi"=>1, "mardi"=>2, "mercredi"=>3, "jeudi"=>4, "vendredi"=>5,
         "samedi"=>6, "dimanche"=>0}
   #auj = Time.zone.now.strftime("%d-%m-%Y") #jj/mm/YYYY
@@ -260,7 +263,7 @@ task :paiement_test => :environment do
           stripe_teacher_id = lesson.cour.teacher.infoteacher.stripe_id
           description = "TopNote - Cour de " + lesson.cour.teacher.infoteacher.first_name
           #On calcule le montant net que doit payer l eleve en fonction de ses codes promos
-          if (User.find(presence.user_id).infouser.code == "LANCEMENT18" and !User.find(presence.user_id).infouser.code_used and nb_eleves > 1) 
+          if (@codes.include? User.find(presence.user_id).infouser.code and !User.find(presence.user_id).infouser.code_used and nb_eleves > 1) 
             amount_eleve = (0.8*@amount).to_i
           else
             amount_eleve = @amount
