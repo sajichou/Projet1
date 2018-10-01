@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180928124516) do
+ActiveRecord::Schema.define(version: 20181001103043) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -154,6 +154,7 @@ ActiveRecord::Schema.define(version: 20180928124516) do
     t.string "justificatif_diplome_content_type"
     t.integer "justificatif_diplome_file_size"
     t.datetime "justificatif_diplome_updated_at"
+    t.datetime "updated_at"
     t.index ["deleted_at"], name: "index_infoteachers_on_deleted_at"
   end
 

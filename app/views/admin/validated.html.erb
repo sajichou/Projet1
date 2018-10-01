@@ -1,11 +1,12 @@
-<h1> Professeurs validés </h1>
+<h1  class="mt-3"> Professeurs validés </h1>
 
-<table class="table">
+<table class="table mt-3">
 		<tr>
 			<th></th>
 			<th>Nom</th>
 			<th>Prénom</th>
 			<th>email</th>
+			<th>Updated_at</th>
 			<th>Code postal</th>
 			<th>Avatar</th>
 		</tr>
@@ -15,6 +16,7 @@
 			<td><%=c.infoteacher.try(:first_name)%></td>
 			<td><%=c.infoteacher.try(:last_name)%></td>
 			<td><%=c.infoteacher.try(:email)%></td>
+			<td><%=c.infoteacher.try(:updated_at)%></td>
 			<td><%=c.infoteacher.try(:dptm)%></td>
 			<td> 
 			<% if c.infoteacher.present?%>
