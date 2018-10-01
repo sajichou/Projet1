@@ -71,12 +71,14 @@ class ChargesController < ApplicationController
 	end
 
 	def create_account
-		@token = params[:token]
-		@test = params[:test]
-		puts "TOKEN : "
-		puts @token
-		puts "City"
-		@city = params[:city]
+		Stripe.api_key = ENV["STRIPE_SECRET_KEY"]
+		token = params[:token]
+		acct = Stripe::Account.create({
+		    :country => "FR",
+		    :type => "custom",
+		    :account_token => token,
+		})
+		current_teacher.infoteacher.update(stripe_id:acct.id)
 	end
 
 end
