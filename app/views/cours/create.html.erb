@@ -305,34 +305,3 @@
 <%end%>
 
 
-<script type="text/javascript">
-	$('#calendar').fullCalendar({
-
-	dayClick: function(date, jsEvent, view) {
-
-    alert('Clicked on: ' + date.format());
-
-    alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
-
-    alert('Current view: ' + view.name);
-
-    // change the day's background color just for fun
-    $(this).css('background-color', 'green');
-
-  },
-  
-		header: { 
-			left:'prev, next, today', 
-			center: 'title',
-			right: 'month, agendaWeek, agendaDay'
-			 },
-		locale :'fr',
-		selectable: true,
-		selectHelpger: true,
-		editable: true,
-		eventLimit: true,
-
-		defaultView: 'agendaWeek'
-
-});
-</script>
