@@ -55,6 +55,7 @@ class PagesController < ApplicationController
         dptm: params[:dptm],
         methodology: params[:methodology],
         experience: params[:experience],
+        updated_at: Time.zone.now,
         justificatif_identite:params[:justificatif_identite],
         justificatif_diplome:params[:justificatif_diplome]}.reject{|k,v| v.blank?}
         )
@@ -219,7 +220,7 @@ class PagesController < ApplicationController
   def modifier_maphoto
     if teacher_signed_in? 
       if params[:avatar].present?
-        current_teacher.infoteacher.update(avatar:params[:avatar])
+        current_teacher.infoteacher.update(avatar:params[:avatar], updated_at:Time.zone.now)
       end
       flash[:info] = "Votre photo a bien été enregistrée."
       redirect_to '/pages/paiement'

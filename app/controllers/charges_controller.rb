@@ -74,6 +74,8 @@ class ChargesController < ApplicationController
 		@token = params[:token]
 		puts "TOKEN : "
 		puts @token
+		puts "City"
+		@city = params[:city]
 	end
 
 end
