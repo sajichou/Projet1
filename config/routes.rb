@@ -37,6 +37,8 @@ Rails.application.routes.draw do
 
   get 'charges/new'
 
+  get 'charges/custom_connect'
+
   post 'cours/show' => 'cours#contacter_prof'
 
   get 'cours/update'

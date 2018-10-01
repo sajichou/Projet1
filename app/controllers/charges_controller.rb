@@ -57,4 +57,16 @@ class ChargesController < ApplicationController
 		flash[:info] = "Nous allons maintenant vérifier vos informations. Nous vous enverrons un mail sous 24h :)"
 	end
 
+	def custom_connect
+
+		Stripe.api_key = "sk_test_4eC39HqLyjWDarjtT1zdp7dc"
+
+		@acct = Stripe::Account.create({
+    	:country => "FR",
+    	:type => "custom"
+		})
+		
+
+	end
+
 end

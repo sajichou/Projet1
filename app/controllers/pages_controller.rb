@@ -159,7 +159,7 @@ class PagesController < ApplicationController
     if params[:objectif].present?
       @objectif = params[:objectif]
     end
-    @codes = ["LANCEMENT18", "TOPDEPART18", "PASPARFAIT18"]
+    @codes = ["LANCEMENT18", "TOPDEPART18", "PASPARFAIT18", "TOPLBC18"]
   end
 
   def paiement
