@@ -1,7 +1,8 @@
 <%= render partial: "shared/sousmenu", locals: {tabname:"monprofil"}  %>
 
 <% if teacher_signed_in? %>
-	<%=form_tag "/pages/monprofil", method:"post", multipart:true  do %>
+	<%=form_tag "/pages/monprofil", class:"my-form", method:"post", multipart:true  do %>
+	<input  name="token" id="token" type="hidden">
 	<fieldset class="mb-5"> 
 
 		<div class="row justify-content-center mb-4">
@@ -18,22 +19,22 @@
 			
 							<% if @current_teacher.infoteacher.first_name.present? %>
 							<p>
-								<input type="text" class="form-control value_success" name="first_name" value='<%=@current_teacher.infoteacher.first_name%>' placeholder="Prénom">
+								<input type="text" class="form-control value_success inp-first-name" name="first_name" value='<%=@current_teacher.infoteacher.first_name%>' placeholder="Prénom">
 							</p>
 
 							<% else %>
 							<p>
-								<input type="text" class="form-control value_danger " name="first_name" placeholder="Prénom">	
+								<input type="text" class="form-control inp-first-name " name="first_name" placeholder="Prénom">	
 							</p>		
 							<% end %>
 
 							<% if @current_teacher.infoteacher.last_name.present? %>
 							<p>
-								<input type="text" class="form-control value_success" name="last_name" value='<%= @current_teacher.infoteacher.last_name%>' placeholder="Nom">
+								<input type="text" class="form-control value_success inp-last-name" name="last_name" value='<%= @current_teacher.infoteacher.last_name%>' placeholder="Nom">
 							</p>
 							<% else %>
 							<p>
-								<input type="text" class="form-control value_danger" name="last_name" placeholder="Nom">
+								<input type="text" class="form-control inp-last-name" name="last_name" placeholder="Nom">
 							</p>
 							<% end %>
 
@@ -44,7 +45,7 @@
 							</p>
 							<% else %>
 							<p>
-								<input type="text" class="form-control value_danger" name="email" placeholder="Email">
+								<input type="text" class="form-control" name="email" placeholder="Email">
 							</p>
 							<% end %>
 
@@ -72,11 +73,11 @@
 						
 							<% if @current_teacher.infoteacher.dptm.present? %>
 							<p >
-								<input type="text" maxlength="5" id="dptm" class="form-control value_success" name="dptm"   value='<%= current_teacher.infoteacher.dptm %>' placeholder="Code postal">
+								<input type="text" maxlength="5" id="dptm" class="form-control value_success inp-zip" name="dptm"   value='<%= current_teacher.infoteacher.dptm %>' placeholder="Code postal">
 							</p>
 							<% else %>
 							<p>
-								<input type="text" maxlength="5" id="dptm" class="form-control value_danger" name="dptm"   placeholder="Numéro de votre code postal" placeholder="Code postal" >
+								<input type="text" maxlength="5" id="dptm" class="form-control inp-zip" name="dptm"   placeholder="Numéro de votre code postal" placeholder="Code postal" >
 							</p>
 							<% end %>
 						</div>
@@ -215,7 +216,53 @@
 			<button type="submit" class=" btn bg-orange mt-1" style="color:white; min-width: 200px;">Enregistrer</button>
 	</fieldset>
 	<%end%>
-	<!-- Update devise registration -->
+
+
+<script type="text/javascript" src="https://js.stripe.com/v3/">
+	const stripe = Stripe(ENV["STRIPE_PUBLISHABLE_KEY"]);
+	const myForm = document.querySelector('.my-form');
+	myForm.addEventListener('submit', handleForm);
+
+	async function handleForm(event) {
+	  event.preventDefault();
+
+	  const result = await stripe.createToken('account', {
+	    legal_entity: {
+	      first_name: document.querySelector('.inp-first-name').value,
+	      last_name: document.querySelector('.inp-last-name').value,
+	      address: {
+	        line1: document.querySelector('.inp-street-address1').value,
+	        city: document.querySelector('.inp-city').value,
+	        state: document.querySelector('.inp-state').value,
+	        postal_code: document.querySelector('.inp-zip').value,
+	      },
+	    },
+	    tos_shown_and_accepted: true,
+	  });
+
+	  
+	    document.querySelector('#token').value = "lol";
+	    myForm.submit();
+	  
+	}
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	<!-- Profil eleve-->
 <% elsif user_signed_in? %>

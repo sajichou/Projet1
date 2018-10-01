@@ -44,9 +44,7 @@ class PagesController < ApplicationController
   end
 
   def completer
-    if params[:cgu].present?
-      cgu = true
-    end
+
     if teacher_signed_in? 
 
       Infoteacher.find_by_teacher_id(current_teacher.id).update({
@@ -57,10 +55,18 @@ class PagesController < ApplicationController
         dptm: params[:dptm],
         methodology: params[:methodology],
         experience: params[:experience],
-        cgu:cgu,
         justificatif_identite:params[:justificatif_identite],
         justificatif_diplome:params[:justificatif_diplome]}.reject{|k,v| v.blank?}
         )
+      #Stripe.api_key = ENV["STRIPE_SECRET_KEY"]
+      token = params[:token]
+      puts "token Stripe : "
+      puts token
+     # acct = Stripe::Account.create({
+      #    :country => "FR",
+      #    :type => "custom",
+      #    :account_token => token,
+     # })
       
       if(current_teacher.infoteacher.avatar.present?)
         redirect_to controller:"pages", action: "paiement"
@@ -75,8 +81,7 @@ class PagesController < ApplicationController
         email:params[:email],
         phone: params[:phone],
         location: params[:location],
-        niveau: params[:niveau],
-        cgu: cgu}.reject{|k,v| v.blank?}
+        niveau: params[:niveau]}.reject{|k,v| v.blank?}
         )
       if(session[:page_id].present?)
         redirect_to controller:"cours", action: "show", id: session[:page_id]

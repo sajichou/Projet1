@@ -39,6 +39,10 @@ Rails.application.routes.draw do
 
   get 'charges/custom_connect'
 
+  get 'charges/create_account'
+
+  post 'charges/custom_connect' =>'charges#create_account'
+
   post 'cours/show' => 'cours#contacter_prof'
 
   get 'cours/update'

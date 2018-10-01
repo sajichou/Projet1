@@ -59,14 +59,21 @@ class ChargesController < ApplicationController
 
 	def custom_connect
 
-		Stripe.api_key = "sk_test_4eC39HqLyjWDarjtT1zdp7dc"
+		#Stripe.api_key = "sk_test_4eC39HqLyjWDarjtT1zdp7dc"
 
-		@acct = Stripe::Account.create({
-    	:country => "FR",
-    	:type => "custom"
-		})
+		#@acct = Stripe::Account.create({
+    	#:country => "FR",
+    	#:type => "custom"
+		#})
+
 		
 
+	end
+
+	def create_account
+		@token = params[:token]
+		puts "TOKEN : "
+		puts @token
 	end
 
 end
