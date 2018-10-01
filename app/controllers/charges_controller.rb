@@ -72,6 +72,7 @@ class ChargesController < ApplicationController
 
 	def create_account
 		@token = params[:token]
+		@test = params[:test]
 		puts "TOKEN : "
 		puts @token
 		puts "City"

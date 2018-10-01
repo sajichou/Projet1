@@ -1,6 +1,7 @@
 
 <%=form_tag "/charges/custom_connect", class:"my-form mt-5", method:"post"  do %>
   <input type="hidden" name="token" id="token">
+  <input type="hidden" name="test" id="test">
   <label>
     <span>First Name</span>
     <input class="inp-first-name" name="first_name">
@@ -35,31 +36,33 @@
 <%end%>
 
 
-<script type="text/javascript" src="https://js.stripe.com/v3/">
-    const stripe = Stripe('pk_test_ASDjZ5YjaloarUT7uNfpysZy');
-    const myForm = document.querySelector('.my-form');
-    myForm.addEventListener('submit', handleForm);
+<script src="https://js.stripe.com/v3/">
 
-    async function handleForm(event) {
-      event.preventDefault();
+const stripe = Stripe('pk_test_ASDjZ5YjaloarUT7uNfpysZy');
+const myForm = document.querySelector('.my-form');
+myForm.addEventListener('submit', handleForm);
 
-      const result = stripe.createToken('account', {
-        legal_entity: {
-          first_name: document.querySelector('.inp-first-name').value,
-          last_name: document.querySelector('.inp-last-name').value,
-          address: {
-            line1: document.querySelector('.inp-street-address1').value,
-            city: document.querySelector('.inp-city').value,
-            state: document.querySelector('.inp-state').value,
-            postal_code: document.querySelector('.inp-zip').value,
-          },
-        },
-        tos_shown_and_accepted: true,
-      });
+async function handleForm(event) {
+  event.preventDefault();
 
-      if (result.token) {
-        document.querySelector('#token').value = result.token.id;
-        myForm.submit();
-      }
-    }
+  const result = await stripe.createToken('account', {
+    legal_entity: {
+      first_name: document.querySelector('.inp-first-name').value,
+      last_name: document.querySelector('.inp-last-name').value,
+      address: {
+        line1: document.querySelector('.inp-street-address1').value,
+        city: document.querySelector('.inp-city').value,
+        state: document.querySelector('.inp-state').value,
+        postal_code: document.querySelector('.inp-zip').value,
+      },
+    },
+    tos_shown_and_accepted: true,
+  });
+
+  if (result.token) {
+    document.querySelector('#token').value = result.token.id;
+    myForm.submit();
+  }
+}
+
 </script>
