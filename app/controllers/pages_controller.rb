@@ -8,6 +8,9 @@ class PagesController < ApplicationController
       @inscriptions = Inscription.where("user_id = ?", current_user.id)       
     elsif teacher_signed_in?
       @cours_proposes = Cour.where("teacher_id=?", current_teacher.id)
+      if current_teacher.role.power == 0
+        flash[:info] = "Vos cours ne seront visibles par les élèves qu'une fois votre profil complet et validé."
+      end
     end     
   end
 
@@ -60,9 +63,9 @@ class PagesController < ApplicationController
         justificatif_diplome:params[:justificatif_diplome]}.reject{|k,v| v.blank?}
         )
       #Stripe.api_key = ENV["STRIPE_SECRET_KEY"]
-      token = params[:token]
-      puts "token Stripe : "
-      puts token
+      #token = params[:token]
+      #puts "token Stripe : "
+      #puts token
      # acct = Stripe::Account.create({
       #    :country => "FR",
       #    :type => "custom",
@@ -222,8 +225,8 @@ class PagesController < ApplicationController
       if params[:avatar].present?
         current_teacher.infoteacher.update(avatar:params[:avatar], updated_at:Time.zone.now)
       end
-      flash[:info] = "Votre photo a bien été enregistrée."
-      redirect_to '/pages/paiement'
+      flash[:info] = "Votre photo a bien été enregistrée. Créez maintenant une annonce :)"
+      redirect_to '/cours/create'
     elsif user_signed_in?
       if params[:avatar].present?
         current_user.infouser.update(avatar:params[:avatar])

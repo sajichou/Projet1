@@ -17,28 +17,32 @@ class AdminController < ApplicationController
 
   def validate
     Role.where(teacher_id:params[:id]).last.update(power:1)
+    Cour.where(teacher_id:params[:id], validated:false).each do |c|
+      c.update(validated:true)
+    end
     TeacherMailer.validated(Teacher.find(params[:id])).deliver
     #SMS
+    if Teacher.find(params[:id]).infoteacher.phone.present?
+      @twilio_number = ENV['TWILIO_NUMBER']
+      account_sid = ENV['TWILIO_ACCOUNT_SID']
+      @client = Twilio::REST::Client.new(account_sid, ENV['TWILIO_AUTH_TOKEN'])
+      teacher_phone = "+33" + Teacher.find(params[:id]).infoteacher.phone
+      twilio_phone_number = "TopNote"
+      #time_str = ((self.time).localtime).strftime("%I:%M%p on %b. %d, %Y")
+      #reminder = "Hi #{self.name}. Just a reminder that you have an appointment coming up at #{time_str}."
+      reminder = "Hello, votre compte TopNote est validé. Vous pouvez désormais créer vos annonces :)
+      Rendez-vous sur : 
+      www.topnote.fr/cours/create
 
-    @twilio_number = ENV['TWILIO_NUMBER']
-    account_sid = ENV['TWILIO_ACCOUNT_SID']
-    @client = Twilio::REST::Client.new(account_sid, ENV['TWILIO_AUTH_TOKEN'])
-    teacher_phone = "+33" + Teacher.find(params[:id]).infoteacher.phone
-    twilio_phone_number = "TopNote"
-    #time_str = ((self.time).localtime).strftime("%I:%M%p on %b. %d, %Y")
-    #reminder = "Hi #{self.name}. Just a reminder that you have an appointment coming up at #{time_str}."
-    reminder = "Hello, votre compte TopNote est validé. Vous pouvez désormais créer vos annonces :)
-    Rendez-vous sur : 
-    www.topnote.fr/cours/create
-
-    L'équipe de TopNote"
-    message = @client.api.account.messages.create(
-      #:from => '+33644640536',
-      :from =>twilio_phone_number,
-      #:to => self.phone_number,
-      :to => teacher_phone,
-      :body => reminder,
-    )
+      L'équipe de TopNote"
+      message = @client.api.account.messages.create(
+        #:from => '+33644640536',
+        :from =>twilio_phone_number,
+        #:to => self.phone_number,
+        :to => teacher_phone,
+        :body => reminder,
+      )
+    end
 
     redirect_to '/admin/candidates'
   end

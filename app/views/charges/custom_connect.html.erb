@@ -1,44 +1,62 @@
+<div class="row justify-content-center">
+  <div class="col-6">
+    <%=form_tag "/charges/custom_connect", class:"my-form mt-5", method:"post"  do %>
+      <input type="hidden" name="token" id="token">
+      <div class="form-row">
 
-<%=form_tag "/charges/custom_connect", class:"my-form mt-5", method:"post"  do %>
-  <input type="hidden" name="token" id="token">
-  <input type="hidden" name="test" id="test">
-  <label>
-    <span>First Name</span>
-    <input class="inp-first-name" name="first_name">
-  </label>
-  <label>
-    <span>Last Name</span>
-    <input class="inp-last-name" name="last_name">
-  </label>
-  <fieldset>
-    <legend>Address</legend>
-    <label>
-      <span>Street Address Line 1</span>
-      <input class="inp-street-address1" name="street_address1">
-    </label>
-    <label>
-      <span>City</span>
-      <input class="inp-city" name="city">
-    </label>
-    <label>
-      <span>State</span>
-      <input class="inp-state" name="state">
-    </label>
-    <label>
-      <span>Postal Code</span>
-      <input class="inp-zip" name="zip">
-    </label>
-  </fieldset>
+    <div class="form-group col-md-3 p-0">
+      <input type="text" class="form-control inp-day" placeholder="DD" pattern=".{2}">
+    </div>
+    <div class="form-group col-md-3 p-0">
+      <input type="text" class="form-control inp-month" placeholder="MM" pattern=".{2}">
+    </div>
+    <div class="form-group col-md-6 p-0">
+      <input type="text" class="form-control inp-year" placeholder="YYYY" pattern=".{4}">
+    </div>
 
-<p>By clicking, you agree to <a href="#">our terms</a> and the <a href="/connect-account/legal">Stripe Connected Account Agreement</a>.</p>
+      <label>
+        <span>First Name</span>
+        <input class="inp-first-name" name="first_name">
+      </label>
+      <label>
+        <span>Last Name</span>
+        <input class="inp-last-name" name="last_name">
+      </label>
+      <label>
+        <span>IBAN</span>
+        <input class="inp-IBAN" name="IBAN" pattern=".{27}">
+      </label>
+      <fieldset>
+        <legend>Address</legend>
+        <label>
+          <span>Street Address Line 1</span>
+          <input class="inp-street-address1" name="street_address1">
+        </label>
+        <label>
+          <span>City</span>
+          <input class="inp-city" name="city">
+        </label>
+        <label>
+          <span>State</span>
+          <input class="inp-state" name="state">
+        </label>
+        <label>
+          <span>Postal Code</span>
+          <input class="inp-zip" name="zip">
+        </label>
+      </fieldset>
 
-      <button type="submit" class=" btn bg-orange mt-1" style="color:white; min-width: 200px;">Submit</button>
-<%end%>
+    <p>By clicking, you agree to <a href="#">our terms</a> and the <a href="/connect-account/legal">Stripe Connected Account Agreement</a>.</p>
+
+          <button type="submit" class=" btn bg-orange mt-1" style="color:white; min-width: 200px;">Submit</button>
+    <%end%>
+  </div>
+</div>
+
+<script>
 
 
-<script src="https://js.stripe.com/v3/">
-
-const stripe = Stripe('pk_test_ASDjZ5YjaloarUT7uNfpysZy');
+const stripe = Stripe('<%=ENV["STRIPE_TEST_PUBLISHABLE_KEY"]%>');
 const myForm = document.querySelector('.my-form');
 myForm.addEventListener('submit', handleForm);
 
@@ -46,9 +64,24 @@ async function handleForm(event) {
   event.preventDefault();
 
   const result = await stripe.createToken('account', {
+    external_accounts : {
+      data : [
+        {
+          fingerprint :document.querySelector('.inp-IBAN').value,
+        },
+      ],
+
+      
+    },
     legal_entity: {
       first_name: document.querySelector('.inp-first-name').value,
       last_name: document.querySelector('.inp-last-name').value,
+      type: "individual",
+      dob: {
+        day: document.querySelector('.inp-day').value,
+        month: document.querySelector('.inp-month').value,
+        year: document.querySelector('.inp-year').value,
+      },
       address: {
         line1: document.querySelector('.inp-street-address1').value,
         city: document.querySelector('.inp-city').value,

@@ -29,9 +29,12 @@ class CoursController < ApplicationController
       flash[:info] ="Veuillez indiquer au moins un niveau d'étude pour ce cours."
     # Si adresse reconnue 
     elsif (params[:latitude].present? and params[:longitude].present?)
-      cour = Cour.create teacher_id:current_teacher.id, matiere:params[:matiere], lieu:params[:lieu],
-       latitude:params[:latitude], longitude:params[:longitude], descriptif:params[:descriptif], street_number:params[:street_number], route:params[:route],
-       locality:params[:locality], postal_code:params[:postal_code], country:params[:country]
+        cour = Cour.create teacher_id:current_teacher.id, matiere:params[:matiere], lieu:params[:lieu],
+         latitude:params[:latitude], longitude:params[:longitude], descriptif:params[:descriptif], street_number:params[:street_number], route:params[:route],
+         locality:params[:locality], postal_code:params[:postal_code], country:params[:country]
+        if current_teacher.role.power == 1
+          cour.update(validated:true)
+        end
       params[:classe].each do |c|
         Annee.create cour_id:cour.id, teacher_id:current_teacher.id, niveau:c
       end
@@ -180,11 +183,11 @@ class CoursController < ApplicationController
     end
     #@cours = Cour.where("matiere=? AND nombre_eleves < ?  ", params[:matiere], 3)
     if params[:matiere].present?
-      @cours = Cour.where("matiere=?", params[:matiere])
+      @cours = Cour.where(matiere: params[:matiere], validated:true)
       @matiere= params[:matiere]
     else
       #matiere non renseignee
-      @cours = Cour.all
+      @cours = Cour.where(validated:true)
     end
 
     #Classe non renseignee
@@ -200,6 +203,8 @@ class CoursController < ApplicationController
       @cours = liste
     end
     @lieu = params[:lieu]
+    @latitude = params[:latitude]
+    @longitude = params[:longitude]
     latitude = params[:latitude].to_f
     longitude = params[:longitude].to_f
     if latitude == 0
@@ -531,12 +536,14 @@ private
 
     if (!teacher_signed_in?)
       redirect_to '/teachers/sign_in'
+=begin
     elsif (teacher_signed_in? and !teacher_complet(current_teacher) and Role.where(teacher_id: current_teacher.id).last.power==0)
       flash[:info] = "Vous devez d'abord terminer votre inscription. Vous recevrez ensuite un mail de validation"
       redirect_to '/pages/monprofil/'
     elsif (teacher_signed_in? and teacher_complet(current_teacher) and Role.where(teacher_id: current_teacher.id).last.power==0)
       flash[:info] = "Nous allons vous contacter sous 24h pour valider votre compte. Vous pourrez ensuite créer des annonces :)"
       redirect_to '/cours/accueil/'
+=end
     end
 
   end

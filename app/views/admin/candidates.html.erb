@@ -25,7 +25,7 @@
 			<td><%=c.infoteacher.try(:first_name)%></td>
 			<td><%=c.infoteacher.try(:last_name)%></td>
 			<td><%=c.infoteacher.try(:email)%></td>
-			<td><%=c.infoteacher.updated_at%></td>
+			<td><%=c.infoteacher.try(:updated_at)%></td>
 			<td><%=c.infoteacher.try(:phone)%></td>
 			<td><%=c.infoteacher.try(:dptm)%></td>
 			<td> 
@@ -34,7 +34,7 @@
 				<% end %>
 			</td>
 			<td>
-				<% if c.infoteacher.stripe_id.present? %>
+				<% if c.infoteacher.try(:stripe_id).present? %>
 					<span style="color:green">OK</span>
 				<% else %>
 					<span style="color:red">NON</span>

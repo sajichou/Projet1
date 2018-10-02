@@ -21,16 +21,29 @@
 								<%=cour.teacher.infoteacher.first_name.capitalize%> <%=cour.teacher.infoteacher.last_name.capitalize[0]%>.
 							</div>
 						</div>
-						<div class="row justify-content-center mt-2">
-							<div class="d-flex">
-								<div style="color: #e55966">
-									<i class="fa fa-check"></i>
-								</div>
-								<div>
-									<p class="ml-1" style="font-size: 90%">Profil vérifié</p>
+						<% if cour.validated %>
+							<div class="row justify-content-center mt-2">
+								<div class="d-flex">
+									<div style="color: #e55966">
+										<i class="fa fa-check"></i>
+									</div>
+									<div>
+										<p class="ml-1" style="font-size: 90%">Profil vérifié</p>
+									</div>
 								</div>
 							</div>
-						</div>						
+						<%else%>
+							<div class="row justify-content-center mt-2">
+								<div class="d-flex">
+									<div style="color: #e55966">
+										<i class="fa fa-check"></i>
+									</div>
+									<div>
+										<p class="ml-1" style="font-size: 90%">Porfil non vérifié</p>
+									</div>
+								</div>
+							</div>
+						<%end%>							
 					</div>
 					<!-- caractéristiques -->
 					<div class="col-12 col-lg-6 pt-3">
