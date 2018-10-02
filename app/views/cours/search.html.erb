@@ -27,8 +27,8 @@
 						<input id="lieu" name="lieu"
                      	class="col-12 col-lg-3 form-search text-center m-2" placeholder="Entrez votre adresse, 3 rue..." value="<%=@lieu%>">
 		                <div>
-		                  <input id="latitude" name="latitude" value="<%=@latitude%>" >
-		                  <input id="longitude" name="longitude" value="<%=@longitude%>">
+		                  <input id="latitude" name="latitude" type="hidden" value="<%=@latitude%>" >
+		                  <input id="longitude" name="longitude" type="hidden" value="<%=@longitude%>">
 		                </div>
 						<!-- Fin de Google Maps Javascript API -->
 						<input type="submit" class="col-12 col-lg-2 form-search-btn m-2" value="Chercher">

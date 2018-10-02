@@ -56,7 +56,11 @@
 <script>
 
 
+<<<<<<< HEAD
 const stripe = Stripe('<%=ENV["STRIPE_TEST_PUBLISHABLE_KEY"]%>');
+=======
+const stripe = Stripe('<%=ENV["STRIPE_PUBLISHABLE_KEY"]%>');
+>>>>>>> 3892a44e8a80c577d8c37ba61cfdfed3287e343f
 const myForm = document.querySelector('.my-form');
 myForm.addEventListener('submit', handleForm);
 
